@@ -13,7 +13,7 @@ import {
 import { StudyCard } from "@/components/study-parts";
 
 const selectClass =
-  "w-full rounded-lg border border-line bg-card px-3 py-2 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent";
+  "w-full rounded-tile border border-line bg-card px-3 py-2 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent";
 
 export function StudyExplorer({ studies }: { studies: Study[] }) {
   const [q, setQ] = useState("");
@@ -122,7 +122,7 @@ export function StudyExplorer({ studies }: { studies: Study[] }) {
           <StudyCard key={s.id} study={s} />
         ))}
         {shown.length === 0 && (
-          <p className="rounded-xl border border-line bg-card p-5 text-sm text-muted">
+          <p className="rounded-card border border-line bg-card p-6 text-sm text-muted">
             No studies match those filters.
           </p>
         )}

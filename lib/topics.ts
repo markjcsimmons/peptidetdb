@@ -28,6 +28,8 @@ export type TopicRating = { subject: string; level: Level; why: string };
 
 export type TopicPage = {
   slug: Topic;
+  /** What the ratings measure. "safety" ratings are drawn as words only, never as a benefit meter. */
+  measures: "benefit" | "safety";
   title: string;
   intro: string;
   ratings: TopicRating[];
@@ -38,6 +40,7 @@ export type TopicPage = {
 export const TOPICS: Record<Topic, TopicPage> = {
   skin: {
     slug: "skin",
+    measures: "benefit",
     title: "Peptides for skin & anti-aging",
     intro:
       "Two kinds of peptide are marketed for skin: collagen peptides you swallow, and peptides such as GHK-Cu you apply to the skin. The evidence is very different for each.",
@@ -66,6 +69,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
   },
   muscle: {
     slug: "muscle",
+    measures: "benefit",
     title: "Peptides for muscle & strength",
     intro:
       "Muscle claims cover a wide range, from collagen powder to injectable growth-hormone-releasing compounds. The studies in this hub only support a narrow claim for one of them.",
@@ -94,6 +98,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
   },
   joints: {
     slug: "joints",
+    measures: "benefit",
     title: "Peptides for joints & tendons",
     intro:
       "Joint and tendon claims range from collagen supplements for osteoarthritis to injected BPC-157 for injuries. The human evidence is stronger for the first than the second, but neither is clear-cut.",
@@ -121,6 +126,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
   },
   "blood-pressure": {
     slug: "blood-pressure",
+    measures: "benefit",
     title: "Marine peptides for blood pressure & vessels",
     intro:
       "Some peptides from fish are claimed to lower blood pressure by blocking an enzyme (ACE) that tightens blood vessels. The human trials are few and small, and they tested different products.",
@@ -149,6 +155,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
   },
   brain: {
     slug: "brain",
+    measures: "benefit",
     title: "Marine peptides for sleep, memory & stress",
     intro:
       "Fish hydrolysate supplements are marketed for sleep, memory and stress. The few human studies are small, all three have ties to a company with an interest in the product, and one found no difference from placebo.",
@@ -176,6 +183,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
   },
   safety: {
     slug: "safety",
+    measures: "safety",
     title: "Peptide safety & regulation",
     intro:
       "Peptides range from approved prescription drugs to unapproved compounds sold with little oversight. Safety evidence follows the same split.",

@@ -5,6 +5,8 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
+import { Callout } from "@/components/ui";
+import { VerticalTimeline } from "@/components/timeline";
 
 export const metadata: Metadata = {
   title: "Are peptides legal in the US? Status Nov 2026",
@@ -31,7 +33,7 @@ function SourceList({ sources }: { sources: Source[] }) {
 export default function LegalStatusPage() {
   const allSources = Object.values(SOURCES) as Source[];
   return (
-    <article className="max-w-3xl">
+    <article className="mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -65,16 +67,15 @@ export default function LegalStatusPage() {
         for anything newer.
       </p>
 
-      <section className="mt-6 rounded-xl border-l-4 border-accent bg-card p-5">
-        <h2 className="sr-only">Short answer</h2>
-        <p className="max-w-prose text-lg">
+      <Callout label="Short answer" className="mt-6">
+        <p className="max-w-prose text-lg [text-wrap:pretty]">
           It depends on the peptide and on how it is made and sold. Some peptides are FDA-approved prescription
           drugs. Many popular &ldquo;wellness&rdquo; peptides, such as BPC-157, are not approved for any use. Their
           status for pharmacy compounding changed through 2026: in July an FDA advisory committee recommended six
           of seven peptides it reviewed for FDA&apos;s 503A bulks list, but the vote is not binding, and we found no
           final FDA decision as of {formatDate(LEGAL_REVIEWED)}.
         </p>
-      </section>
+      </Callout>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Why there is no single answer</h2>
@@ -102,17 +103,22 @@ export default function LegalStatusPage() {
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">What happened, in order</h2>
-        <ol className="mt-4 space-y-5">
-          {TIMELINE.map((e) => (
-            <li key={e.date} className="rounded-xl border border-line bg-card p-5">
-              <p className="text-sm font-medium text-accent">{e.label}</p>
-              <p className="mt-1 max-w-prose">{e.text}</p>
-              <p className="mt-2">
-                Sources: <SourceList sources={e.sources} />
-              </p>
-            </li>
-          ))}
-        </ol>
+        <div className="mt-6">
+          <VerticalTimeline
+            items={TIMELINE.map((e) => ({
+              key: e.date,
+              date: e.label,
+              body: (
+                <>
+                  <p>{e.text}</p>
+                  <p className="mt-2">
+                    Sources: <SourceList sources={e.sources} />
+                  </p>
+                </>
+              ),
+            }))}
+          />
+        </div>
       </section>
 
       <section className="mt-10">
@@ -122,7 +128,7 @@ export default function LegalStatusPage() {
           list. The uses listed are the ones FDA&apos;s meeting page says were evaluated; the results are as reported
           by news outlets.
         </p>
-        <div className="mt-4 overflow-x-auto rounded-xl border border-line">
+        <div className="mt-4 overflow-x-auto rounded-tile border border-line">
           <table className="w-full min-w-[34rem] text-left text-sm">
             <thead className="bg-card text-muted">
               <tr>

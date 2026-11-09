@@ -114,7 +114,7 @@ const sections: { h: string; body: React.ReactNode }[] = [
 
 export default function EditorialPolicyPage() {
   return (
-    <div className="max-w-3xl">
+    <div className="mx-auto max-w-3xl">
       <h1 className="text-3xl font-bold tracking-tight">Editorial policy</h1>
       <p className="mt-3 max-w-prose text-lg text-muted">
         How {SITE.name} chooses, summarises and rates studies, and what we do when we get something wrong.

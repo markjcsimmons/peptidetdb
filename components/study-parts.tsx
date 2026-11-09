@@ -18,33 +18,44 @@ export function KindBadge({ kind }: { kind: Study["kind"] }) {
   );
 }
 
-export function StudyChips({ study }: { study: Study }) {
+/**
+ * Chips for a study. `compact` (used on list cards) keeps the design badge, up to two topics and up to two
+ * peptides, and folds the rest into "+N more"; the study's own page shows everything.
+ */
+export function StudyChips({ study, compact = false }: { study: Study; compact?: boolean }) {
+  const topics = compact ? study.topics.slice(0, 2) : study.topics;
+  const peptides = compact ? study.peptides.slice(0, 2) : study.peptides;
+  const hidden = compact
+    ? study.topics.length - topics.length + (study.peptides.length - peptides.length) + study.delivery.length
+    : 0;
   return (
     <div className="flex flex-wrap gap-2">
       <KindBadge kind={study.kind} />
-      {study.topics.map((t) => (
+      {topics.map((t) => (
         <Link key={t} href={`/science/topics/${t}`} className="chip hover:text-fg">
           {TOPIC_LABEL[t]}
         </Link>
       ))}
-      {study.peptides.map((p) => (
+      {peptides.map((p) => (
         <span key={p} className="chip">
           {PEPTIDE_LABEL[p]}
         </span>
       ))}
-      {study.delivery.map((d) => (
-        <span key={d} className="chip">
-          {DELIVERY_LABEL[d]}
-        </span>
-      ))}
+      {!compact &&
+        study.delivery.map((d) => (
+          <span key={d} className="chip">
+            {DELIVERY_LABEL[d]}
+          </span>
+        ))}
+      {hidden > 0 && <span className="chip">+{hidden} more</span>}
     </div>
   );
 }
 
 export function StudyCard({ study }: { study: Study }) {
   return (
-    <article className="rounded-xl border border-line bg-card p-5">
-      <StudyChips study={study} />
+    <article className="rounded-card border border-line bg-card p-6">
+      <StudyChips study={study} compact />
       <h3 className="mt-3 text-lg font-semibold leading-snug">
         <Link href={`/science/${study.id}`} className="hover:underline">
           {study.title.replace(/\.$/, "")}
@@ -55,8 +66,8 @@ export function StudyCard({ study }: { study: Study }) {
         {study.population ? ` · ${study.population}` : ""}
       </p>
       <p className="mt-3 text-sm">{trimText(study.finding, 260)}</p>
-      <p className="mt-3 text-sm">
-        <Link href={`/science/${study.id}`} className="link">
+      <p className="mt-1 text-sm">
+        <Link href={`/science/${study.id}`} className="link-solo">
           What it found and what it doesn&apos;t show
         </Link>
       </p>

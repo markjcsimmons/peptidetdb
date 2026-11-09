@@ -4,6 +4,8 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
+import { Callout } from "@/components/ui";
+import { SizeScale } from "@/components/size-scale";
 
 export const metadata: Metadata = {
   title: "What are peptides? Types, evidence and safety",
@@ -71,7 +73,7 @@ const FAQ: { q: string; a: React.ReactNode; text: string }[] = [
 
 export default function PeptidesPillarPage() {
   return (
-    <article className="max-w-3xl">
+    <article className="mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -96,15 +98,14 @@ export default function PeptidesPillarPage() {
 
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">What are peptides?</h1>
 
-      <section className="mt-6 rounded-xl border-l-4 border-accent bg-card p-5">
-        <h2 className="sr-only">Short answer</h2>
-        <p className="max-w-prose text-lg">
+      <Callout label="Short answer" className="mt-6">
+        <p className="max-w-prose text-lg [text-wrap:pretty]">
           Peptides are short chains of amino acids, the same building blocks that make up proteins. The word covers
           very different things: prescription drugs such as insulin and GLP-1 medicines, collagen supplements,
           skin-care ingredients, and unapproved compounds sold for injury recovery. What the evidence shows depends
           on which one you mean.
         </p>
-      </section>
+      </Callout>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">What a peptide is</h2>
@@ -123,12 +124,15 @@ export default function PeptidesPillarPage() {
           </Link>{" "}
           for the terms used here.
         </p>
+        <div className="mt-6">
+          <SizeScale />
+        </div>
       </section>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Four things people mean by &ldquo;peptides&rdquo;</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-line bg-card p-5">
+          <div className="rounded-card border border-line bg-card p-6">
             <h3 className="font-semibold">Approved prescription drugs</h3>
             <p className="mt-2 text-sm text-muted">
               Insulin and the GLP-1 medicines are peptide drugs that went through approval. A 2026 review notes that
@@ -136,7 +140,7 @@ export default function PeptidesPillarPage() {
               market&rdquo; of unapproved compounds (<PaperLink id="mendias-2026" via="doi">Mendias &amp; Awan</PaperLink>).
             </p>
           </div>
-          <div className="rounded-xl border border-line bg-card p-5">
+          <div className="rounded-card border border-line bg-card p-6">
             <h3 className="font-semibold">Collagen and other oral supplements</h3>
             <p className="mt-2 text-sm text-muted">
               Collagen peptides are fragments of collagen sold as powders and capsules. This is the best-studied
@@ -158,7 +162,7 @@ export default function PeptidesPillarPage() {
               </Link>
             </p>
           </div>
-          <div className="rounded-xl border border-line bg-card p-5">
+          <div className="rounded-card border border-line bg-card p-6">
             <h3 className="font-semibold">Skin-care peptides</h3>
             <p className="mt-2 text-sm text-muted">
               Peptides such as GHK-copper are applied to the skin. The hub holds a review of GHK but no controlled
@@ -169,7 +173,7 @@ export default function PeptidesPillarPage() {
               .
             </p>
           </div>
-          <div className="rounded-xl border border-line bg-card p-5">
+          <div className="rounded-card border border-line bg-card p-6">
             <h3 className="font-semibold">Unapproved &ldquo;wellness&rdquo; and research peptides</h3>
             <p className="mt-2 text-sm text-muted">
               Compounds such as BPC-157 are not FDA-approved for any use (
@@ -225,7 +229,7 @@ export default function PeptidesPillarPage() {
           </li>
         </ul>
         <p className="mt-4">
-          <Link href="/science" className="link">
+          <Link href="/science" className="link-solo">
             Browse all studies
           </Link>
         </p>

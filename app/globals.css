@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Design tokens. Light is the default; dark follows the system unless the visitor picks a theme with
+ * the header toggle (html[data-theme="light" | "dark"], set before paint by the inline script in
+ * app/layout.tsx). The dark values are written twice because CSS cannot share them between a media
+ * query and an attribute selector: change both together.
+ */
 :root {
   --bg: #f6f7f3;
   --card: #ffffff;
@@ -24,7 +30,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0f1320;
     --card: #161b2c;
     --fg: #eef0f8;
@@ -46,8 +52,42 @@
   }
 }
 
+:root[data-theme="dark"] {
+  --bg: #0f1320;
+  --card: #161b2c;
+  --fg: #eef0f8;
+  --muted: #9aa3c0;
+  --soft: #c3c9de;
+  --line: #272d45;
+  --track: #2c3350;
+  --accent: #55c2a3;
+  --accent-soft: #14302a;
+  --on-accent: #0f1320;
+  --warn: #f1b04c;
+  --warn-soft: #33260f;
+  --bead-a: #55c2a3;
+  --bead-b: #3a9a80;
+  --bead-c: #f1b04c;
+  --ink: #0a0d17;
+  --ink-fg: #b4bcd6;
+  --ink-link: #7ad6bb;
+}
+
 html {
   color-scheme: light dark;
+  scroll-behavior: smooth;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -68,23 +108,31 @@ body {
   h1 {
     letter-spacing: -0.03em;
   }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  a {
+    text-underline-offset: 3px;
+  }
+  /* One visible focus ring for every keyboard-focusable thing, in both themes. */
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  /* Targets of in-page links should not be left with a ring when scrolled to. */
+  main:focus {
+    outline: none;
   }
 }
 
-a {
-  text-underline-offset: 3px;
+.link {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
-.link {
+/* A link that stands alone on its own line: gets a 44px-tall hit area instead of a text-height one. */
+.link-solo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   color: var(--accent);
   text-decoration: underline;
 }
@@ -95,8 +143,75 @@ a {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.125rem 0.625rem;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.25rem;
   color: var(--muted);
   background: var(--card);
+}
+
+/* Theme toggle icon: show the sun while dark is active (click for light), the moon otherwise. */
+.theme-sun {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-sun {
+    display: inline;
+  }
+  :root:not([data-theme="light"]) .theme-moon {
+    display: none;
+  }
+}
+:root[data-theme="dark"] .theme-sun {
+  display: inline;
+}
+:root[data-theme="dark"] .theme-moon {
+  display: none;
+}
+
+/* Print: a readable, ink-friendly copy of any page, with link targets spelled out. */
+@media print {
+  :root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --fg: #000000;
+    --muted: #333333;
+    --soft: #111111;
+    --line: #bbbbbb;
+    --accent: #000000;
+    --accent-soft: #ffffff;
+    --warn: #000000;
+    --warn-soft: #ffffff;
+  }
+  body {
+    font-size: 11pt;
+  }
+  header,
+  footer nav,
+  [data-noprint] {
+    display: none !important;
+  }
+  footer {
+    background: none !important;
+    color: #000 !important;
+    margin-top: 2rem !important;
+  }
+  footer * {
+    color: #000 !important;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+  section,
+  article > div,
+  li,
+  tr {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
 }

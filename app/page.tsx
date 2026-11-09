@@ -1,44 +1,18 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
-import { LEVEL_LABEL, TOPICS, TOPIC_SLUGS, type TopicRating } from "@/lib/topics";
+import { TOPIC_SLUGS } from "@/lib/topics";
 import { COMMITTEE, LEGAL_REVIEWED } from "@/lib/legal-status";
 import { formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { BeadChainHero, BeadRow } from "@/components/beads";
+import { BeadChainHero } from "@/components/beads";
 import { DigestionDiagramCompact, SignalDiagramCompact } from "@/components/diagrams";
-import { EvidenceMeter, LEVEL_ORDER, levelTone } from "@/components/evidence-meter";
-
-/** The strongest rating in a topic, so each card shows the best-supported claim, not the whole list. */
-function strongest(ratings: TopicRating[]): TopicRating {
-  return [...ratings].sort((a, b) => LEVEL_ORDER.indexOf(a.level) - LEVEL_ORDER.indexOf(b.level))[0];
-}
-
-type Tone = "accent" | "warn" | "neutral";
-const TONE: Record<Tone, string> = {
-  accent: "bg-accent-soft text-accent",
-  warn: "bg-warn-soft text-warn",
-  neutral: "bg-line text-fg",
-};
-
-function Pill({ tone, children }: { tone: Tone; children: React.ReactNode }) {
-  return (
-    <span className={`inline-flex items-center rounded-full px-3 py-0.5 text-[13px] font-semibold leading-[22px] ${TONE[tone]}`}>
-      {children}
-    </span>
-  );
-}
-
-function SectionHead({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: React.ReactNode }) {
-  return (
-    <>
-      {eyebrow && <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent">{eyebrow}</p>}
-      <h2 className="text-[32px] font-bold leading-[1.12] sm:text-4xl">{title}</h2>
-      {intro && <p className="mt-4 max-w-[640px] text-soft [text-wrap:pretty]">{intro}</p>}
-    </>
-  );
-}
+import { MeterLegend } from "@/components/evidence-meter";
+import { TopicCard } from "@/components/topic-card";
+import { HorizontalTimeline } from "@/components/timeline";
+import { SizeScale } from "@/components/size-scale";
+import { CARD, Pill, SectionHead, type Tone } from "@/components/ui";
 
 const JUMP = [
   { href: "#what", label: "What are they?" },
@@ -161,8 +135,8 @@ const FAQ: { q: string; text: string; a: React.ReactNode }[] = [
     a: (
       <>
         It depends on the peptide and the claim. Oral collagen peptides have consistent but caveated human evidence for
-        skin hydration and elasticity. Most injectable wellness peptides, such as BPC-157, have mostly animal evidence
-        (<PaperLink id="tewari-2026" via="doi">Tewari 2026</PaperLink>). See the evidence grid above.
+        skin hydration and elasticity. Most injectable wellness peptides, such as BPC-157, have mostly animal evidence (
+        <PaperLink id="tewari-2026" via="doi">Tewari 2026</PaperLink>). See the evidence grid above.
       </>
     ),
   },
@@ -180,13 +154,14 @@ const FAQ: { q: string; text: string; a: React.ReactNode }[] = [
     ),
   },
   {
-    q: "Who runs this site, and is it neutral?",
-    text: SITE.disclosure + " Every study summary states what it cannot show and who paid for it.",
+    q: "Where do the study summaries come from?",
+    text: "Each summary is written in our own words from the study's abstract, and its identifiers are checked against PubMed. Each one states what the study cannot show and who paid for it, or that funding is not stated.",
     a: (
       <>
-        {SITE.disclosure} Every study summary states what it cannot show and who paid for it.{" "}
-        <Link href="/about" className="link">
-          About this site
+        Each summary is written in our own words from the study&apos;s abstract, and its identifiers are checked against
+        PubMed. Each one states what the study cannot show and who paid for it, or that funding is not stated.{" "}
+        <Link href="/science/methodology" className="link">
+          Methodology
         </Link>
       </>
     ),
@@ -210,8 +185,6 @@ const CHECKLIST: { q: string; why: string }[] = [
   { q: "How big was it, and how long?", why: "A few dozen people over a few weeks can only suggest an effect." },
   { q: "Who paid for it?", why: "Company ties do not make a result wrong, but they should be stated." },
 ];
-
-const CARD = "rounded-[20px] border border-line bg-card p-7";
 
 export default function HomePage() {
   const recommended = COMMITTEE.filter((c) => c.result === "Recommended").length;
@@ -241,13 +214,13 @@ export default function HomePage() {
       />
 
       {/* Hero */}
-      <section className="grid items-center gap-14 pt-8 lg:grid-cols-2">
+      <section className="grid items-center gap-12 pt-6 lg:grid-cols-2 lg:gap-14">
         <div>
-          <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent">The {SITE.fullName}</p>
-          <h1 className="text-[40px] font-bold leading-[1.04] sm:text-6xl [text-wrap:balance]">
+          <p className="mb-4 text-caption font-semibold uppercase tracking-[0.08em] text-accent">The {SITE.fullName}</p>
+          <h1 className="text-4xl font-bold leading-[1.05] sm:text-6xl [text-wrap:balance]">
             Peptides, explained by the evidence
           </h1>
-          <p className="mt-6 max-w-[540px] text-[19px] leading-[1.55] text-soft [text-wrap:pretty]">
+          <p className="mt-6 max-w-[34rem] text-lg text-soft [text-wrap:pretty]">
             Peptides are short chains of amino acids. The word covers everything from insulin to collagen powder to
             unapproved injectables, and what the studies show is very different for each. Start here for the basics,
             then go as deep as you like.
@@ -255,20 +228,20 @@ export default function HomePage() {
           <p className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/peptides"
-              className="inline-flex min-h-12 items-center rounded-xl bg-accent px-6 font-semibold text-on-accent hover:opacity-90"
+              className="inline-flex min-h-12 items-center rounded-tile bg-accent px-6 font-semibold text-on-accent hover:opacity-90"
             >
               What are peptides?
             </Link>
             <Link
               href="/science"
-              className="inline-flex min-h-12 items-center rounded-xl border border-line bg-card px-6 font-semibold hover:border-accent"
+              className="inline-flex min-h-12 items-center rounded-tile border border-line bg-card px-6 font-semibold hover:border-accent"
             >
               Browse {STUDIES.length} study summaries
             </Link>
           </p>
-          <p className="mt-6 max-w-[540px] text-sm leading-relaxed text-muted">{SITE.disclosure}</p>
+          <p className="mt-6 max-w-[34rem] text-sm leading-relaxed text-muted">{SITE.disclosure}</p>
         </div>
-        <figure className="m-0 rounded-[28px] bg-accent-soft p-7">
+        <figure className="m-0 rounded-panel bg-accent-soft p-7">
           <BeadChainHero />
           <figcaption className="mt-4 text-sm leading-snug text-soft">
             One bead per amino acid. This chain has 15, the length reported for BPC-157. Colours are decoration only.
@@ -276,71 +249,34 @@ export default function HomePage() {
         </figure>
       </section>
 
-      {/* Jump nav */}
-      <nav aria-label="On this page" className="mt-12 flex flex-wrap gap-2.5">
-        {JUMP.map((j) => (
-          <a
-            key={j.href}
-            href={j.href}
-            className="inline-flex min-h-11 items-center rounded-full border border-line bg-card px-[18px] text-[15px] font-medium hover:border-accent"
-          >
-            {j.label}
-          </a>
-        ))}
+      {/* Jump nav: sticky, scrolls sideways on small screens */}
+      <nav
+        aria-label="On this page"
+        data-noprint
+        className="sticky top-0 z-30 -mx-4 mt-10 overflow-x-auto bg-bg px-4 py-3 sm:-mx-8 sm:px-8"
+      >
+        <div className="flex w-max gap-2.5">
+          {JUMP.map((j) => (
+            <a
+              key={j.href}
+              href={j.href}
+              className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-line bg-card px-[18px] text-sm font-medium hover:border-accent"
+            >
+              {j.label}
+            </a>
+          ))}
+        </div>
       </nav>
 
       {/* What are peptides */}
-      <section id="what" className="mt-24 scroll-mt-8">
+      <section id="what" className="mt-20 scroll-mt-24">
         <SectionHead
           eyebrow="The basics"
           title="What are peptides?"
           intro="Amino acids link into chains. Long, folded chains are proteins; short ones are peptides. There is no sharp line between the two, and the cut-off varies by source."
         />
-        <div className="mt-9 grid gap-8 rounded-[20px] border border-line bg-card p-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <div className="flex h-9 items-center">
-              <BeadRow n={1} />
-            </div>
-            <p className="mt-3 font-semibold">Amino acid</p>
-            <p className="mt-0.5 text-[15px] text-muted">The building block</p>
-          </div>
-          <div>
-            <div className="flex h-9 items-center">
-              <BeadRow n={3} />
-            </div>
-            <p className="mt-3 font-semibold">GHK</p>
-            <p className="mt-0.5 text-[15px] text-muted">
-              3 amino acids, studied for skin repair (
-              <PaperLink id="pickart-2015" via="pmc">
-                review
-              </PaperLink>
-              )
-            </p>
-          </div>
-          <div>
-            <div className="flex h-9 items-center">
-              <BeadRow n={15} size={11} gap={3} />
-            </div>
-            <p className="mt-3 font-semibold">BPC-157</p>
-            <p className="mt-0.5 text-[15px] text-muted">
-              15 amino acids, much discussed for injury recovery (
-              <PaperLink id="mcguire-2025" via="pmc">
-                review
-              </PaperLink>
-              )
-            </p>
-          </div>
-          <div>
-            <div className="flex min-h-9 max-w-[150px] items-center">
-              <span aria-hidden="true" className="flex flex-wrap gap-[3px]">
-                {Array.from({ length: 28 }, (_, i) => (
-                  <span key={i} className="h-[9px] w-[9px] rounded-full bg-muted" />
-                ))}
-              </span>
-            </div>
-            <p className="mt-3 font-semibold">Protein</p>
-            <p className="mt-0.5 text-[15px] text-muted">A long, folded chain, such as collagen</p>
-          </div>
+        <div className="mt-9">
+          <SizeScale />
         </div>
         <p className="mt-5">
           <Link href="/peptides" className="link">
@@ -355,28 +291,28 @@ export default function HomePage() {
       </section>
 
       {/* How do they work */}
-      <section id="how" className="mt-24 scroll-mt-8">
+      <section id="how" className="mt-24 scroll-mt-24">
         <SectionHead eyebrow="The mechanism" title="How do they work?" intro="Three ideas cover most of it." />
         <div className="mt-9 grid gap-6 md:grid-cols-3">
           <div className={`${CARD} flex flex-col gap-4`}>
             <SignalDiagramCompact />
-            <h3 className="text-[22px] font-bold leading-tight">Some are signals</h3>
-            <p className="text-base text-soft">
+            <h3 className="text-xl font-bold leading-tight">Some are signals</h3>
+            <p className="text-soft">
               They attach to a receptor on a cell and change what it does. That is how peptide drugs such as insulin are
               designed to act.
             </p>
           </div>
           <div className={`${CARD} flex flex-col gap-4`}>
             <DigestionDiagramCompact />
-            <h3 className="text-[22px] font-bold leading-tight">Swallowed ones meet digestion</h3>
-            <p className="text-base text-soft">
+            <h3 className="text-xl font-bold leading-tight">Swallowed ones meet digestion</h3>
+            <p className="text-soft">
               Whether anything active gets through, and does anything, is a question for trials, not for the label.
             </p>
           </div>
           <div className={`${CARD} flex flex-col gap-4`}>
             <div className="flex min-h-[130px] flex-col justify-center gap-2.5">
               <div
-                className="flex h-[34px] overflow-hidden rounded-lg"
+                className="flex h-9 overflow-hidden rounded-tile"
                 role="img"
                 aria-label="Bar chart: 67% of publications on six popular injectable peptides used animal models"
               >
@@ -387,7 +323,7 @@ export default function HomePage() {
                   Other
                 </div>
               </div>
-              <p className="text-[13px] leading-snug text-muted">
+              <p className="text-caption leading-snug text-muted">
                 Publications found by a 2026 scoping review of six popular injectable peptides (
                 <PaperLink id="tewari-2026" via="doi">
                   Tewari 2026
@@ -395,21 +331,19 @@ export default function HomePage() {
                 )
               </p>
             </div>
-            <h3 className="text-[22px] font-bold leading-tight">A mechanism is not proof</h3>
-            <p className="text-base text-soft">
-              &ldquo;It blocks an enzyme&rdquo; is a reason to run a trial, not a result.
-            </p>
+            <h3 className="text-xl font-bold leading-tight">A mechanism is not proof</h3>
+            <p className="text-soft">&ldquo;It blocks an enzyme&rdquo; is a reason to run a trial, not a result.</p>
           </div>
         </div>
         <p className="mt-6">
-          <Link href="/peptides/how-peptides-work" className="link">
+          <Link href="/peptides/how-peptides-work" className="link-solo">
             How peptides work, with the evidence
           </Link>
         </p>
       </section>
 
       {/* Types */}
-      <section id="types" className="mt-24 scroll-mt-8">
+      <section id="types" className="mt-24 scroll-mt-24">
         <SectionHead
           eyebrow="The landscape"
           title="What are the different types?"
@@ -419,28 +353,28 @@ export default function HomePage() {
           {TYPES.map((t) => (
             <div key={t.title} className={CARD}>
               <div className="flex flex-wrap items-center justify-between gap-2.5">
-                <span className="text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">Type {t.n}</span>
+                <span className="text-caption font-semibold uppercase tracking-[0.06em] text-muted">Type {t.n}</span>
                 <Pill tone={t.tone}>{t.status}</Pill>
               </div>
               <h3 className="mt-3 text-2xl font-bold leading-tight">{t.title}</h3>
-              <p className="mt-3 text-base text-soft">{t.body}</p>
+              <p className="mt-3 text-soft">{t.body}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Safety */}
-      <section id="safety" className="mt-24 scroll-mt-8">
+      <section id="safety" className="mt-24 scroll-mt-24">
         <SectionHead
           eyebrow="What we know"
           title="Are peptides safe?"
           intro={<>There is no single answer, because &ldquo;peptides&rdquo; is not a single thing. Here is what we know, by type.</>}
         />
-        <div className="mt-9 overflow-hidden rounded-[20px] border border-line bg-card">
+        <div className="mt-9 overflow-hidden rounded-card border border-line bg-card">
           {SAFETY.map((r, i) => (
             <div
               key={r.type}
-              className={`flex flex-wrap gap-x-8 gap-y-3 px-7 py-6 ${i > 0 ? "border-t border-line" : ""} ${r.flag ? "bg-warn-soft" : ""}`}
+              className={`flex flex-wrap gap-x-8 gap-y-3 px-6 py-6 sm:px-7 ${i > 0 ? "border-t border-line" : ""} ${r.flag ? "bg-warn-soft" : ""}`}
             >
               <div className="min-w-0 flex-[1_1_240px]">
                 <p className="font-semibold">{r.type}</p>
@@ -448,55 +382,31 @@ export default function HomePage() {
                   <Pill tone={r.tone}>{r.tag}</Pill>
                 </p>
               </div>
-              <p className="min-w-0 flex-[3_1_380px] text-base text-soft">{r.known}</p>
+              <p className="min-w-0 flex-[3_1_380px] text-soft">{r.known}</p>
             </div>
           ))}
         </div>
-        <p className="mt-5">
-          <Link href="/science/topics/safety" className="link">
+        <p className="mt-3">
+          <Link href="/science/topics/safety" className="link-solo">
             Safety evidence in detail
           </Link>
         </p>
       </section>
 
       {/* Evidence at a glance */}
-      <section id="evidence" className="mt-24 scroll-mt-8">
+      <section id="evidence" className="mt-24 scroll-mt-24">
         <SectionHead
           eyebrow="The evidence"
           title="Do they work? The evidence at a glance"
-          intro="For each topic, the best-supported claim we have summarised. Open a topic for every rating."
+          intro="For each topic, the best-supported and the least-supported claim we have summarised. Open a topic for every rating."
         />
-        <div className="mt-8 rounded-2xl border border-line bg-card px-6 py-5">
-          <p className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">How to read the meters</p>
-          <div className="grid grid-cols-2 gap-x-5 gap-y-4 md:grid-cols-3 lg:grid-cols-6">
-            {[...LEVEL_ORDER].reverse().map((level) => (
-              <div key={level}>
-                <EvidenceMeter level={level} size="sm" labelled={false} />
-                <p className="mt-2 text-sm leading-snug text-soft">{LEVEL_LABEL[level]}</p>
-              </div>
-            ))}
-          </div>
+        <div className="mt-8">
+          <MeterLegend />
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {TOPIC_SLUGS.map((slug) => {
-            const t = TOPICS[slug];
-            const top = strongest(t.ratings);
-            return (
-              <Link key={slug} href={`/science/topics/${slug}`} className={`${CARD} block hover:border-accent`}>
-                <h3 className="text-[22px] font-bold leading-tight">{t.title}</h3>
-                <p className="mt-3.5 text-base">{top.subject}</p>
-                <div className="mt-3.5">
-                  <EvidenceMeter level={top.level} />
-                </div>
-                <p className={`mt-2.5 text-sm font-semibold ${levelTone(top.level) === "warn" ? "text-warn" : "text-accent"}`}>
-                  {LEVEL_LABEL[top.level]}
-                </p>
-                <p className="mt-3.5 text-sm text-muted">
-                  {t.ratings.length} {t.ratings.length === 1 ? "rating" : "ratings"}, reviewed {formatDate(t.reviewedOn)}
-                </p>
-              </Link>
-            );
-          })}
+          {TOPIC_SLUGS.map((slug) => (
+            <TopicCard key={slug} slug={slug} />
+          ))}
         </div>
         <p className="mt-4 text-sm text-muted">
           Ratings reflect only the studies summarised here.{" "}
@@ -508,8 +418,8 @@ export default function HomePage() {
       </section>
 
       {/* Legal */}
-      <section id="legal" className="mt-24 scroll-mt-8">
-        <div className="rounded-3xl border border-line bg-card p-8 sm:p-10">
+      <section id="legal" className="mt-24 scroll-mt-24">
+        <div className="rounded-panel border border-line bg-card p-8 sm:p-10">
           <SectionHead
             eyebrow="Regulation"
             title="Are peptides legal?"
@@ -521,29 +431,22 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { d: "29 Sep 2023", t: "FDA adds several peptides to Category 2 of its interim compounding policies.", now: false },
-              { d: "16 Apr 2026", t: "FDA announces a public advisory committee meeting on the 503A bulks list.", now: false },
-              {
-                d: "23–24 Jul 2026",
-                t: `The committee considers seven peptides. News reports say it recommended ${recommended}.`,
-                now: false,
-              },
-              { d: formatDate(LEGAL_REVIEWED), t: "Last checked. We found no final FDA action.", now: true },
-            ].map((e) => (
-              <li key={e.d} className={`relative border-t-2 pt-5 ${e.now ? "border-accent" : "border-track"}`}>
-                <span
-                  aria-hidden="true"
-                  className={`absolute -top-2 left-0 h-3.5 w-3.5 rounded-full ${e.now ? "bg-accent" : "bg-muted"}`}
-                />
-                <p className={`text-sm font-semibold ${e.now ? "text-accent" : "text-muted"}`}>{e.d}</p>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{e.t}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-7">
-            <Link href="/peptides/legal-status" className="link">
+          <div className="mt-9">
+            <HorizontalTimeline
+              items={[
+                { key: "a", date: "29 Sep 2023", body: "FDA adds several peptides to Category 2 of its interim compounding policies." },
+                { key: "b", date: "16 Apr 2026", body: "FDA announces a public advisory committee meeting on the 503A bulks list." },
+                {
+                  key: "c",
+                  date: "23–24 Jul 2026",
+                  body: `The committee considers seven peptides. News reports say it recommended ${recommended}.`,
+                },
+                { key: "d", date: formatDate(LEGAL_REVIEWED), body: "Last checked. We found no final FDA action.", now: true },
+              ]}
+            />
+          </div>
+          <p className="mt-6">
+            <Link href="/peptides/legal-status" className="link-solo">
               Legal status, with sources and dates
             </Link>
           </p>
@@ -557,9 +460,9 @@ export default function HomePage() {
           title="How to judge a peptide claim"
           intro="Five questions we ask of every study. They work on ads and social media posts too."
         />
-        <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="-mx-4 mt-9 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-5">
           {CHECKLIST.map((c, i) => (
-            <li key={c.q} className="rounded-2xl border border-line bg-card p-[22px]">
+            <li key={c.q} className="min-w-[240px] snap-start rounded-card border border-line bg-card p-5 sm:min-w-0">
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft font-heading font-bold text-accent">
                 {i + 1}
               </span>
@@ -568,48 +471,64 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
-        <p className="mt-5">
-          <Link href="/science/methodology" className="link">
+        <p className="mt-4">
+          <Link href="/science/methodology" className="link-solo">
             Read the methodology
           </Link>
         </p>
       </section>
 
-      {/* FAQ */}
-      <section className="mt-24">
-        <h2 className="text-[32px] font-bold leading-[1.12] sm:text-4xl">Common questions</h2>
-        <div className="mt-8 grid gap-x-12 gap-y-6 md:grid-cols-2">
+      {/* FAQ: collapsed by default, full text stays in the page */}
+      <section className="mt-24 max-w-3xl">
+        <h2 className="text-3xl font-bold leading-[1.12] sm:text-4xl">Common questions</h2>
+        <div className="mt-8 border-b border-track">
           {FAQ.map((f) => (
-            <div key={f.q} className="border-t border-track pt-5">
-              <h3 className="text-lg font-semibold leading-snug">{f.q}</h3>
-              <p className="mt-2 text-base text-soft">{f.a}</p>
-            </div>
+            <details key={f.q} className="group border-t border-track">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 text-lg font-semibold leading-snug [&::-webkit-details-marker]:hidden">
+                <span>{f.q}</span>
+                <svg
+                  className="shrink-0 text-muted transition-transform group-open:rotate-180"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </summary>
+              <p className="max-w-prose pb-5 text-soft">{f.a}</p>
+            </details>
           ))}
         </div>
-        <p className="mt-7">
-          <Link href="/peptides" className="link">
+        <p className="mt-5">
+          <Link href="/peptides" className="link-solo">
             More questions, answered
           </Link>
         </p>
       </section>
 
       {/* Trust */}
-      <section className="mt-24 rounded-3xl bg-accent-soft p-8 sm:p-10">
-        <h2 className="text-[28px] font-bold leading-tight">Why trust this site</h2>
+      <section className="mt-24 rounded-panel bg-accent-soft p-8 sm:p-10">
+        <h2 className="text-3xl font-bold leading-tight">Why trust this site</h2>
         <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-heading text-[40px] font-bold leading-none text-accent">{STUDIES.length}</p>
-            <p className="mt-2 text-[15px] leading-relaxed text-soft">
+            <p className="font-heading text-4xl font-bold leading-none text-accent">{STUDIES.length}</p>
+            <p className="mt-2 text-sm leading-relaxed text-soft">
               studies summarised from their abstracts, each with what it cannot show
             </p>
           </div>
           <div>
-            <p className="font-heading text-[40px] font-bold leading-none text-accent">{TOPIC_SLUGS.length}</p>
-            <p className="mt-2 text-[15px] leading-relaxed text-soft">evidence topics, each with a dated verdict</p>
+            <p className="font-heading text-4xl font-bold leading-none text-accent">{TOPIC_SLUGS.length}</p>
+            <p className="mt-2 text-sm leading-relaxed text-soft">evidence topics, each with a dated verdict</p>
           </div>
           <div>
-            <p className="font-heading text-[40px] font-bold leading-none text-accent">Open</p>
-            <p className="mt-2 text-[15px] leading-relaxed text-soft">
+            <p className="font-heading text-4xl font-bold leading-none text-accent">Open</p>
+            <p className="mt-2 text-sm leading-relaxed text-soft">
               dataset, free to download as{" "}
               <Link href="/data" className="link">
                 CSV and JSON
@@ -617,8 +536,8 @@ export default function HomePage() {
             </p>
           </div>
           <div>
-            <p className="font-heading text-[40px] font-bold leading-none text-accent">Public</p>
-            <p className="mt-2 text-[15px] leading-relaxed text-soft">
+            <p className="font-heading text-4xl font-bold leading-none text-accent">Public</p>
+            <p className="mt-2 text-sm leading-relaxed text-soft">
               <Link href="/corrections" className="link">
                 corrections log
               </Link>{" "}
@@ -630,11 +549,11 @@ export default function HomePage() {
           </div>
         </div>
         <p className="mt-8 max-w-3xl text-sm text-muted">
-          {SITE.disclosure}{" "}
+          Who runs this site and how it is funded:{" "}
           <Link href="/about" className="link">
             About this site
           </Link>
-          . {SITE.disclaimer} Last reviewed {formatDate(SITE.lastReviewed)}.
+          . Last reviewed {formatDate(SITE.lastReviewed)}.
         </p>
       </section>
     </div>

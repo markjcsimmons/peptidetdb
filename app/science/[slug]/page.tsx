@@ -7,6 +7,8 @@ import { SITE } from "@/lib/site";
 import { PaperLink } from "@/components/paper-link";
 import { StudyChips } from "@/components/study-parts";
 import { JsonLd } from "@/components/json-ld";
+import { Callout } from "@/components/ui";
+import { EvidenceRung } from "@/components/evidence-rung";
 
 export const dynamicParams = false;
 
@@ -76,7 +78,7 @@ export default async function StudyPage({ params }: { params: Promise<{ slug: st
   };
 
   return (
-    <article className="max-w-3xl">
+    <article className="mx-auto max-w-3xl">
       <JsonLd data={ld} />
       <JsonLd
         data={{
@@ -122,7 +124,11 @@ export default async function StudyPage({ params }: { params: Promise<{ slug: st
         <p className="mt-2 text-sm text-muted">{KIND_HINT[s.kind]}</p>
       </div>
 
-      <dl className="mt-6 grid gap-4 rounded-xl border border-line bg-card p-5 sm:grid-cols-2">
+      <div className="mt-5">
+        <EvidenceRung kind={s.kind} />
+      </div>
+
+      <dl className="mt-6 grid gap-4 rounded-card border border-line bg-card p-6 sm:grid-cols-2">
         <Fact label="Who or what was studied" value={s.population} />
         <Fact label="Design" value={s.design} />
         <Fact label="Dose" value={s.dose} />
@@ -134,10 +140,9 @@ export default async function StudyPage({ params }: { params: Promise<{ slug: st
         <p className="mt-2 max-w-prose">{s.finding}</p>
       </section>
 
-      <section className="mt-8 rounded-xl border-l-4 border-warn bg-card p-5">
-        <h2 className="text-xl font-semibold">What it doesn&apos;t show</h2>
-        <p className="mt-2 max-w-prose">{s.caveat}</p>
-      </section>
+      <Callout tone="warn" label="What it doesn’t show" className="mt-8">
+        <p className="max-w-prose">{s.caveat}</p>
+      </Callout>
 
       <section className="mt-8">
         <h2 className="text-xl font-semibold">Funding and conflicts of interest</h2>

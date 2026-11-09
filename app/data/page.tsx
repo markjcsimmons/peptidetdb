@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function DataPage() {
   return (
-    <div className="max-w-3xl">
+    <div className="mx-auto max-w-3xl">
       <h1 className="text-3xl font-bold tracking-tight">Data</h1>
       <p className="mt-3 max-w-prose text-lg text-muted">
         The full registry behind this site, {STUDIES.length} studies, as a download. It updates whenever a study is
@@ -22,12 +22,12 @@ export default function DataPage() {
       <p className="mt-6 flex flex-wrap gap-3">
         <a
           href="/data/studies.csv"
-          className="rounded-lg bg-accent px-5 py-2.5 font-medium text-bg hover:opacity-90"
+          className="rounded-tile bg-accent px-5 py-2.5 font-medium text-bg hover:opacity-90"
           download
         >
           Download CSV
         </a>
-        <a href="/data/studies.json" className="rounded-lg border border-line bg-card px-5 py-2.5 font-medium hover:border-accent">
+        <a href="/data/studies.json" className="rounded-tile border border-line bg-card px-5 py-2.5 font-medium hover:border-accent">
           View JSON
         </a>
       </p>
@@ -38,7 +38,7 @@ export default function DataPage() {
       </p>
 
       <h2 className="mt-10 text-xl font-semibold">Fields</h2>
-      <div className="mt-4 overflow-x-auto rounded-xl border border-line">
+      <div className="mt-4 overflow-x-auto rounded-tile border border-line">
         <table className="w-full min-w-[30rem] text-left text-sm">
           <thead className="bg-card text-muted">
             <tr>

@@ -5,6 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { DigestionDiagram, SignalDiagram } from "@/components/diagrams";
+import { Callout, Pill, type Tone } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "How do peptides work?",
@@ -13,26 +14,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/peptides/how-peptides-work" },
 };
 
-type Tone = "accent" | "warn" | "neutral";
-const PILL: Record<Tone, string> = {
-  accent: "bg-accent-soft text-accent",
-  warn: "bg-warn-soft text-warn",
-  neutral: "bg-line text-fg",
-};
-
-function Pill({ tone, children }: { tone: Tone; children: React.ReactNode }) {
-  return (
-    <span className={`inline-flex items-center rounded-full px-3 py-0.5 text-[13px] font-semibold leading-[22px] ${PILL[tone]}`}>
-      {children}
-    </span>
-  );
-}
-
 function StepHead({ n, title }: { n: number; title: string }) {
   return (
     <>
-      <p className="mb-2 font-heading text-[15px] font-bold text-accent">{n}</p>
-      <h2 className="text-[28px] font-bold leading-[1.15] sm:text-[32px]">{title}</h2>
+      <p className="mb-2 font-heading text-sm font-bold text-accent">{n}</p>
+      <h2 className="text-3xl font-bold leading-[1.15]">{title}</h2>
     </>
   );
 }
@@ -45,7 +31,7 @@ function Chevron() {
   );
 }
 
-const NODE = "inline-flex min-h-11 items-center rounded-xl border border-track bg-bg px-[18px] font-medium";
+const NODE = "inline-flex min-h-11 items-center rounded-tile border border-track bg-bg px-[18px] font-medium";
 
 /** Five rungs of evidence, weakest to strongest. Shade = share of --accent mixed into the page colour. */
 const RUNGS: { label: string; height: number; mix: number }[] = [
@@ -83,31 +69,28 @@ export default function HowPeptidesWorkPage() {
         </Link>{" "}
         / How they work
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-[52px]">How do peptides work?</h1>
+      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How do peptides work?</h1>
 
-      <section className="mt-7 rounded-[20px] bg-accent-soft px-8 py-7">
-        <h2 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent [font-family:var(--font-body)]">
-          Short answer
-        </h2>
-        <p className="text-[19px] leading-[1.55] [text-wrap:pretty]">
+      <Callout label="Short answer" className="mt-7">
+        <p className="max-w-prose text-lg [text-wrap:pretty]">
           It depends on the peptide and on how it gets into the body. Some peptides act as signals: they attach to a
           receptor on a cell and change what the cell does. Peptides you swallow are mostly handled by digestion, like
           other protein. And for many peptides sold to consumers, the way they are said to work comes from lab and
           animal research, which is not proof they work in people.
         </p>
-      </section>
+      </Callout>
 
       {/* 1. Signals */}
       <section className="mt-20">
         <StepHead n={1} title="Some peptides are signals" />
-        <p className="mt-4 text-soft [text-wrap:pretty]">
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           Cells talk to each other with chemical messengers, and some of those messengers are short chains of amino
           acids. The usual picture is a lock and key: the peptide fits a receptor on or in a target cell, and that starts
           a change in the cell. This is general biology rather than a finding of any one study on this site, but it is
           why researchers pay attention to peptides, and it is how the approved peptide drugs, insulin and the GLP-1
           medicines among them, are designed to act.
         </p>
-        <div className="mt-7 rounded-[20px] border border-line bg-card p-7">
+        <div className="mt-7 rounded-card border border-line bg-card p-7">
           <SignalDiagram />
         </div>
         <p className="mt-7 text-soft">
@@ -115,7 +98,7 @@ export default function HowPeptidesWorkPage() {
           examples from the studies here:
         </p>
         <div className="mt-4 grid gap-5 md:grid-cols-2">
-          <div className="rounded-2xl border border-line bg-card p-6">
+          <div className="rounded-card border border-line bg-card p-6">
             <Pill tone="warn">Cell and animal work</Pill>
             <h3 className="mt-3 text-xl font-bold leading-tight">GHK, a three-amino-acid peptide</h3>
             <p className="mt-2.5 text-base text-soft">
@@ -127,7 +110,7 @@ export default function HowPeptidesWorkPage() {
               ). Changing gene activity in a dish is a mechanism hint, not a clinical result.
             </p>
           </div>
-          <div className="rounded-2xl border border-line bg-card p-6">
+          <div className="rounded-card border border-line bg-card p-6">
             <Pill tone="accent">Checked in people, once</Pill>
             <h3 className="mt-3 text-xl font-bold leading-tight">Valyl-tyrosine, a peptide from sardine</h3>
             <p className="mt-2.5 text-base text-soft">
@@ -146,16 +129,16 @@ export default function HowPeptidesWorkPage() {
       {/* 2. Digestion */}
       <section className="mt-20">
         <StepHead n={2} title="Swallowed peptides meet digestion" />
-        <p className="mt-4 text-soft [text-wrap:pretty]">
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           Food protein is broken into smaller pieces and amino acids by digestion, and a peptide in a powder or capsule
           enters the same system. So for oral products there are two separate questions: does anything active get
           through, and does it do anything if it does. Neither is settled by the label.
         </p>
-        <div className="mt-7 rounded-[20px] border border-line bg-card p-7">
+        <div className="mt-7 rounded-card border border-line bg-card p-7">
           <DigestionDiagram />
         </div>
-        <div className="mt-5 rounded-2xl border border-line bg-card p-6">
-          <p className="mb-1.5 text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">
+        <div className="mt-5 rounded-card border border-line bg-card p-6">
+          <p className="mb-1.5 text-caption font-semibold uppercase tracking-[0.06em] text-muted">
             An example of how the first question gets blurred
           </p>
           <p className="text-base text-soft">
@@ -181,16 +164,16 @@ export default function HowPeptidesWorkPage() {
       {/* 3. Routes */}
       <section className="mt-20">
         <StepHead n={3} title="Injecting skips digestion, not risk" />
-        <p className="mt-4 text-soft [text-wrap:pretty]">
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           Injected peptides avoid the gut, which is one reason people use them. They also bring injection risks and depend
           on how the product was made.
         </p>
-        <div className="mt-7 flex flex-col gap-5 rounded-[20px] border border-line bg-card p-7">
+        <div className="mt-7 flex flex-col gap-5 rounded-card border border-line bg-card p-7">
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-3">
             <span className="basis-full text-sm font-semibold text-muted sm:basis-[150px]">Swallowed</span>
             <span className={NODE}>Mouth</span>
             <Chevron />
-            <span className="inline-flex min-h-11 items-center rounded-xl border border-warn bg-warn-soft px-[18px] font-semibold text-warn">
+            <span className="inline-flex min-h-11 items-center rounded-tile border border-warn bg-warn-soft px-[18px] font-semibold text-warn">
               Digestion
             </span>
             <Chevron />
@@ -202,7 +185,7 @@ export default function HowPeptidesWorkPage() {
             <span className={NODE}>Needle</span>
             <Chevron />
             <span className={NODE}>Bloodstream or tissue</span>
-            <span className="inline-flex min-h-11 items-center rounded-xl border border-warn bg-warn-soft px-4 text-sm font-semibold text-warn">
+            <span className="inline-flex min-h-11 items-center rounded-tile border border-warn bg-warn-soft px-4 text-sm font-semibold text-warn">
               Injection and manufacturing risks
             </span>
           </div>
@@ -212,12 +195,12 @@ export default function HowPeptidesWorkPage() {
             <span className={NODE}>Skin surface</span>
             <Chevron />
             <span className={NODE}>Skin</span>
-            <span className="inline-flex min-h-11 items-center rounded-xl border border-track bg-line px-4 text-sm font-semibold text-fg">
+            <span className="inline-flex min-h-11 items-center rounded-tile border border-track bg-line px-4 text-sm font-semibold text-fg">
               No controlled product trial summarised here
             </span>
           </div>
         </div>
-        <p className="mt-7 text-soft [text-wrap:pretty]">
+        <p className="mt-7 max-w-prose text-soft [text-wrap:pretty]">
           A 2026 review of approved and unapproved peptides found that many unapproved ones look favourable in animals,
           while{" "}
           <PaperLink id="mendias-2026" via="doi">
@@ -234,7 +217,7 @@ export default function HowPeptidesWorkPage() {
       {/* 4. Mechanism is not proof */}
       <section className="mt-20">
         <StepHead n={4} title="A mechanism is not the proof" />
-        <p className="mt-4 text-soft [text-wrap:pretty]">
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           &ldquo;It blocks an enzyme&rdquo; or &ldquo;it switches on repair genes&rdquo; sounds like an explanation. It is a
           reason to run a trial. Many things that work in cells or animals do nothing in people, and the people who sell a
           product can quote a mechanism without ever testing it in humans. A 2026 scoping review found that 67% of the
@@ -246,7 +229,7 @@ export default function HowPeptidesWorkPage() {
           .
         </p>
 
-        <div className="mt-8 overflow-x-auto rounded-[20px] border border-line bg-card p-7">
+        <div className="mt-8 overflow-x-auto rounded-card border border-line bg-card p-7">
           <div className="min-w-[720px]">
             <p className="font-heading text-xl font-bold">Where the evidence sits</p>
             <p className="mb-6 mt-1 text-sm text-muted">
@@ -256,7 +239,7 @@ export default function HowPeptidesWorkPage() {
               {RUNGS.map((r) => (
                 <div
                   key={r.label}
-                  className="rounded-t-lg"
+                  className="rounded-t-tile"
                   style={{ height: r.height, background: `color-mix(in srgb, var(--accent) ${r.mix}%, var(--card))` }}
                 />
               ))}
@@ -272,13 +255,13 @@ export default function HowPeptidesWorkPage() {
               {MARKERS.map((m) => (
                 <div key={m.name} className="grid grid-cols-5 gap-2">
                   <div
-                    className={`rounded-[10px] border px-3.5 py-2.5 ${
+                    className={`rounded-tile border px-3.5 py-2.5 ${
                       m.tone === "warn" ? "border-warn bg-warn-soft text-warn" : "border-accent bg-accent-soft text-accent"
                     }`}
                     style={{ gridColumn: m.col }}
                   >
                     <p className="text-sm font-semibold">{m.name}</p>
-                    <p className="mt-0.5 text-[13px] leading-snug">{m.note}</p>
+                    <p className="mt-0.5 text-caption leading-snug">{m.note}</p>
                   </div>
                 </div>
               ))}
@@ -286,7 +269,7 @@ export default function HowPeptidesWorkPage() {
           </div>
         </div>
 
-        <p className="mt-8 text-soft [text-wrap:pretty]">
+        <p className="mt-8 max-w-prose text-soft [text-wrap:pretty]">
           When you read a claim about how a peptide works, ask: was this shown in people, in animals, or in cells? Did the
           study measure a real outcome, or only a marker? Was there a comparison group? We answer those questions for each
           study on the{" "}
@@ -301,8 +284,8 @@ export default function HowPeptidesWorkPage() {
         </p>
       </section>
 
-      <section className="mt-20 rounded-[20px] border border-line bg-card p-7">
-        <h2 className="text-[22px] font-bold">Keep going</h2>
+      <section className="mt-20 rounded-card border border-line bg-card p-7">
+        <h2 className="text-xl font-bold">Keep going</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {[
             { href: "/peptides", label: "What are peptides? Types, evidence and safety" },
@@ -312,7 +295,7 @@ export default function HowPeptidesWorkPage() {
             <Link
               key={l.href}
               href={l.href}
-              className="flex min-h-14 items-center rounded-xl border border-line bg-bg px-[18px] py-3 font-medium hover:border-accent"
+              className="flex min-h-14 items-center rounded-tile border border-line bg-bg px-[18px] py-3 font-medium hover:border-accent"
             >
               {l.label}
             </Link>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { KIND_LABEL, STUDIES, type StudyKind } from "@/lib/studies";
-import { TOPICS, TOPIC_SLUGS } from "@/lib/topics";
+import { TOPIC_SLUGS } from "@/lib/topics";
+import { TopicCard } from "@/components/topic-card";
 import { StudyExplorer } from "@/components/study-explorer";
 import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/site";
@@ -54,17 +55,17 @@ export default function SciencePage() {
         ))}
       </div>
 
-      <section className="mt-6 rounded-xl border border-line bg-card p-5">
-        <h2 className="font-semibold">Evidence by topic</h2>
-        <ul className="mt-2 grid gap-1 text-sm sm:grid-cols-2">
+      <section className="mt-8" aria-labelledby="by-topic">
+        <h2 id="by-topic" className="text-2xl font-bold">
+          Evidence by topic
+        </h2>
+        <div className="-mx-4 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 lg:grid-cols-3">
           {TOPIC_SLUGS.map((slug) => (
-            <li key={slug}>
-              <Link href={`/science/topics/${slug}`} className="link">
-                {TOPICS[slug].title}
-              </Link>
-            </li>
+            <div key={slug} className="min-w-[260px] snap-start md:min-w-0 [&>a]:h-full">
+              <TopicCard slug={slug} compact />
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       <div className="mt-8">

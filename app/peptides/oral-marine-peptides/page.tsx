@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LEVEL_HINT, LEVEL_LABEL, type Level } from "@/lib/topics";
+import type { Level } from "@/lib/topics";
+import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { STUDY_BY_ID, shortCite } from "@/lib/studies";
 import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
@@ -69,7 +71,7 @@ const ROWS: Row[] = [
 
 export default function OralMarinePeptidesPage() {
   return (
-    <article className="max-w-3xl">
+    <article className="mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -105,20 +107,19 @@ export default function OralMarinePeptidesPage() {
       <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Do oral marine peptides work?</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <p className="mt-4 rounded-xl border border-line bg-card p-4 text-sm">
+      <p className="mt-4 rounded-tile border border-line bg-card p-4 text-sm">
         <strong>Disclosure.</strong> {SITE.disclosure} This page covers a product category that Pürblack sells, so
         read it with that in mind; the studies are linked so you can check them yourself.
       </p>
 
-      <section className="mt-6 rounded-xl border-l-4 border-accent bg-card p-5">
-        <h2 className="sr-only">Short answer</h2>
-        <p className="max-w-prose text-lg">
+      <Callout label="Short answer" className="mt-6">
+        <p className="max-w-prose text-lg [text-wrap:pretty]">
           Partly. Fish-derived collagen peptides have randomised trials for skin, and a few small human studies
           exist for blood pressure, sleep, memory and recovery. Most are small, several report funding ties to a
           company with an interest in the product, and some found no benefit over placebo. For joints and tendons, immune function and
           vision, we found no human trials.
         </p>
-      </section>
+      </Callout>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">What the studies show, system by system</h2>
@@ -129,13 +130,11 @@ export default function OralMarinePeptidesPage() {
         </p>
         <div className="mt-4 space-y-4">
           {ROWS.map((r) => (
-            <div key={r.system} className="rounded-xl border border-line bg-card p-5">
+            <div key={r.system} className="rounded-card border border-line bg-card p-6">
               <h3 className="font-semibold">{r.system}</h3>
-              <p className="mt-1">
-                <span className="chip border-accent text-accent" title={LEVEL_HINT[r.level]}>
-                  {LEVEL_LABEL[r.level]}
-                </span>
-              </p>
+              <div className="mt-2">
+                <RatingBadge level={r.level} measures="benefit" />
+              </div>
               <p className="mt-3 max-w-prose text-sm">{r.note}</p>
               {r.studies.length > 0 && (
                 <p className="mt-3 text-sm text-muted">

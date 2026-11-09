@@ -14,7 +14,7 @@ export default function MethodologyPage() {
   const kinds = Object.keys(KIND_LABEL) as StudyKind[];
   const levels = Object.keys(LEVEL_LABEL) as Level[];
   return (
-    <div className="max-w-3xl space-y-8">
+    <div className="mx-auto max-w-3xl space-y-8">
       <header>
         <h1 className="text-3xl font-bold tracking-tight">Methodology</h1>
         <p className="mt-3 max-w-prose text-lg text-muted">

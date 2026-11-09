@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function CorrectionsPage() {
   return (
-    <div className="max-w-3xl">
+    <div className="mx-auto max-w-3xl">
       <h1 className="text-3xl font-bold tracking-tight">Corrections log</h1>
       <p className="mt-3 max-w-prose text-lg text-muted">
         Every time a published claim, summary, identifier, verdict or date turns out to be wrong, it is fixed and
@@ -24,7 +24,7 @@ export default function CorrectionsPage() {
       </p>
 
       {CORRECTIONS.length === 0 ? (
-        <p className="mt-8 rounded-xl border border-line bg-card p-5">
+        <p className="mt-8 rounded-card border border-line bg-card p-6">
           No corrections have been logged since the site launched. Last reviewed {formatDate(SITE.lastReviewed)}.
         </p>
       ) : (
@@ -32,7 +32,7 @@ export default function CorrectionsPage() {
           {[...CORRECTIONS]
             .sort((a, b) => b.date.localeCompare(a.date))
             .map((c) => (
-              <li key={`${c.date}-${c.page}`} className="rounded-xl border border-line bg-card p-5">
+              <li key={`${c.date}-${c.page}`} className="rounded-card border border-line bg-card p-6">
                 <p className="text-sm text-muted">
                   {formatDate(c.date)} ·{" "}
                   <Link href={c.page} className="link">

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function GlossaryPage() {
   const terms = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term));
   return (
-    <div className="max-w-3xl">
+    <div className="mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
