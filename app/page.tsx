@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
@@ -13,6 +14,12 @@ import { TopicCard } from "@/components/topic-card";
 import { HorizontalTimeline } from "@/components/timeline";
 import { SizeScale } from "@/components/size-scale";
 import { CARD, Pill, SectionHead, type Tone } from "@/components/ui";
+
+// Title and description come from the layout defaults; this adds the canonical so ?utm= and other
+// variants of the homepage are not treated as separate pages.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const JUMP = [
   { href: "#what", label: "What are they?" },
