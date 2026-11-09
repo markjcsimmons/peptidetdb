@@ -12,6 +12,7 @@
     "indexnow": "tsx scripts/submit-indexnow.ts"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "next": "^15.5.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

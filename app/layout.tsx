@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -36,6 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <SiteFooter />
+        {/* Vercel Web Analytics: cookie-free page-view counts. Only reports on Vercel deployments. */}
+        <Analytics />
       </body>
     </html>
   );

@@ -12,8 +12,8 @@ The operator **works for Pürblack, pays for the site personally, and gets no fu
 
 ## Hard rules from the user
 - **Do not touch ShilajitDB** (`/Users/mark/Desktop/CURSOR:CLAUDE/ShilajitDB/`, a sibling site by the same operator). Read-only reference for patterns only. Its Bing/other accounts: don't change anything on them.
-- Commit/push/deploy only when asked. A push to `main` deploys to production automatically.
-- Never enter credentials. The user is signed in to Namecheap, Google Search Console and Bing in Chrome; use Claude in Chrome for those.
+- Commit only when asked, but **always push to `main` right after committing** (standing rule from the user, 2026-11-09). A push to `main` deploys to production automatically.
+- Never enter credentials. The user is signed in to Namecheap, Google Search Console, Bing and Vercel in Chrome (Bing's session lapsed once on 2026-11-09 and needed a re-sign-in); use Claude in Chrome for those. Don't try to solve Bing/Google bot challenges.
 
 ## Stack and deploy
 - Next.js 15 (App Router) + TypeScript + Tailwind 3, fully static (no DB). `params` in dynamic routes is a Promise.
@@ -26,9 +26,10 @@ The operator **works for Pürblack, pays for the site personally, and gets no fu
 A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google-site-verification=…` (GSC) · CNAME `a890d7c5…dae` → verify.bing.com (Bing). The locked SPF TXT belongs to Namecheap email forwarding.
 
 ## Search setup (done 2026-11-09)
-- Google Search Console: **domain property** `sc-domain:peptidetdb.com`, verified; sitemap submitted. Indexing requested for `/`, `/science`, `/peptides/legal-status`. **`/peptides` request failed twice (Google-side error): retry.** Methodology and the newer pages not requested yet.
-- Bing Webmaster Tools: `https://peptidetdb.com/` added and verified (CNAME); sitemap submitted. Same Bing account holds other sites; leave them alone.
-- IndexNow: key file `public/5b2ad43dfaab38cdd4731aa79c07e54a.txt`; run `npm run indexnow -- --all` (or `--url=/a,/b`) **after a deploy is live**. Google doesn't use IndexNow.
+- Google Search Console: **domain property** `sc-domain:peptidetdb.com`, verified; sitemap submitted (read OK 2026-11-09). Indexing requested for `/`, `/science`, `/peptides/legal-status`, `/peptides` (succeeded on retry), `/peptides/how-peptides-work`, `/peptides/oral-marine-peptides`; `/science/methodology` was already indexed. Reports said "processing, check in a day or so" on 2026-11-09. The inspect box in the GSC header is the way to request indexing (the `/inspect?id=` deep link 404s).
+- Bing Webmaster Tools: `https://peptidetdb.com/` added and verified (CNAME). The first sitemap read errored ("page not accessible") although the file was fine; **re-submitting fixed it: Success, 40 URLs, 0 errors** (2026-11-09). Same Bing account holds other sites; leave them alone.
+- IndexNow: key file `public/5b2ad43dfaab38cdd4731aa79c07e54a.txt`; run `npm run indexnow -- --all` (or `--url=/a,/b`) **after a deploy is live**. Last run 2026-11-09: 40 URLs, 200 OK. Bing's IndexNow page shows no history, so judge by Site Explorer/URL Inspection instead. Google doesn't use IndexNow.
+- Vercel Web Analytics: enabled on the Vercel project 2026-11-09 (the plan-included tier; overage is $30 per extra 1M events; not the $10/mo "Plus"). `<Analytics />` from `@vercel/analytics/next` is in `app/layout.tsx`. It is cookie-free and only reports from Vercel deployments, so check the Analytics tab after deploy.
 
 ## Architecture (everything renders from `lib/`)
 | Path | Role |
@@ -38,8 +39,16 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 | `lib/legal-status.ts` | Timeline/table/sources for the legal page. Update `LEGAL_REVIEWED` with it. |
 | `lib/site.ts` | Name, disclosure, disclaimer, nav, footer links, `contactEmail` (null = unset; hides contact sections). |
 | `lib/corrections.ts`, `lib/glossary.ts`, `lib/studies-export.ts` | Corrections log (empty), glossary, CSV/JSON export. |
-| `app/` | `/` · `/peptides` (pillar) · `/peptides/legal-status` · `/peptides/oral-marine-peptides` · `/science` (hub) · `/science/[id]` · `/science/topics/[topic]` · `/science/methodology` · `/about` `/editorial-policy` `/corrections` `/glossary` `/data` (+`studies.csv`, `studies.json`) · `/llms.txt` · sitemap/robots |
+| `app/` | `/` · `/peptides` (pillar) · `/peptides/how-peptides-work` · `/peptides/legal-status` · `/peptides/oral-marine-peptides` · `/science` (hub) · `/science/[id]` · `/science/topics/[topic]` · `/science/methodology` · `/about` `/editorial-policy` `/corrections` `/glossary` `/data` (+`studies.csv`, `studies.json`) · `/llms.txt` · sitemap/robots |
 | `scripts/` | `study:fetch -- <pmid>` (PubMed record + abstract), `study:audit` (checks every study vs PubMed), `indexnow` |
+
+## UI conventions (redesigned 2026-11-09)
+- Fonts via `next/font` (Inter body, Space Grotesk headings). Colour tokens are CSS variables in `app/globals.css` with light, system-dark and a manual toggle (`html[data-theme]`, set before paint in `app/layout.tsx`). **Dark values are written twice (media query + attribute): change both.** Use the Tailwind tokens (`bg-card`, `text-soft`, `accent`, `warn`…), never raw hex in pages.
+- Scales (in `tailwind.config.js`): Tailwind default type sizes plus `text-caption`; radii `rounded-tile` 12 / `rounded-card` 20 / `rounded-panel` 28. No arbitrary `text-[..px]` or `rounded-[..]`.
+- Shared pieces in `components/`: `ui.tsx` (`Pill`, `Callout`, `SectionHead`, `CARD`), `topic-card.tsx`, `evidence-meter.tsx`, `timeline.tsx`, `size-scale.tsx`, `evidence-rung.tsx`, `beads.tsx`, `diagrams.tsx`. Don't reintroduce the left-border callout; use `Callout`.
+- **Evidence meter rules (trust-critical):** the 5th segment is always empty (reserved for large, independent, replicated trials; nothing is rated that high); "Mixed" and "Limited" share a step; topic cards show best AND least-supported ratings; "Not yet assessed" is never shown as weakest; the **safety** topic (`measures: "safety"`) is words only, never a meter.
+- Accessibility baseline: skip link + `<main id="main">`, one visible `:focus-visible` ring, standalone links use `.link-solo` (44px target), no colour-only meaning. Print stylesheet and SVG favicon/OG image (`app/icon.svg`, `app/opengraph-image.tsx`, `app/favicon.ico/route.tsx`) exist.
+- The disclosure shows on the homepage hero and footer only (not repeated in the FAQ/trust strip); it must still sit next to any page that names a Pürblack product (e.g. `/peptides/oral-marine-peptides`).
 
 ## Rules for adding or editing a study
 1. `npm run study:fetch -- <pmid>`; **read the abstract**; write `finding` and `caveat` **in your own words, from the abstract only** (never paste).
@@ -65,7 +74,7 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 - **Editorial policy commitments are drafts** (include studies whatever they found; public corrections; no products graded). Confirm with the user.
 - No contact email yet (Namecheap email forwarding could provide `hello@peptidetdb.com`); set `SITE.contactEmail`.
 - Stage 2 product grading: rubric first (see Disclosure).
-- Ideas: claim-checker tool, COA checklist, dose comparer, weekly PubMed study monitor (human review before publishing), regulatory tracker, OG images, Vercel Analytics.
+- Ideas: claim-checker tool, COA checklist, dose comparer, weekly PubMed study monitor (human review before publishing), regulatory tracker, a weight-loss/GLP-1 topic page (big search interest; needs studies fetched first), dark-mode and print polish checks.
 
 ## Environment notes
 - Default `python3` (3.8) lacks openpyxl; `pip install --user openpyxl` was done; `/usr/bin/python3` is 3.9.
