@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     stat("/", SITE.lastReviewed),
     stat("/peptides", SITE.lastReviewed),
+    stat("/peptides/how-peptides-work", SITE.lastReviewed),
     stat("/peptides/legal-status", LEGAL_REVIEWED),
     stat("/peptides/oral-marine-peptides", SITE.lastReviewed),
     stat("/science", SITE.lastReviewed),

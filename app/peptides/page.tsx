@@ -191,7 +191,11 @@ export default function PeptidesPillarPage() {
           skin, and each route carries different risks and different rules. Peptides taken by mouth meet digestion,
           so whether a given oral peptide has any effect is a question for trials, such as the collagen trials
           summarised on this site, not an assumption. Injected products skip digestion but carry the risks of
-          injection and of how the product was made.
+          injection and of how the product was made. See{" "}
+          <Link href="/peptides/how-peptides-work" className="link">
+            how peptides work
+          </Link>
+          .
         </p>
       </section>
 
