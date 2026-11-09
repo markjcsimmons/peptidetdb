@@ -21,10 +21,13 @@ export type StudyKind =
   | "animal"
   | "in-vitro";
 
-export type Topic = "skin" | "muscle" | "joints" | "safety";
+export type Topic = "skin" | "muscle" | "joints" | "blood-pressure" | "brain" | "safety";
 
 export type PeptideId =
   | "collagen"
+  | "marine-collagen"
+  | "fish-hydrolysate"
+  | "valyl-tyrosine"
   | "bpc-157"
   | "tb-500"
   | "ghk-cu"
@@ -96,11 +99,16 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   skin: "Skin & anti-aging",
   muscle: "Muscle & strength",
   joints: "Joints & tendons",
+  "blood-pressure": "Blood pressure & vessels",
+  brain: "Sleep, memory & stress",
   safety: "Safety & regulation",
 };
 
 export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   collagen: "Collagen peptides",
+  "marine-collagen": "Marine (fish-derived) collagen peptides",
+  "fish-hydrolysate": "Fish protein hydrolysate",
+  "valyl-tyrosine": "Valyl-tyrosine (sardine peptide)",
   "bpc-157": "BPC-157",
   "tb-500": "TB-500 / thymosin beta-4",
   "ghk-cu": "GHK-Cu (copper peptide)",
@@ -389,6 +397,258 @@ export const STUDIES: Study[] = [
       "Describes GHK, bound to copper, as supporting wound healing and skin repair, mainly from animal and cell work, and reports that cosmetic products containing it were found to improve skin firmness, elasticity and fine lines. It also reports that GHK can raise or lower the activity of thousands of genes.",
     caveat:
       "A review, not a trial: the abstract gives no sample sizes for the cosmetic findings, and a gene-expression result is not a clinical outcome. Read the paper's own disclosures for any commercial ties.",
+    verifiedOn: "2026-11-09",
+  },
+
+  // ── Oral marine (fish-derived) peptides ────────────────────────────────────
+  {
+    id: "evans-2021",
+    authors: "Evans M, Lewis ED, Zakaria N, Pelipyagina T, Guthrie N",
+    year: 2021,
+    title:
+      "A randomized, triple-blind, placebo-controlled, parallel study to evaluate the efficacy of a freshwater marine collagen on skin wrinkles and elasticity.",
+    journal: "J Cosmet Dermatol",
+    ref: "20(3):825–834",
+    pmid: "32799362",
+    pmcid: "PMC8176521",
+    doi: "10.1111/jocd.13676",
+    kind: "human-controlled",
+    topics: ["skin"],
+    peptides: ["marine-collagen"],
+    delivery: ["oral"],
+    population: "Women aged 45–60 (number not given in the abstract)",
+    design: "Randomised, triple-blind, placebo-controlled, parallel groups",
+    dose: "A hydrolysed fish-derived (freshwater) collagen product; dose not given in the abstract",
+    duration: "12 weeks",
+    finding:
+      "After 12 weeks the collagen group's wrinkle score fell 35% from baseline (P = .035) and fell 24% more than placebo on the right side of the face. In a planned subgroup of women aged 45–54, cheek elasticity improved 20% at week 6 and 10% at week 12 from baseline. At week 12 the collagen group also rated overall skin, wrinkles, elasticity, hydration, radiance and firmness higher than the placebo group did.",
+    caveat:
+      "Several results are changes from baseline or self-rated scores, which placebo can also move; only one facial wrinkle result is described as a difference from placebo. The abstract gives no sample size or dose, and the elasticity benefit comes from an age subgroup.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "hwang-2026",
+    authors: "Hwang S, Won J, Kim S, Kang W, Park M",
+    year: 2026,
+    title:
+      "Low-Molecular-Weight Collagen Peptide Supplementation Improves Cellulite Severity, Skin Elasticity, and Hair Shaft Diameter: A Clinical Study with Pharmacokinetic Evaluation.",
+    journal: "J Med Food",
+    ref: "29(4):187–195",
+    pmid: "41788055",
+    doi: "10.1177/1096620X261428336",
+    kind: "human-controlled",
+    topics: ["skin"],
+    peptides: ["marine-collagen"],
+    delivery: ["oral"],
+    population: "114 women aged 20–50 with thigh cellulite and self-reported hair thinning",
+    design: "Randomised, placebo-controlled trial, preceded by a preliminary pharmacokinetic study",
+    dose: "1,000 mg/day of low-molecular-weight collagen peptides made from fish-skin gelatin",
+    duration: "24 weeks",
+    finding:
+      "At weeks 12 and 24 the collagen peptide group improved more than placebo on cellulite severity, dermal–subcutaneous border length, skin roughness and skin elasticity, and hair diameter rose significantly at week 24. In the separate pharmacokinetic part, blood exposure to the tripeptide Gly-Pro-Hyp (area under the curve over two hours) was about 54 times higher after the peptide than after a general collagen product.",
+    caveat:
+      "Cellulite and hair results are single-trial findings, and the abstract does not say who funded the study. The pharmacokinetic comparison is a blood-level measurement from a preliminary study; it does not by itself show a clinical benefit.",
+    funding: "The authors declare no competing financial or nonfinancial interests.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "kawasaki-2000",
+    authors: "Kawasaki T, Seki E, Osajima K, Yoshida M, Asada K, Matsui T, Osajima Y",
+    year: 2000,
+    title:
+      "Antihypertensive effect of valyl-tyrosine, a short chain peptide derived from sardine muscle hydrolyzate, on mild hypertensive subjects.",
+    journal: "J Hum Hypertens",
+    ref: "14(8):519–523",
+    pmid: "10962520",
+    doi: "10.1038/sj.jhh.1001065",
+    kind: "human-controlled",
+    topics: ["blood-pressure"],
+    peptides: ["valyl-tyrosine"],
+    delivery: ["oral"],
+    population: "29 adults with high-normal blood pressure or mild hypertension",
+    design: "Randomised, double-blind, placebo-controlled: 3-week run-in, 4 weeks of treatment, 4-week recovery",
+    dose: "3 mg of valyl-tyrosine in a 100 ml drink, twice a day",
+    duration: "4 weeks of treatment",
+    finding:
+      "On the sardine peptide, systolic and diastolic blood pressure fell by 9.7 and 5.3 mm Hg after one week and by 9.3 and 5.2 mm Hg after four weeks (P < 0.001), with no change on placebo. Pressure crept back up during the recovery period. Blood markers fitted ACE inhibition (angiotensin II and aldosterone fell), and no adverse effects were detected.",
+    caveat:
+      "A single small, short trial in people with mild hypertension, and nothing else in this hub replicates it. It tested one defined peptide (valyl-tyrosine) in a drink, not marine collagen or fish hydrolysate products in general.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "zhu-2010",
+    authors: "Zhu CF, Li GZ, Peng HB, Zhang F, Chen Y, Li Y",
+    year: 2010,
+    title:
+      "Therapeutic effects of marine collagen peptides on Chinese patients with type 2 diabetes mellitus and primary hypertension.",
+    journal: "Am J Med Sci",
+    ref: "340(5):360–366",
+    pmid: "20739874",
+    doi: "10.1097/MAJ.0b013e3181edfcf2",
+    kind: "human-controlled",
+    topics: ["blood-pressure"],
+    peptides: ["marine-collagen"],
+    delivery: ["oral"],
+    population: "100 patients with type 2 diabetes and primary hypertension (50 per group) plus 50 healthy comparison subjects, in China",
+    design: "Randomised, double-blind; patients also kept taking their regular diabetes and blood-pressure medicines",
+    dose: "Marine collagen peptides from deep-sea fish, twice daily; dose not given in the abstract",
+    duration: "3 months",
+    finding:
+      "Compared with patient controls, the marine collagen peptide group had lower fasting blood glucose, HbA1c, diastolic blood pressure, mean arterial pressure, triglycerides, total and LDL cholesterol and creatinine, and higher HDL cholesterol and insulin sensitivity.",
+    caveat:
+      "Patients stayed on their regular medicines, so this is an add-on effect in people with diabetes and hypertension, not in healthy people. The abstract reports lower diastolic and mean arterial pressure but does not list systolic pressure among the significant results, and it gives no dose.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "oliveira-2020",
+    authors: "Oliveira GV, Volino-Souza M, Cordeiro EM, Conte-Junior CA, Alvares TS",
+    year: 2020,
+    title: "Effects of fish protein hydrolysate ingestion on endothelial function compared to whey protein hydrolysate in humans.",
+    journal: "Int J Food Sci Nutr",
+    ref: "71(2):242–248",
+    pmid: "31271072",
+    doi: "10.1080/09637486.2019.1635090",
+    kind: "human-controlled",
+    topics: ["blood-pressure"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "9 healthy adults",
+    design: "Single-dose comparison of fish protein hydrolysate, whey protein hydrolysate and placebo",
+    dose: "20 g, one dose",
+    duration: "Measured up to 120 minutes after the dose",
+    finding:
+      "Whey protein hydrolysate increased endothelium-dependent dilation of a blood vessel 30 minutes after the dose compared with placebo. Fish protein hydrolysate did not. In a lab assay the fish product had higher total antioxidant capacity than the whey product.",
+    caveat:
+      "Nine people and a single dose, so it says nothing about longer-term use or blood pressure. It tested a general fish hydrolysate, not a defined peptide.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "eckert-2024",
+    authors: "Eckert F, Meyer N, Monzel E, Bouvret E, Chataigner M, Hellhammer J",
+    year: 2024,
+    title:
+      "Efficacy of a fish hydrolysate supplement on sleep quality: A randomized, double-blind, placebo-controlled, crossover clinical trial.",
+    journal: "Clin Nutr ESPEN",
+    ref: "60:48–58",
+    pmid: "38479939",
+    doi: "10.1016/j.clnesp.2024.01.002",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "Healthy German adults reporting poor sleep quality (number not given in the abstract)",
+    design: "Randomised, double-blind, placebo-controlled crossover",
+    dose: "A fish hydrolysate of low-molecular-weight peptides; dose not given in the abstract",
+    duration: "4 weeks",
+    finding:
+      "Sleep quality on the Pittsburgh Sleep Quality Index improved from baseline during the four weeks on fish hydrolysate (p = .002), with better sleep efficacy, fewer sleep disturbances and less daytime sleepiness. But there were no significant differences between fish hydrolysate and placebo.",
+    caveat:
+      "The head-to-head comparison was negative: fish hydrolysate did not beat placebo, so the improvement from baseline cannot be credited to the supplement. The authors' conclusion that it supports people with sleep problems goes further than that result.",
+    funding:
+      "Fully sponsored by Abyss Ingredients, which took part in discussing the design and writing the paper; two authors disclose a commercial interest.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "chataigner-2026",
+    authors: "Chataigner M, Peltier A, Bouvret E, Dinel AL, Joffre C, Pallet V",
+    year: 2026,
+    title:
+      "Dietary fish hydrolysate improves episodic memory in healthy elderly with lower level of memory performance: a double-blind, randomized, placebo-controlled clinical study.",
+    journal: "Am J Clin Nutr",
+    ref: "124(1):101360",
+    pmid: "42162916",
+    doi: "10.1016/j.ajcnut.2026.101360",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "53 healthy adults aged 60–73 whose memory scores were lower than average for their age",
+    design: "Randomised, double-blind, placebo-controlled, registered trial",
+    dose: "1 g/day of low-molecular-weight peptides plus 30 mg omega-3 long-chain fatty acids",
+    duration: "3 months",
+    finding:
+      "On the primary episodic-memory score the fish hydrolysate group did better than placebo (P = 0.003), with partial improvement in spatial working memory; verbal recognition did not differ. Red-blood-cell omega-3 levels rose and C-reactive protein, a marker of inflammation, fell.",
+    caveat:
+      "A small trial in a selected group of healthy older adults. The supplement also contained omega-3 fatty acids, so the benefit cannot be attributed to the peptides alone.",
+    funding:
+      "Two authors are funded by Abyss Ingredients. One author reports financial support from Public Investment Bank France and Région Bretagne. The other authors report no conflicts.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "mjos-2019",
+    authors: "Mjøs I, Thorsen E, Hausken T, Lied E, Nilsen RM, Brønstad I, Edvardsen E, Frisk B",
+    year: 2019,
+    title:
+      "The effect of low dose marine protein hydrolysates on short-term recovery after high intensity performance cycling: a double-blinded crossover study.",
+    journal: "J Int Soc Sports Nutr",
+    ref: "16(1):48",
+    pmid: "31665070",
+    pmcid: "PMC6819466",
+    doi: "10.1186/s12970-019-0318-3",
+    kind: "human-controlled",
+    topics: ["muscle"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "14 healthy male cyclists, mean age 45.6",
+    design: "Double-blind crossover",
+    dose: "Low-dose marine protein hydrolysate added to a whey protein and carbohydrate recovery drink; exact dose not given in the abstract",
+    duration: "Four hours of recovery between two high-intensity cycling sessions",
+    finding:
+      "Time to exhaustion in the second session did not differ significantly between the drink with marine protein hydrolysate and the same drink without it (mean difference 0.85 min, p = 0.156), and heart rate, respiratory exchange ratio, blood lactate and glucose did not differ either.",
+    caveat:
+      "A small study at a low dose, in trained middle-aged men and short-term recovery only. It cannot rule out an effect at other doses or over longer training.",
+    funding:
+      "Funded by Firmenich Bjørge Biomarine A/S, whose representative was a co-author and composed the diets. The authors say the study was double-blinded and the statisticians did not know the diet order until the analyses were complete.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "cordeiro-2020",
+    authors: "Cordeiro EM, de Oliveira GV, Volino-Souza M, Velozo ODC, Alvares TS",
+    year: 2020,
+    title:
+      "Effects of fish protein hydrolysate ingestion on postexercise aminoacidemia compared with whey protein hydrolysate in young individuals.",
+    journal: "J Food Sci",
+    ref: "85(1):21–27",
+    pmid: "31846088",
+    doi: "10.1111/1750-3841.14970",
+    kind: "human-controlled",
+    topics: ["muscle"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "9 physically active adults (6 men, 3 women)",
+    design: "Randomised, double-blind crossover",
+    dose: "0.25 g/kg of fish protein hydrolysate, whey protein hydrolysate or placebo, taken straight after a resistance-exercise session",
+    duration: "Blood sampled for 180 minutes",
+    finding:
+      "Both fish and whey protein hydrolysates raised blood levels of total amino acids, essential amino acids, branched-chain amino acids and leucine after exercise, compared with placebo. There were no significant differences between fish and whey at any time point.",
+    caveat:
+      "It measured amino acids in the blood, not muscle growth or strength, and it shows only that fish hydrolysate is digested quickly, like whey. It says nothing about effects from specific bioactive peptides. Nine people.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "oddoux-2022",
+    authors: "Oddoux S, Violette P, Cornet J, Akkoyun-Farinez J, Besnier M, Noël A, Rouillon F",
+    year: 2022,
+    title:
+      "Effect of a Dietary Supplement Combining Bioactive Peptides and Magnesium on Adjustment Disorder with Anxiety: A Clinical Trial in General Practice.",
+    journal: "Nutrients",
+    ref: "14(12):2425",
+    pmid: "35745154",
+    pmcid: "PMC9228954",
+    doi: "10.3390/nu14122425",
+    kind: "human-uncontrolled",
+    topics: ["brain"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "Patients diagnosed with adjustment disorder with anxiety (Hamilton Anxiety score of 20 or more) seen by general practitioners; number not given in the abstract",
+    design: "Observational, multicentre, single-arm study with no comparison group",
+    dose: "A supplement combining fish-protein-hydrolysate peptides (Gabolysat), magnesium and vitamin B6",
+    duration: "28 days",
+    finding:
+      "Average Hamilton anxiety scores fell by 12.1 points (from 25.6 to 13.6, p < 0.001), 41.9% of patients had a 50% reduction in score, and clinicians rated 75.3% as improved.",
+    caveat:
+      "No control group, so it cannot separate the supplement from placebo, natural recovery or other care. The product also contained magnesium and vitamin B6, so any change cannot be attributed to the peptides.",
+    funding: "Three of the authors work for Laboratoire Dielen.",
     verifiedOn: "2026-11-09",
   },
 ];

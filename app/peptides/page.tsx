@@ -152,7 +152,10 @@ export default function PeptidesPillarPage() {
               <Link href="/science/topics/joints" className="link">
                 joints
               </Link>
-              .
+              . For fish-derived peptides specifically, see{" "}
+              <Link href="/peptides/oral-marine-peptides" className="link">
+                Do oral marine peptides work?
+              </Link>
             </p>
           </div>
           <div className="rounded-xl border border-line bg-card p-5">

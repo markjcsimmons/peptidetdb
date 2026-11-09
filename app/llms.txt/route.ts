@@ -35,6 +35,7 @@ export function GET() {
     "",
     `- [What are peptides?](${SITE.url}/peptides): definition, the four things the word covers, and what the studies show so far.`,
     `- [Are peptides legal in the US?](${SITE.url}/peptides/legal-status): dated, source-linked timeline of the 2026 FDA changes for peptide compounding. Last reviewed ${LEGAL_REVIEWED}.`,
+    `- [Do oral marine peptides work?](${SITE.url}/peptides/oral-marine-peptides): human studies of fish-derived collagen peptides and fish hydrolysates, by body system, including where no trial was found.`,
     `- [Glossary](${SITE.url}/glossary)`,
     "",
   );

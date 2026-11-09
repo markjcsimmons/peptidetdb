@@ -20,6 +20,7 @@ npm run build      # 25 static pages
 |---|---|
 | `/` | Landing page: topics and how to read a study |
 | `/peptides` | Pillar page: what peptides are, the four things the word covers, what the studies show, FAQ |
+| `/peptides/oral-marine-peptides` | "Do oral marine peptides work?": human evidence by body system, including systems with no trials found |
 | `/peptides/legal-status` | Dated, source-linked US legal status. Data in `lib/legal-status.ts`; update `LEGAL_REVIEWED` with it |
 | `/about`, `/editorial-policy`, `/corrections`, `/glossary` | Trust pages. Corrections come from `lib/corrections.ts`, terms from `lib/glossary.ts` |
 | `/data`, `/data/studies.csv`, `/data/studies.json` | Downloadable study registry (`lib/studies-export.ts`) |
