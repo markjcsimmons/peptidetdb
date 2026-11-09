@@ -1,41 +1,57 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
-import { LEVEL_HINT, LEVEL_LABEL, TOPICS, TOPIC_SLUGS, type Level, type TopicRating } from "@/lib/topics";
+import { LEVEL_LABEL, TOPICS, TOPIC_SLUGS, type TopicRating } from "@/lib/topics";
 import { COMMITTEE, LEGAL_REVIEWED } from "@/lib/legal-status";
 import { formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-
-const LEVEL_ORDER: Level[] = ["consistent", "mixed", "limited", "preclinical", "none", "unassessed"];
-const WARN_LEVELS: Level[] = ["preclinical", "none", "unassessed"];
+import { BeadChainHero, BeadRow } from "@/components/beads";
+import { DigestionDiagramCompact, SignalDiagramCompact } from "@/components/diagrams";
+import { EvidenceMeter, LEVEL_ORDER, levelTone } from "@/components/evidence-meter";
 
 /** The strongest rating in a topic, so each card shows the best-supported claim, not the whole list. */
 function strongest(ratings: TopicRating[]): TopicRating {
   return [...ratings].sort((a, b) => LEVEL_ORDER.indexOf(a.level) - LEVEL_ORDER.indexOf(b.level))[0];
 }
 
-function LevelChip({ level }: { level: Level }) {
-  const tone = WARN_LEVELS.includes(level) ? "border-warn text-warn" : "border-accent text-accent";
+type Tone = "accent" | "warn" | "neutral";
+const TONE: Record<Tone, string> = {
+  accent: "bg-accent-soft text-accent",
+  warn: "bg-warn-soft text-warn",
+  neutral: "bg-line text-fg",
+};
+
+function Pill({ tone, children }: { tone: Tone; children: React.ReactNode }) {
   return (
-    <span className={`chip ${tone}`} title={LEVEL_HINT[level]}>
-      {LEVEL_LABEL[level]}
+    <span className={`inline-flex items-center rounded-full px-3 py-0.5 text-[13px] font-semibold leading-[22px] ${TONE[tone]}`}>
+      {children}
     </span>
   );
 }
 
-function Dots({ n, label }: { n: number; label: string }) {
+function SectionHead({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: React.ReactNode }) {
   return (
-    <span className="flex items-center gap-0.5" role="img" aria-label={label}>
-      {Array.from({ length: n }, (_, i) => (
-        <span key={i} className="h-3 w-3 rounded-full bg-accent" />
-      ))}
-    </span>
+    <>
+      {eyebrow && <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent">{eyebrow}</p>}
+      <h2 className="text-[32px] font-bold leading-[1.12] sm:text-4xl">{title}</h2>
+      {intro && <p className="mt-4 max-w-[640px] text-soft [text-wrap:pretty]">{intro}</p>}
+    </>
   );
 }
 
-const TYPES: { title: string; status: string; tone: "accent" | "warn"; body: React.ReactNode }[] = [
+const JUMP = [
+  { href: "#what", label: "What are they?" },
+  { href: "#how", label: "How do they work?" },
+  { href: "#types", label: "Types" },
+  { href: "#safety", label: "Are they safe?" },
+  { href: "#evidence", label: "Do they work?" },
+  { href: "#legal", label: "Are they legal?" },
+];
+
+const TYPES: { n: number; title: string; status: string; tone: Tone; body: React.ReactNode }[] = [
   {
+    n: 1,
     title: "Approved prescription drugs",
     status: "Went through FDA approval",
     tone: "accent",
@@ -48,6 +64,7 @@ const TYPES: { title: string; status: string; tone: "accent" | "warn"; body: Rea
     ),
   },
   {
+    n: 2,
     title: "Collagen and marine peptide supplements",
     status: "Best-studied in people",
     tone: "accent",
@@ -62,6 +79,7 @@ const TYPES: { title: string; status: string; tone: "accent" | "warn"; body: Rea
     ),
   },
   {
+    n: 3,
     title: "Skin-care peptides",
     status: "No controlled trial summarised here yet",
     tone: "warn",
@@ -73,6 +91,7 @@ const TYPES: { title: string; status: string; tone: "accent" | "warn"; body: Rea
     ),
   },
   {
+    n: 4,
     title: "Unapproved wellness and research peptides",
     status: "Mostly animal evidence",
     tone: "warn",
@@ -89,9 +108,11 @@ const TYPES: { title: string; status: string; tone: "accent" | "warn"; body: Rea
   },
 ];
 
-const SAFETY: { type: string; known: React.ReactNode }[] = [
+const SAFETY: { type: string; tag: string; tone: Tone; flag?: boolean; known: React.ReactNode }[] = [
   {
     type: "Approved prescription drugs",
+    tag: "Safety reviewed at approval",
+    tone: "accent",
     known: (
       <>
         Approval includes a review of safety, and they are used under a clinician. They still have side effects; this
@@ -101,19 +122,26 @@ const SAFETY: { type: string; known: React.ReactNode }[] = [
   },
   {
     type: "Collagen and marine supplements",
+    tag: "Not assessed here yet",
+    tone: "neutral",
     known: (
       <>
-        Not assessed on this site yet. One small trial reported no adverse effects over four weeks in 29 people (
+        One small trial reported no adverse effects over four weeks in 29 people (
         <PaperLink id="kawasaki-2000" via="doi">Kawasaki 2000</PaperLink>), which is too few to establish safety.
       </>
     ),
   },
   {
     type: "Skin-care peptides",
-    known: <>Not assessed on this site yet.</>,
+    tag: "Not assessed here yet",
+    tone: "neutral",
+    known: <>No safety evidence is summarised on this site for topical peptides.</>,
   },
   {
     type: "Unapproved wellness and research peptides",
+    tag: "Human data scarce",
+    tone: "warn",
+    flag: true,
     known: (
       <>
         Reviews say{" "}
@@ -169,7 +197,7 @@ const FAQ: { q: string; text: string; a: React.ReactNode }[] = [
     a: (
       <>
         Ask whether it was shown in people, animals or cells; whether the study had a comparison group; whether it
-        measured a real outcome or only a marker; and who paid for it. See the checklist below.
+        measured a real outcome or only a marker; and who paid for it. See the checklist above.
       </>
     ),
   },
@@ -182,6 +210,8 @@ const CHECKLIST: { q: string; why: string }[] = [
   { q: "How big was it, and how long?", why: "A few dozen people over a few weeks can only suggest an effect." },
   { q: "Who paid for it?", why: "Company ties do not make a result wrong, but they should be stated." },
 ];
+
+const CARD = "rounded-[20px] border border-line bg-card p-7";
 
 export default function HomePage() {
   const recommended = COMMITTEE.filter((c) => c.result === "Recommended").length;
@@ -211,67 +241,108 @@ export default function HomePage() {
       />
 
       {/* Hero */}
-      <section className="max-w-3xl">
-        <p className="mb-2 text-sm font-medium uppercase tracking-wide text-accent">The {SITE.fullName}</p>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Peptides, explained by the evidence</h1>
-        <p className="mt-4 max-w-prose text-lg">
-          Peptides are short chains of amino acids. The word covers everything from insulin to collagen powder to
-          unapproved injectables, and what the studies show is very different for each. Start here for the basics, then
-          go as deep as you like.
-        </p>
-        <p className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/peptides"
-            className="inline-block rounded-lg bg-accent px-5 py-2.5 font-medium text-bg hover:opacity-90"
-          >
-            What are peptides?
-          </Link>
-          <Link
-            href="/science"
-            className="inline-block rounded-lg border border-line px-5 py-2.5 font-medium hover:border-accent"
-          >
-            Browse {STUDIES.length} study summaries
-          </Link>
-        </p>
-        <p className="mt-5 max-w-prose text-sm text-muted">{SITE.disclosure}</p>
+      <section className="grid items-center gap-14 pt-8 lg:grid-cols-2">
+        <div>
+          <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent">The {SITE.fullName}</p>
+          <h1 className="text-[40px] font-bold leading-[1.04] sm:text-6xl [text-wrap:balance]">
+            Peptides, explained by the evidence
+          </h1>
+          <p className="mt-6 max-w-[540px] text-[19px] leading-[1.55] text-soft [text-wrap:pretty]">
+            Peptides are short chains of amino acids. The word covers everything from insulin to collagen powder to
+            unapproved injectables, and what the studies show is very different for each. Start here for the basics,
+            then go as deep as you like.
+          </p>
+          <p className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/peptides"
+              className="inline-flex min-h-12 items-center rounded-xl bg-accent px-6 font-semibold text-on-accent hover:opacity-90"
+            >
+              What are peptides?
+            </Link>
+            <Link
+              href="/science"
+              className="inline-flex min-h-12 items-center rounded-xl border border-line bg-card px-6 font-semibold hover:border-accent"
+            >
+              Browse {STUDIES.length} study summaries
+            </Link>
+          </p>
+          <p className="mt-6 max-w-[540px] text-sm leading-relaxed text-muted">{SITE.disclosure}</p>
+        </div>
+        <figure className="m-0 rounded-[28px] bg-accent-soft p-7">
+          <BeadChainHero />
+          <figcaption className="mt-4 text-sm leading-snug text-soft">
+            One bead per amino acid. This chain has 15, the length reported for BPC-157. Colours are decoration only.
+          </figcaption>
+        </figure>
       </section>
 
+      {/* Jump nav */}
+      <nav aria-label="On this page" className="mt-12 flex flex-wrap gap-2.5">
+        {JUMP.map((j) => (
+          <a
+            key={j.href}
+            href={j.href}
+            className="inline-flex min-h-11 items-center rounded-full border border-line bg-card px-[18px] text-[15px] font-medium hover:border-accent"
+          >
+            {j.label}
+          </a>
+        ))}
+      </nav>
+
       {/* What are peptides */}
-      <section className="mt-16 max-w-3xl">
-        <h2 className="text-2xl font-semibold">What are peptides?</h2>
-        <p className="mt-3 max-w-prose">
-          Amino acids link into chains. Long, folded chains are proteins; short ones are peptides. There is no sharp
-          line between the two, and the cut-off varies by source.
-        </p>
-        <div className="mt-5 grid gap-4 rounded-xl border border-line bg-card p-5 sm:grid-cols-4">
+      <section id="what" className="mt-24 scroll-mt-8">
+        <SectionHead
+          eyebrow="The basics"
+          title="What are peptides?"
+          intro="Amino acids link into chains. Long, folded chains are proteins; short ones are peptides. There is no sharp line between the two, and the cut-off varies by source."
+        />
+        <div className="mt-9 grid gap-8 rounded-[20px] border border-line bg-card p-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Dots n={1} label="1 amino acid" />
-            <p className="mt-2 text-sm font-medium">Amino acid</p>
-            <p className="text-sm text-muted">The building block</p>
+            <div className="flex h-9 items-center">
+              <BeadRow n={1} />
+            </div>
+            <p className="mt-3 font-semibold">Amino acid</p>
+            <p className="mt-0.5 text-[15px] text-muted">The building block</p>
           </div>
           <div>
-            <Dots n={3} label="3 amino acids" />
-            <p className="mt-2 text-sm font-medium">GHK</p>
-            <p className="text-sm text-muted">
-              3 amino acids (<PaperLink id="pickart-2015" via="pmc">review</PaperLink>)
+            <div className="flex h-9 items-center">
+              <BeadRow n={3} />
+            </div>
+            <p className="mt-3 font-semibold">GHK</p>
+            <p className="mt-0.5 text-[15px] text-muted">
+              3 amino acids, studied for skin repair (
+              <PaperLink id="pickart-2015" via="pmc">
+                review
+              </PaperLink>
+              )
             </p>
           </div>
           <div>
-            <Dots n={15} label="15 amino acids" />
-            <p className="mt-2 text-sm font-medium">BPC-157</p>
-            <p className="text-sm text-muted">
-              15 amino acids (<PaperLink id="mcguire-2025" via="pmc">review</PaperLink>)
+            <div className="flex h-9 items-center">
+              <BeadRow n={15} size={11} gap={3} />
+            </div>
+            <p className="mt-3 font-semibold">BPC-157</p>
+            <p className="mt-0.5 text-[15px] text-muted">
+              15 amino acids, much discussed for injury recovery (
+              <PaperLink id="mcguire-2025" via="pmc">
+                review
+              </PaperLink>
+              )
             </p>
           </div>
           <div>
-            <p className="text-lg leading-none text-accent" aria-hidden="true">
-              ●●●●●●●●●●●●●●●●●●●●…
-            </p>
-            <p className="mt-2 text-sm font-medium">Protein</p>
-            <p className="text-sm text-muted">A long, folded chain, such as collagen</p>
+            <div className="flex min-h-9 max-w-[150px] items-center">
+              <span aria-hidden="true" className="flex flex-wrap gap-[3px]">
+                {Array.from({ length: 28 }, (_, i) => (
+                  <span key={i} className="h-[9px] w-[9px] rounded-full bg-muted" />
+                ))}
+              </span>
+            </div>
+            <p className="mt-3 font-semibold">Protein</p>
+            <p className="mt-0.5 text-[15px] text-muted">A long, folded chain, such as collagen</p>
           </div>
         </div>
-        <p className="mt-4">
+        <p className="mt-5">
           <Link href="/peptides" className="link">
             Read the full explainer
           </Link>{" "}
@@ -284,23 +355,53 @@ export default function HomePage() {
       </section>
 
       {/* How do they work */}
-      <section className="mt-16 max-w-3xl">
-        <h2 className="text-2xl font-semibold">How do they work?</h2>
-        <ul className="mt-3 max-w-prose list-disc space-y-2 pl-5">
-          <li>
-            <strong>Some are signals.</strong> They attach to a receptor on a cell and change what it does. That is how
-            peptide drugs such as insulin are designed to act.
-          </li>
-          <li>
-            <strong>Swallowed peptides meet digestion.</strong> Whether anything active gets through, and does
-            anything, is a question for trials.
-          </li>
-          <li>
-            <strong>A mechanism is not proof.</strong> &ldquo;It blocks an enzyme&rdquo; is a reason to run a trial, not
-            a result.
-          </li>
-        </ul>
-        <p className="mt-4">
+      <section id="how" className="mt-24 scroll-mt-8">
+        <SectionHead eyebrow="The mechanism" title="How do they work?" intro="Three ideas cover most of it." />
+        <div className="mt-9 grid gap-6 md:grid-cols-3">
+          <div className={`${CARD} flex flex-col gap-4`}>
+            <SignalDiagramCompact />
+            <h3 className="text-[22px] font-bold leading-tight">Some are signals</h3>
+            <p className="text-base text-soft">
+              They attach to a receptor on a cell and change what it does. That is how peptide drugs such as insulin are
+              designed to act.
+            </p>
+          </div>
+          <div className={`${CARD} flex flex-col gap-4`}>
+            <DigestionDiagramCompact />
+            <h3 className="text-[22px] font-bold leading-tight">Swallowed ones meet digestion</h3>
+            <p className="text-base text-soft">
+              Whether anything active gets through, and does anything, is a question for trials, not for the label.
+            </p>
+          </div>
+          <div className={`${CARD} flex flex-col gap-4`}>
+            <div className="flex min-h-[130px] flex-col justify-center gap-2.5">
+              <div
+                className="flex h-[34px] overflow-hidden rounded-lg"
+                role="img"
+                aria-label="Bar chart: 67% of publications on six popular injectable peptides used animal models"
+              >
+                <div className="flex items-center bg-warn pl-3 text-sm font-semibold text-bg" style={{ width: "67%" }}>
+                  67% animal models
+                </div>
+                <div className="flex items-center bg-line pl-3 text-sm font-medium text-fg" style={{ width: "33%" }}>
+                  Other
+                </div>
+              </div>
+              <p className="text-[13px] leading-snug text-muted">
+                Publications found by a 2026 scoping review of six popular injectable peptides (
+                <PaperLink id="tewari-2026" via="doi">
+                  Tewari 2026
+                </PaperLink>
+                )
+              </p>
+            </div>
+            <h3 className="text-[22px] font-bold leading-tight">A mechanism is not proof</h3>
+            <p className="text-base text-soft">
+              &ldquo;It blocks an enzyme&rdquo; is a reason to run a trial, not a result.
+            </p>
+          </div>
+        </div>
+        <p className="mt-6">
           <Link href="/peptides/how-peptides-work" className="link">
             How peptides work, with the evidence
           </Link>
@@ -308,53 +409,50 @@ export default function HomePage() {
       </section>
 
       {/* Types */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-semibold">What are the different types?</h2>
-        <p className="mt-3 max-w-prose text-muted">
-          We sort them by what matters to a reader: whether they are approved, and how much human evidence exists.
-        </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <section id="types" className="mt-24 scroll-mt-8">
+        <SectionHead
+          eyebrow="The landscape"
+          title="What are the different types?"
+          intro="We sort them by what matters to a reader: whether they are approved, and how much human evidence exists."
+        />
+        <div className="mt-9 grid gap-6 md:grid-cols-2">
           {TYPES.map((t) => (
-            <div key={t.title} className="rounded-xl border border-line bg-card p-5">
-              <h3 className="font-semibold">{t.title}</h3>
-              <p className="mt-2">
-                <span className={`chip ${t.tone === "warn" ? "border-warn text-warn" : "border-accent text-accent"}`}>
-                  {t.status}
-                </span>
-              </p>
-              <p className="mt-3 text-sm text-muted">{t.body}</p>
+            <div key={t.title} className={CARD}>
+              <div className="flex flex-wrap items-center justify-between gap-2.5">
+                <span className="text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">Type {t.n}</span>
+                <Pill tone={t.tone}>{t.status}</Pill>
+              </div>
+              <h3 className="mt-3 text-2xl font-bold leading-tight">{t.title}</h3>
+              <p className="mt-3 text-base text-soft">{t.body}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Safety */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-semibold">Are peptides safe?</h2>
-        <p className="mt-3 max-w-prose">
-          There is no single answer, because &ldquo;peptides&rdquo; is not a single thing. Here is what we know, by type.
-        </p>
-        <div className="mt-4 overflow-x-auto rounded-xl border border-line">
-          <table className="w-full min-w-[34rem] text-left text-sm">
-            <thead className="bg-card text-muted">
-              <tr>
-                <th className="px-3 py-2 font-medium">Type</th>
-                <th className="px-3 py-2 font-medium">What is known</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SAFETY.map((r) => (
-                <tr key={r.type} className="border-t border-line align-top">
-                  <th scope="row" className="px-3 py-2 font-medium">
-                    {r.type}
-                  </th>
-                  <td className="px-3 py-2">{r.known}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <section id="safety" className="mt-24 scroll-mt-8">
+        <SectionHead
+          eyebrow="What we know"
+          title="Are peptides safe?"
+          intro={<>There is no single answer, because &ldquo;peptides&rdquo; is not a single thing. Here is what we know, by type.</>}
+        />
+        <div className="mt-9 overflow-hidden rounded-[20px] border border-line bg-card">
+          {SAFETY.map((r, i) => (
+            <div
+              key={r.type}
+              className={`flex flex-wrap gap-x-8 gap-y-3 px-7 py-6 ${i > 0 ? "border-t border-line" : ""} ${r.flag ? "bg-warn-soft" : ""}`}
+            >
+              <div className="min-w-0 flex-[1_1_240px]">
+                <p className="font-semibold">{r.type}</p>
+                <p className="mt-2">
+                  <Pill tone={r.tone}>{r.tag}</Pill>
+                </p>
+              </div>
+              <p className="min-w-0 flex-[3_1_380px] text-base text-soft">{r.known}</p>
+            </div>
+          ))}
         </div>
-        <p className="mt-4">
+        <p className="mt-5">
           <Link href="/science/topics/safety" className="link">
             Safety evidence in detail
           </Link>
@@ -362,34 +460,45 @@ export default function HomePage() {
       </section>
 
       {/* Evidence at a glance */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-semibold">Do they work? The evidence at a glance</h2>
-        <p className="mt-3 max-w-prose text-muted">
-          For each topic, the best-supported claim we have summarised. Open a topic for every rating.
-        </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <section id="evidence" className="mt-24 scroll-mt-8">
+        <SectionHead
+          eyebrow="The evidence"
+          title="Do they work? The evidence at a glance"
+          intro="For each topic, the best-supported claim we have summarised. Open a topic for every rating."
+        />
+        <div className="mt-8 rounded-2xl border border-line bg-card px-6 py-5">
+          <p className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">How to read the meters</p>
+          <div className="grid grid-cols-2 gap-x-5 gap-y-4 md:grid-cols-3 lg:grid-cols-6">
+            {[...LEVEL_ORDER].reverse().map((level) => (
+              <div key={level}>
+                <EvidenceMeter level={level} size="sm" labelled={false} />
+                <p className="mt-2 text-sm leading-snug text-soft">{LEVEL_LABEL[level]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {TOPIC_SLUGS.map((slug) => {
             const t = TOPICS[slug];
             const top = strongest(t.ratings);
             return (
-              <Link
-                key={slug}
-                href={`/science/topics/${slug}`}
-                className="rounded-xl border border-line bg-card p-5 hover:border-accent"
-              >
-                <h3 className="font-semibold">{t.title}</h3>
-                <p className="mt-3 text-sm">{top.subject}</p>
-                <p className="mt-2">
-                  <LevelChip level={top.level} />
+              <Link key={slug} href={`/science/topics/${slug}`} className={`${CARD} block hover:border-accent`}>
+                <h3 className="text-[22px] font-bold leading-tight">{t.title}</h3>
+                <p className="mt-3.5 text-base">{top.subject}</p>
+                <div className="mt-3.5">
+                  <EvidenceMeter level={top.level} />
+                </div>
+                <p className={`mt-2.5 text-sm font-semibold ${levelTone(top.level) === "warn" ? "text-warn" : "text-accent"}`}>
+                  {LEVEL_LABEL[top.level]}
                 </p>
-                <p className="mt-3 text-sm text-muted">
+                <p className="mt-3.5 text-sm text-muted">
                   {t.ratings.length} {t.ratings.length === 1 ? "rating" : "ratings"}, reviewed {formatDate(t.reviewedOn)}
                 </p>
               </Link>
             );
           })}
         </div>
-        <p className="mt-3 text-sm text-muted">
+        <p className="mt-4 text-sm text-muted">
           Ratings reflect only the studies summarised here.{" "}
           <Link href="/science/methodology" className="link">
             How ratings are set
@@ -399,37 +508,67 @@ export default function HomePage() {
       </section>
 
       {/* Legal */}
-      <section className="mt-16 max-w-3xl rounded-xl border border-line bg-card p-5">
-        <h2 className="text-2xl font-semibold">Are peptides legal?</h2>
-        <p className="mt-3 max-w-prose">
-          It depends on the peptide and how it is made and sold. Some are FDA-approved drugs; many popular wellness
-          peptides are not approved for any use. In July 2026 an FDA advisory committee considered seven of them for the
-          compounding bulks list, and according to news reports it recommended {recommended}. We found no final FDA
-          action as of {formatDate(LEGAL_REVIEWED)}.
-        </p>
-        <p className="mt-3">
-          <Link href="/peptides/legal-status" className="link">
-            Legal status, with sources and dates
-          </Link>
-        </p>
+      <section id="legal" className="mt-24 scroll-mt-8">
+        <div className="rounded-3xl border border-line bg-card p-8 sm:p-10">
+          <SectionHead
+            eyebrow="Regulation"
+            title="Are peptides legal?"
+            intro={
+              <>
+                It depends on the peptide and how it is made and sold. Some are FDA-approved drugs; many popular wellness
+                peptides are not approved for any use. In July 2026 an FDA advisory committee considered seven of them for
+                the compounding bulks list, and according to news reports it recommended {recommended}.
+              </>
+            }
+          />
+          <ol className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { d: "29 Sep 2023", t: "FDA adds several peptides to Category 2 of its interim compounding policies.", now: false },
+              { d: "16 Apr 2026", t: "FDA announces a public advisory committee meeting on the 503A bulks list.", now: false },
+              {
+                d: "23–24 Jul 2026",
+                t: `The committee considers seven peptides. News reports say it recommended ${recommended}.`,
+                now: false,
+              },
+              { d: formatDate(LEGAL_REVIEWED), t: "Last checked. We found no final FDA action.", now: true },
+            ].map((e) => (
+              <li key={e.d} className={`relative border-t-2 pt-5 ${e.now ? "border-accent" : "border-track"}`}>
+                <span
+                  aria-hidden="true"
+                  className={`absolute -top-2 left-0 h-3.5 w-3.5 rounded-full ${e.now ? "bg-accent" : "bg-muted"}`}
+                />
+                <p className={`text-sm font-semibold ${e.now ? "text-accent" : "text-muted"}`}>{e.d}</p>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{e.t}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-7">
+            <Link href="/peptides/legal-status" className="link">
+              Legal status, with sources and dates
+            </Link>
+          </p>
+        </div>
       </section>
 
       {/* Checklist */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-semibold">How to judge a peptide claim</h2>
-        <p className="mt-3 max-w-prose text-muted">
-          Five questions we ask of every study. They work on ads and social media posts too.
-        </p>
-        <ol className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mt-24">
+        <SectionHead
+          eyebrow="A skill to keep"
+          title="How to judge a peptide claim"
+          intro="Five questions we ask of every study. They work on ads and social media posts too."
+        />
+        <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {CHECKLIST.map((c, i) => (
-            <li key={c.q} className="rounded-xl border border-line bg-card p-5">
-              <p className="text-sm font-medium text-accent">{i + 1}</p>
-              <p className="mt-1 font-semibold">{c.q}</p>
-              <p className="mt-2 text-sm text-muted">{c.why}</p>
+            <li key={c.q} className="rounded-2xl border border-line bg-card p-[22px]">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft font-heading font-bold text-accent">
+                {i + 1}
+              </span>
+              <p className="mt-3.5 font-semibold leading-snug">{c.q}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{c.why}</p>
             </li>
           ))}
         </ol>
-        <p className="mt-4">
+        <p className="mt-5">
           <Link href="/science/methodology" className="link">
             Read the methodology
           </Link>
@@ -437,17 +576,17 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="mt-16 max-w-3xl">
-        <h2 className="text-2xl font-semibold">Common questions</h2>
-        <div className="mt-4 space-y-6">
+      <section className="mt-24">
+        <h2 className="text-[32px] font-bold leading-[1.12] sm:text-4xl">Common questions</h2>
+        <div className="mt-8 grid gap-x-12 gap-y-6 md:grid-cols-2">
           {FAQ.map((f) => (
-            <div key={f.q}>
-              <h3 className="font-semibold">{f.q}</h3>
-              <p className="mt-1 max-w-prose text-muted">{f.a}</p>
+            <div key={f.q} className="border-t border-track pt-5">
+              <h3 className="text-lg font-semibold leading-snug">{f.q}</h3>
+              <p className="mt-2 text-base text-soft">{f.a}</p>
             </div>
           ))}
         </div>
-        <p className="mt-4">
+        <p className="mt-7">
           <Link href="/peptides" className="link">
             More questions, answered
           </Link>
@@ -455,37 +594,47 @@ export default function HomePage() {
       </section>
 
       {/* Trust */}
-      <section className="mt-16 max-w-3xl border-t border-line pt-8">
-        <h2 className="text-xl font-semibold">Why trust this site</h2>
-        <ul className="mt-3 max-w-prose list-disc space-y-2 pl-5 text-sm">
-          <li>
-            {STUDIES.length} studies summarised from their abstracts, with who paid for each, and what it cannot show.
-          </li>
-          <li>
-            Public{" "}
-            <Link href="/corrections" className="link">
-              corrections log
-            </Link>{" "}
-            and{" "}
-            <Link href="/editorial-policy" className="link">
-              editorial policy
-            </Link>
-            ; the full dataset is open as{" "}
-            <Link href="/data" className="link">
-              CSV and JSON
-            </Link>
-            .
-          </li>
-          <li>
-            {SITE.disclosure}{" "}
-            <Link href="/about" className="link">
-              About this site
-            </Link>
-            .
-          </li>
-        </ul>
-        <p className="mt-4 text-sm text-muted">
-          {SITE.disclaimer} Last reviewed {formatDate(SITE.lastReviewed)}.
+      <section className="mt-24 rounded-3xl bg-accent-soft p-8 sm:p-10">
+        <h2 className="text-[28px] font-bold leading-tight">Why trust this site</h2>
+        <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="font-heading text-[40px] font-bold leading-none text-accent">{STUDIES.length}</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-soft">
+              studies summarised from their abstracts, each with what it cannot show
+            </p>
+          </div>
+          <div>
+            <p className="font-heading text-[40px] font-bold leading-none text-accent">{TOPIC_SLUGS.length}</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-soft">evidence topics, each with a dated verdict</p>
+          </div>
+          <div>
+            <p className="font-heading text-[40px] font-bold leading-none text-accent">Open</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-soft">
+              dataset, free to download as{" "}
+              <Link href="/data" className="link">
+                CSV and JSON
+              </Link>
+            </p>
+          </div>
+          <div>
+            <p className="font-heading text-[40px] font-bold leading-none text-accent">Public</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-soft">
+              <Link href="/corrections" className="link">
+                corrections log
+              </Link>{" "}
+              and{" "}
+              <Link href="/editorial-policy" className="link">
+                editorial policy
+              </Link>
+            </p>
+          </div>
+        </div>
+        <p className="mt-8 max-w-3xl text-sm text-muted">
+          {SITE.disclosure}{" "}
+          <Link href="/about" className="link">
+            About this site
+          </Link>
+          . {SITE.disclaimer} Last reviewed {formatDate(SITE.lastReviewed)}.
         </p>
       </section>
     </div>

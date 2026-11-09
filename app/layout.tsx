@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+
+const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const heading = Space_Grotesk({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -12,10 +16,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${body.variable} ${heading.variable}`}>
       <body>
         <SiteHeader />
-        <main className="mx-auto max-w-5xl px-4 py-10">{children}</main>
+        <main className="mx-auto max-w-[1120px] px-4 py-10 sm:px-8">{children}</main>
         <SiteFooter />
       </body>
     </html>
