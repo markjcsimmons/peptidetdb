@@ -8,7 +8,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "study:fetch": "tsx scripts/fetch-study.ts",
-    "study:audit": "tsx scripts/audit-studies.ts"
+    "study:audit": "tsx scripts/audit-studies.ts",
+    "indexnow": "tsx scripts/submit-indexnow.ts"
   },
   "dependencies": {
     "next": "^15.5.0",
