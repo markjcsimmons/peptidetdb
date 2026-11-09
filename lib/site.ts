@@ -4,8 +4,8 @@
  * `disclosure` states the operator's actual relationship (as told to us 2026-11-09): the operator
  * works for Pürblack, pays for the site personally, and receives no funding or support from it.
  * Keep it true: if that changes (Pürblack funds, hosts or reviews anything), update this text first.
- * The same text appears in the footer, on the methodology page, and should accompany any page that
- * names, links or grades a Pürblack product.
+ * The same text appears in the footer, on the About and methodology pages, and should accompany any
+ * page that names, links or grades a Pürblack product.
  */
 export const SITE = {
   /** Short brand, used in titles and structured data. Spell out `fullName` once per page. */
@@ -18,12 +18,24 @@ export const SITE = {
   disclosure:
     "This site is run by an employee of Pürblack, a peptide supplement brand, in a personal capacity. Pürblack does not fund, review or direct the site, and its costs are paid by its operator.",
   disclaimer:
-    "Educational information only. It is not medical advice, and nothing here is a recommendation to use any peptide. Talk to a clinician before starting a supplement or treatment.",
+    "Educational information only. It is not medical or legal advice, and nothing here is a recommendation to use any peptide. Talk to a clinician before starting a supplement or treatment.",
   lastReviewed: "2026-11-09",
+  /** Set when a monitored address exists. Pages that mention contact details show them only when set. */
+  contactEmail: null as string | null,
 };
 
 export const NAV = [
+  { href: "/peptides", label: "Peptides" },
   { href: "/science", label: "Studies" },
-  { href: "/science/topics/skin", label: "Topics" },
+  { href: "/peptides/legal-status", label: "Legal status" },
+  { href: "/science/methodology", label: "Methodology" },
+];
+
+export const FOOTER_LINKS = [
+  { href: "/about", label: "About" },
+  { href: "/editorial-policy", label: "Editorial policy" },
+  { href: "/corrections", label: "Corrections" },
+  { href: "/data", label: "Data" },
+  { href: "/glossary", label: "Glossary" },
   { href: "/science/methodology", label: "Methodology" },
 ];

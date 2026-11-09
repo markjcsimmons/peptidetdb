@@ -120,6 +120,15 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
         </section>
       )}
 
+      {t.slug === "safety" && (
+        <p className="mt-6">
+          See also:{" "}
+          <Link href="/peptides/legal-status" className="link">
+            Are peptides legal in the US? (dated status page)
+          </Link>
+        </p>
+      )}
+
       <p className="mt-8 text-sm text-muted">{SITE.disclaimer}</p>
     </div>
   );

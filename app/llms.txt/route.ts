@@ -1,6 +1,7 @@
 import { SITE } from "@/lib/site";
 import { KIND_LABEL, PEPTIDE_LABEL, STUDIES, shortCite } from "@/lib/studies";
 import { LEVEL_LABEL, TOPICS, TOPIC_SLUGS } from "@/lib/topics";
+import { LEGAL_REVIEWED } from "@/lib/legal-status";
 
 export const dynamic = "force-static";
 
@@ -29,6 +30,23 @@ export function GET() {
     ),
     "",
   );
-  lines.push("## Method", "", `${SITE.url}/science/methodology`, "");
+  lines.push(
+    "## Guides",
+    "",
+    `- [What are peptides?](${SITE.url}/peptides): definition, the four things the word covers, and what the studies show so far.`,
+    `- [Are peptides legal in the US?](${SITE.url}/peptides/legal-status): dated, source-linked timeline of the 2026 FDA changes for peptide compounding. Last reviewed ${LEGAL_REVIEWED}.`,
+    `- [Glossary](${SITE.url}/glossary)`,
+    "",
+  );
+  lines.push(
+    "## Trust and data",
+    "",
+    `- [Methodology](${SITE.url}/science/methodology)`,
+    `- [Editorial policy](${SITE.url}/editorial-policy)`,
+    `- [Corrections log](${SITE.url}/corrections)`,
+    `- [About and disclosure](${SITE.url}/about)`,
+    `- [Study registry as CSV](${SITE.url}/data/studies.csv) and [JSON](${SITE.url}/data/studies.json)`,
+    "",
+  );
   return new Response(lines.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8" } });
 }

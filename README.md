@@ -19,6 +19,10 @@ npm run build      # 25 static pages
 | Route | What it is |
 |---|---|
 | `/` | Landing page: topics and how to read a study |
+| `/peptides` | Pillar page: what peptides are, the four things the word covers, what the studies show, FAQ |
+| `/peptides/legal-status` | Dated, source-linked US legal status. Data in `lib/legal-status.ts`; update `LEGAL_REVIEWED` with it |
+| `/about`, `/editorial-policy`, `/corrections`, `/glossary` | Trust pages. Corrections come from `lib/corrections.ts`, terms from `lib/glossary.ts` |
+| `/data`, `/data/studies.csv`, `/data/studies.json` | Downloadable study registry (`lib/studies-export.ts`) |
 | `/science` | Hub: filter studies by topic, peptide and design |
 | `/science/[id]` | One page per study (finding, caveat, funding, links, JSON-LD) |
 | `/science/topics/[topic]` | Evidence by topic: hand-written verdicts, study table, coverage gaps |

@@ -87,8 +87,9 @@ export default function MethodologyPage() {
         <h2 className="text-xl font-semibold">What is not here yet</h2>
         <p className="mt-3 max-w-prose">
           This hub currently holds {STUDIES.length} studies, mostly on oral collagen peptides and on BPC-157. It does
-          not yet cover trials of oral marine bioactive peptides other than collagen, legal and regulatory status, or
-          prescription peptide drugs such as the GLP-1 medicines. Absence from this site is not evidence of absence.
+          not yet cover trials of oral marine bioactive peptides other than collagen, or prescription peptide drugs
+          such as the GLP-1 medicines. Legal and regulatory status has its own dated page, with the limits of what
+          it covers stated there. Absence from this site is not evidence of absence.
         </p>
       </section>
 

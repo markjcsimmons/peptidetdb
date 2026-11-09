@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NAV, SITE } from "@/lib/site";
+import { FOOTER_LINKS, NAV, SITE } from "@/lib/site";
 import { formatDate } from "@/lib/format";
 
 export function SiteHeader() {
@@ -32,13 +32,14 @@ export function SiteFooter() {
           <strong className="text-fg">Disclosure.</strong> {SITE.disclosure}
         </p>
         <p>{SITE.disclaimer}</p>
-        <p>
-          Studies last checked {formatDate(SITE.lastReviewed)}.{" "}
-          <Link href="/science/methodology" className="link">
-            How we summarise and check studies
-          </Link>
-          .
-        </p>
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-1">
+          {FOOTER_LINKS.map((l) => (
+            <Link key={l.href} href={l.href} className="link">
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <p>Studies last checked {formatDate(SITE.lastReviewed)}.</p>
       </div>
     </footer>
   );

@@ -120,7 +120,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       },
     ],
     gaps: [
-      "Legal and regulatory status changes quickly and is not summarised here yet; check FDA and HHS sources directly.",
+      "Legal and regulatory status is not part of these ratings; it has its own dated page (see Legal status).",
       "Safety of oral collagen and marine peptide supplements is not summarised here yet.",
     ],
     reviewedOn: "2026-11-09",
