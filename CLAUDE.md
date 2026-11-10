@@ -1,6 +1,6 @@
 # PeptideTDB — Claude context
 
-Handoff file. Read this first in a new session. Last updated 2026-11-09.
+Handoff file. Read this first in a new session. Last updated 2026-11-10.
 
 ## What this is
 **PeptideTDB** ("Peptide Transparency Database") at **https://peptidetdb.com**: a neutral, evidence-first knowledge base about peptides. Stage 1 (live): plain-language summaries of scientific studies, topic evidence verdicts, a legal-status page, trust pages. Stage 2 (NOT started): a product/brand grading section.
@@ -26,9 +26,9 @@ The operator **works for Pürblack, pays for the site personally, and gets no fu
 A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google-site-verification=…` (GSC) · CNAME `a890d7c5…dae` → verify.bing.com (Bing). The locked SPF TXT belongs to Namecheap email forwarding.
 
 ## Search setup (done 2026-11-09)
-- Google Search Console: **domain property** `sc-domain:peptidetdb.com`, verified; sitemap submitted (read OK 2026-11-09). Indexing requested for `/`, `/science`, `/peptides/legal-status`, `/peptides` (succeeded on retry), `/peptides/how-peptides-work`, `/peptides/oral-marine-peptides`; `/science/methodology` was already indexed. Reports said "processing, check in a day or so" on 2026-11-09. The inspect box in the GSC header is the way to request indexing (the `/inspect?id=` deep link 404s).
+- Google Search Console: **domain property** `sc-domain:peptidetdb.com`, verified; sitemap submitted (read OK 2026-11-09). Indexing requested for `/`, `/science`, `/peptides/legal-status`, `/peptides` (succeeded on retry), `/peptides/how-peptides-work`, `/peptides/oral-marine-peptides`; `/science/methodology` was already indexed. Reports said "processing, check in a day or so" on 2026-11-09. The inspect box in the GSC header is the way to request indexing (the `/inspect?id=` deep link 404s). **Not yet requested (2026-11-10):** `/science/topics/immune` (new topic; deployed 2026-11-10), and optionally the four new study pages (`/science/wolf-2011`, `cordero-1999`, `zhukova-2018`, `wang-2018`).
 - Bing Webmaster Tools: `https://peptidetdb.com/` added and verified (CNAME). The first sitemap read errored ("page not accessible") although the file was fine; **re-submitting fixed it: Success, 40 URLs, 0 errors** (2026-11-09). Same Bing account holds other sites; leave them alone.
-- IndexNow: key file `public/5b2ad43dfaab38cdd4731aa79c07e54a.txt`; run `npm run indexnow -- --all` (or `--url=/a,/b`) **after a deploy is live**. Last run 2026-11-09: 40 URLs, 200 OK. Bing's IndexNow page shows no history, so judge by Site Explorer/URL Inspection instead. Google doesn't use IndexNow.
+- IndexNow: key file `public/5b2ad43dfaab38cdd4731aa79c07e54a.txt`; run `npm run indexnow -- --all` (or `--url=/a,/b`) **after a deploy is live**. Last run 2026-11-10 (after the thymic-peptides deploy, commit 150237c): 45 URLs, 200 OK. Bing's IndexNow page shows no history, so judge by Site Explorer/URL Inspection instead. Google doesn't use IndexNow.
 - Vercel Web Analytics: enabled on the Vercel project 2026-11-09 (the plan-included tier; overage is $30 per extra 1M events; not the $10/mo "Plus"). `<Analytics />` from `@vercel/analytics/next` is in `app/layout.tsx`. It is cookie-free and only reports from Vercel deployments, so check the Analytics tab after deploy.
 
 ## Architecture (everything renders from `lib/`)
@@ -61,8 +61,8 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 - Legal/regulatory content: primary sources (FDA, HHS, Federal Register), dated, news labelled as news; never call something legal/illegal without a source that says so.
 - "No human trials found" means *our PubMed search found none*; say so, never "none exists".
 
-## Content status (2026-11-09)
-26 studies: thymic peptides (4: Wolf 2011 Cochrane review in cancer patients = the only human evidence; Cordero 1999 review; Zhukova 2018 Thymalin in rats; Wang 2018 Tα1-Fc in mice; added 2026-11-09 with the new `immune` topic), oral collagen (5), BPC-157/injectable reviews and pilots (7), oral marine peptides (10: Evans 2021, Hwang 2026, Kawasaki 2000, Zhu 2010, Oliveira 2020, Eckert 2024, Chataigner 2026, Mjøs 2019, Cordeiro 2020, Oddoux 2022). Key finding: oral marine peptides have limited human evidence (skin best; BP, sleep/memory, muscle small/mixed; 4 of 10 have industry ties) and **no human trials found for joints/tendons, immune function or vision**. Legal page reflects the 2026 FDA picture: Category 2 page (as of 22 Apr 2026), PCAC meeting 23–24 Jul 2026 recommended 6 of 7 peptides for the 503A bulks list (non-binding; FDA staff opposed); no final FDA action found as of 9 Nov.
+## Content status (2026-11-10)
+26 studies across 7 topics: thymic peptides (4: Wolf 2011 Cochrane review in cancer patients = the only human evidence; Cordero 1999 review; Zhukova 2018 Thymalin in rats; Wang 2018 Tα1-Fc in mice; written 2026-11-09, live since 2026-11-10 with the new `immune` topic), oral collagen (5), BPC-157/injectable reviews and pilots (7), oral marine peptides (10: Evans 2021, Hwang 2026, Kawasaki 2000, Zhu 2010, Oliveira 2020, Eckert 2024, Chataigner 2026, Mjøs 2019, Cordeiro 2020, Oddoux 2022). Key finding: oral marine peptides have limited human evidence (skin best; BP, sleep/memory, muscle small/mixed; 4 of 10 have industry ties) and **no human trials found for joints/tendons, immune function or vision**. Legal page reflects the 2026 FDA picture: Category 2 page (as of 22 Apr 2026), PCAC meeting 23–24 Jul 2026 recommended 6 of 7 peptides for the 503A bulks list (non-binding; FDA staff opposed); no final FDA action found as of 9 Nov.
 
 ## Keyword plan
 `peptide_keyword_workbook.xlsx` (repo root): 144 keywords (Semrush rounds 1–2, US), 63 proposed pages, waves by KD, priority scores (editable Inputs sheet). Easy wins not yet built: `what do peptides do` (KD 7), `are peptides steroids` (12k), `peptides for muscle growth` (40k, KD 40), collagen cluster pages, injectable profile pages (start with selank, KPV), `peptide COA`/purity guide.
