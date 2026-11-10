@@ -142,8 +142,8 @@ export default function ForWeightLossPage() {
           </li>
         </ul>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          The three large trials above were funded by the drug makers, and several authors of the pooled analyses report
-          fees from them. That does not make the results wrong, but it is why we report it on each study page.
+          The three large trials above were funded by the drug makers, and several authors of the network meta-analysis
+          report fees from drug companies. That does not make the results wrong, but it is why we report it on each study page.
         </p>
       </section>
 

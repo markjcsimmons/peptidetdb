@@ -451,7 +451,7 @@ export default function HomePage() {
                 {
                   key: "d",
                   date: "30 Oct 2026",
-                  body: "HHS publishes a draft policy not to enforce against licensed compounders of six of them, under conditions.",
+                  body: "HHS publishes a draft policy not to enforce against licensed compounders of six of them, reportedly under conditions.",
                 },
                 { key: "e", date: formatDate(LEGAL_REVIEWED), body: "Last checked. We found no final FDA action.", now: true },
               ]}

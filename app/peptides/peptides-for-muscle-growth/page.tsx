@@ -150,8 +150,8 @@ export default function PeptidesForMuscleGrowthPage() {
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           <strong className="text-fg">What this does not show.</strong> Everyone trained, so collagen is an add-on to
           exercise, not a substitute. &ldquo;Fat-free mass&rdquo; is not the same as muscle. The three placebo-controlled
-          trials above share authors, and the record for the 2021 trial discloses one author&rsquo;s lecture support from
-          a collagen manufacturer. The meta-analysis called its evidence significant but of low to moderate certainty.
+          trials above share authors, and the record for the 2021 trial discloses that one author has given lectures partly
+          supported by GELITA AG and is a co-inventor of patents on collagen-peptide use. The meta-analysis called its evidence significant but of low to moderate certainty.
         </p>
       </section>
 
@@ -201,7 +201,7 @@ export default function PeptidesForMuscleGrowthPage() {
           <PaperLink id="teichman-2006" via="doi">
             raised growth hormone and IGF-I for weeks
           </PaperLink>{" "}
-          in healthy adults, ipamorelin&rsquo;s one controlled trial (after bowel surgery) found no significant benefit,
+          in healthy adults, ipamorelin&rsquo;s one placebo-controlled trial (after bowel surgery) found no significant benefit,
           and a higher hormone level is not the same as more muscle. When growth hormone itself was injected into
           healthy adults, systematic reviews found about 2 kg more lean mass but{" "}
           <PaperLink id="liu-2008" via="doi">

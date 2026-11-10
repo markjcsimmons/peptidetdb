@@ -86,7 +86,7 @@ export default function CollagenPeptidesPage() {
 
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">
-          Collagen peptides are collagen broken into short fragments. They are the most-studied peptide supplement. The
+          Collagen peptides are collagen broken into short fragments. They are among the best-studied peptide supplements. The
           human evidence is strongest for skin hydration and elasticity, weaker for muscle (they add to the effect of
           resistance training) and mixed for joints. The trials have biases, so how large any benefit is remains
           uncertain. They were generally well tolerated in trials, with fish allergy the documented risk. Nothing here
@@ -98,8 +98,8 @@ export default function CollagenPeptidesPage() {
         <h2 className="text-3xl font-bold leading-[1.15]">What collagen peptides are</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           Collagen is the main structural protein in skin, bone and connective tissue. Collagen peptides, also called
-          hydrolysed collagen, are collagen that has been broken into much smaller pieces so it dissolves in water. They
-          are sold as powders, capsules and drinks, from several animal sources: cattle (bovine), pigs and fish (marine).
+          hydrolysed collagen, are collagen that has been broken into much smaller pieces. They are sold as powders,
+          capsules and drinks, made from animal sources such as cattle (bovine) and fish (marine).
           The word &ldquo;peptide&rdquo; here means a short chain of amino acids, the same word used for prescription
           drugs and unapproved injectables, which have very different evidence; see{" "}
           <Link href="/peptides/how-peptides-work" className="link">
@@ -109,7 +109,7 @@ export default function CollagenPeptidesPage() {
         </p>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           We have summarised {collagenStudies.length} studies of collagen peptides: {nReviews} meta-analyses or
-          systematic reviews and {nHumanTrials} controlled trials in people. The rest are safety and laboratory studies.
+          systematic reviews and {nHumanTrials} controlled trials in people. The rest are smaller or non-trial studies, including a case report and a laboratory study.
         </p>
       </section>
 

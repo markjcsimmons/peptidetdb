@@ -77,7 +77,8 @@ export default function LegalStatusPage() {
           status for pharmacy compounding changed through 2026: in July an FDA advisory committee recommended six
           of seven peptides it reviewed for FDA&apos;s 503A bulks list, but the vote is not binding. On 30 October
           HHS published a draft policy saying it does not intend to take enforcement action against licensed
-          pharmacies and physicians that compound six of them under set conditions while rulemaking is pending. That
+          pharmacies and physicians that compound six of them (the list comes from law-firm summaries) under set conditions
+          while rulemaking is pending. That
           is not an approval and not a listing, and we found no final FDA decision as of {formatDate(LEGAL_REVIEWED)}.
         </p>
       </Callout>
@@ -196,7 +197,7 @@ export default function LegalStatusPage() {
             HHS may revisit the policy if a safety signal or product-quality problem arises with a compounded product
             in its scope.
           </li>
-          <li>Comments were due two weeks after publication, which is 13 November 2026 (docket HHS-OASH-2026-0496).</li>
+          <li>Comments are due two weeks after publication, which is 13 November 2026 (docket HHS-OASH-2026-0496).</li>
         </ul>
         <p className="mt-4 max-w-prose">
           We could not open the HHS policy document (it blocks automated readers), so the details below come from a law

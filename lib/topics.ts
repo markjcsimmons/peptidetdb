@@ -107,7 +107,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "Ipamorelin and CJC-1295",
         level: "none",
-        why: "Our PubMed searches found no controlled trial of either with a muscle, strength or body-composition outcome. Small studies in healthy volunteers show CJC-1295 raised growth hormone and IGF-I for weeks and ipamorelin triggers a brief growth hormone release, and ipamorelin's one controlled trial (after bowel surgery) found no significant benefit. A higher hormone level is not evidence of more muscle.",
+        why: "Our PubMed searches found no controlled trial of either with a muscle, strength or body-composition outcome. Small studies in healthy volunteers show CJC-1295 raised growth hormone and IGF-I for weeks and ipamorelin triggers a brief growth hormone release, and ipamorelin's one placebo-controlled trial (after bowel surgery) found no significant benefit. A higher hormone level is not evidence of more muscle.",
       },
       {
         subject: "Injected growth hormone itself in healthy adults (context for these peptides)",

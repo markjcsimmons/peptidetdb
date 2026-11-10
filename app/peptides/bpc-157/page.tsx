@@ -167,8 +167,8 @@ export default function Bpc157Page() {
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           The drug-development review notes that BPC-157 is unusually stable in gastric juice and has shown activity by oral,
           injected and topical routes in preclinical work, but that its human pharmacokinetics are critically
-          undercharacterised. In rodent studies the plasma half-life was under 30 minutes, which contrasts with effects
-          described as lasting hours to days. We found no human study of oral use.
+          undercharacterised. In preclinical studies in two species the plasma half-life was under 30 minutes, which
+          contrasts with effects described as lasting hours to days. We found no human study of oral use.
         </p>
       </section>
 

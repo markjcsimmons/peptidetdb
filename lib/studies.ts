@@ -1758,7 +1758,7 @@ export const STUDIES: Study[] = [
     population: "Six studies with 8,993 adults with overweight or obesity (5,553 who stopped, 3,440 who continued)",
     design: "Systematic review and meta-analysis of randomised and other controlled trials of tirzepatide, semaglutide, liraglutide and dulaglutide, searched to December 2025",
     finding:
-      "People who stopped had a significantly higher weight than those who continued (mean difference 17.9 percentage points, 95% CI 14.1 to 21.7), with statistical heterogeneity between studies. Weight after stopping was 9.1 percentage points higher than before stopping. Regain after tirzepatide was larger than after semaglutide. Adverse reactions, including gastrointestinal ones, were fewer after stopping and cardiovascular events were not affected by stopping.",
+      "The authors report a significant rebound in weight after stopping, a mean difference of 17.9% (95% CI 14.1 to 21.7) between those who stopped and those who continued, with statistical heterogeneity between studies, and a 9.1% difference between weight after and before stopping. Regain after tirzepatide was larger than after semaglutide. Adverse reactions, including gastrointestinal ones, were fewer after stopping and cardiovascular events were not affected by stopping.",
     caveat:
       "It pools randomised and other controlled studies with heterogeneous results. The authors suggest differences in how the drugs work explain the difference between tirzepatide and semaglutide, which is a suggestion, not something the analysis tested.",
     funding: "The record states the authors declare no competing interests.",
@@ -1806,7 +1806,7 @@ export const STUDIES: Study[] = [
     finding:
       "Compared with lifestyle change alone at one year, moderate-to-high-certainty evidence showed weight loss of 14.9% with tirzepatide, 14.8% with CagriSema, 10.9% with oral semaglutide, 9.9% with orforglipron, 9.8% with subcutaneous semaglutide and 8.1% with phentermine-topiramate. Stopping because of adverse events and gastrointestinal events were most increased with several of these drugs. Tirzepatide reduced fat mass the most (25.7%) and also lean mass the most (8.3%). Subcutaneous semaglutide was the only drug linked to lower all-cause mortality and heart attacks, estimates largely from cardiovascular outcome trials in high-risk people, and it and tirzepatide reduced heart failure. No drug convincingly improved quality of life or kidney failure. The authors conclude larger benefits generally came with greater harms and more discontinuation.",
     caveat:
-      "A pooled analysis of mostly industry-run trials, mainly comparing drugs at one year. The mortality and heart-attack findings come largely from trials in people with existing heart disease. The abstract names no head-to-head trial for most comparisons, which come from the network model.",
+      "A pooled analysis of 262 trials that mainly compares drugs at one year. The mortality and heart-attack findings come largely from trials in people with existing heart disease. As a network meta-analysis, comparisons between drugs are partly inferred through shared comparators rather than measured head to head.",
     funding:
       "The record lists grants from Chinese national and Sichuan science programmes and states that several authors have consulted for, spoken for or received grants from drug companies including Novo Nordisk and Eli Lilly.",
     verifiedOn: "2026-11-10",
