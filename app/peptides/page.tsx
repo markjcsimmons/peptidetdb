@@ -141,7 +141,12 @@ export default function PeptidesPillarPage() {
             <p className="mt-2 text-sm text-muted">
               Insulin and the GLP-1 medicines are peptide drugs that went through approval. A 2026 review notes that
               numerous peptide drugs have undergone a rigorous approval process, alongside a parallel &ldquo;gray
-              market&rdquo; of unapproved compounds (<PaperLink id="mendias-2026" via="doi">Mendias &amp; Awan</PaperLink>).
+              market&rdquo; of unapproved compounds (<PaperLink id="mendias-2026" via="doi">Mendias &amp; Awan</PaperLink>). For what the weight-loss trials show,
+              see{" "}
+              <Link href="/peptides/for-weight-loss" className="link">
+                peptides for weight loss
+              </Link>
+              .
             </p>
           </div>
           <div className="rounded-card border border-line bg-card p-6">
@@ -189,6 +194,14 @@ export default function PeptidesPillarPage() {
               status changed through 2026. See the{" "}
               <Link href="/peptides/legal-status" className="link">
                 legal status page
+              </Link>
+              , and the profiles for{" "}
+              <Link href="/peptides/ipamorelin" className="link">
+                ipamorelin
+              </Link>{" "}
+              and{" "}
+              <Link href="/peptides/cjc-1295" className="link">
+                CJC-1295
               </Link>
               .
             </p>

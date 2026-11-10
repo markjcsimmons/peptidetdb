@@ -20,7 +20,7 @@ const REVIEWED = "2026-11-10";
 const FAQ: { q: string; a: string }[] = [
   {
     q: "Do peptides build muscle?",
-    a: "Some evidence supports collagen peptides as an add-on to resistance training: a 2024 meta-analysis of 19 trials found a larger gain in fat-free mass than control, with moderate certainty. For injectable peptides sold online, recent reviews say muscle and performance benefits are unproven or uncertain.",
+    a: "Some evidence supports collagen peptides as an add-on to resistance training: a 2024 meta-analysis of 19 trials found a larger gain in fat-free mass than control, with moderate certainty. For injectable peptides sold online, recent reviews say muscle and performance benefits are unproven or uncertain, and we found no controlled trial of ipamorelin or CJC-1295 with a muscle outcome.",
   },
   {
     q: "Is collagen as good as whey protein for muscle?",
@@ -28,7 +28,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Does MK-677 build muscle?",
-    a: "In a 1-year trial of 65 healthy older adults, MK-677 increased fat-free mass but did not change strength or function, and it raised fasting blood glucose. It is a pill that acts like the hormone ghrelin, not an injectable peptide.",
+    a: "In a 1-year trial of 65 healthy older adults, MK-677 increased fat-free mass but did not change strength or function, and it raised fasting blood glucose. A trial in hip-fracture patients was stopped early because of a heart-failure signal. It is a pill that acts like the hormone ghrelin, not an injectable peptide.",
   },
   {
     q: "Are muscle-building peptides banned in sport?",
@@ -81,7 +81,8 @@ export default function PeptidesForMuscleGrowthPage() {
           2024 meta-analysis of 19 trials found a larger gain in fat-free mass than control, though the strength effect
           was small and everyone in these trials was exercising. For the injectable &ldquo;research&rdquo; peptides sold
           for muscle, such as ipamorelin, CJC-1295 and BPC-157, recent reviews say the benefits are unproven or
-          uncertain. We did not find evidence that any peptide builds muscle without training.
+          uncertain, and we found no controlled trial of ipamorelin or CJC-1295 with a muscle outcome. We did not find
+          evidence that any peptide builds muscle without training.
         </p>
       </Callout>
 
@@ -185,8 +186,32 @@ export default function PeptidesForMuscleGrowthPage() {
           , with uncertain safety, product-quality concerns and anti-doping restrictions.
         </p>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          We have not yet summarised the individual trials of these peptides, so this site does not rate them. That is a
-          gap in our coverage, not a finding that no trials exist: the review itself says some have trial data.
+          The individual trials are thin. <strong className="text-fg">Tesamorelin</strong> is the one with randomised
+          trials, in people with HIV and extra abdominal fat: a meta-analysis of{" "}
+          <PaperLink id="badran-2026" via="doi">
+            five trials
+          </PaperLink>{" "}
+          found lean body mass up 1.42 kg alongside less visceral and liver fat, and an exploratory analysis found{" "}
+          <PaperLink id="adrian-2019" via="pmc">
+            small increases in trunk muscle area
+          </PaperLink>
+          , with no strength measure. For <Link href="/peptides/ipamorelin" className="link">ipamorelin</Link> and{" "}
+          <Link href="/peptides/cjc-1295" className="link">CJC-1295</Link> we found no controlled trial with a muscle,
+          strength or body-composition outcome: CJC-1295&rsquo;s trials show it{" "}
+          <PaperLink id="teichman-2006" via="doi">
+            raised growth hormone and IGF-I for weeks
+          </PaperLink>{" "}
+          in healthy adults, ipamorelin&rsquo;s one controlled trial (after bowel surgery) found no significant benefit,
+          and a higher hormone level is not the same as more muscle. When growth hormone itself was injected into
+          healthy adults, systematic reviews found about 2 kg more lean mass but{" "}
+          <PaperLink id="liu-2008" via="doi">
+            no clear strength gain
+          </PaperLink>{" "}
+          and more swelling, joint pain and blood-sugar problems (
+          <PaperLink id="liu-2007" via="doi">
+            Liu 2007
+          </PaperLink>
+          ).
         </p>
       </section>
 
@@ -200,7 +225,12 @@ export default function PeptidesForMuscleGrowthPage() {
           , 25 mg a day of MK-677 raised growth hormone and IGF-I to young-adult levels and increased fat-free mass by
           1.1 kg, where the placebo group lost 0.5 kg. The extra mass did not change strength or function. Fasting blood
           glucose rose, insulin sensitivity fell, cortisol rose, and weight gain was larger (2.7 kg versus 0.8 kg). The
-          authors say the trial was too small and short to judge function. It tested older adults, not athletes.
+          authors say the trial was too small and short to judge function. It tested older adults, not athletes. A
+          second trial in{" "}
+          <PaperLink id="adunsky-2011" via="doi">
+            123 hip-fracture patients
+          </PaperLink>{" "}
+          found mixed results on function and was stopped early because of a congestive-heart-failure signal.
         </p>
       </section>
 
