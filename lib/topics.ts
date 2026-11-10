@@ -72,12 +72,22 @@ export const TOPICS: Record<Topic, TopicPage> = {
     measures: "benefit",
     title: "Peptides for muscle & strength",
     intro:
-      "Muscle claims cover a wide range, from collagen powder to injectable growth-hormone-releasing compounds. The studies in this hub only support a narrow claim for one of them.",
+      "Muscle claims cover a wide range, from collagen powder to injectable growth-hormone-releasing compounds. The human evidence is best for collagen peptides taken alongside resistance training, and even there the trials are of mixed quality and nearly all participants were also training.",
     ratings: [
       {
-        subject: "Oral collagen peptides with resistance training",
+        subject: "Oral collagen peptides with resistance training: fat-free mass",
+        level: "consistent",
+        why: "A 2024 meta-analysis of 19 trials (768 healthy adults) favoured collagen for fat-free mass, with moderate certainty, and three randomised trials in older men, middle-aged men and premenopausal women each found a larger gain than placebo. Everyone trained, so it shows collagen as an add-on to exercise, and fat-free mass is not the same as muscle.",
+      },
+      {
+        subject: "Oral collagen peptides with resistance training: strength",
+        level: "mixed",
+        why: "The meta-analysis found a small strength effect (0.19) with low certainty. Gains in hand-grip, quadriceps and leg strength appeared in some trials but were not significant between groups in others.",
+      },
+      {
+        subject: "Collagen peptides compared with whey protein",
         level: "limited",
-        why: "One randomised trial in older men with sarcopenia found larger gains in fat-free mass and strength than placebo when both groups trained. It does not show an effect without exercise, or in other groups.",
+        why: "One small trial of 22 young adults found whey increased muscle thickness more than leucine-matched collagen, with similar strength gains. An exploratory comparison in a trial of 97 men found no significant difference between whey and collagen. Neither shows collagen is as good as whey.",
       },
       {
         subject: "Fish protein hydrolysate (oral marine peptides)",
@@ -85,16 +95,28 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "Two small crossover studies. One found fish hydrolysate raised blood amino acids after exercise about as much as whey hydrolysate, which measures digestion rather than muscle gain. The other found no benefit for recovery between two cycling sessions, and was funded by a company with an interest in the product.",
       },
       {
-        subject: "Injectable and research peptides (BPC-157, CJC-1295, ipamorelin and others)",
+        subject: "Oral ghrelin mimetic MK-677 in older adults",
+        level: "limited",
+        why: "One 1-year trial of 65 healthy older adults found a gain in fat-free mass, with no change in strength or function, and higher fasting glucose, lower insulin sensitivity, higher cortisol and weight gain. It is taken by mouth and is not an injectable peptide.",
+      },
+      {
+        subject: "Growth-hormone-axis peptides (CJC-1295, ipamorelin, sermorelin, tesamorelin)",
+        level: "unassessed",
+        why: "Recent reviews say the muscle and performance benefits of these remain unproven or uncertain, and that human evidence ranges from regulatory-grade trials for some to none for others. We have not summarised the individual trials, so we do not rate them.",
+      },
+      {
+        subject: "BPC-157 and other research peptides",
         level: "preclinical",
-        why: "Two recent reviews conclude the claimed muscle and recovery benefits are not substantiated by human trials. Most evidence is from animals.",
+        why: "Reviews conclude the claimed muscle and recovery benefits are not substantiated by human trials, and a 2026 sports-medicine review lists BPC-157 as investigational. Most evidence is from animals.",
       },
     ],
     gaps: [
-      "Controlled trials of collagen peptides outside older, sarcopenic men are not summarised here yet.",
+      "Collagen trials in women and in people who do not train are scarce in what we have summarised.",
+      "Most collagen trials came from a small number of research groups, and funding is stated unevenly.",
       "No trial of oral marine peptides for muscle growth or strength over weeks of training was found.",
+      "The individual trials of growth-hormone-axis peptides (sermorelin, tesamorelin, ipamorelin, CJC-1295) are not summarised here yet.",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-10",
   },
   joints: {
     slug: "joints",
@@ -258,7 +280,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "Other unapproved research peptides (CJC-1295, ipamorelin, MK-677, TB-500 and others)",
         level: "limited",
-        why: "Three recent reviews say rigorous human safety data are scarce. One documents cardiovascular and metabolic risks, naming MK-677 and congestive heart failure; another lists contamination, impurities and inaccurate dosing as risks of the unregulated injectable market.",
+        why: "Three recent reviews say rigorous human safety data are scarce. One documents cardiovascular and metabolic risks, naming MK-677 and congestive heart failure; another lists contamination, impurities and inaccurate dosing as risks of the unregulated injectable market. A 2026 endocrinology review of growth-hormone-axis peptides lists raised prolactin and cortisol, dysglycaemia, fluid retention and muscle or joint pain as reported effects. In a 1-year randomised trial in older adults, MK-677 raised fasting glucose and lowered insulin sensitivity.",
       },
       {
         subject: "Oral collagen peptides (general tolerability)",

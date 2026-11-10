@@ -48,7 +48,13 @@ export default function AboutPage() {
         <ul className="mt-3 list-disc space-y-1 pl-5">
           <li>It does not give medical or legal advice or recommend that you use any peptide.</li>
           <li>It does not sell products.</li>
-          <li>It does not currently grade or rank any products.</li>
+          <li>
+            It does not currently grade or rank any products. A draft grading rubric is published first, at{" "}
+            <Link href="/grading-rubric" className="link">
+              /grading-rubric
+            </Link>
+            .
+          </li>
         </ul>
       </section>
 

@@ -448,7 +448,12 @@ export default function HomePage() {
                   date: "23–24 Jul 2026",
                   body: `The committee considers seven peptides. News reports say it recommended ${recommended}.`,
                 },
-                { key: "d", date: formatDate(LEGAL_REVIEWED), body: "Last checked. We found no final FDA action.", now: true },
+                {
+                  key: "d",
+                  date: "30 Oct 2026",
+                  body: "HHS publishes a draft policy not to enforce against licensed compounders of six of them, under conditions.",
+                },
+                { key: "e", date: formatDate(LEGAL_REVIEWED), body: "Last checked. We found no final FDA action.", now: true },
               ]}
             />
           </div>

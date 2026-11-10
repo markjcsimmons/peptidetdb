@@ -175,6 +175,7 @@ export default function CollagenBenefitsPage() {
         <h2 className="text-xl font-bold">Keep going</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {[
+            { href: "/peptides/collagen-peptides", label: "Collagen peptides: the full picture" },
             { href: "/peptides/collagen-peptides-side-effects", label: "Collagen peptide side effects" },
             { href: "/peptides/marine-vs-bovine-collagen", label: "Marine vs bovine collagen" },
             { href: "/peptides/how-to-read-a-peptide-coa", label: "How to read a peptide COA" },

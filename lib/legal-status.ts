@@ -8,9 +8,9 @@
  * says so.
  */
 
-export const LEGAL_REVIEWED = "2026-11-09";
+export const LEGAL_REVIEWED = "2026-11-10";
 
-export type SourceKind = "primary" | "news";
+export type SourceKind = "primary" | "news" | "commentary";
 export type Source = { label: string; url: string; kind: SourceKind };
 
 export const SOURCES = {
@@ -34,8 +34,13 @@ export const SOURCES = {
     url: "https://www.fda.gov/media/193342/download",
     kind: "primary",
   },
+  hhsNotice: {
+    label: "Federal Register, 30 October 2026 (FR Doc. 2026-22192): HHS, Enforcement Discretion Policy Regarding 503A Compounding Using Certain Peptide Bulk Drug Substances (docket HHS-OASH-2026-0496)",
+    url: "https://govinfo.gov/content/pkg/FR-2026-10-30/html/2026-22192.htm",
+    kind: "primary",
+  },
   hhsPolicy: {
-    label: "HHS: 503A peptide enforcement discretion policy, Appendix B",
+    label: "HHS: 503A peptide enforcement discretion policy, Appendix B (PDF; blocks automated readers, so we have not read it directly)",
     url: "https://www.hhs.gov/sites/default/files/hhs-503a-peptide-enforcement-discretion-policy-appendix-b.pdf",
     kind: "primary",
   },
@@ -43,6 +48,11 @@ export const SOURCES = {
     label: "ABC News: FDA advisers narrowly vote to add 6 peptides to a drug compounding list (24 July 2026)",
     url: "https://abcnews.com/Health/fda-advisers-narrowly-vote-add-6-peptides-drug/story?id=135064915",
     kind: "news",
+  },
+  hollandKnight: {
+    label: "Holland & Knight (law firm), 4 November 2026: HHS issues interim enforcement discretion policy for compounding",
+    url: "https://www.hklaw.com/en/insights/publications/2026/11/hhs-issues-interim-enforcement-discretion-policy-for-compounding",
+    kind: "commentary",
   },
   time: {
     label: "TIME: An FDA Committee Just Voted in Favor of Peptides—Despite the Agency's Opposition (23 July 2026)",
@@ -77,6 +87,12 @@ export const TIMELINE: TimelineEvent[] = [
     label: "23 and 24 July 2026",
     text: "The advisory committee meets and considers seven peptides for the 503A bulks list (see the table below). According to news reports, it recommended six and rejected one. FDA's own meeting page, current as of 6 August 2026 when we read it, carried the agenda and briefing materials but not the votes.",
     sources: [SOURCES.fdaMeeting, SOURCES.abc, SOURCES.time],
+  },
+  {
+    date: "2026-10-30",
+    label: "30 October 2026",
+    text: "HHS publishes in the Federal Register a draft, interim enforcement-discretion policy for compounding under Section 503A with certain peptide bulk drug substances. It says HHS does not intend to take enforcement action against a state-licensed pharmacy, a federal facility or a licensed physician that compounds with a substance listed in the policy's Appendix A, while rulemaking on the 503A bulks list is pending. The notice says it does not add any substance to the bulks list, creates no rights and is not binding. Comments are due two weeks after publication, which is 13 November 2026. Some law-firm alerts date the policy 28 October; the Federal Register publication date is 30 October.",
+    sources: [SOURCES.hhsNotice],
   },
 ];
 

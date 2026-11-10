@@ -205,6 +205,7 @@ export default function ArePeptidesSteroidsPage() {
           {[
             { href: "/peptides", label: "What are peptides? Types, evidence and safety" },
             { href: "/peptides/what-do-peptides-do", label: "What do peptides do?" },
+            { href: "/peptides/peptides-for-muscle-growth", label: "Peptides for muscle growth" },
             { href: "/peptides/legal-status", label: "Are peptides legal in the US?" },
           ].map((l) => (
             <Link

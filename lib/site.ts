@@ -21,7 +21,7 @@ export const SITE = {
     "Educational information only. It is not medical or legal advice, and nothing here is a recommendation to use any peptide. Talk to a clinician before starting a supplement or treatment.",
   lastReviewed: "2026-11-09",
   /** Set when a monitored address exists. Pages that mention contact details show them only when set. */
-  contactEmail: null as string | null,
+  contactEmail: "info@peptidetdb.com" as string | null,
 };
 
 export const NAV = [
@@ -35,6 +35,7 @@ export const FOOTER_LINKS = [
   { href: "/about", label: "About" },
   { href: "/editorial-policy", label: "Editorial policy" },
   { href: "/corrections", label: "Corrections" },
+  { href: "/grading-rubric", label: "Grading rubric" },
   { href: "/data", label: "Data" },
   { href: "/glossary", label: "Glossary" },
   { href: "/science/methodology", label: "Methodology" },
