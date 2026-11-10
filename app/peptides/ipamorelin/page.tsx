@@ -170,6 +170,7 @@ export default function IpamorelinPage() {
         </div>
         <p className="mt-5 max-w-prose text-sm text-muted">
           More context: <Link href="/peptides/cjc-1295" className="link">CJC-1295</Link>,{" "}
+          <Link href="/peptides/bpc-157" className="link">BPC-157</Link>,{" "}
           <Link href="/peptides/peptides-for-muscle-growth" className="link">peptides for muscle growth</Link> and the{" "}
           <Link href="/science/topics/muscle" className="link">muscle evidence</Link>.
         </p>

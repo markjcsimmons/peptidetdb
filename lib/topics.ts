@@ -149,13 +149,13 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "BPC-157 for tendon, ligament and joint problems",
         level: "preclinical",
-        why: "A systematic review found 35 animal studies and 1 clinical report. The human data amount to small pilots and a retrospective chart review of 16 patients with no control group.",
+        why: "Reviews describe mostly animal evidence. A 2026 systematic review found only three small uncontrolled human studies (30 people in all, one a retrospective review of 16 knee-pain patients), judged them poor quality with very low certainty, and found no randomised trial; a 2026 orthopaedic review likewise found no controlled human evidence.",
       },
     ],
     gaps: [
       "Individual randomised trials of collagen for tendon problems are not summarised here yet.",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-10",
   },
   "blood-pressure": {
     slug: "blood-pressure",
@@ -189,9 +189,9 @@ export const TOPICS: Record<Topic, TopicPage> = {
   brain: {
     slug: "brain",
     measures: "benefit",
-    title: "Marine peptides for sleep, memory & stress",
+    title: "Peptides for sleep, memory & stress",
     intro:
-      "Fish hydrolysate supplements are marketed for sleep, memory and stress. The few human studies are small, all three have ties to a company with an interest in the product, and one found no difference from placebo.",
+      "Fish hydrolysate supplements are marketed for sleep, memory and stress, and selank, an unapproved peptide that appears on FDA's compounding page, is promoted for anxiety. The few human studies of the fish products are small, all three have ties to a company with an interest in the product, and one found no difference from placebo. The selank trials are older, small and had no placebo group.",
     ratings: [
       {
         subject: "Fish hydrolysate for sleep quality",
@@ -208,18 +208,24 @@ export const TOPICS: Record<Topic, TopicPage> = {
         level: "limited",
         why: "A single-arm study with no control group reported lower anxiety scores over 28 days. It cannot separate the supplement from placebo or natural recovery, and three authors work for Laboratoire Dielen.",
       },
+      {
+        subject: "Selank for anxiety disorders",
+        level: "limited",
+        why: "Three small Russian-language trials in 60 to 70 patients compared selank with benzodiazepines (medazepam, phenazepam) or added it to one, and none used a placebo. The authors report similar anxiolytic effect to medazepam and fewer side effects when selank was added to phenazepam. The abstracts give no scores or doses.",
+      },
     ],
     gaps: [
       "No independently funded randomised trial of a marine peptide supplement for sleep, memory or stress is summarised here.",
+      "We found no placebo-controlled human trial of selank. Semax, which has trial-type records in PubMed, is not covered here yet.",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-10",
   },
   immune: {
     slug: "immune",
     measures: "benefit",
-    title: "Thymic peptides for immune function",
+    title: "Peptides for immune function & inflammation",
     intro:
-      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, trials and meta-analyses of thymosin alpha-1 given by injection in hospital and clinic patients (sepsis, pancreatitis, COVID-19, COPD flare-ups, hepatitis B), a 2024 advocacy-style review, a 1999 narrative review and two animal experiments. This page is about thymus-derived products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
+      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, trials and meta-analyses of thymosin alpha-1 given by injection in hospital and clinic patients (sepsis, pancreatitis, COVID-19, COPD flare-ups, hepatitis B), a 2024 advocacy-style review, a 1999 narrative review and two animal experiments. The page also holds KPV, a three-amino-acid fragment promoted for inflammation, for which we found only laboratory, animal and review papers. It is about thymus-derived and similar products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
     ratings: [
       {
         subject: "Thymus extracts added to cancer treatment",
@@ -260,6 +266,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
         subject: "Injected thymosin alpha-1 for hepatitis B",
         level: "mixed",
         why: "Open-label trials in hepatitis B-related liver failure report better transplant-free survival at 90 days (75% vs 53% in 120 patients; a later 73-patient trial also reports a significant survival gain without giving figures), though a competing-risk analysis of the first found no significant survival difference. In cirrhosis, a meta-analysis of seven trials found an early advantage over entecavir alone that was gone by 48 to 52 weeks, a 690-patient trial found no difference in decompensation, liver cancer or death, and a small trial of 51 patients found no benefit from adding it to peginterferon.",
+      },
+      {
+        subject: "KPV (anti-inflammatory tripeptide) for gut and skin inflammation",
+        level: "preclinical",
+        why: "A 2008 study found KPV reduced inflammatory signalling in human cell lines and lowered colitis in mice, and a 2016 mouse study found it prevented colitis-associated cancer. A 2019 review proposes it for skin wounds. Our PubMed searches found no human trial of KPV.",
       },
       {
         subject: "Thymosin alpha-1 as an adjunct to influenza vaccine in older adults",
@@ -327,7 +338,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "BPC-157 (unapproved)",
         level: "limited",
-        why: "Human safety data amount to a two-person intravenous pilot and small case series. Reviews call it investigational and warn of risks from unregulated manufacturing and contamination.",
+        why: "Human safety data amount to three small uncontrolled studies totalling 30 people (one a two-person intravenous pilot), which a 2026 systematic review judged poor quality with very low certainty. Reviews call it investigational, say it has no validated dosing or human pharmacokinetics, and warn of risks from unregulated manufacturing and contamination.",
       },
       {
         subject: "Other unapproved research peptides (CJC-1295, ipamorelin, MK-677, TB-500 and others)",

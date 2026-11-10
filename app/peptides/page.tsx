@@ -196,6 +196,18 @@ export default function PeptidesPillarPage() {
                 legal status page
               </Link>
               , and the profiles for{" "}
+              <Link href="/peptides/bpc-157" className="link">
+                BPC-157
+              </Link>
+              ,{" "}
+              <Link href="/peptides/kpv" className="link">
+                KPV
+              </Link>
+              ,{" "}
+              <Link href="/peptides/selank" className="link">
+                selank
+              </Link>
+              ,{" "}
               <Link href="/peptides/ipamorelin" className="link">
                 ipamorelin
               </Link>{" "}

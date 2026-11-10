@@ -42,7 +42,9 @@ export type PeptideId =
   | "thymalin"
   | "growth-hormone"
   | "semaglutide"
-  | "tirzepatide";
+  | "tirzepatide"
+  | "kpv"
+  | "selank";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -129,6 +131,8 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   "growth-hormone": "Growth hormone (the hormone itself)",
   semaglutide: "Semaglutide (GLP-1 drug)",
   tirzepatide: "Tirzepatide (GIP/GLP-1 drug)",
+  kpv: "KPV (Lys-Pro-Val)",
+  selank: "Selank",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -1805,6 +1809,201 @@ export const STUDIES: Study[] = [
       "A pooled analysis of mostly industry-run trials, mainly comparing drugs at one year. The mortality and heart-attack findings come largely from trials in people with existing heart disease. The abstract names no head-to-head trial for most comparisons, which come from the network model.",
     funding:
       "The record lists grants from Chinese national and Sichuan science programmes and states that several authors have consulted for, spoken for or received grants from drug companies including Novo Nordisk and Eli Lilly.",
+    verifiedOn: "2026-11-10",
+  },
+  // ── BPC-157, selank and KPV profile evidence (added 2026-11-10) ───────────
+  {
+    id: "poolton-2026",
+    authors: "Poolton JT, Minett J, Kazmi A",
+    year: 2026,
+    title: "Human evidence for BPC-157 in orthopaedic and regenerative medicine: a systematic review of efficacy and safety.",
+    journal: "Acta Orthop Belg",
+    ref: "92(3)",
+    pmid: "42885452",
+    doi: "10.52628/92.3.15837",
+    kind: "systematic-review",
+    topics: ["joints", "safety"],
+    peptides: ["bpc-157"],
+    delivery: [],
+    population: "Three studies with 30 people in total: knee pain (16), interstitial cystitis (12) and an intravenous safety pilot (2)",
+    design: "Systematic review registered with PROSPERO, searching Embase, PubMed, the Cochrane Library and ClinicalTrials.gov to 1 June 2026; quality rated with an NIH before-after tool and GRADE",
+    finding:
+      "Only three human studies qualified: a retrospective study of intra-articular injections for knee pain, a retrospective pilot of bladder instillation for interstitial cystitis, and a two-person intravenous safety pilot. All reported symptom improvement in most participants and no treatment-related adverse events, but all were judged poor quality and the overall certainty was rated very low (serious risk of bias, indirectness and imprecision). The authors conclude BPC-157 should not be used clinically outside ethically approved, regulated, high-quality trials.",
+    caveat:
+      "None of the three studies had a control group, so improvement cannot be separated from placebo or natural recovery, and 30 people is far too few to establish safety. The review found no randomised trial.",
+    funding: "The record lists no grants and no conflict-of-interest statement.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "tham-2026",
+    authors: "Tham A, Hodgkins CW, Kennedy JG",
+    year: 2026,
+    title: "Investigational Peptides in Orthopaedic Practice: Evidence, Safety, and Patient Counseling for BPC-157, Thymosin Beta-4, and TB-500.",
+    journal: "J Am Acad Orthop Surg",
+    ref: "online ahead of print",
+    pmid: "42937313",
+    doi: "10.5435/JAAOS-D-26-00049",
+    kind: "review",
+    topics: ["joints", "safety"],
+    peptides: ["bpc-157", "tb-500"],
+    delivery: [],
+    design: "Narrative review (PubMed, Embase and Scopus to June 2026, plus regulatory and anti-doping sources)",
+    finding:
+      "BPC-157 has the largest body of direct musculoskeletal preclinical evidence, mostly small-animal studies of tendon, ligament, muscle, joint and bone, but human evidence is limited to one small retrospective uncontrolled case series without validated outcome measures, and dosing, pharmacokinetic and long-term safety data are lacking. Thymosin beta-4 has human experience in eye, skin and heart uses that cannot establish musculoskeletal effects. TB-500 is a distinct seven-amino-acid fragment often conflated with thymosin beta-4, with no validated equivalence. The authors raise product identity, purity, concentration, sterility and consistency concerns, say none has an FDA-approved musculoskeletal use, and conclude routine clinical use cannot be recommended.",
+    caveat:
+      "A narrative review that does not pool data or give how many studies it found. Its statement that human musculoskeletal evidence for BPC-157 is one case series differs slightly from the systematic review's count of three small human studies, which includes non-musculoskeletal uses.",
+    funding: "The record lists no grants and no conflict-of-interest statement.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "mateescu-2026",
+    authors: "Mateescu DM, Gavrilescu DM, Constantinescu FE, Oancea C, Ilie AC, Folescu R, Popa MD, Iurciuc S, Muresan CO, Enache A",
+    year: 2026,
+    title: "BPC-157 as an Investigational Peptide Therapeutic: Biopharmaceutical Challenges, Formulation Strategies, and Translational Development Barriers.",
+    journal: "Pharmaceutics",
+    ref: "18(5)",
+    pmid: "42198317",
+    pmcid: "PMC13210877",
+    doi: "10.3390/pharmaceutics18050625",
+    kind: "review",
+    topics: ["safety"],
+    peptides: ["bpc-157"],
+    delivery: [],
+    design: "Narrative review of BPC-157 as a drug candidate (PubMed, Embase, Cochrane Library to April 2026, plus patent and regulator sites); no formal quality assessment",
+    finding:
+      "The authors report that BPC-157 is unusually stable in gastric juice and active by oral, injected and topical routes in preclinical work, but that it has no approved formulation, no validated dosing regimen and no completed phase II trial. Preclinical studies in two species showed a plasma half-life under 30 minutes and intramuscular bioavailability of 14% to 51%, which contrasts with effects described as lasting hours to days. They say the clinical data come from fewer than 30 people in three uncontrolled pilot studies, none using standardised pharmaceutical preparations.",
+    caveat:
+      "A narrative review with no formal quality assessment, so the claims about what has and has not been completed are the authors' reading of the literature. It says nothing about whether oral BPC-157 works in people.",
+    funding: "The record lists a grant from Victor Babeș University of Medicine and Pharmacy Timișoara and states no conflicts of interest.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "zozulia-2008",
+    authors: "Zozulia AA, Neznamov GG, Siuniakov TS, Kost NV, Gabaeva MV, Sokolov OIu, Serebriakova EV, Siranchieva OA, Andriushenko AV, Telesheva ES, Siuniakov SA, Smulevich AB, Miasoedov NF, Seredenin SB",
+    year: 2008,
+    title: "Efficacy and possible mechanisms of action of a new peptide anxiolytic selank in the therapy of generalized anxiety disorders and neurasthenia.",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "108(4):38–48",
+    pmid: "18454096",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["selank"],
+    delivery: [],
+    population: "62 patients with generalized anxiety disorder and neurasthenia: selank (30) and medazepam (32)",
+    design: "Randomised comparison with an active drug (medazepam); no placebo group; Hamilton, Zung and CGI scales plus enkephalin activity in blood serum",
+    finding:
+      "The anxiolytic effects of selank and medazepam were similar, and the authors report that selank also had antiasthenic and psychostimulant effects. Patients had a shortened half-life of leu-enkephalin in the blood that correlated with illness duration and symptom severity, and this measure rose during selank treatment, mostly in patients with generalized anxiety disorder.",
+    caveat:
+      "There was no placebo group, so a comparison with an active drug cannot show that selank beats no treatment. The abstract gives no scores, dose or treatment length, and the enkephalin link is a correlation, not a tested mechanism. It is an older paper in a Russian-language journal with a small sample.",
+    funding: "The record lists no grants and no conflict-of-interest statement.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "medvedev-2014",
+    authors: "Medvedev VE, Tereshchenko ON, Israelian AIu, Chobanu IK, Kost NV, Sokolov OIu, Miasoedov NF",
+    year: 2014,
+    title: "A comparison of the anxiolytic effect and tolerability of selank and phenazepam in the treatment of anxiety disorders.",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "114(7):17–22",
+    pmid: "25176261",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["selank"],
+    delivery: [],
+    population: "60 patients with phobic-anxiety and somatoform disorders",
+    design: "Comparison of selank with phenazepam; the abstract does not say whether patients were randomised or blinded and mentions no placebo group",
+    finding:
+      "The authors report a pronounced anxiolytic and mild nootropic effect of selank, an anxiolytic effect that lasted for a week after the last dose, and a positive effect on quality of life.",
+    caveat:
+      "The abstract gives no scores, no dose, no numbers for the comparison with phenazepam, and no detail on tolerability despite the title. Without a placebo group it cannot show that selank beats no treatment. It is an older paper in a Russian-language journal.",
+    funding: "The record lists no grants and no conflict-of-interest statement.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "medvedev-2015",
+    authors: "Medvedev VE, Tereshchenko ON, Kost NV, Ter-Israelyan AY, Gushanskaya EV, Chobanu IK, Sokolov OY, Myasoedov NF",
+    year: 2015,
+    title: "Optimization of the treatment of anxiety disorders with selank.",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "115(6):33–40",
+    pmid: "26356395",
+    doi: "10.17116/jnevro20151156133-40",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["selank"],
+    delivery: [],
+    population: "70 patients with anxiety-phobic, hypochondriac and somatoform disorders: phenazepam alone (30) and selank plus phenazepam (40)",
+    design: "Randomised comparison of phenazepam alone with selank added to phenazepam; scales included the Hamilton depression scale, CGI, Spielberger, UKU side-effect scale and SF-36",
+    finding:
+      "The authors report that phenazepam's benefit appeared earlier with selank added, that the combination reduced phenazepam's side effects (attention and memory impairment, weakness, sedation and others) during treatment and after withdrawal, and that quality of life was better in the selank group.",
+    caveat:
+      "Selank was an add-on to a benzodiazepine, not tested alone, and the groups were unequal (30 and 40). The abstract gives no placebo, doses or numbers, so the size of any benefit is unknown. It is an older paper in a Russian-language journal.",
+    funding: "The record lists no grants and no conflict-of-interest statement.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "dalmasso-2008",
+    authors: "Dalmasso G, Charrier-Hisamuddin L, Nguyen HT, Yan Y, Sitaraman S, Merlin D",
+    year: 2008,
+    title: "PepT1-mediated tripeptide KPV uptake reduces intestinal inflammation.",
+    journal: "Gastroenterology",
+    ref: "134(1):166–178",
+    pmid: "18061177",
+    pmcid: "PMC2431115",
+    doi: "10.1053/j.gastro.2007.10.026",
+    kind: "animal",
+    topics: ["immune"],
+    peptides: ["kpv"],
+    delivery: ["oral"],
+    design: "Human intestinal and T-cell lines plus two chemical models of colitis in mice, with KPV added to drinking water",
+    finding:
+      "At nanomolar concentrations KPV blocked inflammatory signalling and reduced inflammatory cytokine release in human intestinal and T-cell lines, acting through the PepT1 transporter. Given orally to mice, it reduced the incidence of colitis in two models, with lower inflammatory cytokine expression.",
+    caveat:
+      "Cell lines and mice only, with colitis induced chemically, so it says nothing about people. The abstract gives no mouse dose. The authors conclude KPV might be a new therapeutic agent for inflammatory bowel disease, which is a hypothesis, not a result.",
+    funding: "The record lists NIH (NIDDK) grants.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "viennois-2016",
+    authors: "Viennois E, Ingersoll SA, Ayyadurai S, Zhao Y, Wang L, Zhang M, Han MK, Garg P, Xiao B, Merlin D",
+    year: 2016,
+    title: "Critical role of PepT1 in promoting colitis-associated cancer and therapeutic benefits of the anti-inflammatory PepT1-mediated tripeptide KPV in a murine model.",
+    journal: "Cell Mol Gastroenterol Hepatol",
+    ref: "2(3):340–357",
+    pmid: "27458604",
+    pmcid: "PMC4957955",
+    doi: "10.1016/j.jcmgh.2016.01.006",
+    kind: "animal",
+    topics: ["immune"],
+    peptides: ["kpv"],
+    delivery: [],
+    design: "Mice engineered to overexpress or lack the PepT1 transporter, with colitis-associated cancer induced chemically; human colon biopsies were also analysed",
+    finding:
+      "Mice that overexpressed PepT1 had larger tumours and more inflammation, and mice lacking it had fewer. Human colon biopsies from patients with colorectal cancer showed more PepT1. KPV prevented cancer development in normal mice but had no effect in mice lacking PepT1.",
+    caveat:
+      "The main finding concerns the PepT1 transporter in mice, and KPV was a secondary experiment. It is a mouse study, so it does not show that KPV prevents or treats anything in people.",
+    funding: "The record lists VA and NIH (NIDDK) grants.",
+    verifiedOn: "2026-11-10",
+  },
+  {
+    id: "bohm-2019",
+    authors: "Böhm M, Luger T",
+    year: 2019,
+    title: "Are melanocortin peptides future therapeutics for cutaneous wound healing?",
+    journal: "Exp Dermatol",
+    ref: "28(3):219–224",
+    pmid: "30661264",
+    doi: "10.1111/exd.13887",
+    kind: "review",
+    topics: ["immune"],
+    peptides: ["kpv"],
+    delivery: [],
+    design: "Narrative review and proposal",
+    finding:
+      "The authors note that truncated forms of the hormone α-MSH, such as the tripeptide KPV, have anti-inflammatory effects without α-MSH's pigment-inducing activity, and propose that such peptides are promising future candidates for treating skin wounds and ulcers. They outline experimental work in silico, in vitro, ex vivo and in animals and discuss the arguments for and against.",
+    caveat:
+      "A 2019 proposal, not a test: the abstract reports no human trial of KPV for wounds. It describes what the authors think is promising.",
+    funding: "The record lists a Deutsche Forschungsgemeinschaft grant.",
     verifiedOn: "2026-11-10",
   },
 ];
