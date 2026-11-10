@@ -181,6 +181,41 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-09",
   },
+  immune: {
+    slug: "immune",
+    measures: "benefit",
+    title: "Thymic peptides for immune function",
+    intro:
+      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, a 1999 narrative review and two animal experiments. This page is about thymus-derived products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
+    ratings: [
+      {
+        subject: "Thymus extracts added to cancer treatment",
+        level: "mixed",
+        why: "A Cochrane review pooled 20 randomised trials of purified thymus extracts. It found no benefit for survival or tumour response, but fewer severe infections during chemotherapy or radiotherapy, a result the authors call preliminary. Most trials had at least a moderate risk of bias.",
+      },
+      {
+        subject: "Thymosin alpha-1 added to cancer treatment",
+        level: "limited",
+        why: "The same review found a trend toward longer survival with synthetic thymic peptides such as thymosin alpha-1 (risk ratio 1.21; 95% CI 0.94 to 1.56), but it did not reach statistical significance and rests on few trials.",
+      },
+      {
+        subject: "Thymalin and engineered thymosin alpha-1 in animals",
+        level: "preclinical",
+        why: "In rats, low-dose Thymalin slowed or reversed a transplanted tumour. In mice, a long-acting engineered form of thymosin alpha-1 (joined to an antibody fragment) slowed two tumour models and raised T-cell numbers. Neither was tested in people, and the second is a different molecule from thymosin alpha-1.",
+      },
+      {
+        subject: "Thymus extracts or peptides outside cancer care (infections, allergies, vaccine response, healthy adults)",
+        level: "unassessed",
+        why: "The hub holds no trial of thymic products outside cancer care yet, so it says nothing about these uses. That is a gap in our coverage, not a finding that no trial exists.",
+      },
+    ],
+    gaps: [
+      "The Cochrane review's searches ended in February 2010; later trials of thymosin alpha-1 are not summarised here.",
+      "No trial of thymic extracts or peptides for infections, allergies, vaccine response or healthy ageing is summarised here yet.",
+      "Legal and regulatory status, including thymosin alpha-1, is not part of these ratings; it has its own dated page (see Legal status).",
+    ],
+    reviewedOn: "2026-11-09",
+  },
   safety: {
     slug: "safety",
     measures: "safety",

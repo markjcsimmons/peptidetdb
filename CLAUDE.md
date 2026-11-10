@@ -34,8 +34,8 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 ## Architecture (everything renders from `lib/`)
 | Path | Role |
 |---|---|
-| `lib/studies.ts` | **Study registry** (22 studies). Types, labels, `STUDIES`. |
-| `lib/topics.ts` | Hand-written evidence verdicts per topic (skin, muscle, joints, blood-pressure, brain, safety) with `reviewedOn`. Levels incl. `none` = "No human trials found". |
+| `lib/studies.ts` | **Study registry** (26 studies). Types, labels, `STUDIES`. |
+| `lib/topics.ts` | Hand-written evidence verdicts per topic (skin, muscle, joints, blood-pressure, brain, immune, safety) with `reviewedOn`. Levels incl. `none` = "No human trials found". |
 | `lib/legal-status.ts` | Timeline/table/sources for the legal page. Update `LEGAL_REVIEWED` with it. |
 | `lib/site.ts` | Name, disclosure, disclaimer, nav, footer links, `contactEmail` (null = unset; hides contact sections). |
 | `lib/corrections.ts`, `lib/glossary.ts`, `lib/studies-export.ts` | Corrections log (empty), glossary, CSV/JSON export. |
@@ -62,7 +62,7 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 - "No human trials found" means *our PubMed search found none*; say so, never "none exists".
 
 ## Content status (2026-11-09)
-22 studies: oral collagen (5), BPC-157/injectable reviews and pilots (7), oral marine peptides (10: Evans 2021, Hwang 2026, Kawasaki 2000, Zhu 2010, Oliveira 2020, Eckert 2024, Chataigner 2026, Mjøs 2019, Cordeiro 2020, Oddoux 2022). Key finding: oral marine peptides have limited human evidence (skin best; BP, sleep/memory, muscle small/mixed; 4 of 10 have industry ties) and **no human trials found for joints/tendons, immune function or vision**. Legal page reflects the 2026 FDA picture: Category 2 page (as of 22 Apr 2026), PCAC meeting 23–24 Jul 2026 recommended 6 of 7 peptides for the 503A bulks list (non-binding; FDA staff opposed); no final FDA action found as of 9 Nov.
+26 studies: thymic peptides (4: Wolf 2011 Cochrane review in cancer patients = the only human evidence; Cordero 1999 review; Zhukova 2018 Thymalin in rats; Wang 2018 Tα1-Fc in mice; added 2026-11-09 with the new `immune` topic), oral collagen (5), BPC-157/injectable reviews and pilots (7), oral marine peptides (10: Evans 2021, Hwang 2026, Kawasaki 2000, Zhu 2010, Oliveira 2020, Eckert 2024, Chataigner 2026, Mjøs 2019, Cordeiro 2020, Oddoux 2022). Key finding: oral marine peptides have limited human evidence (skin best; BP, sleep/memory, muscle small/mixed; 4 of 10 have industry ties) and **no human trials found for joints/tendons, immune function or vision**. Legal page reflects the 2026 FDA picture: Category 2 page (as of 22 Apr 2026), PCAC meeting 23–24 Jul 2026 recommended 6 of 7 peptides for the 503A bulks list (non-binding; FDA staff opposed); no final FDA action found as of 9 Nov.
 
 ## Keyword plan
 `peptide_keyword_workbook.xlsx` (repo root): 144 keywords (Semrush rounds 1–2, US), 63 proposed pages, waves by KD, priority scores (editable Inputs sheet). Easy wins not yet built: `what do peptides do` (KD 7), `are peptides steroids` (12k), `peptides for muscle growth` (40k, KD 40), collagen cluster pages, injectable profile pages (start with selank, KPV), `peptide COA`/purity guide.
@@ -73,6 +73,8 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 - Decide whether to disclose **AI-assisted drafting** (pages say summaries are written from abstracts, not by whom).
 - **Editorial policy commitments are drafts** (include studies whatever they found; public corrections; no products graded). Confirm with the user.
 - No contact email yet (Namecheap email forwarding could provide `hello@peptidetdb.com`); set `SITE.contactEmail`.
+- **Operator-supplied files not added (reviewed 2026-11-09, folders under `~/Desktop/PURBLACK/Peptides/`):** the "IPH" cartilage/vascular/muscle set (IPH-AEN, -AVN, -AGAA: Danish Scientific Journal 2019, Scientific Discussion #33, Österreichisches Multiscience Journal #19, a Science-SD paper whose authors include Ideal Pharma Peptide GmbH staff, plus Pages drafts). No PMIDs, nothing in PubMed under the journals or product names, clinical sections use patients' own baseline as "control" with no placebo/blinding stated, so they fail the PubMed-verification rule. Ask whether IPH is linked to Pürblack before writing about them (disclosure). Also not added: the "Retina and Peptides" analytical review (unsigned; head of group "Andrei Ilnitski" looks like an author on the IPH-AGAA paper), and consumer/clinic pages on thymus extracts (WebMD, Kaiser, Port Moody, German Society for Thymus Therapy, NAVC proceeding). Candidate for a future vision topic: Cervia 2019, J Clin Med (PMID 31374938), a review the retina document relies on.
+- Immune topic gaps: run a PubMed search for human trials of thymic extracts/peptides outside cancer care (infections, allergies, vaccine response, newer thymosin alpha-1 trials after Feb 2010) and add what qualifies; the "Thymus extracts or peptides outside cancer care" rating is `unassessed` until then.
 - Stage 2 product grading: rubric first (see Disclosure).
 - Ideas: claim-checker tool, COA checklist, dose comparer, weekly PubMed study monitor (human review before publishing), regulatory tracker, a weight-loss/GLP-1 topic page (big search interest; needs studies fetched first), dark-mode and print polish checks.
 

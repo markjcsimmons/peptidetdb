@@ -21,7 +21,7 @@ export type StudyKind =
   | "animal"
   | "in-vitro";
 
-export type Topic = "skin" | "muscle" | "joints" | "blood-pressure" | "brain" | "safety";
+export type Topic = "skin" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -36,7 +36,10 @@ export type PeptideId =
   | "mk-677"
   | "sermorelin"
   | "tesamorelin"
-  | "mots-c";
+  | "mots-c"
+  | "thymic-peptides"
+  | "thymosin-alpha-1"
+  | "thymalin";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -101,6 +104,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   joints: "Joints & tendons",
   "blood-pressure": "Blood pressure & vessels",
   brain: "Sleep, memory & stress",
+  immune: "Immune function",
   safety: "Safety & regulation",
 };
 
@@ -118,6 +122,9 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   sermorelin: "Sermorelin",
   tesamorelin: "Tesamorelin",
   "mots-c": "MOTS-c",
+  "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
+  "thymosin-alpha-1": "Thymosin alpha-1",
+  thymalin: "Thymalin",
 };
 
 export const DELIVERY_LABEL: Record<Delivery, string> = {
@@ -649,6 +656,99 @@ export const STUDIES: Study[] = [
     caveat:
       "No control group, so it cannot separate the supplement from placebo, natural recovery or other care. The product also contained magnesium and vitamin B6, so any change cannot be attributed to the peptides.",
     funding: "Three of the authors work for Laboratoire Dielen.",
+    verifiedOn: "2026-11-09",
+  },
+
+  // ── Thymic peptides and thymus extracts ────────────────────────────────────
+  {
+    id: "wolf-2011",
+    authors: "Wolf E, Milazzo S, Boehm K, Zwahlen M, Horneber M",
+    year: 2011,
+    title: "Thymic peptides for treatment of cancer patients.",
+    journal: "Cochrane Database Syst Rev",
+    ref: "2011(2):CD003993",
+    pmid: "21328265",
+    pmcid: "PMC6481824",
+    doi: "10.1002/14651858.CD003993.pub3",
+    kind: "meta-analysis",
+    topics: ["immune"],
+    peptides: ["thymic-peptides", "thymosin-alpha-1"],
+    delivery: [],
+    population: "26 randomised trials; 2,736 adults with cancer receiving chemotherapy, radiotherapy or both",
+    design: "Cochrane systematic review and meta-analysis (random-effects model); searches ran to February 2010",
+    finding:
+      "Purified thymus extracts (20 trials) did not improve overall survival (risk ratio 1.00; 95% CI 0.79 to 1.25), disease-free survival (0.97; 0.82 to 1.16) or tumour response (1.07; 0.92 to 1.25). For thymosin alpha-1 the pooled survival ratio was 1.21 (95% CI 0.94 to 1.56, P = 0.14), a trend that did not reach statistical significance. The extracts did lower the risk of severe infections during chemotherapy or radiotherapy (0.54; 0.38 to 0.78). Both kinds of product were well tolerated.",
+    caveat:
+      "Most included trials had at least a moderate risk of bias, and the extract results varied moderately to highly between trials. The authors call the infection result preliminary. Only six trials tested synthetic peptides (thymopentin or thymosin alpha-1), so the thymosin alpha-1 estimate rests on a handful of trials at most. The review covers adults with cancer on standard treatment, so it says nothing about immune support in healthy people or other illnesses, and it does not include trials after February 2010.",
+    funding:
+      "The authors certify no affiliation with, or involvement in, any organisation with a direct financial interest in the subject of the review.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "cordero-1999",
+    authors: "Cordero OJ, Piñeiro A, Nogueira M",
+    year: 1999,
+    title: "Thymic peptides and preparations: an update.",
+    journal: "Arch Immunol Ther Exp (Warsz)",
+    ref: "47(2):77–82",
+    pmid: "10202559",
+    kind: "review",
+    topics: ["immune"],
+    peptides: ["thymic-peptides"],
+    delivery: [],
+    population: "Literature on thymic peptides and thymus preparations up to 1999",
+    design: "Narrative review",
+    finding:
+      "A 1999 overview of thymic peptides and preparations. Its abstract says only that the possible human uses were still being worked out, and that the paper covers the peptides' general characteristics and recent advances.",
+    caveat:
+      "The abstract reports no results, so nothing here shows that any thymic peptide works in people. It is a narrative review from 1999 and cannot reflect later trials.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "zhukova-2018",
+    authors: "Zhukova GV, Schikhlyarova AI, Barteneva TA, Shevchenko AN, Zakharyuta FM",
+    year: 2018,
+    title: "Effect of Thymalin on the Tumor and Thymus under Conditions of Activation Therapy In Vivo.",
+    journal: "Bull Exp Biol Med",
+    ref: "165(1):80–83",
+    pmid: "29797130",
+    doi: "10.1007/s10517-018-4104-z",
+    kind: "animal",
+    topics: ["immune"],
+    peptides: ["thymalin"],
+    delivery: [],
+    population: "Outbred male albino rats with transplanted sarcoma 45; number of animals not given in the abstract",
+    design: "Animal experiment with tissue analysis of the thymus",
+    dose: "Thymalin at doses below the therapeutic dose, varied during the course",
+    finding:
+      "In rats with a transplanted tumour, low-dose Thymalin stopped tumour growth and caused regression in more than half of the animals, and suppressed growth by 78% in the rest. Thymus tissue showed more lymphocyte proliferation and more tissue basophils and plasma cells. The authors credit the low doses, adjusted during the course under their 'activation therapy' regimen.",
+    caveat:
+      "A study in rats with a transplanted tumour, so it does not show an effect in people. The abstract does not describe a comparison group or give the number of animals, and the explanation offered for the result is the authors' interpretation.",
+    verifiedOn: "2026-11-09",
+  },
+  {
+    id: "wang-2018",
+    authors: "Wang F, Yu T, Zheng H, Lao X",
+    year: 2018,
+    title:
+      "Thymosin Alpha1-Fc Modulates the Immune System and Down-regulates the Progression of Melanoma and Breast Cancer with a Prolonged Half-life.",
+    journal: "Sci Rep",
+    ref: "8(1):12351",
+    pmid: "30120362",
+    pmcid: "PMC6097990",
+    doi: "10.1038/s41598-018-30956-y",
+    kind: "animal",
+    topics: ["immune"],
+    peptides: ["thymosin-alpha-1"],
+    delivery: [],
+    population: "Mice, including mouse breast cancer (4T1) and melanoma (B16F10) tumour models; numbers not given in the abstract",
+    design: "Laboratory engineering of a thymosin alpha-1 fusion protein (joined to the Fc part of human IgG4), then mouse experiments",
+    finding:
+      "The authors made a longer-lasting form of thymosin alpha-1 by attaching an antibody fragment. In mice its serum half-life was 25 hours, about 13 times that of thymosin alpha-1. They report it restored lymphocyte counts after immune injury and slowed tumour growth in the two mouse models, with more CD86, interferon-gamma and interleukin-2 and more tumour-infiltrating CD4+ and CD8+ T cells.",
+    caveat:
+      "A mouse study of a new engineered molecule, not of thymosin alpha-1 itself, so it is not evidence about the peptide that people are given. The abstract gives no animal numbers, and the authors present it as information for developing new cancer immunotherapy, not as a clinical result.",
+    funding:
+      "The record lists non-U.S. government research support. The authors declare no competing interests.",
     verifiedOn: "2026-11-09",
   },
 ];
