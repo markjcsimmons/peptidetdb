@@ -160,7 +160,10 @@ export default function PeptidesPillarPage() {
               <Link href="/science/topics/joints" className="link">
                 joints
               </Link>
-              . For fish-derived peptides specifically, see{" "}
+              . More: <Link href="/peptides/collagen-peptides-benefits" className="link">collagen peptide benefits</Link>,{" "}
+              <Link href="/peptides/collagen-peptides-side-effects" className="link">side effects</Link> and{" "}
+              <Link href="/peptides/marine-vs-bovine-collagen" className="link">marine vs bovine</Link>. For fish-derived
+              peptides specifically, see{" "}
               <Link href="/peptides/oral-marine-peptides" className="link">
                 Do oral marine peptides work?
               </Link>
@@ -202,6 +205,10 @@ export default function PeptidesPillarPage() {
           injection and of how the product was made. See{" "}
           <Link href="/peptides/how-peptides-work" className="link">
             how peptides work
+          </Link>
+          . To check what is actually in a product, see{" "}
+          <Link href="/peptides/how-to-read-a-peptide-coa" className="link">
+            how to read a certificate of analysis
           </Link>
           .
         </p>

@@ -48,7 +48,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "Oral collagen peptides",
         level: "consistent",
-        why: "Two large meta-analyses of randomised trials (19 trials with 1,125 people; 26 trials with 1,721 people) report better skin hydration and elasticity than placebo. The 2023 analysis found biases in the included trials, so the direction is consistent but the size of the effect is uncertain.",
+        why: "Two large meta-analyses of randomised trials (19 trials with 1,125 people; 26 trials with 1,721 people) report better skin hydration and elasticity than placebo. The 2023 analysis found biases in the included trials, and a 2026 systematic review of 25 trials rated most as high risk of bias (hydration improved in 10 of 15 trials, elasticity in 10 of 13, wrinkles in 9 of 10), so the direction is consistent but the size of the effect is uncertain.",
       },
       {
         subject: "Oral marine (fish-derived) collagen peptides",
@@ -65,7 +65,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "No controlled trial of a topical GHK-Cu product is summarised here yet.",
       "No head-to-head trial of marine versus bovine collagen is summarised here.",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-10",
   },
   muscle: {
     slug: "muscle",
@@ -186,7 +186,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
     measures: "benefit",
     title: "Thymic peptides for immune function",
     intro:
-      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, trials and a meta-analysis of thymosin alpha-1 given by injection in hospital patients (sepsis, pancreatitis, COVID-19), a 2024 advocacy-style review, a 1999 narrative review and two animal experiments. This page is about thymus-derived products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
+      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, trials and meta-analyses of thymosin alpha-1 given by injection in hospital and clinic patients (sepsis, pancreatitis, COVID-19, COPD flare-ups, hepatitis B), a 2024 advocacy-style review, a 1999 narrative review and two animal experiments. This page is about thymus-derived products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
     ratings: [
       {
         subject: "Thymus extracts added to cancer treatment",
@@ -209,20 +209,35 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "An earlier trial of 361 patients with severe sepsis found fewer deaths at 28 days on thymosin alpha-1 (26% vs 35%), but the result was borderline and the interval included no effect. A later placebo-controlled trial of 1,106 adults found no difference (23.4% vs 24.1%). Both were run in China and both gave the peptide as hospital treatment.",
       },
       {
-        subject: "Injected thymosin alpha-1 for severe acute pancreatitis and COVID-19",
+        subject: "Injected thymosin alpha-1 for severe acute pancreatitis",
+        level: "mixed",
+        why: "A 508-patient placebo-controlled trial found no reduction in infected pancreatic necrosis. A meta-analysis of five trials (706 patients) found fewer infections outside the pancreas and better T-cell counts, with the authors asking for more research. The two do not clearly agree.",
+      },
+      {
+        subject: "Injected thymosin alpha-1 for COVID-19",
         level: "limited",
-        why: "A 508-patient placebo-controlled trial in severe acute pancreatitis found no reduction in infected necrosis. A meta-analysis of eight COVID-19 studies reports lower mortality (risk ratio 0.59), but with very high variation between studies, and its authors say randomised trials are needed.",
+        why: "A meta-analysis of eight studies reports lower mortality (risk ratio 0.59), but with very high variation between studies, and its authors say randomised trials are needed.",
+      },
+      {
+        subject: "Injected thymosin alpha-1 added to usual care in COPD flare-ups",
+        level: "consistent",
+        why: "A meta-analysis of 39 randomised trials (3,329 patients) found better lung function and blood gases, a shorter hospital stay and higher CD4 T-cell counts than routine treatment alone. The abstract does not describe trial quality or give survival or flare-up outcomes, the authors ask for more high-quality trials, and the evidence comes from hospital treatment of flare-ups, not prevention.",
+      },
+      {
+        subject: "Injected thymosin alpha-1 for hepatitis B",
+        level: "mixed",
+        why: "An open-label trial in 120 patients with hepatitis B-related liver failure found better transplant-free survival at 90 days (75% vs 53%), though a competing-risk analysis found no significant survival difference. A meta-analysis of seven trials in cirrhosis found an early advantage over entecavir alone that was gone by 48 to 52 weeks, and a small trial of 51 patients found no benefit from adding it to peginterferon.",
       },
       {
         subject: "Thymus extracts or peptides for infection prevention, allergies, vaccine response and healthy adults",
         level: "unassessed",
-        why: "None of the trials summarised here tests these uses, and none tests an oral or over-the-counter thymus product. Our PubMed search also turned up thymosin alpha-1 trials in hepatitis B, COPD flare-ups and other conditions that are not yet summarised. This is a gap in our coverage, not a finding that no trial exists.",
+        why: "None of the trials summarised here tests these uses, and none tests an oral or over-the-counter thymus product. Our PubMed search also turned up thymosin alpha-1 trials of vaccine response in older adults and other conditions that are not yet summarised. This is a gap in our coverage, not a finding that no trial exists.",
       },
     ],
     gaps: [
       "The Cochrane review's searches ended in February 2010. Later cancer-care trials of thymosin alpha-1 are not summarised here.",
-      "Trials of thymosin alpha-1 in hepatitis B, COPD flare-ups, vaccine response in older adults and other conditions turned up in our PubMed search but are not summarised yet.",
-      "Every human trial here gave thymosin alpha-1 by injection in a hospital or clinic. None tests an oral or over-the-counter thymus product, and the sepsis and pancreatitis results do not transfer to healthy people.",
+      "Trials of thymosin alpha-1 for vaccine response in older adults and other conditions turned up in our PubMed search but are not summarised yet, and the hepatitis B and COPD entries cover only some of the trials found.",
+      "The recent thymosin alpha-1 trials here are of hospital or clinic treatment, mostly by injection. None tests an oral or over-the-counter thymus product, and the sepsis and pancreatitis results do not transfer to healthy people.",
       "Several of the trials report grants or fees from SciClone Pharmaceuticals; see each study page for the stated funding.",
       "Legal and regulatory status, including thymosin alpha-1, is not part of these ratings; it has its own dated page (see Legal status).",
     ],
@@ -243,14 +258,25 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "Other unapproved research peptides (CJC-1295, ipamorelin, MK-677, TB-500 and others)",
         level: "limited",
-        why: "Two recent reviews say rigorous human safety data are scarce. One documents cardiovascular and metabolic risks, naming MK-677 and congestive heart failure.",
+        why: "Three recent reviews say rigorous human safety data are scarce. One documents cardiovascular and metabolic risks, naming MK-677 and congestive heart failure; another lists contamination, impurities and inaccurate dosing as risks of the unregulated injectable market.",
+      },
+      {
+        subject: "Oral collagen peptides (general tolerability)",
+        level: "limited",
+        why: "A 2026 systematic review of 25 randomised trials, mostly in healthy volunteers, reports that hydrolysed collagen was generally well tolerated with a low rate of adverse events. The trials were designed to measure benefit, most were rated at high risk of bias, and no long-term or dedicated safety study is summarised here.",
+      },
+      {
+        subject: "Fish-derived collagen for people with fish allergy",
+        level: "limited",
+        why: "A case report describes anaphylaxis in a 9-year-old with fish allergy after fish-collagen gummy tablets, confirmed by a challenge test, and a laboratory study found heating does not remove fish collagen's reactivity with allergic patients' antibodies. These show a risk exists for people with fish allergy; they do not say how common it is.",
       },
     ],
     gaps: [
       "Legal and regulatory status is not part of these ratings; it has its own dated page (see Legal status).",
-      "Safety of oral collagen and marine peptide supplements is not summarised here yet.",
+      "Contaminants (heavy metals, microbes) in collagen and marine peptide supplements: we found no study, so the supplements' product quality is not rated here. See the COA guide for how to check a specific batch.",
+      "Drug interactions, pregnancy and long-term safety of oral collagen and marine peptide supplements are not summarised here yet.",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-10",
   },
 };
 
