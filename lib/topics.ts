@@ -186,7 +186,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
     measures: "benefit",
     title: "Thymic peptides for immune function",
     intro:
-      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, a 1999 narrative review and two animal experiments. This page is about thymus-derived products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
+      "Extracts and peptides from the thymus, the gland where T cells mature, are marketed to support or 'boost' immunity. The studies in this hub are a Cochrane review in cancer patients, trials and a meta-analysis of thymosin alpha-1 given by injection in hospital patients (sepsis, pancreatitis, COVID-19), a 2024 advocacy-style review, a 1999 narrative review and two animal experiments. This page is about thymus-derived products, not oral marine peptides, for which our search found no human immune trials (see the oral marine peptides page).",
     ratings: [
       {
         subject: "Thymus extracts added to cancer treatment",
@@ -204,17 +204,29 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "In rats, low-dose Thymalin slowed or reversed a transplanted tumour. In mice, a long-acting engineered form of thymosin alpha-1 (joined to an antibody fragment) slowed two tumour models and raised T-cell numbers. Neither was tested in people, and the second is a different molecule from thymosin alpha-1.",
       },
       {
-        subject: "Thymus extracts or peptides outside cancer care (infections, allergies, vaccine response, healthy adults)",
+        subject: "Injected thymosin alpha-1 for sepsis",
+        level: "mixed",
+        why: "An earlier trial of 361 patients with severe sepsis found fewer deaths at 28 days on thymosin alpha-1 (26% vs 35%), but the result was borderline and the interval included no effect. A later placebo-controlled trial of 1,106 adults found no difference (23.4% vs 24.1%). Both were run in China and both gave the peptide as hospital treatment.",
+      },
+      {
+        subject: "Injected thymosin alpha-1 for severe acute pancreatitis and COVID-19",
+        level: "limited",
+        why: "A 508-patient placebo-controlled trial in severe acute pancreatitis found no reduction in infected necrosis. A meta-analysis of eight COVID-19 studies reports lower mortality (risk ratio 0.59), but with very high variation between studies, and its authors say randomised trials are needed.",
+      },
+      {
+        subject: "Thymus extracts or peptides for infection prevention, allergies, vaccine response and healthy adults",
         level: "unassessed",
-        why: "The hub holds no trial of thymic products outside cancer care yet, so it says nothing about these uses. That is a gap in our coverage, not a finding that no trial exists.",
+        why: "None of the trials summarised here tests these uses, and none tests an oral or over-the-counter thymus product. Our PubMed search also turned up thymosin alpha-1 trials in hepatitis B, COPD flare-ups and other conditions that are not yet summarised. This is a gap in our coverage, not a finding that no trial exists.",
       },
     ],
     gaps: [
-      "The Cochrane review's searches ended in February 2010; later trials of thymosin alpha-1 are not summarised here.",
-      "No trial of thymic extracts or peptides for infections, allergies, vaccine response or healthy ageing is summarised here yet.",
+      "The Cochrane review's searches ended in February 2010. Later cancer-care trials of thymosin alpha-1 are not summarised here.",
+      "Trials of thymosin alpha-1 in hepatitis B, COPD flare-ups, vaccine response in older adults and other conditions turned up in our PubMed search but are not summarised yet.",
+      "Every human trial here gave thymosin alpha-1 by injection in a hospital or clinic. None tests an oral or over-the-counter thymus product, and the sepsis and pancreatitis results do not transfer to healthy people.",
+      "Several of the trials report grants or fees from SciClone Pharmaceuticals; see each study page for the stated funding.",
       "Legal and regulatory status, including thymosin alpha-1, is not part of these ratings; it has its own dated page (see Legal status).",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-10",
   },
   safety: {
     slug: "safety",

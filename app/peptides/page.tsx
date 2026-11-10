@@ -22,7 +22,11 @@ const FAQ: { q: string; a: React.ReactNode; text: string }[] = [
       <>
         No. Peptides are chains of amino acids; anabolic steroids are a different chemical class of hormones. People
         mix them up because both come up in sport, and some peptides, BPC-157 for example, are banned in professional
-        sport (<PaperLink id="vasireddi-2025" via="pmc">noted in a 2025 systematic review</PaperLink>).
+        sport (<PaperLink id="vasireddi-2025" via="pmc">noted in a 2025 systematic review</PaperLink>).{" "}
+        <Link href="/peptides/are-peptides-steroids" className="link">
+          More on peptides and steroids
+        </Link>
+        .
       </>
     ),
   },
@@ -229,6 +233,11 @@ export default function PeptidesPillarPage() {
           </li>
         </ul>
         <p className="mt-4">
+          <Link href="/peptides/what-do-peptides-do" className="link-solo">
+            What do peptides do? Evidence by use
+          </Link>
+        </p>
+        <p className="mt-2">
           <Link href="/science" className="link-solo">
             Browse all studies
           </Link>
