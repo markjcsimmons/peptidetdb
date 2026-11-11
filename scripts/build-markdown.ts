@@ -48,6 +48,9 @@ function sitemapPaths(): string[] {
 const htmlFile = (path: string) => join(APP_DIR, path === "/" ? "index.html" : `${path}.html`);
 const mdFile = (path: string) => join(PUBLIC_DIR, path === "/" ? "index.md" : `${path.slice(1)}.md`);
 
+/** Pages deliberately not listed in llms.txt: the home page is the file's own subject, /data is covered by its CSV/JSON links. */
+const LLMS_EXEMPT = new Set(["/", "/data"]);
+
 const OPEN = "\uE000";
 const CLOSE = "\uE001";
 
@@ -161,6 +164,27 @@ function main() {
     const path = "/" + rel.replace(/\.html$/, "").replace(/^index$/, "");
     if (!pageSet.has(path === "/" ? "/" : path)) problems.push(`${path}: prerendered but missing from app/sitemap.ts (so no markdown version)`);
   }
+
+  // Every static route in the app must be in the sitemap (a route that is rendered on demand has no prerendered
+  // HTML, so the loop above would never see it). Dynamic [param] routes are covered by their prerendered HTML.
+  const manifest = JSON.parse(readFileSync(join(ROOT, ".next", "server", "app-paths-manifest.json"), "utf8")) as Record<string, string>;
+  for (const route of Object.keys(manifest)) {
+    if (!route.endsWith("/page") || route.includes("[") || route.startsWith("/_")) continue;
+    const path = route === "/page" ? "/" : route.slice(0, -"/page".length);
+    if (!pageSet.has(path)) problems.push(`${path}: a page route that is not in app/sitemap.ts (add it, or it gets no markdown version)`);
+  }
+
+  // Every page must be listed in /llms.txt (the agents' entry point), except those exempted here.
+  const llmsFile = join(APP_DIR, "llms.txt.body");
+  if (existsSync(llmsFile)) {
+    const llms = readFileSync(llmsFile, "utf8");
+    for (const path of paths) {
+      if (LLMS_EXEMPT.has(path)) continue;
+      if (!new RegExp(`https?://[^/\\s)]+${path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\.md`).test(llms)) {
+        problems.push(`${path}: not linked from /llms.txt (add it to app/llms.txt/route.ts)`);
+      }
+    }
+  } else problems.push("llms.txt was not prerendered, so its links could not be checked");
 
   if (problems.length > 0) {
     console.error(`\nbuild-markdown: ${problems.length} problem(s):\n- ${problems.join("\n- ")}\n`);

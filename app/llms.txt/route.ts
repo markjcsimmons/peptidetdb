@@ -64,6 +64,7 @@ export function GET() {
   lines.push(
     "## Trust and data",
     "",
+    `- [Study hub](${SITE.url}/science): all ${STUDIES.length} study summaries, filterable by topic, peptide and design.`,
     `- [Methodology](${SITE.url}/science/methodology)`,
     `- [Editorial policy](${SITE.url}/editorial-policy)`,
     `- [Corrections log](${SITE.url}/corrections)`,
