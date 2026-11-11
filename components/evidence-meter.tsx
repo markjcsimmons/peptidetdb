@@ -33,6 +33,7 @@ export function EvidenceMeter({ level, size = "md", labelled = true }: { level: 
       role={labelled ? "img" : undefined}
       aria-label={labelled ? `Evidence level ${fill} of 5: ${LEVEL_LABEL[level]}` : undefined}
       aria-hidden={labelled ? undefined : true}
+      data-md-text={labelled ? `Evidence level ${fill} of 5 \u2014` : undefined}
     >
       {Array.from({ length: 5 }, (_, i) => (
         <span

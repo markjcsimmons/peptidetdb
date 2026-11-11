@@ -46,7 +46,7 @@ export function StudyExplorer({ studies }: { studies: Study[] }) {
 
   return (
     <section aria-label="Study explorer">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-md-skip>
         <label className="block text-sm">
           <span className="mb-1 block text-muted">Search</span>
           <input
@@ -96,7 +96,7 @@ export function StudyExplorer({ studies }: { studies: Study[] }) {
         </label>
       </div>
 
-      <p className="mt-4 text-sm text-muted" aria-live="polite">
+      <p className="mt-4 text-sm text-muted" aria-live="polite" data-md-skip>
         Showing {shown.length} of {studies.length} studies
         {active ? (
           <>

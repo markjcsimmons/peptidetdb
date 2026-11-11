@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "tsx scripts/build-markdown.ts",
+    "markdown": "tsx scripts/build-markdown.ts",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "study:fetch": "tsx scripts/fetch-study.ts",
@@ -23,6 +25,8 @@
     "@types/react-dom": "^19.0.3",
     "autoprefixer": "^10.4.20",
     "fast-xml-parser": "^4.5.1",
+    "node-html-markdown": "^2.0.0",
+    "node-html-parser": "^9.0.7",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",

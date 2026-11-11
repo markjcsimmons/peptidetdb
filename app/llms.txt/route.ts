@@ -9,6 +9,11 @@ export const dynamic = "force-static";
 export function GET() {
   const lines: string[] = [];
   lines.push(`# ${SITE.name} (${SITE.fullName})`, "", `> ${SITE.description}`, "");
+  lines.push(
+    "Every page on this site has a markdown version: add .md to the page's URL (the home page is /index.md), or request the normal URL with the header `Accept: text/markdown`. The links below point to the markdown versions.",
+    `All pages in one file: ${SITE.url}/llms-full.txt`,
+    "",
+  );
   lines.push("## About", "", SITE.disclosure, "", SITE.disclaimer, "");
   lines.push(
     "## Evidence by topic",
@@ -67,5 +72,7 @@ export function GET() {
     `- [Study registry as CSV](${SITE.url}/data/studies.csv) and [JSON](${SITE.url}/data/studies.json)`,
     "",
   );
-  return new Response(lines.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8" } });
+  // Point page links at their markdown versions (page paths have no dot; /data/studies.csv and the like keep theirs).
+  const text = lines.join("\n").replace(new RegExp(`${SITE.url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(/[^\\s)./]+(?:/[^\\s)./]+)*)(?=[)\\s])`, "g"), `${SITE.url}$1.md`);
+  return new Response(text, { headers: { "content-type": "text/plain; charset=utf-8" } });
 }
