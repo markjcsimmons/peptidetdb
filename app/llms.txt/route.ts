@@ -2,6 +2,7 @@ import { SITE } from "@/lib/site";
 import { KIND_LABEL, PEPTIDE_LABEL, STUDIES, shortCite } from "@/lib/studies";
 import { LEVEL_LABEL, TOPICS, TOPIC_SLUGS } from "@/lib/topics";
 import { LEGAL_REVIEWED } from "@/lib/legal-status";
+import { COLLAGEN_CHECKED_ON } from "@/lib/product-checks";
 
 export const dynamic = "force-static";
 
@@ -38,6 +39,7 @@ export function GET() {
     `- [What do peptides do?](${SITE.url}/peptides/what-do-peptides-do): what human studies show for skin, muscle, joints, blood pressure, brain and immune function, with the best and least-supported rating for each.`,
     `- [Are peptides steroids?](${SITE.url}/peptides/are-peptides-steroids): why peptides and anabolic steroids are different substances, what the muscle studies show, and why that does not make a peptide safe.`,
     `- [Collagen peptides: what the evidence shows](${SITE.url}/peptides/collagen-peptides): what collagen peptides are, what trials show for skin, muscle and joints, safety, and how to check a product.`,
+    `- [Collagen peptides with published batch test results](${SITE.url}/peptides/best-collagen-peptides): which of 15 collagen brands publish batch-specific lab reports (three do), which are listed by NSF without a batch report, and which testing claims could not be verified. Documents checked ${COLLAGEN_CHECKED_ON}; not a product grade.`,
     `- [Peptides for muscle growth](${SITE.url}/peptides/peptides-for-muscle-growth): collagen with resistance training, collagen vs whey, MK-677, and what reviews say about ipamorelin, CJC-1295 and BPC-157.`,
     `- [BPC-157: what the studies show](${SITE.url}/peptides/bpc-157): mostly animal evidence, three small uncontrolled human studies (30 people), no randomised trial found, oral use, safety, product quality and 2026 legal status.`,
     `- [KPV peptide: what the studies show](${SITE.url}/peptides/kpv): laboratory and mouse studies, no human trial found, and its July 2026 FDA advisory committee review.`,

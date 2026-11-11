@@ -49,11 +49,15 @@ export default function AboutPage() {
           <li>It does not give medical or legal advice or recommend that you use any peptide.</li>
           <li>It does not sell products.</li>
           <li>
-            It does not currently grade or rank any products. A draft grading rubric is published first, at{" "}
+            It does not grade or score any products. A draft grading rubric is published first, at{" "}
             <Link href="/grading-rubric" className="link">
               /grading-rubric
             </Link>
-            .
+            . One page,{" "}
+            <Link href="/peptides/best-collagen-peptides" className="link">
+              collagen peptides with published batch test results
+            </Link>
+            , records which collagen brands publish lab reports; it lists documents we found and is not a grade.
           </li>
         </ul>
       </section>

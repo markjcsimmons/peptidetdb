@@ -17,7 +17,9 @@ const sections: { h: string; body: React.ReactNode }[] = [
       <p>
         Peptides and the scientific evidence about them: collagen and other oral peptides, skin-care peptides, and
         unapproved compounds sold for injury recovery or performance, plus the regulatory picture for the latter.
-        Products are not graded or ranked yet; a draft rubric is published at /grading-rubric before any product is graded.
+        Products are not graded or scored yet; a draft rubric is published at /grading-rubric before any product is graded.
+        The collagen page at /peptides/best-collagen-peptides records which brands publish batch lab reports and which
+        certifications we could verify, with a link to each document; it is a documentation check, not a grade.
       </p>
     ),
   },
