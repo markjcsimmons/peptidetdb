@@ -180,6 +180,7 @@ export default function CollagenBenefitsPage() {
             { href: "/peptides/marine-vs-bovine-collagen", label: "Marine vs bovine collagen" },
             { href: "/peptides/how-to-read-a-peptide-coa", label: "How to read a peptide COA" },
             { href: "/peptides/best-collagen-peptides", label: "Collagen brands with batch test results" },
+            { href: "/peptides/best-peptides-for-skin", label: "Best peptides for skin, ranked" },
           ].map((l) => (
             <Link
               key={l.href}

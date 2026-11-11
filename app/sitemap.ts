@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/how-to-read-a-peptide-coa", "2026-11-10"),
     stat("/peptides/collagen-peptides", "2026-11-10"),
     stat("/peptides/best-collagen-peptides", COLLAGEN_CHECKED_ON),
+    stat("/peptides/best-peptides-for-skin", TOPICS.skin.reviewedOn),
     stat("/peptides/peptides-for-muscle-growth", "2026-11-10"),
     stat("/peptides/bpc-157", "2026-11-10"),
     stat("/peptides/kpv", "2026-11-10"),

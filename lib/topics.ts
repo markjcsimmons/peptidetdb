@@ -43,7 +43,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
     measures: "benefit",
     title: "Peptides for skin & anti-aging",
     intro:
-      "Two kinds of peptide are marketed for skin: collagen peptides you swallow, and peptides such as GHK-Cu you apply to the skin. The evidence is very different for each.",
+      "Two kinds of peptide are marketed for skin: collagen peptides you swallow, and cosmetic peptides such as argireline and GHK-Cu that you apply to the skin. The evidence is very different for each.",
     ratings: [
       {
         subject: "Oral collagen peptides",
@@ -56,16 +56,23 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "Two randomised trials of fish-derived collagen peptides report better wrinkle, elasticity, cellulite and hair results. One gives no sample size or dose, and several of its results are changes from baseline or self-rated scores. The 2023 meta-analysis above found that the size of the hydration effect varied with the collagen source.",
       },
       {
+        subject: "Topical cosmetic peptides (argireline, palmitoyl peptides and similar)",
+        level: "limited",
+        why: "Small, short trials report improvements in wrinkle and roughness measures: 60 people for 4 weeks with argireline, 24 people in four groups with two other peptides, and a 12-week palmitoyl-RGD cream study whose abstract gives no sample size. A 2026 meta-analysis of oral and topical peptides found a modest wrinkle effect, but it says the benefit was largely driven by oral peptides and does not report topical products separately. A review of argireline notes that it may not cross the skin well.",
+      },
+      {
         subject: "Topical GHK-Cu (copper peptide)",
-        level: "unassessed",
-        why: "The hub holds one review of GHK and no controlled human trial of a GHK-Cu product yet. A review's summary of cosmetic benefits is not the same as a trial result.",
+        level: "limited",
+        why: "One small randomised trial (13 patients completing, after laser resurfacing) found no objective difference in redness, wrinkles or skin quality with GHK-Cu products, only higher patient satisfaction. A 2025 review says clinical studies of GHK-Cu and its palmitoyl form are surprisingly absent, and that the case for it rests mostly on cell studies. Whether injected or ingested GHK-Cu does anything for skin is not covered by these studies.",
       },
     ],
     gaps: [
-      "No controlled trial of a topical GHK-Cu product is summarised here yet.",
       "No head-to-head trial of marine versus bovine collagen is summarised here.",
+      "We did not search for trials comparing a topical peptide with an established treatment such as a retinoid, so none is summarised here.",
+      "The 2026 peptide meta-analysis does not separate topical from oral results in its abstract; the full text may.",
+      "The PubMed records of four of the topical-peptide trials carry no funding or conflict statement, so who paid for them is unknown from the abstracts.",
     ],
-    reviewedOn: "2026-11-10",
+    reviewedOn: "2026-11-11",
   },
   muscle: {
     slug: "muscle",
