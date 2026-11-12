@@ -49,6 +49,12 @@ export const GLOSSARY: Term[] = [
     term: "Narrative or scoping review",
     definition: "A review that summarises or maps the literature without pooling results. It generates no new data.",
   },
+  {
+    id: "uncontrolled-study",
+    term: "Uncontrolled study",
+    definition:
+      "A study with no comparison group, such as a pilot study, case series or chart review. Without a comparison it cannot show whether a change was caused by the treatment.",
+  },
   { id: "preclinical", term: "Preclinical", definition: "Research in animals or cells, before testing in people. Results often do not carry over to people." },
   { id: "sarcopenia", term: "Sarcopenia", definition: "Age-related loss of muscle mass and strength." },
   {

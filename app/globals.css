@@ -16,6 +16,8 @@
   --soft: #3a4352;
   --line: #e0e3dc;
   --track: #d5dad2;
+  --mix-controlled: #6aa697;
+  --mix-uncontrolled: #b3d2c9;
   --accent: #1f6f5c;
   --accent-soft: #e3f0eb;
   --on-accent: #ffffff;
@@ -38,6 +40,8 @@
     --soft: #c3c9de;
     --line: #272d45;
     --track: #2c3350;
+    --mix-controlled: #3a8a75;
+    --mix-uncontrolled: #2b5c50;
     --accent: #55c2a3;
     --accent-soft: #14302a;
     --on-accent: #0f1320;
@@ -60,6 +64,8 @@
   --soft: #c3c9de;
   --line: #272d45;
   --track: #2c3350;
+  --mix-controlled: #3a8a75;
+  --mix-uncontrolled: #2b5c50;
   --accent: #55c2a3;
   --accent-soft: #14302a;
   --on-accent: #0f1320;

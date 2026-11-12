@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/json-ld";
 import { StudyCard } from "@/components/study-parts";
 import { TopicGuides } from "@/components/guide-links";
 import { StudyMix } from "@/components/study-mix";
+import { StudyTimeline } from "@/components/study-timeline";
 import { RatingsTable } from "@/components/ratings-table";
 import { PageContents } from "@/components/page-contents";
 import { CARD } from "@/components/ui";
@@ -68,6 +69,9 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
       />
       <div className="mt-5 rounded-tile border border-line bg-card px-5 py-4">
         <StudyMix studies={studies} title={`The ${studies.length} studies behind these ratings`} />
+        <div className="mt-6">
+          <StudyTimeline studies={studies} />
+        </div>
       </div>
       <TopicGuides topic={t.slug} />
 

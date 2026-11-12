@@ -5,6 +5,8 @@ import { PROFILE_FACTS } from "@/lib/profiles";
 import { formatDate } from "@/lib/format";
 import { RatingBadge } from "@/components/evidence-meter";
 import { StudyMix } from "@/components/study-mix";
+import { StudyTimeline } from "@/components/study-timeline";
+import { Term } from "@/components/term";
 import { ROUTE_LABEL } from "@/components/ranked-list";
 import { RouteIcon } from "@/components/route-icon";
 
@@ -12,6 +14,26 @@ function rating(topic: keyof typeof TOPICS, subject: string) {
   const r = TOPICS[topic].ratings.find((x) => x.subject === subject);
   if (!r) throw new Error(`lib/profiles.ts: "${subject}" is not a rating on the ${topic} topic page`);
   return r;
+}
+
+/** Wrap regulatory terms in a status line with their glossary pop-ups. */
+const TERMS: [RegExp, string][] = [
+  [/503A/, "503a"],
+  [/503B/, "503b"],
+  [/Category 2/, "category-2"],
+];
+function withTerms(text: string) {
+  const re = new RegExp(`(${TERMS.map(([r]) => r.source).join("|")})`);
+  return text.split(re).map((part, i) => {
+    const hit = TERMS.find(([r]) => r.test(part) && part.match(r)?.[0] === part);
+    return hit ? (
+      <Term key={i} id={hit[1]}>
+        {part}
+      </Term>
+    ) : (
+      part
+    );
+  });
 }
 
 const DT = "text-caption font-semibold uppercase tracking-[0.06em] text-muted";
@@ -49,7 +71,7 @@ export function ProfileFactsPanel({ path, reviewed }: { path: string; reviewed: 
         <div className={f.routes?.length ? "" : "sm:col-span-2"}>
           <dt className={DT}>US status (as of {formatDate(reviewed)})</dt>
           <dd className="mt-1 text-sm text-soft">
-            {f.status}{" "}
+            {withTerms(f.status)}{" "}
             <Link href="/peptides/legal-status" className="link">
               Dated sources
             </Link>
@@ -91,6 +113,9 @@ export function ProfileFactsPanel({ path, reviewed }: { path: string; reviewed: 
           <dt className="sr-only">Studies summarised</dt>
           <dd>
             <StudyMix studies={studies} title={`The ${studies.length} studies we summarised`} />
+            <div className="mt-6">
+              <StudyTimeline studies={studies} />
+            </div>
           </dd>
         </div>
       </dl>
