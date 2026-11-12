@@ -372,6 +372,7 @@ export default function BestPeptidesForSkinPage() {
             { href: "/science/topics/skin", label: "Full skin evidence and studies" },
             { href: "/peptides/collagen-peptides-benefits", label: "Collagen peptide benefits" },
             { href: "/peptides/best-collagen-peptides", label: "Collagen brands with batch test results" },
+            { href: "/peptides/peptides-for-hair-growth", label: "Peptides for hair growth, ranked" },
           ].map((l) => (
             <Link
               key={l.href}

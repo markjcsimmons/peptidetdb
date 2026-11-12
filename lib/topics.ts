@@ -74,6 +74,47 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-11",
   },
+  hair: {
+    slug: "hair",
+    measures: "benefit",
+    title: "Peptides for hair growth & hair loss",
+    intro:
+      "Hair claims cover scalp serums with cosmetic peptides, injections into the scalp, collagen you swallow and research peptides sold online. The human trials are mostly small and short, and many test a peptide mixed with other ingredients.",
+    ratings: [
+      {
+        subject: "Topical peptide products for hair loss (GPIGS, acetyl tetrapeptide-3 and similar)",
+        level: "limited",
+        why: "Small randomised trials report improvements: 22 men for 4 months with a penta-peptide lotion, 30 volunteers for 4 months with a plant extract plus peptide, and 32 people for 24 weeks with a herbal-and-peptide mix that matched 3% minoxidil with no placebo arm. A 2026 systematic review of 14 trials graded the recommendation B for some peptide formulations, but its abstract gives no sample sizes or effect sizes, and several products combine a peptide with other ingredients.",
+      },
+      {
+        subject: "Injected peptide formulations in the scalp (QR678 and similar)",
+        level: "limited",
+        why: "One single-blind randomised trial of 112 men found better regrowth and density when QR678 Neo was added to a hair transplant than with a conventional transplant, with no placebo injection. A 2026 systematic review of injected treatments says the evidence is limited by small studies, varied methods and short follow-up, and that randomised trials are needed.",
+      },
+      {
+        subject: "Oral collagen peptides for hair",
+        level: "limited",
+        why: "A 24-week placebo-controlled trial in 114 women reported a rise in hair shaft diameter, a 24-week trial in people with damaged hair but no hair loss reported better gloss and elasticity, and an 83-person trial found a collagen-and-amino-acid tablet added to drug treatment beat drugs alone. The last had no placebo, used a mixed supplement and was written by employees of its maker. No trial of collagen alone in hair loss is summarised.",
+      },
+      {
+        subject: "Thymosin beta-4 (TB-500)",
+        level: "preclinical",
+        why: "Rat and mouse experiments, and a review of animal work including cashmere goats, report that thymosin beta-4 speeds hair growth. We summarise no human hair trial of it.",
+      },
+      {
+        subject: "BPC-157",
+        level: "none",
+        why: "Our PubMed search for BPC-157 together with hair-loss terms found no study. That is not proof none exists.",
+      },
+    ],
+    gaps: [
+      "No head-to-head trial of a peptide against finasteride or minoxidil, apart from one 32-person trial against minoxidil with no placebo.",
+      "The abstracts of the topical and injected trials rarely give concentrations or group sizes, so a shop product cannot be matched to a trial.",
+      "Hair loss reported with GLP-1 weight-loss drugs is summarised in the weight topic (Cheng 2026), not rated here.",
+      "Biotin, minerals and other non-peptide supplements for hair are outside this site's scope.",
+    ],
+    reviewedOn: "2026-11-11",
+  },
   muscle: {
     slug: "muscle",
     measures: "benefit",

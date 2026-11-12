@@ -21,7 +21,7 @@ export type StudyKind =
   | "animal"
   | "in-vitro";
 
-export type Topic = "skin" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "safety";
+export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -32,6 +32,7 @@ export type PeptideId =
   | "tb-500"
   | "ghk-cu"
   | "cosmetic-peptides"
+  | "glp-1-agonists"
   | "cjc-1295"
   | "ipamorelin"
   | "mk-677"
@@ -106,6 +107,7 @@ export const KIND_HINT: Record<StudyKind, string> = {
 
 export const TOPIC_LABEL: Record<Topic, string> = {
   skin: "Skin & anti-aging",
+  hair: "Hair growth & loss",
   muscle: "Muscle & strength",
   joints: "Joints & tendons",
   "blood-pressure": "Blood pressure & vessels",
@@ -123,7 +125,8 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   "bpc-157": "BPC-157",
   "tb-500": "TB-500 / thymosin beta-4",
   "ghk-cu": "GHK-Cu (copper peptide)",
-  "cosmetic-peptides": "Cosmetic skin-care peptides",
+  "cosmetic-peptides": "Cosmetic skin and hair peptides",
+  "glp-1-agonists": "GLP-1 receptor agonists (drug class)",
   "cjc-1295": "CJC-1295",
   ipamorelin: "Ipamorelin",
   "mk-677": "MK-677 (ibutamoren)",
@@ -601,6 +604,278 @@ export const STUDIES: Study[] = [
     verifiedOn: "2026-11-11",
   },
 
+  // ── Hair: topical and injected peptides, oral collagen, thymosin beta-4 (added 2026-11-11) ──
+  {
+    id: "joerg-2026",
+    authors: "Joerg L, Zafar K, Jagdeo J",
+    year: 2026,
+    title: "Peptides for Hair Growth and Treatment of Hair Loss and Alopecia: A Systematic Review.",
+    journal: "J Drugs Dermatol",
+    ref: "25(11):1026–1032",
+    pmid: "42976838",
+    doi: "10.36849/JDD.9736",
+    kind: "systematic-review",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides", "ghk-cu"],
+    delivery: [],
+    population: "14 clinical trials of peptide-containing products for hair loss, picked from 981 records",
+    design: "Systematic review (PRISMA) of PubMed, Embase and the Cochrane Library, searched 3 November 2025, English-language human trials only",
+    finding:
+      "The authors give a grade B recommendation to formulations with acetyl tetrapeptide-3, biotinoyl tripeptide-1, GHK and the penta-peptide Gly-Pro-Ile-Gly-Ser, and grade C to QR678 and QR678 Neo. They conclude that peptide formulations, especially combinations of acetyl tetrapeptide-3, biotinoyl tripeptide-1 and GHK, are effective, well-tolerated alternatives to conventional hair-growth treatments.",
+    caveat:
+      "The abstract gives no sample sizes, effect sizes or comparison treatments, and does not say what the grades rest on, so it cannot tell you how much hair grew. Many of the products combine a peptide with other ingredients, so the peptide's own share is unknown. The abstract also calls peptide formulations 'established' and 'safe' without showing evidence for either, and its claim of being an alternative to conventional treatment is not backed by head-to-head results in the abstract (the one such trial we summarise is 32 people, Lueangarun 2020).",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "iwabuchi-2016",
+    authors: "Iwabuchi T, Takeda S, Yamanishi H, Ideta R, Ehama R, Tsuruda A, Shibata H, Ito T, Komatsu N, Terai K, Oka S",
+    year: 2016,
+    title: "The topical penta-peptide Gly-Pro-Ile-Gly-Ser increases the proportion of thick hair in Japanese men with androgenetic alopecia.",
+    journal: "J Cosmet Dermatol",
+    ref: "15(2):176–184",
+    pmid: "27030543",
+    doi: "10.1111/jocd.12216",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides"],
+    delivery: ["topical"],
+    population: "22 Japanese men with androgenetic alopecia (male-pattern hair loss), plus laboratory work on human hair cells and follicles",
+    design: "Double-blind, randomised lotion with or without the penta-peptide Gly-Pro-Ile-Gly-Ser (GPIGS)",
+    dose: "Lotion; concentration not given in the abstract",
+    duration: "4 months",
+    finding:
+      "Compared with placebo, the peptide lotion raised the proportion of thick hair (60 µm or more; p = 0.006), lowered the proportion of fine vellus hair (p = 0.029) and improved how balding looked when blinded reviewers graded photographs (p = 0.020). No adverse skin effects were noted. In the laboratory the peptide made human hair-follicle cells multiply and lengthened hair shafts in cultured follicles.",
+    caveat:
+      "Twenty-two men for 4 months is a small, short trial, and the abstract does not give how many were in each group or how much hair changed. It compares the peptide with a placebo lotion, not with minoxidil or finasteride, and it covers men only. The cell and follicle results are laboratory findings.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "loing-2013",
+    authors: "Loing E, Lachance R, Ollier V, Hocquaux M",
+    year: 2013,
+    title: "A new strategy to modulate alopecia using a combination of two specific and unique ingredients.",
+    journal: "J Cosmet Sci",
+    ref: "64(1):45–58",
+    pmid: "23449130",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides"],
+    delivery: ["topical"],
+    population: "30 volunteers with receding hair",
+    design: "Randomised, placebo-controlled; a cosmetic ingredient combining a red clover (Trifolium pratense) flower extract with a biomimetic peptide",
+    dose: "Applied daily to the scalp; concentration not given in the abstract",
+    duration: "4 months",
+    finding:
+      "In the treated group, anagen (growing-phase) hair rose by 13% on average, telogen (resting-phase) hair density fell by 29% and the anagen-to-telogen ratio rose by 46%, measured with TrichoScan. In the placebo group anagen hair fell by 2%, telogen density rose by 23% and the ratio fell by 33%. The authors report the combination blocked 5-alpha-reductase, reduced inflammation and stimulated matrix proteins near the follicle.",
+    caveat:
+      "The product is a mixture of a plant extract and a peptide, so the trial cannot say what the peptide did by itself. Thirty volunteers is small, the abstract does not give group sizes or a statistical test, and the authors developed the ingredient. The mechanism statements come from laboratory work, not from the trial.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "rinaldi-2019",
+    authors: "Rinaldi F, Marzani B, Pinto D, Sorbellini E",
+    year: 2019,
+    title: "Randomized controlled trial on a PRP-like cosmetic, biomimetic peptides based, for the treatment of alopecia areata.",
+    journal: "J Dermatolog Treat",
+    ref: "30(6):588–593",
+    pmid: "30513014",
+    doi: "10.1080/09546634.2018.1544405",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides"],
+    delivery: ["topical"],
+    population: "People with alopecia areata, an autoimmune condition that causes patchy hair loss (number not given in the abstract)",
+    design: "Randomised, double-blind, placebo- and active-controlled, parallel groups; a cosmetic product of biomimetic peptides designed to mimic platelet-rich plasma",
+    duration: "3 months of treatment, plus 1 month of follow-up",
+    finding:
+      "Hair regrowth on the SALT score improved significantly from baseline after 3 months (p < 0.001) with the peptide cosmetic, and improved further at 1 month of follow-up. The authors suggest it could be a safer alternative to platelet-rich plasma injections.",
+    caveat:
+      "The abstract gives no sample size, does not say what the active comparator was, and reports improvement from baseline instead of the difference from placebo or from the comparator, so it cannot show that the peptide product did better than either. The study does not test platelet-rich plasma itself, so 'safer alternative' is the authors' suggestion, not a result.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "gold-2025",
+    authors: "Gold M, Zaman UMSM, Chouksey V, Gosavi M",
+    year: 2025,
+    title: "Evaluation of the efficacy of a biomimetic peptide solution for rejuvenation of donor scalp and as storage media for hair follicle grafts during FUE hair transplantation.",
+    journal: "J Cosmet Laser Ther",
+    ref: "27(3):64–70",
+    pmid: "40228316",
+    doi: "10.1080/14764172.2025.2468499",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides"],
+    delivery: ["injectable"],
+    population: "112 men aged 25–50 with Norwood-Hamilton grade IV–VI androgenetic alopecia having hair transplantation",
+    design: "Prospective, single-blind, randomised: transplant with QR678 Neo (injected into the scalp and used to store grafts) versus a conventional transplant",
+    finding:
+      "By the final stage the QR678 Neo group had better regrowth, density and shaft diameter than the conventional-transplant group, with a global photographic score of 8.87 and a terminal hair count of 181.02 (p < 0.001). The authors call it a promising treatment option for androgenetic alopecia.",
+    caveat:
+      "This tests an add-on to hair-transplant surgery, not a stand-alone peptide treatment. The comparison group had a conventional transplant, with no placebo injection, and the study was single-blind. The abstract does not give the comparison group's results or who funded the work.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "lueangarun-2020",
+    authors: "Lueangarun S, Panchaprateep R",
+    year: 2020,
+    title:
+      "An Herbal Extract Combination (Biochanin A, Acetyl tetrapeptide-3, and Ginseng Extracts) versus 3% Minoxidil Solution for the Treatment of Androgenetic Alopecia: A 24-week, Prospective, Randomized, Triple-blind, Controlled Trial.",
+    journal: "J Clin Aesthet Dermatol",
+    ref: "13(10):32–37",
+    pmid: "33584955",
+    pmcid: "PMC7840088",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides"],
+    delivery: ["topical"],
+    population: "32 men and women with mild to moderate androgenetic alopecia (16 men, mean age 41)",
+    design: "Randomised, triple-blind comparison of a herbal-and-peptide combination with 3% minoxidil solution; no placebo group",
+    dose: "1 mL twice a day",
+    duration: "24 weeks",
+    finding:
+      "Terminal hair counts rose by 8.3% with the combination and 8.7% with 3% minoxidil, with no significant difference between them, and an expert panel judging photographs saw a response to both in most patients. No local reactions occurred with the combination; one person using minoxidil developed scalp eczema.",
+    caveat:
+      "Thirty-two people is too few to show that the two treatments are equally good: 'no significant difference' can also mean the study was too small to detect one. There was no placebo group, so it cannot show how much hair grows without treatment. The combination holds biochanin A and ginseng extracts as well as the peptide, so the peptide's own effect is unknown.",
+    funding: "The record states that no funding was provided and the authors have no conflicts of interest.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "milani-2023",
+    authors: "Milani M, Colombo F, GFM-O-Trial Investigators Group",
+    year: 2023,
+    title:
+      "Efficacy and tolerability of an oral supplement containing amino acids, iron, selenium, and marine hydrolyzed collagen in subjects with hair loss (androgenetic alopecia, AGA or FAGA or telogen effluvium). A prospective, randomized, 3-month, controlled, assessor-blinded study.",
+    journal: "Skin Res Technol",
+    ref: "29(6)",
+    pmid: "37357646",
+    pmcid: "PMC10240182",
+    doi: "10.1111/srt.13381",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["marine-collagen"],
+    delivery: ["oral"],
+    population: "83 people (26 men, 57 women; mean age 41) with androgenetic alopecia or chronic telogen effluvium",
+    design: "Randomised, assessor-blinded: a supplement plus drug treatment (48 people) versus drug treatment alone (35 people)",
+    dose: "One tablet a day with 300 mg hydrolysed fish collagen plus taurine, cysteine, methionine, iron and selenium",
+    duration: "12 weeks",
+    finding:
+      "On a 7-point global assessment of standardised photographs, the supplement group scored 1.67 at week 12 against 0.66 for drugs alone (p < 0.001), and 50% against 23% scored 2 or more. 76 of 83 people (91.6%) completed the study, and the supplement was generally well tolerated.",
+    caveat:
+      "A tablet that combines collagen with amino acids, iron and selenium, so the trial cannot say what the collagen did. The comparison group received drugs only, with no placebo tablet, and the outcome was a rating of photographs by an assessor. Everyone was also on drug treatment, so it tests an add-on, not collagen for hair loss by itself.",
+    funding: "Two authors are employees of the company that commercialised the supplement.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "kim-2026",
+    authors: "Kim TK, Oh J, Ha YS, Son HJ, Yang JS, Kim K, Her Y, Kim SK, Hwang S, Yang SR, Choi J, Kim SJ",
+    year: 2026,
+    title:
+      "Efficacy and Safety of Low-Molecular-Weight Collagen Peptide GT for Improving Hair Condition in Individuals with Damaged Hair: A Randomized, Double-Blind, Placebo-Controlled Trial.",
+    journal: "Int J Stem Cells",
+    ref: "",
+    pmid: "42624827",
+    doi: "10.15283/ijsc26035",
+    kind: "human-controlled",
+    topics: ["hair"],
+    peptides: ["collagen"],
+    delivery: ["oral"],
+    population: "Korean adults aged 19–60 with mild to moderate hair damage and no alopecia (number not given in the abstract)",
+    design: "Randomised, double-blind, placebo-controlled",
+    dose: "3 g a day of a low-molecular-weight collagen peptide (LMWCP GT)",
+    duration: "24 weeks",
+    finding:
+      "Compared with placebo, the collagen peptide group had better hair gloss, hair elasticity (tensile strength and diameter) and scalp elasticity, and rated their overall hair condition more highly. No treatment-related adverse events were observed.",
+    caveat:
+      "It tested damaged hair in people without hair loss, so it says nothing about regrowth or thinning. The abstract gives no sample size, no numbers for the changes and no funding statement, and the source of the collagen is not stated.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "cheng-2026",
+    authors: "Cheng PL, Chang HC",
+    year: 2026,
+    title: "Glucagon-like peptide-1 receptor agonists and hair loss: A systematic review and meta-analysis.",
+    journal: "Diabetes Res Clin Pract",
+    ref: "237:113333",
+    pmid: "42155605",
+    doi: "10.1016/j.diabres.2026.113333",
+    kind: "meta-analysis",
+    topics: ["hair", "weight"],
+    peptides: ["glp-1-agonists"],
+    delivery: [],
+    population: "9 interventional studies (7 randomised trials, 2 non-randomised) with 4,114 people using GLP-1 receptor agonists",
+    design: "Systematic review and random-effects meta-analysis of hair loss reported in trials of GLP-1 drugs",
+    finding:
+      "Hair loss was reported more often with GLP-1 drugs than with placebo (risk ratio 3.25, 95% CI 1.44 to 7.36), and 3.59 (2.10 to 6.12) when the analysis was limited to randomised trials in people with overweight or obesity. Among people given the drugs, 3.9% had hair loss.",
+    caveat:
+      "Hair loss here was an event reported in trials, not necessarily a measured outcome, and the abstract does not say which drugs or doses were used or whether hair grew back after stopping. It shows an association; it does not say why. The wide confidence intervals mean the size of the risk is uncertain.",
+    funding: "The record lists no grants; the authors declare no competing interests.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "beer-2026",
+    authors: "Beer J, Boghosian T, Mendez H, Sayegh M, Boghosian N, Tosti A",
+    year: 2026,
+    title: "Injectable Therapy for Androgenetic Alopecia: A Systematic Review.",
+    journal: "Dermatol Surg",
+    ref: "52(7):659–665",
+    pmid: "41603616",
+    doi: "10.1097/DSS.0000000000004999",
+    kind: "systematic-review",
+    topics: ["hair"],
+    peptides: ["cosmetic-peptides"],
+    delivery: ["injectable"],
+    population: "30 studies of injected (mesotherapy) treatments for androgenetic alopecia: 7 interventional, 11 observational, 12 descriptive reports",
+    design: "Systematic review (PRISMA) of PubMed, Embase and Scopus, searched July 2025 with the terms 'mesotherapy' and 'androgenetic alopecia'",
+    finding:
+      "Multivitamin and peptide formulations were the agents studied most often, followed by dutasteride, minoxidil, bicalutamide, growth factors and finasteride. Reported results ranged from more hair density and thicker shafts to less shedding. Side effects were generally mild but included paradoxical alopecia, scarring and acute dermatitis. The authors say injections may give a cosmetic benefit, particularly with dutasteride.",
+    caveat:
+      "The abstract gives no peptide-specific result, so it cannot say whether injected peptides work. Most of the included studies were not randomised, techniques varied and follow-up was short. The authors say randomised trials are needed before injections can be recommended as routine therapy.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "philp-2004",
+    authors: "Philp D, Nguyen M, Scheremeta B, St-Surin S, Villa AM, Orgel A, Kleinman HK, Elkin M",
+    year: 2004,
+    title: "Thymosin beta4 increases hair growth by activation of hair follicle stem cells.",
+    journal: "FASEB J",
+    ref: "18(2):385–387",
+    pmid: "14657002",
+    doi: "10.1096/fj.03-0244fje",
+    kind: "animal",
+    topics: ["hair"],
+    peptides: ["tb-500"],
+    delivery: [],
+    population: "Normal rats and mice, plus rat whisker-follicle cells grown in the laboratory",
+    design: "Animal and cell experiments with thymosin beta-4, a 43-amino-acid protein",
+    finding:
+      "Thymosin beta-4 stimulated hair growth in normal rats and mice. A subset of follicle cells that arise from the hair follicle's stem-cell region made the protein, and at nanomolar concentrations it increased the migration and differentiation of isolated follicle stem-cell-like cells and raised production of an enzyme that remodels the matrix around cells.",
+    caveat:
+      "Animals and cells, not people: the abstract reports no human hair data. It studies thymosin beta-4 itself and does not mention products sold online, so it cannot be used to judge them.",
+    verifiedOn: "2026-11-11",
+  },
+  {
+    id: "dai-2021",
+    authors: "Dai B, Sha RN, Yuan JL, Liu DJ",
+    year: 2021,
+    title: "Multiple potential roles of thymosin β4 in the growth and development of hair follicles.",
+    journal: "J Cell Mol Med",
+    ref: "25(3):1350–1358",
+    pmid: "33393222",
+    pmcid: "PMC7875905",
+    doi: "10.1111/jcmm.16241",
+    kind: "review",
+    topics: ["hair"],
+    peptides: ["tb-500"],
+    delivery: [],
+    design: "Narrative review of thymosin beta-4 in hair-follicle growth",
+    finding:
+      "The authors review evidence that the body's own thymosin beta-4 helps drive the mouse hair-follicle cycle and that giving it from outside speeds hair growth in mice and raises cashmere production in goats. They note that the molecular mechanisms have rarely been reported.",
+    caveat:
+      "A review of animal and cell work: the abstract describes no human studies, and its title says 'potential roles'. It does not show that thymosin beta-4 or any related product grows hair in people.",
+    funding: "The record lists a regional science and technology grant in Inner Mongolia; the authors declare no conflicts of interest.",
+    verifiedOn: "2026-11-11",
+  },
+
   // ── Oral marine (fish-derived) peptides ────────────────────────────────────
   {
     id: "evans-2021",
@@ -638,7 +913,7 @@ export const STUDIES: Study[] = [
     pmid: "41788055",
     doi: "10.1177/1096620X261428336",
     kind: "human-controlled",
-    topics: ["skin"],
+    topics: ["skin", "hair"],
     peptides: ["marine-collagen"],
     delivery: ["oral"],
     population: "114 women aged 20–50 with thigh cellulite and self-reported hair thinning",
