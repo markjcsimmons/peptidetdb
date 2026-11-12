@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { LEVEL_LABEL, type Level } from "@/lib/topics";
 import { CARD, Pill } from "@/components/ui";
 import { EvidenceMeter, RatingBadge, levelTone } from "@/components/evidence-meter";
+import { RouteIcon } from "@/components/route-icon";
 
 /** How an option is taken. Set only where the page itself makes the route plain; omit it otherwise. */
 export type Route = "oral" | "topical" | "injected" | "nasal";
@@ -34,13 +35,37 @@ function groups(options: RankedOption[]) {
   return out;
 }
 
+const ICON = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+
+function CheckIcon() {
+  return (
+    <svg {...ICON}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12.5 2.8 2.8L16.5 9.5" />
+    </svg>
+  );
+}
+
+function GapIcon() {
+  return (
+    <svg {...ICON}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.3" />
+      <path d="M12 16.8h.01" />
+    </svg>
+  );
+}
+
 function RoutePills({ routes }: { routes?: Route[] }) {
   if (!routes?.length) return null;
   return (
     <span className="flex flex-wrap gap-1.5">
       {routes.map((r) => (
         <Pill key={r} tone="neutral">
-          {ROUTE_LABEL[r]}
+          <span className="flex items-center gap-1.5">
+            <RouteIcon route={r} size={15} />
+            {ROUTE_LABEL[r]}
+          </span>
         </Pill>
       ))}
     </span>
@@ -161,14 +186,24 @@ export function RankedList({ options }: { options: RankedOption[] }) {
                 </div>
               </div>
             </div>
-            <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-              <strong className="text-fg">What the studies show.</strong> {o.shows}
-            </p>
-            <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-              <strong className="text-fg">What they do not show.</strong> {o.notShown}
-            </p>
+            <div className="mt-5 grid gap-3 md:grid-cols-2">
+              <div className="rounded-tile border border-line bg-bg p-4">
+                <p className="flex items-center gap-2 font-semibold text-accent">
+                  <CheckIcon />
+                  What the studies show
+                </p>
+                <p className="mt-2 text-soft [text-wrap:pretty]">{o.shows}</p>
+              </div>
+              <div className="rounded-tile border border-line bg-bg p-4">
+                <p className="flex items-center gap-2 font-semibold text-warn">
+                  <GapIcon />
+                  What they do not show
+                </p>
+                <p className="mt-2 text-soft [text-wrap:pretty]">{o.notShown}</p>
+              </div>
+            </div>
             {o.extra && (
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
+              <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
                 <strong className="text-fg">{o.extra.label}</strong> {o.extra.body}
               </p>
             )}

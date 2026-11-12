@@ -31,7 +31,7 @@ export function mixSentence(studies: Study[]) {
   const parts = mixCounts(studies)
     .filter((g) => g.n > 0)
     .map((g) => `${g.label.toLowerCase()}: ${g.n}`);
-  return `${studies.length} ${studies.length === 1 ? "study" : "studies"} summarised. ${parts.join("; ")}`;
+  return `${studies.length} ${studies.length === 1 ? "study" : "studies"} summarised (${parts.join("; ")})`;
 }
 
 /** "What kind of evidence is this?": one stacked bar of study designs, with a counted legend. */

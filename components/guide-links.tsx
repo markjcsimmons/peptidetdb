@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LEVEL_LABEL, TOPICS } from "@/lib/topics";
+import { LEVEL_LABEL, TOPICS, type Level, type TopicRating } from "@/lib/topics";
 import { PEPTIDE_LABEL, STUDIES, TOPIC_LABEL, type PeptideId, type Topic } from "@/lib/studies";
 import {
   GOALS,
@@ -13,7 +13,7 @@ import {
   type Goal,
 } from "@/lib/guides";
 import { CARD } from "@/components/ui";
-import { LEVEL_ORDER, RatingBadge } from "@/components/evidence-meter";
+import { LEVEL_ORDER, RatingBadge, levelTone } from "@/components/evidence-meter";
 
 const TILE_LINK =
   "flex h-full min-h-14 flex-col justify-center rounded-tile border border-line bg-bg px-[18px] py-3 hover:border-accent";
@@ -35,6 +35,47 @@ function bestAndWorst(goal: Goal) {
   return { ratings, assessed, best, worst, unassessed: ratings.length - assessed.length };
 }
 
+const SPREAD: { level: Level; short: string }[] = [
+  { level: "consistent", short: "Consistent" },
+  { level: "mixed", short: "Mixed" },
+  { level: "limited", short: "Limited" },
+  { level: "preclinical", short: "Animal" },
+  { level: "none", short: "None found" },
+];
+
+/**
+ * Small dot chart: one dot per rated option, in its level's row. Shows the whole spread of a goal's
+ * ratings at once, so a card never shows only its best option. "Not yet assessed" is counted in words, not drawn.
+ */
+export function LevelSpread({ ratings }: { ratings: TopicRating[] }) {
+  const counts = SPREAD.map((c) => ({ ...c, n: ratings.filter((r) => r.level === c.level).length }));
+  const unassessed = ratings.filter((r) => r.level === "unassessed").length;
+  const text = `Spread of ratings: ${counts
+    .filter((c) => c.n)
+    .map((c) => `${c.n} ${LEVEL_LABEL[c.level].toLowerCase()}`)
+    .join(", ")}${unassessed ? `, ${unassessed} not yet assessed` : ""}.`;
+  return (
+    <div role="img" aria-label={text} data-md-text={text} className="mt-4 rounded-tile border border-line bg-bg px-3 py-2.5">
+      <ul className="space-y-1">
+        {counts.map((c) => (
+          <li key={c.level} className="flex items-center gap-3">
+            <span className="w-20 shrink-0 text-caption leading-tight text-muted">{c.short}</span>
+            <span className="flex flex-wrap gap-1">
+              {c.n === 0 ? (
+                <span className="text-caption leading-tight text-muted">–</span>
+              ) : (
+                Array.from({ length: c.n }, (_, i) => (
+                  <span key={i} className={`block h-2.5 w-2.5 rounded-full ${levelTone(c.level) === "warn" ? "bg-warn" : "bg-accent"}`} />
+                ))
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /** Full goal tile for the hub: guide link, best and least-supported rating, link to the evidence page. */
 export function GoalTile({ goal, headingLevel = "h3" }: { goal: Goal; headingLevel?: "h2" | "h3" }) {
   const guide = guideFor(goal.guide);
@@ -50,6 +91,7 @@ export function GoalTile({ goal, headingLevel = "h3" }: { goal: Goal; headingLev
         </Link>
       </H>
       <p className="mt-2 text-sm text-soft">{guide.blurb}</p>
+      <LevelSpread ratings={ratings} />
 
       {best && (
         <div className="mt-5 border-t border-line pt-4">

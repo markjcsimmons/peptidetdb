@@ -10,6 +10,9 @@ import { JsonLd } from "@/components/json-ld";
 import { StudyCard } from "@/components/study-parts";
 import { TopicGuides } from "@/components/guide-links";
 import { StudyMix } from "@/components/study-mix";
+import { RatingsTable } from "@/components/ratings-table";
+import { PageContents } from "@/components/page-contents";
+import { CARD } from "@/components/ui";
 
 export const dynamicParams = false;
 
@@ -35,7 +38,7 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
   const studies = studiesForTopic(t.slug);
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -52,26 +55,37 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
         </Link>{" "}
         / {TOPIC_LABEL[t.slug]}
       </nav>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight">{t.title}</h1>
-      <p className="mt-3 max-w-prose text-lg text-muted">{t.intro}</p>
-      <TopicGuides topic={t.slug} />
-      <div className="mt-6 rounded-tile border border-line bg-card px-5 py-4">
+      <p className="mt-5 text-caption font-semibold uppercase tracking-[0.08em] text-accent">
+        {t.measures === "safety" ? "Safety evidence" : "Evidence page"}
+      </p>
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">{t.title}</h1>
+      <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(t.reviewedOn)}.</p>
+      <p className="mt-5 max-w-prose text-lg text-soft [text-wrap:pretty]">{t.intro}</p>
+
+      <RatingsTable
+        measures={t.measures}
+        rows={t.ratings.map((r, i) => ({ subject: r.subject, level: r.level, href: `#rating-${i + 1}` }))}
+      />
+      <div className="mt-5 rounded-tile border border-line bg-card px-5 py-4">
         <StudyMix studies={studies} title={`The ${studies.length} studies behind these ratings`} />
       </div>
+      <TopicGuides topic={t.slug} />
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">What the evidence shows</h2>
-        <div className="mt-4 space-y-4">
-          {t.ratings.map((r) => (
-            <div key={r.subject} className="rounded-card border border-line bg-card p-6">
-              <h3 className="font-semibold">{r.subject}</h3>
-              <div className="mt-2">
+      <PageContents />
+
+      <section className="mt-14">
+        <h2 className="text-3xl font-bold leading-[1.15]">What the evidence shows</h2>
+        <ol className="mt-6 grid gap-5">
+          {t.ratings.map((r, i) => (
+            <li key={r.subject} id={`rating-${i + 1}`} className={`${CARD} scroll-mt-6`}>
+              <h3 className="text-xl font-bold leading-tight">{r.subject}</h3>
+              <div className="mt-3">
                 <RatingBadge level={r.level} measures={t.measures} />
               </div>
-              <p className="mt-3 max-w-prose text-sm">{r.why}</p>
-            </div>
+              <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">{r.why}</p>
+            </li>
           ))}
-        </div>
+        </ol>
         <details className="mt-4 rounded-tile border border-line bg-card">
           <summary className="flex min-h-11 cursor-pointer items-center px-4 text-sm font-medium">
             How to read these ratings
@@ -89,8 +103,8 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
         </p>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold">Studies ({studies.length})</h2>
+      <section className="mt-14">
+        <h2 className="text-3xl font-bold leading-[1.15]">Studies ({studies.length})</h2>
         <div className="mt-4 overflow-x-auto rounded-tile border border-line">
           <table className="w-full min-w-[34rem] text-left text-sm">
             <thead className="bg-card text-muted">
@@ -123,8 +137,8 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
       </section>
 
       {t.gaps.length > 0 && (
-        <section className="mt-10 rounded-card border border-line bg-card p-6">
-          <h2 className="font-semibold">Not covered yet</h2>
+        <section className="mt-14 rounded-card border border-line bg-card p-6 sm:p-7">
+          <h2 className="text-xl font-bold">Not covered yet</h2>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
             {t.gaps.map((g) => (
               <li key={g}>{g}</li>
@@ -143,6 +157,6 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
       )}
 
       <p className="mt-8 text-sm text-muted">{SITE.disclaimer}</p>
-    </div>
+    </article>
   );
 }
