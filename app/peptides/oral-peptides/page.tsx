@@ -10,6 +10,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Oral peptides: do they work? Ranked by evidence",
@@ -448,7 +449,7 @@ export default function OralPeptidesPage() {
   }
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -490,6 +491,8 @@ export default function OralPeptidesPage() {
           not find in PubMed.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Why swallowing a peptide is hard</h2>

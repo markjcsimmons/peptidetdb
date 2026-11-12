@@ -7,6 +7,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { VerticalTimeline } from "@/components/timeline";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Are peptides legal in the US? Status Nov 2026",
@@ -36,7 +37,7 @@ function SourceList({ sources }: { sources: Source[] }) {
 export default function LegalStatusPage() {
   const allSources = Object.values(SOURCES) as Source[];
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -82,6 +83,8 @@ export default function LegalStatusPage() {
           is not an approval and not a listing, and we found no final FDA decision as of {formatDate(LEGAL_REVIEWED)}.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Why there is no single answer</h2>

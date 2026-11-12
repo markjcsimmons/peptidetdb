@@ -5,6 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Collagen peptide side effects: what is known",
@@ -36,7 +37,7 @@ const FAQ: { q: string; a: string }[] = [
 
 export default function CollagenSideEffectsPage() {
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -76,6 +77,8 @@ export default function CollagenSideEffectsPage() {
           benefit, and most are rated at high risk of bias.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">What the trials report</h2>

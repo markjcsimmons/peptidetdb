@@ -68,7 +68,7 @@ export default function SciencePage() {
         </div>
       </section>
 
-      <div className="mt-8">
+      <div id="explore" className="mt-8 scroll-mt-6">
         <StudyExplorer studies={STUDIES} />
       </div>
     </div>

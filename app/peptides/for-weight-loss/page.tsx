@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { RelatedGoals } from "@/components/guide-links";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Peptides for weight loss: what studies show",
@@ -43,7 +44,7 @@ const FAQ: { q: string; a: string }[] = [
 
 export default function ForWeightLossPage() {
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -84,6 +85,8 @@ export default function ForWeightLossPage() {
           unapproved injectables, and FDA warns against unapproved and compounded versions of these drugs.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Two different things sold as &ldquo;peptides for weight loss&rdquo;</h2>

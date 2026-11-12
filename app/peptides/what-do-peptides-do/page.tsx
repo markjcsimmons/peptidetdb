@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { TOPIC_SLUGS } from "@/lib/topics";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "What do peptides do?",
@@ -37,7 +38,7 @@ const FAQ: { q: string; a: string }[] = [
 export default function WhatDoPeptidesDoPage() {
   const topics = TOPIC_SLUGS.filter((t) => t !== "safety");
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -76,6 +77,8 @@ export default function WhatDoPeptidesDoPage() {
           injectable peptides sold online, mainly animal evidence.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">What the studies show, by use</h2>

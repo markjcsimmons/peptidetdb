@@ -16,7 +16,7 @@ import { CARD } from "@/components/ui";
 import { LEVEL_ORDER, RatingBadge } from "@/components/evidence-meter";
 
 const TILE_LINK =
-  "flex min-h-14 flex-col justify-center rounded-tile border border-line bg-bg px-[18px] py-3 hover:border-accent";
+  "flex h-full min-h-14 flex-col justify-center rounded-tile border border-line bg-bg px-[18px] py-3 hover:border-accent";
 
 /**
  * Best- and least-supported rating a goal guide covers. Like TopicCard: never only the best one,
@@ -88,7 +88,7 @@ export function GoalTile({ goal, headingLevel = "h3" }: { goal: Goal; headingLev
 /** Compact goal links without ratings (a lone "best" rating would cherry-pick). */
 export function GoalLinkGrid({ goals, className = "" }: { goals: Goal[]; className?: string }) {
   return (
-    <ul className={`grid gap-3 sm:grid-cols-2 lg:grid-cols-3 ${className}`}>
+    <ul className={`grid grid-cols-2 gap-3 lg:grid-cols-3 ${className}`}>
       {goals.map((g) => {
         const guide = guideFor(g.guide);
         return (

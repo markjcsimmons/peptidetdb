@@ -18,12 +18,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/peptides/by-goal" },
 };
 
+/** Index pages that list the guides rather than being one. */
+const HUBS = ["/peptides/by-goal", "/peptides/a-z"];
+
 /** Fails the build if a page under app/peptides/ is missing from lib/guides.ts, or a registered path has no page. */
 function checkRegistry() {
   const dirs = readdirSync(join(process.cwd(), "app/peptides"), { withFileTypes: true })
     .filter((d) => d.isDirectory())
     .map((d) => `/peptides/${d.name}`)
-    .filter((p) => p !== "/peptides/by-goal");
+    .filter((p) => !HUBS.includes(p));
   const registered = new Set(GUIDES.map((g) => g.path));
   const missing = dirs.filter((p) => !registered.has(p));
   const extra = [...registered].filter((p) => !dirs.includes(p));

@@ -4,6 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { Callout, CARD, Pill } from "@/components/ui";
+import { PageContents } from "@/components/page-contents";
 import {
   CERTIFIED,
   COLLAGEN_CHECKED_ON,
@@ -62,7 +63,7 @@ function Links({ links }: { links: Ref[] }) {
 
 export default function BestCollagenPeptidesPage() {
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -112,6 +113,8 @@ export default function BestCollagenPeptidesPage() {
           and it is not a product grade.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">How we checked, and what this page is not</h2>

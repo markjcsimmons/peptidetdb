@@ -8,6 +8,7 @@ import { Callout } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Peptides for hair growth: ranked by the evidence",
@@ -209,7 +210,7 @@ export default function PeptidesForHairGrowthPage() {
   }
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -249,6 +250,8 @@ export default function PeptidesForHairGrowthPage() {
           data, and we found no hair study of TB-500 or BPC-157.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">How this ranking works</h2>

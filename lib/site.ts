@@ -30,7 +30,7 @@ export const SITE = {
 
 export const NAV = [
   { href: "/peptides/by-goal", label: "By goal" },
-  { href: "/peptides", label: "Peptides" },
+  { href: "/peptides/a-z", label: "Peptides A–Z" },
   { href: "/science", label: "Studies" },
   { href: "/peptides/legal-status", label: "Legal status" },
   { href: "/science/methodology", label: "Methodology" },

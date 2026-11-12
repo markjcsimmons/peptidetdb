@@ -7,6 +7,7 @@ import { STUDY_BY_ID, shortCite } from "@/lib/studies";
 import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Do oral marine peptides work? What studies show",
@@ -71,7 +72,7 @@ const ROWS: Row[] = [
 
 export default function OralMarinePeptidesPage() {
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -115,6 +116,8 @@ export default function OralMarinePeptidesPage() {
           vision, we found no human trials.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">What the studies show, system by system</h2>

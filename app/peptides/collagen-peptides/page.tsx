@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { STUDIES } from "@/lib/studies";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Collagen peptides: what the evidence shows",
@@ -46,7 +47,7 @@ export default function CollagenPeptidesPage() {
   const nReviews = collagenStudies.filter((s) => s.kind === "meta-analysis" || s.kind === "systematic-review").length;
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -87,6 +88,8 @@ export default function CollagenPeptidesPage() {
           shows they work for hair, nails or gut health, because we have not summarised those.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">What collagen peptides are</h2>

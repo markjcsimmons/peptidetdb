@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "Marine vs bovine collagen: what studies show",
@@ -38,7 +39,7 @@ export default function MarineVsBovinePage() {
   ).sort((a, b) => b.year - a.year);
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -79,6 +80,8 @@ export default function MarineVsBovinePage() {
           with fish allergy.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">What we looked for</h2>

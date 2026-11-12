@@ -8,6 +8,7 @@ import { Callout } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides } from "@/components/guide-links";
+import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
   title: "BPC-157: what the studies show",
@@ -44,7 +45,7 @@ const FAQ: { q: string; a: string }[] = [
 export default function Bpc157Page() {
   const studies = STUDIES.filter((s) => s.peptides.includes("bpc-157")).sort((a, b) => b.year - a.year);
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="relative mx-auto max-w-3xl">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -84,6 +85,8 @@ export default function Bpc157Page() {
           compounding status is changing in 2026 without a final FDA decision.
         </p>
       </Callout>
+
+      <PageContents />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">What it is</h2>

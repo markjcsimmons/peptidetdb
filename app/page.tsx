@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GOALS, GoalLinkGrid } from "@/components/guide-links";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
 import { TOPIC_SLUGS } from "@/lib/topics";
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 const JUMP = [
+  { href: "#goals", label: "By goal" },
   { href: "#what", label: "What are they?" },
   { href: "#how", label: "How do they work?" },
   { href: "#types", label: "Types" },
@@ -274,6 +276,24 @@ export default function HomePage() {
           ))}
         </div>
       </nav>
+
+      {/* Goal strip: most visitors arrive with a goal in mind */}
+      <section id="goals" className="mt-14 scroll-mt-24">
+        <SectionHead
+          eyebrow="By goal"
+          title="What do you want to know about?"
+          intro="Each page ranks peptide types by the strength of the human evidence for one goal, and says what the studies do not show."
+        />
+        <GoalLinkGrid goals={GOALS} className="mt-6" />
+        <p className="mt-4 flex flex-wrap gap-x-6">
+          <Link href="/peptides/by-goal" className="link-solo">
+            Compare all goals
+          </Link>
+          <Link href="/peptides/a-z" className="link-solo">
+            Peptides A–Z
+          </Link>
+        </p>
+      </section>
 
       {/* What are peptides */}
       <section id="what" className="mt-20 scroll-mt-24">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   KIND_LABEL,
   PEPTIDE_LABEL,
@@ -20,6 +20,15 @@ export function StudyExplorer({ studies }: { studies: Study[] }) {
   const [topic, setTopic] = useState<Topic | "">("");
   const [peptide, setPeptide] = useState<PeptideId | "">("");
   const [kind, setKind] = useState<StudyKind | "">("");
+
+  // Links such as /science?peptide=bpc-157#explore (from the A–Z index) open with that filter set.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const p = params.get("peptide");
+    const t = params.get("topic");
+    if (p && p in PEPTIDE_LABEL) setPeptide(p as PeptideId);
+    if (t && t in TOPIC_LABEL) setTopic(t as Topic);
+  }, []);
 
   const peptides = useMemo(
     () => (Object.keys(PEPTIDE_LABEL) as PeptideId[]).filter((p) => studies.some((s) => s.peptides.includes(p))),

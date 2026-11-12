@@ -41,6 +41,7 @@ export function GET() {
     "",
     `- [What are peptides?](${SITE.url}/peptides): definition, the four things the word covers, and what the studies show so far.`,
     `- [Peptides by goal](${SITE.url}/peptides/by-goal): every goal page (skin, hair, joints, muscle, weight, sleep, gut, women, men, oral) with its best and least-supported rating, plus the peptide profiles, product checks and background guides.`,
+    `- [Peptides A–Z](${SITE.url}/peptides/a-z): every peptide in the study registry with its number of summarised studies, the rankings that include it and its evidence pages.`,
     `- [How do peptides work?](${SITE.url}/peptides/how-peptides-work): peptides as cell signals, what digestion does to swallowed ones, and why a lab mechanism is not proof of a human effect.`,
     `- [What do peptides do?](${SITE.url}/peptides/what-do-peptides-do): what human studies show for skin, hair, muscle, joints, blood pressure, brain, immune function, weight, women's health, men's health and gut health, with the best and least-supported rating for each.`,
     `- [Are peptides steroids?](${SITE.url}/peptides/are-peptides-steroids): why peptides and anabolic steroids are different substances, what the muscle studies show, and why that does not make a peptide safe.`,
