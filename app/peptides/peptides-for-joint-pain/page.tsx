@@ -6,7 +6,6 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout, CARD } from "@/components/ui";
 import { RatingBadge } from "@/components/evidence-meter";
-import { DisclosureNote } from "@/components/disclosure-note";
 import { TOPICS, type Level } from "@/lib/topics";
 
 export const metadata: Metadata = {
@@ -280,11 +279,6 @@ export default function PeptidesForJointPainPage() {
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for joint pain, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <DisclosureNote>
-        This page covers a product category that includes products Pürblack sells, so read it with that in mind. The ranking
-        follows the studies, every claim links to the study, and no product is named.
-      </DisclosureNote>
-
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">
           Collagen has the most human evidence of the peptide-type supplements sold for joints, but the results are mixed:
@@ -417,7 +411,7 @@ export default function PeptidesForJointPainPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
+        {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
       </p>
     </article>
   );

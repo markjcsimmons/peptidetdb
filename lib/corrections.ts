@@ -16,6 +16,12 @@ export type Correction = {
 export const CORRECTIONS: Correction[] = [
   {
     date: "2026-11-11",
+    page: "/peptides/collagen-peptides and six related pages",
+    was: "The collagen, collagen-benefits, collagen-side-effects, muscle-growth, skin, hair and joint-pain pages carried a note saying the page covered a product category that includes products Pürblack sells.",
+    now: "Pürblack sells oral peptide supplements made from fish protein, not collagen peptides, so the note overstated the overlap and has been removed from those pages. The site-wide disclosure in the footer and About page, and the notes on pages that cover fish-derived products, remain.",
+  },
+  {
+    date: "2026-11-11",
     page: "/peptides/peptides-for-hair-growth",
     was: "Ranked \"Thymosin beta-4 (TB-500)\" as one option, treating the two names as the same compound.",
     now: "A 2026 orthopaedic review (Tham 2026) describes TB-500 as a distinct seven-amino-acid fragment that is not validated as equivalent to thymosin beta-4. The hair studies we cite are of thymosin beta-4 itself, so the page now labels the option \"Thymosin beta-4 (not the same as TB-500)\" and says we found no hair study of TB-500.",

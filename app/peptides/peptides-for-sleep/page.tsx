@@ -224,8 +224,8 @@ export default function PeptidesForSleepPage() {
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <DisclosureNote>
-        This page covers a product category that includes products Pürblack sells, so read it with that in mind. The ranking
-        follows the studies, every claim links to the study, and no product is named.
+        Pürblack sells oral peptide supplements made from fish protein, which this page covers as fish hydrolysate. The
+        ranking follows the studies, every claim links to the study, and no product is named.
       </DisclosureNote>
 
       <Callout label="Short answer" className="mt-6">
