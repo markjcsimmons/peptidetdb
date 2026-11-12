@@ -421,6 +421,53 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-10",
   },
+  "womens-health": {
+    slug: "womens-health",
+    measures: "benefit",
+    title: "Peptides for women: desire, bone, PCOS & menopause",
+    intro:
+      "Most peptide research does not split results by sex, so this topic covers only outcomes specific to women: low sexual desire, bone loss after menopause, polycystic ovary syndrome (PCOS) and menopausal symptoms. Skin, hair, joints and sleep, which women also search for, are rated on their own topic pages.",
+    ratings: [
+      {
+        subject: "Bremelanotide (Vyleesi) for low sexual desire in premenopausal women",
+        level: "consistent",
+        why: "Two identical 24-week placebo-controlled trials in 1,267 premenopausal women found higher desire scores (0.35 points) and lower distress (0.33 points) than placebo, and a 2026 meta-analysis agreed. Nausea, flushing and headache were common, and nausea was the usual reason to stop. A 2024 re-analysis argues the scales are poorly validated and the benefit small, so the effect is real in the statistics but modest and debated.",
+      },
+      {
+        subject: "GLP-1 drugs (liraglutide, semaglutide) for weight in women with PCOS",
+        level: "consistent",
+        why: "A 2026 meta-analysis of 11 randomised trials found a BMI drop of 1.38 kg/m² more than controls (low certainty), a 32-week placebo-controlled trial of 82 women found 5.7% weight loss against 1.4%, and a 16-week open-label trial of 100 women found 6.1 kg lost with semaglutide plus metformin against 2.3 kg with metformin. These are prescription drugs and the gains are modest.",
+      },
+      {
+        subject: "GLP-1 drugs for periods, hormones and fertility in PCOS",
+        level: "limited",
+        why: "The meta-analysis found evidence too thin to judge hirsutism or menstrual regularity and found no benefit on LDL cholesterol or triglycerides. Single trials report a lower free androgen index with liraglutide and a higher natural pregnancy rate (35% against 15%) after semaglutide plus metformin, but the second was open-label and secondary to weight.",
+      },
+      {
+        subject: "Oral collagen peptides for bone density after menopause",
+        level: "mixed",
+        why: "A 12-month trial in 131 postmenopausal women found small gains in spine and hip bone density over placebo, and an uncontrolled 4-year follow-up of 31 of them agreed. Two trials of about six months found no change in blood markers of bone turnover versus placebo. A 2026 scoping review of 15 studies called the evidence promising but inconsistent. No study here shows fewer fractures.",
+      },
+      {
+        subject: "Peptides or collagen for menopausal symptoms (hot flushes, mood, sleep)",
+        level: "none",
+        why: "Our PubMed search on 12 November 2026 for peptide or collagen trials with hot-flush or menopause-symptom outcomes found none. That is not proof none exists.",
+      },
+      {
+        subject: "Unapproved injectable peptides in pregnancy or breastfeeding",
+        level: "unassessed",
+        why: "We have not summarised any study of these, so we do not rate them. One quick PubMed search found no safety data, but it was narrow. This is a gap in our coverage, not a finding that they are safe.",
+      },
+    ],
+    gaps: [
+      "Almost all peptide trials report men and women together without splitting results, so a result may not apply to women. We rate only trials of women or outcomes specific to women.",
+      "Bremelanotide trials enrolled premenopausal women only (mean age 39), mostly white and from US sites; we did not search for trials in postmenopausal women.",
+      "Fertility, IVF, endometriosis and hormone-therapy outcomes were not searched; a single quick search for kisspeptin trials found nothing relevant to rate.",
+      "Collagen bone trials measure bone density or blood markers; none of the studies here counted fractures.",
+      "Pregnancy and breastfeeding safety of research peptides was searched only narrowly and is not rated.",
+    ],
+    reviewedOn: "2026-11-12",
+  },
   safety: {
     slug: "safety",
     measures: "safety",
