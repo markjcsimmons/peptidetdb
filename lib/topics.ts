@@ -262,12 +262,32 @@ export const TOPICS: Record<Topic, TopicPage> = {
     measures: "benefit",
     title: "Peptides for sleep, memory & stress",
     intro:
-      "Fish hydrolysate supplements are marketed for sleep, memory and stress, and selank, an unapproved peptide that appears on FDA's compounding page, is promoted for anxiety. The few human studies of the fish products are small, all three have ties to a company with an interest in the product, and one found no difference from placebo. The selank trials are older, small and had no placebo group.",
+      "Peptides are promoted for sleep (DSIP, casein and fish hydrolysates, collagen taken at bedtime, epitalon), memory and stress (fish hydrolysate, selank). The human studies are small, the oral-product trials often have ties to a company with an interest in the product, and several found no difference from placebo. The DSIP trials are decades old and injected, and the selank trials are older, small and had no placebo group.",
     ratings: [
       {
         subject: "Fish hydrolysate for sleep quality",
         level: "limited",
         why: "A four-week crossover trial found sleep scores improved from baseline, but there was no significant difference between fish hydrolysate and placebo. The trial was fully sponsored by Abyss Ingredients, and two authors disclose a commercial interest.",
+      },
+      {
+        subject: "Casein hydrolysate (Lactium) for sleep",
+        level: "limited",
+        why: "A 36-person, 4-week trial in chronic insomnia reported a larger fall in one sleep-disorder score and a shorter time to fall asleep on polysomnography than placebo, though most improvements were changes from baseline. A 40-person, 8-week trial of Lactium combined with L-theanine found no difference on the main sleep questionnaires, only on some diary measures, so the peptide's own effect cannot be separated.",
+      },
+      {
+        subject: "Collagen peptides before bed for sleep",
+        level: "limited",
+        why: "One crossover trial in 13 active men with sleep complaints found fewer awakenings with 15 g of collagen peptides before bed, with no change in sleep length, onset or efficiency. A 2026 scoping review found only a handful of collagen trials with sleep outcomes, and trials against alpha-lactalbumin did not show collagen to be better.",
+      },
+      {
+        subject: "DSIP (delta sleep-inducing peptide) for insomnia",
+        level: "limited",
+        why: "A few small injected-DSIP trials from 1987 to 1992 disagree: one in 14 patients with severe chronic insomnia reported substantial improvement, while a 16-patient trial and a crossover trial found weak or clinically insignificant effects. A 2006 review calls the case for DSIP as a sleep factor extremely poorly documented. Our searches found no modern trial and none of an oral or nasal product.",
+      },
+      {
+        subject: "Epitalon for sleep",
+        level: "none",
+        why: "Our PubMed searches found no human trial of epitalon with a sleep outcome. A 2026 review says its human evidence is limited to small physiological or biomarker studies and that it is biologically active but clinically unproven.",
       },
       {
         subject: "Fish hydrolysate for memory in older adults",
@@ -288,8 +308,10 @@ export const TOPICS: Record<Topic, TopicPage> = {
     gaps: [
       "No independently funded randomised trial of a marine peptide supplement for sleep, memory or stress is summarised here.",
       "We found no placebo-controlled human trial of selank. Semax, which has trial-type records in PubMed, is not covered here yet.",
+      "We did not search for trials comparing any of these with melatonin, sleep hygiene or cognitive behavioural therapy for insomnia.",
+      "Glycine and other amino acids, melatonin and herbal sleep aids are outside this site's scope.",
     ],
-    reviewedOn: "2026-11-10",
+    reviewedOn: "2026-11-11",
   },
   immune: {
     slug: "immune",
