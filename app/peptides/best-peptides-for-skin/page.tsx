@@ -4,10 +4,10 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD } from "@/components/ui";
-import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals } from "@/components/guide-links";
+import { RankedList, type Route } from "@/components/ranked-list";
 
 export const metadata: Metadata = {
   title: "Best peptides for skin: ranked by the evidence",
@@ -21,6 +21,8 @@ const REVIEWED = "2026-11-11";
 type Option = {
   name: string;
   level: Level;
+  /** How it is taken, only where the entry makes it plain. */
+  routes?: Route[];
   /** Rating text on the skin topic page that this entry mirrors (checked at build time below). */
   topicSubject?: string;
   shows: React.ReactNode;
@@ -31,6 +33,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen peptides",
     level: "consistent",
+    routes: ["oral"],
     topicSubject: "Oral collagen peptides",
     shows: (
       <>
@@ -63,6 +66,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral marine (fish-derived) collagen peptides",
     level: "limited",
+    routes: ["oral"],
     topicSubject: "Oral marine (fish-derived) collagen peptides",
     shows: (
       <>
@@ -92,6 +96,7 @@ const OPTIONS: Option[] = [
   {
     name: "Topical cosmetic peptides (argireline, palmitoyl peptides and similar)",
     level: "limited",
+    routes: ["topical"],
     topicSubject: "Topical cosmetic peptides (argireline, palmitoyl peptides and similar)",
     shows: (
       <>
@@ -129,6 +134,7 @@ const OPTIONS: Option[] = [
   {
     name: "Topical GHK-Cu (copper peptide)",
     level: "limited",
+    routes: ["topical"],
     topicSubject: "Topical GHK-Cu (copper peptide)",
     shows: (
       <>
@@ -275,35 +281,7 @@ export default function BestPeptidesForSkinPage() {
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <ol className="mt-6 grid gap-5">
-          {OPTIONS.map((o, i) => (
-            <li key={o.name} className={CARD}>
-              <div className="flex items-start gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg text-lg font-bold"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-xl font-bold leading-tight">
-                    <span className="sr-only">Rank {i + 1}: </span>
-                    {o.name}
-                  </h3>
-                  <div className="mt-3">
-                    <RatingBadge level={o.level} measures="benefit" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What the studies show.</strong> {o.shows}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What they do not show.</strong> {o.notShown}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <RankedList options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not ranked: injectable peptides such as BPC-157 and TB-500. We have summarised no skin study of them, which is a
           gap in our coverage, not a finding. Hair, nails and acne are not covered either.

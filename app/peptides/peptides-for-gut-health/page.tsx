@@ -4,10 +4,10 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD } from "@/components/ui";
-import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals } from "@/components/guide-links";
+import { RankedList, type Route } from "@/components/ranked-list";
 
 export const metadata: Metadata = {
   title: "Peptides for gut health: ranked by the evidence",
@@ -21,6 +21,8 @@ const REVIEWED = "2026-11-12";
 type Option = {
   name: string;
   level: Level;
+  /** How it is taken, only where the entry makes it plain. */
+  routes?: Route[];
   /** Rating on the gut topic page this entry mirrors (checked at build time below). */
   topicSubject: string;
   shows: React.ReactNode;
@@ -31,6 +33,7 @@ const OPTIONS: Option[] = [
   {
     name: "Linaclotide and plecanatide (prescription) for IBS with constipation and chronic constipation",
     level: "consistent",
+    routes: ["oral"],
     topicSubject: "Linaclotide and plecanatide (prescription) for IBS with constipation and chronic constipation",
     shows: (
       <>
@@ -69,6 +72,7 @@ const OPTIONS: Option[] = [
   {
     name: "GLP-2 drugs (teduglutide and others) for short bowel syndrome",
     level: "consistent",
+    routes: ["injected"],
     topicSubject: "GLP-2 drugs (teduglutide and others) for short bowel syndrome",
     shows: (
       <>
@@ -98,6 +102,7 @@ const OPTIONS: Option[] = [
   {
     name: "Larazotide acetate (investigational) for coeliac disease",
     level: "mixed",
+    routes: ["oral"],
     topicSubject: "Larazotide acetate (investigational) for coeliac disease",
     shows: (
       <>
@@ -122,6 +127,7 @@ const OPTIONS: Option[] = [
   {
     name: "Fish and milk protein hydrolysates for IBS symptoms",
     level: "limited",
+    routes: ["oral"],
     topicSubject: "Fish and milk protein hydrolysates for IBS symptoms",
     shows: (
       <>
@@ -217,6 +223,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen peptides for gut health, bloating or gut barrier",
     level: "none",
+    routes: ["oral"],
     topicSubject: "Oral collagen peptides for gut health, bloating or gut barrier",
     shows: (
       <>
@@ -331,35 +338,7 @@ export default function PeptidesForGutHealthPage() {
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <ol className="mt-6 grid gap-5">
-          {OPTIONS.map((o, i) => (
-            <li key={o.name} className={CARD}>
-              <div className="flex items-start gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg text-lg font-bold"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-xl font-bold leading-tight">
-                    <span className="sr-only">Rank {i + 1}: </span>
-                    {o.name}
-                  </h3>
-                  <div className="mt-3">
-                    <RatingBadge level={o.level} measures="benefit" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What the studies show.</strong> {o.shows}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What they do not show.</strong> {o.notShown}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <RankedList options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not rated: GLP-1 weight-loss drugs, which affect the gut as a side effect. A 2025 meta-analysis of 55 placebo-controlled
           trials found they raised the risk of{" "}

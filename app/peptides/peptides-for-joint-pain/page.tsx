@@ -4,10 +4,10 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD } from "@/components/ui";
-import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals } from "@/components/guide-links";
+import { RankedList, type Route } from "@/components/ranked-list";
 
 export const metadata: Metadata = {
   title: "Peptides for joint pain: ranked by the evidence",
@@ -21,6 +21,8 @@ const REVIEWED = "2026-11-11";
 type Option = {
   name: string;
   level: Level;
+  /** How it is taken, only where the entry makes it plain. */
+  routes?: Route[];
   /** Rating(s) on the joints topic page this entry mirrors (every one is checked at build time below). */
   topicSubjects: string[];
   shows: React.ReactNode;
@@ -31,6 +33,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen for osteoarthritis",
     level: "mixed",
+    routes: ["oral"],
     topicSubjects: ["Oral collagen for osteoarthritis symptoms"],
     shows: (
       <>
@@ -65,6 +68,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen for exercise-related knee and joint pain",
     level: "mixed",
+    routes: ["oral"],
     topicSubjects: ["Oral collagen peptides for exercise-related knee and joint pain (no arthritis)"],
     shows: (
       <>
@@ -100,6 +104,7 @@ const OPTIONS: Option[] = [
   {
     name: "Undenatured type II collagen (UC-II)",
     level: "mixed",
+    routes: ["oral"],
     topicSubjects: ["Undenatured type II collagen (UC-II, not a peptide) for knee osteoarthritis"],
     shows: (
       <>
@@ -122,6 +127,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen for tendon problems",
     level: "limited",
+    routes: ["oral"],
     topicSubjects: ["Oral collagen for tendon problems (tendinopathy)"],
     shows: (
       <>
@@ -147,6 +153,7 @@ const OPTIONS: Option[] = [
   {
     name: "Injectable research peptides (BPC-157 and TB-500)",
     level: "preclinical",
+    routes: ["injected"],
     topicSubjects: ["BPC-157 for tendon, ligament and joint problems", "TB-500 for tendon and ligament injury"],
     shows: (
       <>
@@ -188,6 +195,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral marine (fish-derived) collagen peptides",
     level: "none",
+    routes: ["oral"],
     topicSubjects: ["Oral marine (fish-derived) collagen peptides for joints and tendons"],
     shows: (
       <>
@@ -307,35 +315,7 @@ export default function PeptidesForJointPainPage() {
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <ol className="mt-6 grid gap-5">
-          {OPTIONS.map((o, i) => (
-            <li key={o.name} className={CARD}>
-              <div className="flex items-start gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg text-lg font-bold"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-xl font-bold leading-tight">
-                    <span className="sr-only">Rank {i + 1}: </span>
-                    {o.name}
-                  </h3>
-                  <div className="mt-3">
-                    <RatingBadge level={o.level} measures="benefit" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What the studies show.</strong> {o.shows}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What they do not show.</strong> {o.notShown}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <RankedList options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not covered: glucosamine, chondroitin, hyaluronic acid and other non-peptide supplements, collagen in joints other
           than the knee and hip, and bone density. That is a gap in our coverage, not a finding.

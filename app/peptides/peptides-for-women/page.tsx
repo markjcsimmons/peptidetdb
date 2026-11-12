@@ -4,11 +4,11 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD } from "@/components/ui";
-import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals } from "@/components/guide-links";
+import { RankedList, type Route } from "@/components/ranked-list";
 
 export const metadata: Metadata = {
   title: "Peptides for women: ranked by the evidence",
@@ -22,6 +22,8 @@ const REVIEWED = "2026-11-12";
 type Option = {
   name: string;
   level: Level;
+  /** How it is taken, only where the entry makes it plain. */
+  routes?: Route[];
   /** Topic page and rating this entry mirrors (checked at build time below). */
   topic: Topic;
   topicSubject: string;
@@ -33,6 +35,7 @@ const OPTIONS: Option[] = [
   {
     name: "Bremelanotide (Vyleesi) for low sexual desire, before menopause",
     level: "consistent",
+    routes: ["injected"],
     topic: "womens-health",
     topicSubject: "Bremelanotide (Vyleesi) for low sexual desire in premenopausal women",
     shows: (
@@ -107,6 +110,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen peptides for skin",
     level: "consistent",
+    routes: ["oral"],
     topic: "skin",
     topicSubject: "Oral collagen peptides",
     shows: (
@@ -143,6 +147,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen peptides for bone density after menopause",
     level: "mixed",
+    routes: ["oral"],
     topic: "womens-health",
     topicSubject: "Oral collagen peptides for bone density after menopause",
     shows: (
@@ -208,6 +213,7 @@ const OPTIONS: Option[] = [
   {
     name: "Topical cosmetic peptides for skin",
     level: "limited",
+    routes: ["topical"],
     topic: "skin",
     topicSubject: "Topical cosmetic peptides (argireline, palmitoyl peptides and similar)",
     shows: (
@@ -238,6 +244,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen peptides for hair",
     level: "limited",
+    routes: ["oral"],
     topic: "hair",
     topicSubject: "Oral collagen peptides for hair",
     shows: (
@@ -395,35 +402,7 @@ export default function PeptidesForWomenPage() {
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <ol className="mt-6 grid gap-5">
-          {OPTIONS.map((o, i) => (
-            <li key={o.name} className={CARD}>
-              <div className="flex items-start gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg text-lg font-bold"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-xl font-bold leading-tight">
-                    <span className="sr-only">Rank {i + 1}: </span>
-                    {o.name}
-                  </h3>
-                  <div className="mt-3">
-                    <RatingBadge level={o.level} measures="benefit" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What the studies show.</strong> {o.shows}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What they do not show.</strong> {o.notShown}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <RankedList options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not rated: unapproved injectable peptides in pregnancy and breastfeeding (we have not summarised any study; see the{" "}
           <Link href="/science/topics/womens-health" className="link">

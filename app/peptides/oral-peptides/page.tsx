@@ -4,12 +4,12 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD } from "@/components/ui";
-import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { DisclosureNote } from "@/components/disclosure-note";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals } from "@/components/guide-links";
+import { RankedList, type Route } from "@/components/ranked-list";
 
 export const metadata: Metadata = {
   title: "Oral peptides: do they work? Ranked by evidence",
@@ -23,6 +23,8 @@ const REVIEWED = "2026-11-12";
 type Option = {
   name: string;
   level: Level;
+  /** How it is taken, only where the entry makes it plain. */
+  routes?: Route[];
   /** Topic page and rating this entry mirrors (checked at build time below). */
   topic: Topic;
   topicSubject: string;
@@ -34,6 +36,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral semaglutide tablet (a peptide drug with an absorption enhancer) for weight loss",
     level: "consistent",
+    routes: ["oral"],
     topic: "oral-peptides",
     topicSubject: "Oral semaglutide tablet (a peptide drug with an absorption enhancer) for weight loss",
     shows: (
@@ -66,6 +69,7 @@ const OPTIONS: Option[] = [
   {
     name: "Linaclotide and plecanatide (prescription capsules) for IBS with constipation and chronic constipation",
     level: "consistent",
+    routes: ["oral"],
     topic: "gut",
     topicSubject: "Linaclotide and plecanatide (prescription) for IBS with constipation and chronic constipation",
     shows: (
@@ -95,6 +99,7 @@ const OPTIONS: Option[] = [
   {
     name: "Oral collagen peptides for skin",
     level: "consistent",
+    routes: ["oral"],
     topic: "skin",
     topicSubject: "Oral collagen peptides",
     shows: (
@@ -121,6 +126,7 @@ const OPTIONS: Option[] = [
   {
     name: "Dietary collagen peptides: do fragments reach the blood after swallowing?",
     level: "limited",
+    routes: ["oral"],
     topic: "oral-peptides",
     topicSubject: "Dietary collagen peptides: do fragments reach the blood after swallowing?",
     shows: (
@@ -156,6 +162,7 @@ const OPTIONS: Option[] = [
   {
     name: "Fish-derived collagen peptides for skin",
     level: "limited",
+    routes: ["oral"],
     topic: "skin",
     topicSubject: "Oral marine (fish-derived) collagen peptides",
     shows: (
@@ -186,6 +193,7 @@ const OPTIONS: Option[] = [
   {
     name: "Casein hydrolysate (Lactium) for sleep",
     level: "limited",
+    routes: ["oral"],
     topic: "brain",
     topicSubject: "Casein hydrolysate (Lactium) for sleep",
     shows: (
@@ -212,6 +220,7 @@ const OPTIONS: Option[] = [
   {
     name: "Valyl-tyrosine, a defined sardine-derived peptide, for blood pressure",
     level: "limited",
+    routes: ["oral"],
     topic: "blood-pressure",
     topicSubject: "Valyl-tyrosine, a defined sardine-derived peptide",
     shows: (
@@ -234,6 +243,7 @@ const OPTIONS: Option[] = [
   {
     name: "Pürblack's oral targeted peptide capsules (Muscle+, Joint+, Vascular+ and related products)",
     level: "limited",
+    routes: ["oral"],
     topic: "oral-peptides",
     topicSubject: "Pürblack's oral targeted peptide capsules (Muscle+, Joint+, Vascular+ and related products)",
     shows: (
@@ -269,6 +279,7 @@ const OPTIONS: Option[] = [
   {
     name: "BPC-157 capsules and other oral research peptides",
     level: "preclinical",
+    routes: ["oral"],
     topic: "gut",
     topicSubject: "BPC-157 for gut conditions (ulcers, colitis, fistulas)",
     shows: (
@@ -532,38 +543,9 @@ export default function OralPeptidesPage() {
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <ol className="mt-6 grid gap-5">
-          {OPTIONS.map((o, i) => (
-            <li key={o.name} className={CARD}>
-              <div className="flex items-start gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg text-lg font-bold"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-xl font-bold leading-tight">
-                    <span className="sr-only">Rank {i + 1}: </span>
-                    {o.name}
-                  </h3>
-                  <div className="mt-3">
-                    <RatingBadge level={o.level} measures="benefit" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What the studies show.</strong> {o.shows}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What they do not show.</strong> {o.notShown}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">Safety and product testing.</strong> {TESTING[o.name]}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <RankedList
+          options={OPTIONS.map((o) => ({ ...o, extra: { label: "Safety and product testing.", body: TESTING[o.name] } }))}
+        />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not covered: other approved oral peptide drugs, and absorption studies of research peptides taken by mouth. Pürblack
           products other than those named, such as its vision, brain and immune capsules, were not reviewed beyond the booklet

@@ -4,10 +4,10 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD } from "@/components/ui";
-import { RatingBadge } from "@/components/evidence-meter";
+import { Callout } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals } from "@/components/guide-links";
+import { RankedList, type Route } from "@/components/ranked-list";
 
 export const metadata: Metadata = {
   title: "Peptides for sleep: ranked by the evidence",
@@ -21,6 +21,8 @@ const REVIEWED = "2026-11-11";
 type Option = {
   name: string;
   level: Level;
+  /** How it is taken, only where the entry makes it plain. */
+  routes?: Route[];
   /** Rating on the brain topic page this entry mirrors (checked at build time below). */
   topicSubject: string;
   shows: React.ReactNode;
@@ -31,6 +33,7 @@ const OPTIONS: Option[] = [
   {
     name: "Casein hydrolysate (Lactium)",
     level: "limited",
+    routes: ["oral"],
     topicSubject: "Casein hydrolysate (Lactium) for sleep",
     shows: (
       <>
@@ -57,6 +60,7 @@ const OPTIONS: Option[] = [
   {
     name: "Collagen peptides before bed",
     level: "limited",
+    routes: ["oral"],
     topicSubject: "Collagen peptides before bed for sleep",
     shows: (
       <>
@@ -83,6 +87,7 @@ const OPTIONS: Option[] = [
   {
     name: "Fish hydrolysate",
     level: "limited",
+    routes: ["oral"],
     topicSubject: "Fish hydrolysate for sleep quality",
     shows: (
       <>
@@ -106,6 +111,7 @@ const OPTIONS: Option[] = [
   {
     name: "DSIP (delta sleep-inducing peptide)",
     level: "limited",
+    routes: ["injected"],
     topicSubject: "DSIP (delta sleep-inducing peptide) for insomnia",
     shows: (
       <>
@@ -249,35 +255,7 @@ export default function PeptidesForSleepPage() {
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <ol className="mt-6 grid gap-5">
-          {OPTIONS.map((o, i) => (
-            <li key={o.name} className={CARD}>
-              <div className="flex items-start gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-bg text-lg font-bold"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-xl font-bold leading-tight">
-                    <span className="sr-only">Rank {i + 1}: </span>
-                    {o.name}
-                  </h3>
-                  <div className="mt-3">
-                    <RatingBadge level={o.level} measures="benefit" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What the studies show.</strong> {o.shows}
-              </p>
-              <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">
-                <strong className="text-fg">What they do not show.</strong> {o.notShown}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <RankedList options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not covered: melatonin, the amino acid glycine, magnesium, herbal sleep aids and sleep medicines, which are not
           peptides, and anxiety peptides such as selank (see{" "}
