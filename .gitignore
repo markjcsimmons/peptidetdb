@@ -13,3 +13,5 @@ next-env.d.ts
 /public/**/*.md
 /public/*.md
 /public/llms-full.txt
+# numbered copies macOS makes of the generated file (e.g. "llms-full 2.txt")
+/public/llms-full *.txt
