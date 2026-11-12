@@ -21,7 +21,7 @@ export type StudyKind =
   | "animal"
   | "in-vitro";
 
-export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "safety";
+export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "oral-peptides" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -36,6 +36,7 @@ export type PeptideId =
   | "bremelanotide"
   | "gc-c-agonists"
   | "kisspeptin"
+  | "oral-peptide-delivery"
   | "glp-2-analogues"
   | "larazotide"
   | "type-ii-collagen"
@@ -126,6 +127,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   "womens-health": "Women's health",
   "mens-health": "Men's health",
   gut: "Gut health & digestion",
+  "oral-peptides": "Oral peptides: do they get absorbed?",
   safety: "Safety & regulation",
 };
 
@@ -142,6 +144,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   bremelanotide: "Bremelanotide (Vyleesi)",
   "gc-c-agonists": "Linaclotide and plecanatide (guanylate cyclase-C agonists)",
   kisspeptin: "Kisspeptin-10",
+  "oral-peptide-delivery": "Oral peptide delivery (general)",
   "glp-2-analogues": "GLP-2 analogues (teduglutide and others)",
   larazotide: "Larazotide acetate",
   "type-ii-collagen": "Undenatured type II collagen (UC-II)",
@@ -1619,6 +1622,155 @@ export const STUDIES: Study[] = [
     verifiedOn: "2026-11-12",
   },
 
+  // ── Oral peptides ───────────────────────────────────────────────────────────
+  {
+    id: "knop-2023",
+    authors: "Knop FK, Aroda VR, do Vale RD, Holst-Hansen T, Laursen PN, Rosenstock J, Rubino DM, Garvey WT, OASIS 1 Investigators",
+    year: 2023,
+    title: "Oral semaglutide 50 mg taken once per day in adults with overweight or obesity (OASIS 1): a randomised, double-blind, placebo-controlled, phase 3 trial.",
+    journal: "Lancet",
+    ref: "402(10403):705–719",
+    pmid: "37385278",
+    doi: "10.1016/S0140-6736(23)01185-6",
+    kind: "human-controlled",
+    topics: ["oral-peptides"],
+    peptides: ["semaglutide"],
+    delivery: ["oral"],
+    population: "667 adults with a BMI of at least 30 (or 27 with weight-related complications) and no type 2 diabetes, at 50 clinics in nine countries",
+    design: "Randomised, double-blind, placebo-controlled phase 3 trial, plus a lifestyle programme",
+    dose: "Oral semaglutide escalated to 50 mg once a day",
+    duration: "68 weeks",
+    finding:
+      "Body weight fell by an estimated 15.1% on oral semaglutide against 2.4% on placebo at week 68 (difference −12.7 percentage points, p<0.0001). 85% of those on the drug lost at least 5% of body weight against 26% on placebo, and 34% lost at least 20% against 3%. Adverse events were more frequent on the drug (92% against 86%), and gastrointestinal events affected 80% against 46%, mostly mild to moderate.",
+    caveat:
+      "A 68-week trial in adults without diabetes who also had a lifestyle programme, so it does not show what happens after stopping or over years. The 50 mg tablet dose is higher than the doses used for diabetes. The weight-loss percentages are given for those with data (317 and 295), not all 667 randomised. Several authors are Novo Nordisk employees or shareholders, and the abstract states the trial was funded by Novo Nordisk.",
+    funding: "The abstract states the trial was funded by Novo Nordisk; several authors are Novo Nordisk employees or shareholders.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "buckley-2018",
+    authors: "Buckley ST, Bækdal TA, Vegge A, Maarbjerg SJ, Pyke C, Ahnfelt-Rønne J, Madsen KG, Schéele SG, Alanentalo T, Kirk RK, Pedersen BL, Skyggebjerg RB, Benie AJ, Strauss HM, Wahlund PO, Bjerregaard S, Farkas E, Fekete C, Søndergaard FL, Borregaard J, Hartoft-Nielsen ML, Knudsen LB",
+    year: 2018,
+    title: "Transcellular stomach absorption of a derivatized glucagon-like peptide-1 receptor agonist.",
+    journal: "Sci Transl Med",
+    ref: "10(467)",
+    pmid: "30429357",
+    doi: "10.1126/scitranslmed.aar7047",
+    kind: "human-controlled",
+    topics: ["oral-peptides"],
+    peptides: ["semaglutide"],
+    delivery: ["oral"],
+    design: "Clinical and preclinical (dog) studies of an oral semaglutide tablet with and without SNAC",
+    finding:
+      "Explains how an oral peptide drug gets in at all: semaglutide in a tablet with the absorption enhancer SNAC was absorbed in the stomach, only near the tablet surface, and only when SNAC was included. SNAC protected the peptide from digestive enzymes through local buffering and enhanced absorption only briefly. The absorption went through cells and not through the gaps between them, and was specific to that compound.",
+    caveat:
+      "The abstract does not give how many people or dogs were studied. It describes one drug with one enhancer, and the authors' point is that this mechanism is compound-specific, so it does not mean other peptides, or peptides without such a formulation, are absorbed the same way. The abstract states the absorption of oral peptides is usually hindered by poor absorption and enzyme breakdown.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "dubey-2021",
+    authors: "Dubey SK, Parab S, Dabholkar N, Agrawal M, Singhvi G, Alexander A, Bapat RA, Kesharwani P",
+    year: 2021,
+    title: "Oral peptide delivery: challenges and the way ahead.",
+    journal: "Drug Discov Today",
+    ref: "26(4):931–950",
+    pmid: "33444788",
+    doi: "10.1016/j.drudis.2021.01.001",
+    kind: "review",
+    topics: ["oral-peptides"],
+    peptides: ["oral-peptide-delivery"],
+    delivery: ["oral"],
+    finding:
+      "Describes why swallowing a peptide is difficult: peptides' physical and chemical properties, enzymes that degrade them in the gut, and barriers to crossing the gut wall. It surveys approaches to get round these, including nanocarriers and site-specific or stimulus-triggered delivery.",
+    caveat:
+      "A narrative review of delivery technology, not of clinical benefit; the abstract gives no figures and no list of studies, and does not say which approaches have worked in people.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "tran-2022",
+    authors: "Tran H, ElSayed MEH",
+    year: 2022,
+    title: "Progress and limitations of oral peptide delivery as a potentially transformative therapy.",
+    journal: "Expert Opin Drug Deliv",
+    ref: "19(2):163–178",
+    pmid: "35255753",
+    doi: "10.1080/17425247.2022.2051476",
+    kind: "review",
+    topics: ["oral-peptides"],
+    peptides: ["oral-peptide-delivery"],
+    delivery: ["oral"],
+    finding:
+      "Reviews technologies that help peptides cross the gut, mainly permeation enhancers, and says that despite their success in FDA-approved oral peptide products, oral delivery still faces low-to-single-digit oral bioavailability. The authors name ingestible devices and gut shuttles as possible next steps and say clinical studies are needed to show their safety and efficacy.",
+    caveat:
+      "An expert-opinion review of formulation technology. It does not rate clinical benefit, and the 'low-to-single-digit' bioavailability statement is the authors' summary, with no figures in the abstract. It concerns peptides designed as drugs, not food-derived peptide supplements.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "iwai-2005",
+    authors: "Iwai K, Hasegawa T, Taguchi Y, Morimatsu F, Sato K, Nakamura Y, Higashi A, Kido Y, Nakabo Y, Ohtsuki K",
+    year: 2005,
+    title: "Identification of food-derived collagen peptides in human blood after oral ingestion of gelatin hydrolysates.",
+    journal: "J Agric Food Chem",
+    ref: "53(16):6531–6536",
+    pmid: "16076145",
+    doi: "10.1021/jf050206p",
+    kind: "human-uncontrolled",
+    topics: ["oral-peptides"],
+    peptides: ["collagen"],
+    delivery: ["oral"],
+    population: "Healthy volunteers (number not given in the abstract), fasted for 12 hours",
+    design: "Blood sampling after one dose of gelatin hydrolysate from pig skin, chicken feet or cartilage",
+    dose: "9.4 to 23 g of gelatin hydrolysate",
+    finding:
+      "After fasting volunteers swallowed gelatin hydrolysates, the peptide form of hydroxyproline rose in their blood, peaking at 20 to 60 nmol/mL of plasma after 1 to 2 hours and halving by 4 hours. The main peptide was Pro-Hyp, with smaller amounts of several others.",
+    caveat:
+      "Healthy volunteers, no comparison group and no number of people in the abstract. It shows that fragments of swallowed collagen reach the blood, not that they do anything once there. It used 9.4 to 23 g of gelatin hydrolysate, a protein dose far larger than a typical supplement scoop of a few grams.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "yamamoto-2016",
+    authors: "Yamamoto S, Deguchi K, Onuma M, Numata N, Sakai Y",
+    year: 2016,
+    title: "Absorption and Urinary Excretion of Peptides after Collagen Tripeptide Ingestion in Humans.",
+    journal: "Biol Pharm Bull",
+    ref: "39(3):428–434",
+    pmid: "26934933",
+    doi: "10.1248/bpb.b15-00624",
+    kind: "human-controlled",
+    topics: ["oral-peptides"],
+    peptides: ["collagen"],
+    delivery: ["oral"],
+    design: "Comparison of absorption after three collagen preparations: a tripeptide fraction, a half-tripeptide preparation and a collagen peptide without tripeptides",
+    finding:
+      "Plasma levels of Gly-Pro-Hyp and Pro-Hyp rose after people ingested collagen tripeptide preparations, in proportion to how much Gly-Pro-Hyp they contained, and both peptides also appeared in the urine. A collagen peptide without tripeptides produced a much weaker rise. The authors conclude collagen tripeptides are absorbed efficiently.",
+    caveat:
+      "The abstract gives no number of participants, doses or design details. It measured absorption into blood and urine, not skin, joint or any health outcome, and the preparations were specific tripeptide-rich products, so the result does not apply to every collagen supplement.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "skov-2019",
+    authors: "Skov K, Oxfeldt M, Thøgersen R, Hansen M, Bertram HC",
+    year: 2019,
+    title: "Enzymatic Hydrolysis of a Collagen Hydrolysate Enhances Postprandial Absorption Rate-A Randomized Controlled Trial.",
+    journal: "Nutrients",
+    ref: "11(5)",
+    pmid: "31086034",
+    pmcid: "PMC6566347",
+    doi: "10.3390/nu11051064",
+    kind: "human-controlled",
+    topics: ["oral-peptides"],
+    peptides: ["collagen"],
+    delivery: ["oral"],
+    population: "Ten healthy men",
+    design: "Randomised, blinded crossover trial of enzymatically hydrolysed collagen, non-enzymatically hydrolysed collagen and water",
+    dose: "35 g of collagen protein per day of testing",
+    duration: "Blood sampling for 240 minutes on each of three test days",
+    finding:
+      "Plasma concentrations of nearly all amino acids rose over 240 minutes after both collagen hydrolysates. The absorption rate and bioavailability of glycine, proline and hydroxyproline were significantly higher after the enzymatically hydrolysed product than after the non-enzymatically hydrolysed one (p < 0.05).",
+    caveat:
+      "Ten healthy men in a one-dose crossover with 35 g of protein, which is a large dose, and it measured blood amino acids, not any health benefit. It shows how fast collagen's amino acids are absorbed, not that faster absorption helps. The authors declare no conflict, and the record states the protein company named had no role in the design, analysis or publication.",
+    verifiedOn: "2026-11-12",
+  },
   // ── Men's health ────────────────────────────────────────────────────────────
   {
     id: "deameh-2026",

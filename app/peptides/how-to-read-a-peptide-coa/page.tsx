@@ -245,7 +245,7 @@ export default function PeptideCoaPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
+        {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
       </p>
     </article>
   );

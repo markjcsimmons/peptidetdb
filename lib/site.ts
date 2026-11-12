@@ -4,8 +4,10 @@
  * `disclosure` states the operator's actual relationship (as told to us 2026-11-09): the operator
  * works for Pürblack, pays for the site personally, and receives no funding or support from it.
  * Keep it true: if that changes (Pürblack funds, hosts or reviews anything), update this text first.
- * The same text appears in the footer, on the About and methodology pages, and should accompany any
- * page that names, links or grades a Pürblack product.
+ * The full text appears in the footer of every page and on the home, About, methodology and editorial
+ * policy pages. A page whose own text names, links or grades a Pürblack product also carries the one-line
+ * `disclosureShort` through <DisclosureNote> (rule agreed with the operator 2026-11-12). Pages that never
+ * mention Pürblack rely on the footer.
  */
 export const SITE = {
   /** Short brand, used in titles and structured data. Spell out `fullName` once per page. */
@@ -19,6 +21,8 @@ export const SITE = {
     "This site is run by an employee of Pürblack, a peptide supplement brand, in a personal capacity. Pürblack does not fund, review or direct the site, and its costs are paid by its operator.",
   disclaimer:
     "Educational information only. It is not medical or legal advice, and nothing here is a recommendation to use any peptide. Talk to a clinician before starting a supplement or treatment.",
+  /** One line for pages whose own text mentions Pürblack. Must say the same thing as `disclosure`. */
+  disclosureShort: "Run by a Pürblack employee. Pürblack does not fund or direct this site.",
   lastReviewed: "2026-11-09",
   /** Set when a monitored address exists. Pages that mention contact details show them only when set. */
   contactEmail: "info@peptidetdb.com" as string | null,

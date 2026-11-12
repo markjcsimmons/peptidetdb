@@ -293,7 +293,7 @@ export default function LegalStatusPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer}
+        {SITE.disclaimer}
       </p>
     </article>
   );

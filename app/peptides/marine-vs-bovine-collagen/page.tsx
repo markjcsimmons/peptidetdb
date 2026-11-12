@@ -5,7 +5,6 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
-import { DisclosureNote } from "@/components/disclosure-note";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 
@@ -70,11 +69,6 @@ export default function MarineVsBovinePage() {
       </nav>
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Marine vs bovine collagen: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
-
-      <DisclosureNote>
-        Marine-derived peptide supplements are the product category Pürblack sells, so read this page with that in
-        mind. The studies are linked so you can check them yourself, and we state plainly where evidence is missing.
-      </DisclosureNote>
 
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

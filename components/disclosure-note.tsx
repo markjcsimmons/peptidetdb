@@ -1,10 +1,13 @@
 import { SITE } from "@/lib/site";
 
-/** Boxed disclosure for pages that name or discuss a product category Pürblack sells (see lib/site.ts). */
+/**
+ * One-line disclosure for a page whose own text names or discusses Pürblack (see lib/site.ts).
+ * Pages that never mention Pürblack do not need it: the footer carries the full statement.
+ */
 export function DisclosureNote({ children }: { children?: React.ReactNode }) {
   return (
-    <p className="mt-6 rounded-tile border border-line bg-card p-4 text-sm">
-      <strong>Disclosure.</strong> {SITE.disclosure} {children}
+    <p className="mt-4 text-caption text-muted">
+      <strong>Disclosure:</strong> {SITE.disclosureShort} {children}
     </p>
   );
 }

@@ -107,11 +107,6 @@ export default function OralMarinePeptidesPage() {
       <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Do oral marine peptides work?</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <p className="mt-4 rounded-tile border border-line bg-card p-4 text-sm">
-        <strong>Disclosure.</strong> {SITE.disclosure} This page covers a product category that Pürblack sells, so
-        read it with that in mind; the studies are linked so you can check them yourself.
-      </p>
-
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">
           Partly. Fish-derived collagen peptides have randomised trials for skin, and a few small human studies

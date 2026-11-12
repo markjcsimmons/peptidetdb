@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-12",
+    page: "Per-page Pürblack notes (several pages)",
+    was: "Pages on weight loss, sleep, gut health, marine vs bovine collagen and oral marine peptides carried a boxed note about Pürblack, and the full disclosure was repeated in the footer text of several guide pages.",
+    now: "The operator decided that a one-line note should appear only on a page whose own text mentions Pürblack (now the grading rubric and the collagen documentation page), and that other pages rely on the footer. The full disclosure remains in the footer of every page and on the home, About, methodology and editorial policy pages. Nothing about the operator's relationship with Pürblack has changed.",
+  },
+  {
     date: "2026-11-11",
     page: "/peptides/collagen-peptides and six related pages",
     was: "The collagen, collagen-benefits, collagen-side-effects, muscle-growth, skin, hair and joint-pain pages carried a note saying the page covered a product category that includes products Pürblack sells.",

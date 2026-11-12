@@ -6,7 +6,6 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout, CARD } from "@/components/ui";
 import { RatingBadge } from "@/components/evidence-meter";
-import { DisclosureNote } from "@/components/disclosure-note";
 import { TOPICS, type Level } from "@/lib/topics";
 
 export const metadata: Metadata = {
@@ -223,11 +222,6 @@ export default function PeptidesForSleepPage() {
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for sleep, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <DisclosureNote>
-        Pürblack sells oral peptide supplements made from fish protein, which this page covers as fish hydrolysate. The
-        ranking follows the studies, every claim links to the study, and no product is named.
-      </DisclosureNote>
-
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">
           No peptide has strong human evidence for sleep. Casein hydrolysate and collagen taken before bed each have one or two
@@ -364,7 +358,7 @@ export default function PeptidesForSleepPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
+        {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
       </p>
     </article>
   );

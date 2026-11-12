@@ -290,7 +290,7 @@ export default function PeptidesPillarPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer} Last reviewed {formatDate(SITE.lastReviewed)}.
+        {SITE.disclaimer} Last reviewed {formatDate(SITE.lastReviewed)}.
       </p>
     </article>
   );

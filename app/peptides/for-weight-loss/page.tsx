@@ -6,7 +6,6 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
-import { DisclosureNote } from "@/components/disclosure-note";
 
 export const metadata: Metadata = {
   title: "Peptides for weight loss: what studies show",
@@ -74,11 +73,6 @@ export default function ForWeightLossPage() {
       </nav>
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for weight loss: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
-
-      <DisclosureNote>
-        This site is about peptides in general. Pürblack sells oral marine peptide supplements, which are not weight-loss
-        drugs and are not what this page is about, but read it with that in mind.
-      </DisclosureNote>
 
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

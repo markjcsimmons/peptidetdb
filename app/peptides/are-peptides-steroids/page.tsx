@@ -220,8 +220,7 @@ export default function ArePeptidesSteroidsPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        The steroid definition is from NIDA&rsquo;s DrugFacts page on anabolic steroids (page dated May 2023). {SITE.disclosure}{" "}
-        {SITE.disclaimer} Last reviewed {formatDate("2026-11-10")}.
+        The steroid definition is from NIDA&rsquo;s DrugFacts page on anabolic steroids (page dated May 2023). {SITE.disclaimer} Last reviewed {formatDate("2026-11-10")}.
       </p>
     </article>
   );

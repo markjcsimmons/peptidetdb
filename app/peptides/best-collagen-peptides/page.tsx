@@ -145,7 +145,7 @@ export default function BestCollagenPeptidesPage() {
           <li>
             <strong className="text-fg">No money changes hands.</strong> We take no payment, free product or affiliate
             commission from any brand on this page, and there are no affiliate links. The brands did not see this page
-            before publication. {SITE.disclosure} Pürblack does not sell collagen peptides, so none of the products below
+            before publication. {SITE.disclosureShort} Pürblack does not sell collagen peptides, so none of the products below
             competes with its products.
           </li>
           <li>
@@ -368,7 +368,7 @@ export default function BestCollagenPeptidesPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer} Documents checked {formatDate(COLLAGEN_CHECKED_ON)}.
+        {SITE.disclaimer} Documents checked {formatDate(COLLAGEN_CHECKED_ON)}.
       </p>
     </article>
   );

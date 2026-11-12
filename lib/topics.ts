@@ -552,6 +552,38 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-12",
   },
+  "oral-peptides": {
+    slug: "oral-peptides",
+    measures: "benefit",
+    title: "Oral peptides: do they get absorbed?",
+    intro:
+      "Most peptides are broken down by digestive enzymes and cross the gut wall poorly, which is why many peptide drugs are injected. This topic covers the two questions behind 'do oral peptides work': does a swallowed peptide reach the blood, and do the oral products that exist have trial evidence. Ratings for individual uses (skin, sleep, blood pressure, gut) are on their own topic pages.",
+    ratings: [
+      {
+        subject: "Oral semaglutide tablet (a peptide drug with an absorption enhancer) for weight loss",
+        level: "consistent",
+        why: "A 667-adult, 68-week placebo-controlled phase 3 trial found weight fell 15.1% on 50 mg a day against 2.4% on placebo, with gut side effects in 80% against 46%. It works because the tablet contains an absorption enhancer (SNAC) that lets the peptide be absorbed in the stomach; the tablet's mechanism is specific to that drug. The trial was funded by Novo Nordisk, and the dose is much higher than the diabetes dose.",
+      },
+      {
+        subject: "Dietary collagen peptides: do fragments reach the blood after swallowing?",
+        level: "limited",
+        why: "Three small human studies found collagen-derived peptides (Pro-Hyp, Gly-Pro-Hyp) and collagen-rich amino acids rise in blood or urine after swallowing gelatin or collagen hydrolysates, at doses of 9.4 to 23 g and 35 g where stated, and an enzymatically pre-digested product was absorbed faster in ten men. None measured a health benefit, and none says how much of a few-gram supplement dose is absorbed.",
+      },
+      {
+        subject: "Pürblack's oral targeted peptide capsules (Muscle+, Joint+, Vascular+ and related products)",
+        level: "limited",
+        why: "Pürblack's materials describe natural food-derived peptides taken as capsules and absorbed through the PepT1 transporter, and cite three 2019 papers (Ivko and colleagues) for its muscle, joint and vascular peptides. In the muscle paper, 77 men aged 30 to 58 took 50, 100 or 150 µg a day in 30-day courses for six months, and muscle mass and strength rose at 100 and 150 µg against their own starting values. There was no placebo group, the group sizes are given inconsistently, and the 4.5-fold rise in alpha-actinin-3 was measured in cultured human embryonic cells, not in men. The papers are in journals we could not find in PubMed, and the materials give no measurement of how much of the peptides is absorbed.",
+      },
+    ],
+    gaps: [
+      "Two reviews (2021, 2022) say oral peptide delivery still faces low-to-single-digit oral bioavailability even with the best technologies; they concern peptide drugs, and the abstracts give no figures.",
+      "We did not search for absorption studies of BPC-157, thymosin, GH-axis or other research peptides taken by mouth, and found no human trial of them in our earlier searches for those peptides.",
+      "We did not search other approved oral peptide drugs beyond oral semaglutide and the gut drugs linaclotide and plecanatide.",
+      "Absorption into the blood is not evidence of benefit; the use-specific topic pages rate benefit.",
+      "Safety and product testing are described on the oral peptides page for each entry, not rated here.",
+    ],
+    reviewedOn: "2026-11-12",
+  },
   safety: {
     slug: "safety",
     measures: "safety",

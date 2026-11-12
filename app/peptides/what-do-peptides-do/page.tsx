@@ -158,7 +158,7 @@ export default function WhatDoPeptidesDoPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclosure} {SITE.disclaimer} Last reviewed {formatDate("2026-11-10")}.
+        {SITE.disclaimer} Last reviewed {formatDate("2026-11-10")}.
       </p>
     </article>
   );
