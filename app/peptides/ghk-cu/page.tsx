@@ -7,8 +7,9 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
-import { PeptideInGuides } from "@/components/guide-links";
+import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
+import { ProfileFactsPanel } from "@/components/profile-facts";
 
 export const metadata: Metadata = {
   title: "GHK-Cu copper peptide: what the studies show",
@@ -78,7 +79,8 @@ export default function GhkCuPage() {
         </Link>{" "}
         / GHK-Cu
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">GHK-Cu copper peptide: what the studies show</h1>
+      <PageKindLabel path="/peptides/ghk-cu" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">GHK-Cu copper peptide: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <Callout label="Short answer" className="mt-6">
@@ -90,6 +92,8 @@ export default function GhkCuPage() {
           products.
         </p>
       </Callout>
+
+      <ProfileFactsPanel path="/peptides/ghk-cu" reviewed={REVIEWED} />
 
       <PageContents />
 

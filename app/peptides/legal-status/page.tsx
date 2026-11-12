@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { VerticalTimeline } from "@/components/timeline";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Are peptides legal in the US? Status Nov 2026",
@@ -65,7 +66,8 @@ export default function LegalStatusPage() {
         </Link>{" "}
         / Legal status
       </nav>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Are peptides legal in the US?</h1>
+      <PageKindLabel path="/peptides/legal-status" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Are peptides legal in the US?</h1>
       <p className="mt-2 text-sm text-muted">
         Last reviewed {formatDate(LEGAL_REVIEWED)}. This area is changing quickly, so check the linked FDA pages
         for anything newer.

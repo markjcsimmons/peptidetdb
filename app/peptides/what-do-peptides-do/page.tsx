@@ -8,6 +8,7 @@ import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { TOPIC_SLUGS } from "@/lib/topics";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "What do peptides do?",
@@ -67,7 +68,8 @@ export default function WhatDoPeptidesDoPage() {
         </Link>{" "}
         / What they do
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">What do peptides do?</h1>
+      <PageKindLabel path="/peptides/what-do-peptides-do" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">What do peptides do?</h1>
 
       <Callout label="Short answer" className="mt-7">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

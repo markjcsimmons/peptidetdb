@@ -8,6 +8,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Do oral marine peptides work? What studies show",
@@ -105,7 +106,8 @@ export default function OralMarinePeptidesPage() {
         </Link>{" "}
         / Oral marine peptides
       </nav>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Do oral marine peptides work?</h1>
+      <PageKindLabel path="/peptides/oral-marine-peptides" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Do oral marine peptides work?</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <Callout label="Short answer" className="mt-6">

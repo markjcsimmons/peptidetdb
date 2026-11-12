@@ -6,7 +6,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
-import { RelatedGoals } from "@/components/guide-links";
+import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
 
 export const metadata: Metadata = {
@@ -73,7 +73,8 @@ export default function ForWeightLossPage() {
         </Link>{" "}
         / Peptides for weight loss
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for weight loss: what the studies show</h1>
+      <PageKindLabel path="/peptides/for-weight-loss" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for weight loss: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <Callout label="Short answer" className="mt-6">

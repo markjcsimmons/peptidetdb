@@ -193,3 +193,10 @@ export function TopicGuides({ topic }: { topic: Topic }) {
 }
 
 export { GOALS };
+
+/** Small label above a guide page's title saying what kind of page it is. */
+export function PageKindLabel({ path }: { path: string }) {
+  return (
+    <p className="mt-5 text-caption font-semibold uppercase tracking-[0.08em] text-accent">{KIND_LABEL[guideFor(path).kind]}</p>
+  );
+}

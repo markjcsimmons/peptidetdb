@@ -6,6 +6,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Are peptides steroids?",
@@ -97,7 +98,8 @@ export default function ArePeptidesSteroidsPage() {
         </Link>{" "}
         / Are peptides steroids?
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Are peptides steroids?</h1>
+      <PageKindLabel path="/peptides/are-peptides-steroids" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Are peptides steroids?</h1>
 
       <Callout label="Short answer" className="mt-7">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

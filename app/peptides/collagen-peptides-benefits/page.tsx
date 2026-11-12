@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Collagen peptide benefits: what studies show",
@@ -67,7 +68,8 @@ export default function CollagenBenefitsPage() {
         </Link>{" "}
         / Collagen peptide benefits
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptide benefits: what the studies show</h1>
+      <PageKindLabel path="/peptides/collagen-peptides-benefits" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptide benefits: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <Callout label="Short answer" className="mt-6">

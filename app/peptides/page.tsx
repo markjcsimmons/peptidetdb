@@ -101,7 +101,7 @@ export default function PeptidesPillarPage() {
         }}
       />
 
-      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">What are peptides?</h1>
+      <h1 className="text-4xl font-bold leading-[1.05] sm:text-5xl">What are peptides?</h1>
 
       <Callout label="Short answer" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

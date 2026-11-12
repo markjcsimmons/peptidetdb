@@ -6,6 +6,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { DigestionDiagram, SignalDiagram } from "@/components/diagrams";
 import { Callout, Pill, type Tone } from "@/components/ui";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "How do peptides work?",
@@ -69,7 +70,8 @@ export default function HowPeptidesWorkPage() {
         </Link>{" "}
         / How they work
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How do peptides work?</h1>
+      <PageKindLabel path="/peptides/how-peptides-work" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">How do peptides work?</h1>
 
       <Callout label="Short answer" className="mt-7">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

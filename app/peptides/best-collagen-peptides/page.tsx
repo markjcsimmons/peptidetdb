@@ -5,6 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { Callout, CARD, Pill } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 import {
   CERTIFIED,
   COLLAGEN_CHECKED_ON,
@@ -97,7 +98,8 @@ export default function BestCollagenPeptidesPage() {
         </Link>{" "}
         / Collagen peptides with published batch test results
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">
+      <PageKindLabel path="/peptides/best-collagen-peptides" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">
         Collagen peptides with published batch test results
       </h1>
       <p className="mt-2 text-sm text-muted">

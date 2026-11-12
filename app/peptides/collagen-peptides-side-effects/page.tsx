@@ -6,6 +6,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Collagen peptide side effects: what is known",
@@ -66,7 +67,8 @@ export default function CollagenSideEffectsPage() {
         </Link>{" "}
         / Collagen peptide side effects
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptide side effects: what is known</h1>
+      <PageKindLabel path="/peptides/collagen-peptides-side-effects" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptide side effects: what is known</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <Callout label="Short answer" className="mt-6">

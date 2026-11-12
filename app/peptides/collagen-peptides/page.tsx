@@ -8,6 +8,7 @@ import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { STUDIES } from "@/lib/studies";
 import { PageContents } from "@/components/page-contents";
+import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Collagen peptides: what the evidence shows",
@@ -76,7 +77,8 @@ export default function CollagenPeptidesPage() {
         </Link>{" "}
         / Collagen peptides
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptides: what the evidence shows</h1>
+      <PageKindLabel path="/peptides/collagen-peptides" />
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptides: what the evidence shows</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <Callout label="Short answer" className="mt-6">
