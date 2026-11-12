@@ -19,9 +19,10 @@ export type StudyKind =
   | "human-uncontrolled" // pilot, case series or chart review: no comparison group
   | "review" // narrative or scoping review: summarises others' work, generates no data
   | "animal"
-  | "in-vitro";
+  | "in-vitro"
+  | "lab-analysis"; // tests a product or a detection method: no people, animals or cells
 
-export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "oral-peptides" | "safety";
+export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "oral-peptides" | "eye" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -56,7 +57,8 @@ export type PeptideId =
   | "semaglutide"
   | "tirzepatide"
   | "kpv"
-  | "selank";
+  | "selank"
+  | "thymosin-beta-4";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -102,6 +104,7 @@ export const KIND_LABEL: Record<StudyKind, string> = {
   review: "Review",
   animal: "Animal study",
   "in-vitro": "Cell / lab study",
+  "lab-analysis": "Product or lab analysis",
 };
 
 /** One-line plain-language reading of each design, shown beside the badge. */
@@ -113,6 +116,7 @@ export const KIND_HINT: Record<StudyKind, string> = {
   review: "Summarises other people's work. Generates no new data.",
   animal: "Done in animals. Results often do not carry over to people.",
   "in-vitro": "Done on cells or tissue in a lab. A mechanism hint, not a clinical result.",
+  "lab-analysis": "Analyses a product or develops a test in a lab. It says what is in something, not whether it works.",
 };
 
 export const TOPIC_LABEL: Record<Topic, string> = {
@@ -128,6 +132,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   "mens-health": "Men's health",
   gut: "Gut health & digestion",
   "oral-peptides": "Oral peptides: do they get absorbed?",
+  eye: "Eyes: dry eye & cornea",
   safety: "Safety & regulation",
 };
 
@@ -137,7 +142,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   "fish-hydrolysate": "Fish protein hydrolysate",
   "valyl-tyrosine": "Valyl-tyrosine (sardine peptide)",
   "bpc-157": "BPC-157",
-  "tb-500": "TB-500 / thymosin beta-4",
+  "tb-500": "TB-500 (Ac-LKKTETQ fragment)",
   "ghk-cu": "GHK-Cu (copper peptide)",
   "cosmetic-peptides": "Cosmetic skin and hair peptides",
   "glp-1-agonists": "GLP-1 receptor agonists (drug class)",
@@ -162,6 +167,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   tirzepatide: "Tirzepatide (GIP/GLP-1 drug)",
   kpv: "KPV (Lys-Pro-Val)",
   selank: "Selank",
+  "thymosin-beta-4": "Thymosin beta-4 (full protein)",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -349,7 +355,7 @@ export const STUDIES: Study[] = [
     pmid: "34324435",
     kind: "human-uncontrolled",
     topics: ["joints"],
-    peptides: ["bpc-157", "tb-500"],
+    peptides: ["bpc-157", "thymosin-beta-4"],
     delivery: ["injectable"],
     population: "17 patients with knee pain at one Florida clinic; 16 reached by phone",
     design: "Retrospective chart review with a follow-up phone survey",
@@ -867,7 +873,7 @@ export const STUDIES: Study[] = [
     doi: "10.1096/fj.03-0244fje",
     kind: "animal",
     topics: ["hair"],
-    peptides: ["tb-500"],
+    peptides: ["thymosin-beta-4"],
     delivery: [],
     population: "Normal rats and mice, plus rat whisker-follicle cells grown in the laboratory",
     design: "Animal and cell experiments with thymosin beta-4, a 43-amino-acid protein",
@@ -889,7 +895,7 @@ export const STUDIES: Study[] = [
     doi: "10.1111/jcmm.16241",
     kind: "review",
     topics: ["hair"],
-    peptides: ["tb-500"],
+    peptides: ["thymosin-beta-4"],
     delivery: [],
     design: "Narrative review of thymosin beta-4 in hair-follicle growth",
     finding:
@@ -3776,7 +3782,7 @@ export const STUDIES: Study[] = [
     doi: "10.5435/JAAOS-D-26-00049",
     kind: "review",
     topics: ["joints", "safety"],
-    peptides: ["bpc-157", "tb-500"],
+    peptides: ["bpc-157", "tb-500", "thymosin-beta-4"],
     delivery: [],
     design: "Narrative review (PubMed, Embase and Scopus to June 2026, plus regulatory and anti-doping sources)",
     finding:
@@ -3936,6 +3942,208 @@ export const STUDIES: Study[] = [
       "A 2019 proposal, not a test: the abstract reports no human trial of KPV for wounds. It describes what the authors think is promising.",
     funding: "The record lists a Deutsche Forschungsgemeinschaft grant.",
     verifiedOn: "2026-11-10",
+  },
+  // --- TB-500 and thymosin beta-4 (added 2026-11-12 for the TB-500 profile) ---
+  {
+    id: "delcourt-2023",
+    authors: "Delcourt V, Garcia P, Chabot B, Barnabé A, Bouscarel M, Loup B, Popot MA, Bailly-Chouriberry L",
+    year: 2023,
+    title: "TB500/TB1000 and SGF1000: A scientific approach for a better understanding of misbranded and adulterated drugs.",
+    journal: "Drug Test Anal",
+    ref: "15(4):458–464",
+    pmid: "36482504",
+    doi: "10.1002/dta.3421",
+    kind: "lab-analysis",
+    topics: ["safety"],
+    peptides: ["tb-500"],
+    delivery: [],
+    population: "Three products sold online under the names TB500, TB1000 and SGF1000",
+    design: "Laboratory analysis of products bought over the internet (short communication)",
+    finding:
+      "The contents of the TB500 and TB1000 products did not consistently match earlier descriptions of them. SGF1000 was mostly sheep extracellular matrix and blood proteins, with only a very dilute signal from the growth promoters it was sold as. The authors call such products dangerous because neither the EMA nor the FDA has approved them and nobody officially controls how they are made.",
+    caveat:
+      "Three products from one testing laboratory, and the abstract gives no figures for what TB500 or TB1000 actually contained. It shows that products sold online may not contain what they claim; it does not show how often that happens.",
+    funding: "The record lists the French horse and riding institute (IFCE) as the grant source; no conflict-of-interest statement.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "esposito-2012",
+    authors: "Esposito S, Deventer K, Goeman J, Van der Eycken J, Van Eenoo P",
+    year: 2012,
+    title: "Synthesis and characterization of the N-terminal acetylated 17-23 fragment of thymosin beta 4 identified in TB-500, a product suspected to possess doping potential.",
+    journal: "Drug Test Anal",
+    ref: "4(9):733–738",
+    pmid: "22962027",
+    doi: "10.1002/dta.1402",
+    kind: "lab-analysis",
+    topics: ["safety"],
+    peptides: ["tb-500"],
+    delivery: [],
+    population: "A product sold as TB-500",
+    design: "Identification by high-resolution mass spectrometry, synthesis of the reference peptide and a proposed detection method",
+    finding:
+      "The anti-doping laboratory identified the N-terminally acetylated 17–23 fragment of human thymosin beta-4 (Ac-LKKTETQ) in TB-500, made the same peptide itself as a reference, and proposed a way to detect it in blood and urine. It describes TB-500 as suspected of being used for doping in sport.",
+    caveat:
+      "A chemistry and detection paper: it tests no effect in animals or people, and it analysed one formulation, so it does not show what every product sold as TB-500 contains.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "ho-2012",
+    authors: "Ho EN, Kwok WH, Lau MY, Wong AS, Wan TS, Lam KK, Schiff PJ, Stewart BD",
+    year: 2012,
+    title: "Doping control analysis of TB-500, a synthetic version of an active region of thymosin β₄, in equine urine and plasma by liquid chromatography-mass spectrometry.",
+    journal: "J Chromatogr A",
+    ref: "1265:57–69",
+    pmid: "23084823",
+    doi: "10.1016/j.chroma.2012.09.043",
+    kind: "animal",
+    topics: ["safety"],
+    peptides: ["tb-500"],
+    delivery: [],
+    population: "Horses given a single dose of TB-500 (10 mg of the peptide), plus laboratory metabolism experiments",
+    design: "Development of a doping-control test for racehorses",
+    finding:
+      "The authors describe TB-500 as a veterinary preparation whose key ingredient is the seven-amino-acid peptide LKKTETQ with an added acetyl group, a copy of the region of thymosin beta-4 that binds actin. They developed a test that detects it and its breakdown products in horse plasma (down to 0.02 ng/mL) and urine (0.01 ng/mL), and confirmed it in samples from horses given one dose.",
+    caveat:
+      "A detection method, not a test of whether TB-500 works: the healing effects listed in the abstract are claims made for the product, not results of this study. The abstract does not give the number of horses.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "rahaman-2024",
+    authors: "Rahaman KA, Muresan AR, Min H, Son J, Han HS, Kang MJ, Kwon OS",
+    year: 2024,
+    title: "Simultaneous quantification of TB-500 and its metabolites in in-vitro experiments and rats by UHPLC-Q-Exactive orbitrap MS/MS and their screening by wound healing activities in-vitro.",
+    journal: "J Chromatogr B Analyt Technol Biomed Life Sci",
+    ref: "1235:124033",
+    pmid: "38382158",
+    doi: "10.1016/j.jchromb.2024.124033",
+    kind: "animal",
+    topics: ["skin"],
+    peptides: ["tb-500"],
+    delivery: [],
+    population: "Human serum, laboratory enzyme systems, rats given TB-500, and cultured skin fibroblasts",
+    design: "Laboratory and rat study of how TB-500 is broken down, with wound-healing tests in cells",
+    finding:
+      "The authors note that TB-500's own biological effects had not been documented. In rats the main breakdown product in the first 6 hours was Ac-LK, and Ac-LKK could be detected for up to 72 hours. In fibroblast tests neither TB-500 nor its breakdown products were toxic, and only one breakdown product, Ac-LKKTE, improved wound closure compared with control. The authors suggest that wound-healing effects reported for TB-500 may come from that fragment rather than from TB-500 itself.",
+    caveat:
+      "Cells and rats, not people, and the abstract gives no doses or numbers of rats. A wound-closure test in a dish is a mechanism hint, not a clinical result.",
+    funding: "The record lists no grants; the authors declare no competing interests.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "ruff-2010",
+    authors: "Ruff D, Crockford D, Girardi G, Zhang Y",
+    year: 2010,
+    title: "A randomized, placebo-controlled, single and multiple dose study of intravenous thymosin beta4 in healthy volunteers.",
+    journal: "Ann N Y Acad Sci",
+    ref: "1194:223–229",
+    pmid: "20536472",
+    doi: "10.1111/j.1749-6632.2010.05474.x",
+    kind: "human-controlled",
+    topics: ["safety"],
+    peptides: ["thymosin-beta-4"],
+    delivery: ["injectable"],
+    population: "40 healthy volunteers in four dose groups of 10, each including placebo",
+    design: "Phase 1 randomised, placebo-controlled dose-escalation trial of synthetic thymosin beta-4 given into a vein",
+    dose: "42, 140, 420 or 1,260 mg",
+    duration: "A single dose, then the same dose daily for 14 days",
+    finding:
+      "Adverse events were infrequent and mild or moderate, with no serious events and no dose-limiting toxicity at any dose, given once or daily for 14 days. Blood levels rose in proportion to the dose. The authors present it as a step toward testing the protein after heart attacks.",
+    caveat:
+      "A two-week safety study in 40 healthy people; it tests no benefit, and the abstract does not say how many in each group got placebo. It used the full 43-amino-acid protein given into a vein, not TB-500, so it says nothing about products sold as TB-500.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "guarnera-2010",
+    authors: "Guarnera G, DeRosa A, Camerini R, 8 European sites",
+    year: 2010,
+    title: "The effect of thymosin treatment of venous ulcers.",
+    journal: "Ann N Y Acad Sci",
+    ref: "1194:207–212",
+    pmid: "20536470",
+    doi: "10.1111/j.1749-6632.2010.05490.x",
+    kind: "human-controlled",
+    topics: ["skin"],
+    peptides: ["thymosin-beta-4"],
+    delivery: ["topical"],
+    population: "73 patients with venous leg ulcers at eight sites in Italy and Poland",
+    design: "Phase 2 double-blind, placebo-controlled, dose-escalation trial of thymosin beta-4 applied to the wound",
+    finding:
+      "Every dose had an acceptable safety profile, comparable to placebo. The authors report that a 0.03% dose may speed healing and that about 25% of patients healed completely within 3 months, mainly those with small to moderate wounds.",
+    caveat:
+      "The abstract gives no healing comparison with placebo, no p-values and no group sizes, and its efficacy wording is tentative ('may'), so the 25% figure cannot be judged against placebo. It tested the full protein on wounds, not TB-500.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "sosne-2015",
+    authors: "Sosne G, Dunn SP, Kim C",
+    year: 2015,
+    title: "Thymosin β4 significantly improves signs and symptoms of severe dry eye in a phase 2 randomized trial.",
+    journal: "Cornea",
+    ref: "34(5):491–496",
+    pmid: "25826322",
+    doi: "10.1097/ICO.0000000000000379",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["thymosin-beta-4"],
+    delivery: ["topical"],
+    population: "9 patients with severe dry eye (including dry eye from graft-versus-host disease) at 2 US sites",
+    design: "Phase 2 randomised, double-masked, placebo-controlled trial of 0.1% thymosin beta-4 eye drops (RGN-259) six times a day",
+    duration: "28 days of treatment and 28 days of follow-up",
+    finding:
+      "At day 56 the treated eyes (12) had 35.1% less eye discomfort (p = 0.0141) and 59.1% less corneal staining (p = 0.0108) than eyes given the vehicle drops (6). Tear break-up time and tear volume also improved, and the drops were safe and well tolerated.",
+    caveat:
+      "Nine patients, with results counted by eye, and differences reported 'at various time points', which raises the chance of a chance finding. It tested eye drops of the full protein, not TB-500.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "sosne-2022",
+    authors: "Sosne G, Kleinman HK, Springs C, Gross RH, Sung J, Kang S",
+    year: 2022,
+    title: "0.1% RGN-259 (Thymosin ß4) Ophthalmic Solution Promotes Healing and Improves Comfort in Neurotrophic Keratopathy Patients in a Randomized, Placebo-Controlled, Double-Masked Phase III Clinical Trial.",
+    journal: "Int J Mol Sci",
+    ref: "24(1)",
+    pmid: "36613994",
+    pmcid: "PMC9820614",
+    doi: "10.3390/ijms24010554",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["thymosin-beta-4"],
+    delivery: ["topical"],
+    population: "18 patients with stage 2 or 3 neurotrophic keratopathy (a non-healing defect of the cornea): 10 on RGN-259, 8 on placebo",
+    design: "Phase 3 randomised, placebo-controlled, double-masked trial of 0.1% thymosin beta-4 eye drops",
+    duration: "4 weeks of treatment, follow-up to day 43",
+    finding:
+      "Complete healing at 4 weeks occurred in 6 of 10 treated patients and 1 of 8 on placebo (p = 0.0656, short of the usual threshold for significance), which the authors call a strong trend. Healing with no recurrence at day 43 was significant (p = 0.0359), and discomfort, foreign-body sensation and dryness improved only in the treated group. No significant adverse effects were seen.",
+    caveat:
+      "Eighteen patients, and the main 4-week healing comparison was not significant, so the authors' conclusion that the drops promote rapid healing goes further than that result. Company employees helped design the study. A 2025 Cochrane review rated the evidence from this trial as low certainty. It tested eye drops of the full protein, not TB-500.",
+    funding:
+      "Two authors are employed by ReGenTree, which is developing RGN-259, and one by its parent company HLB Therapeutics. Company employees designed the study with the lead author; an independent contract research organisation ran and analysed it.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "kruoch-2025",
+    authors: "Kruoch Z, Choo AY, Kemp A, Gonzales M, Yim TW, McCann P, Liu SH, Ting DSJ, Kuo IC",
+    year: 2025,
+    title: "Medical and surgical interventions for neurotrophic keratopathy.",
+    journal: "Cochrane Database Syst Rev",
+    ref: "12(12):CD015723",
+    pmid: "41347649",
+    pmcid: "PMC12679690",
+    doi: "10.1002/14651858.CD015723.pub2",
+    kind: "meta-analysis",
+    topics: ["eye"],
+    peptides: ["thymosin-beta-4"],
+    delivery: [],
+    population: "7 randomised trials, 494 people with neurotrophic keratopathy (18 to 156 per trial)",
+    design: "Cochrane systematic review and meta-analysis (databases searched to January 2025)",
+    finding:
+      "Across all the treatments, the evidence on corneal healing, vision and corneal sensation was of low or very low certainty. For 0.1% RGN-259 (thymosin beta-4 eye drops), one trial of 18 people gave a very imprecise result, and the review judged that it may not increase corneal healing (risk ratio 9.00, 95% CI 0.57 to 141.88; low certainty). Five of the trials that reported funding were industry-sponsored.",
+    caveat:
+      "Thymosin beta-4 is one small trial among several treatments in this review. It concerns eye disease, so it says nothing about TB-500 or injected use.",
+    funding:
+      "The National Eye Institute (US) and UK public bodies, as stated in the record; the authors declare no conflicts relating to this review.",
+    verifiedOn: "2026-11-12",
   },
 ];
 

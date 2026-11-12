@@ -224,6 +224,10 @@ export default function PeptidesPillarPage() {
                 GHK-Cu
               </Link>
               ,{" "}
+              <Link href="/peptides/tb-500" className="link">
+                TB-500
+              </Link>
+              ,{" "}
               <Link href="/peptides/selank" className="link">
                 selank
               </Link>

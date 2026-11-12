@@ -45,7 +45,8 @@ const FUNDING: Record<string, Exclude<FundingType, "not-stated">> = {
   "jendricke-2019": "public", "nass-2008": "public", "dominikowski-2026": "public", "villegas-meza-2026": "public",
   "adrian-2019": "public", "badran-2026": "public", "liu-2008": "public", "liu-2007": "public", "ionescu-2006": "public",
   "qi-2026": "public", "laverde-2026": "public", "mateescu-2026": "public", "dalmasso-2008": "public",
-  "viennois-2016": "public", "bohm-2019": "public",
+  "viennois-2016": "public", "bohm-2019": "public", "delcourt-2023": "public", "rahaman-2024": "public",
+  "kruoch-2025": "public", "sosne-2022": "industry",
 };
 
 export const fundingType = (id: string): FundingType => FUNDING[id] ?? "not-stated";
@@ -83,6 +84,8 @@ export const SIZE: Record<string, StudySize> = {
   "wilding-2022": { people: 327 }, "qi-2026": { people: 8993, trials: 6 }, "laverde-2026": { people: 821, trials: 7 },
   "nong-2026": { people: 99791, trials: 262 }, "poolton-2026": { people: 30, trials: 3 }, "zozulia-2008": { people: 62 },
   "medvedev-2014": { people: 60 }, "medvedev-2015": { people: 70 },
+  "ruff-2010": { people: 40 }, "guarnera-2010": { people: 73 }, "sosne-2015": { people: 9 }, "sosne-2022": { people: 18 },
+  "kruoch-2025": { people: 494, trials: 7 },
 };
 
 // Every id must exist in the registry, so a renamed study cannot leave a stale value behind.

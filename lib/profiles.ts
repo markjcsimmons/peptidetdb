@@ -52,6 +52,15 @@ export const PROFILE_FACTS: Record<string, ProfileFacts> = {
       "Sold as a cosmetic ingredient. FDA lists GHK-Cu for injectable routes among compounding nominations that were withdrawn (FDA page current as of 22 April 2026).",
     ratings: [["skin", "Topical GHK-Cu (copper peptide)"]],
   },
+  "/peptides/tb-500": {
+    peptide: "tb-500",
+    what: "A seven-amino-acid fragment of the protein thymosin beta-4 (Ac-LKKTETQ), sold for injury recovery.",
+    routes: ["injected"],
+    status:
+      "Not FDA-approved. FDA's compounding page lists it among withdrawn nominations; FDA's advisory committee recommended it for the 503A bulks list for wound healing in July 2026 (not binding); no final FDA decision.",
+    ratings: [["joints", "TB-500 for tendon and ligament injury"]],
+    safety: "Other unapproved research peptides (CJC-1295, ipamorelin, MK-677, TB-500 and others)",
+  },
   "/peptides/selank": {
     peptide: "selank",
     what: "A peptide promoted for anxiety.",

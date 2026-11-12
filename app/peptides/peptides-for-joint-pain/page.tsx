@@ -184,6 +184,10 @@ const OPTIONS: Option[] = [
         recommended. Rat doses do not translate to people. See{" "}
         <Link href="/peptides/bpc-157" className="link">
           BPC-157: what the studies show
+        </Link>
+        ,{" "}
+        <Link href="/peptides/tb-500" className="link">
+          TB-500: what the studies show
         </Link>{" "}
         and the{" "}
         <Link href="/peptides/legal-status" className="link">

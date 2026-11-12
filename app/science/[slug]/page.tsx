@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     review: "review",
     animal: "animal study",
     "in-vitro": "lab study",
+    "lab-analysis": "lab analysis",
   };
   return {
     title: `${firstAuthorSurname(s)} ${s.year}: ${subject} ${noun[s.kind]}`,

@@ -65,6 +65,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
         level: "limited",
         why: "One small randomised trial (13 patients completing, after laser resurfacing) found no objective difference in redness, wrinkles or skin quality with GHK-Cu products, only higher patient satisfaction. A 2025 review says clinical studies of GHK-Cu and its palmitoyl form are surprisingly absent, and that the case for it rests mostly on cell studies. A 2026 aesthetic-medicine review found only two randomised trials among 20 studies and reports one with fewer wrinkles than controls (not read by us), and a 1992 trial of a copper tripeptide cream in leg ulcers found no difference from placebo. Whether injected or ingested GHK-Cu does anything for skin is not covered by these studies.",
       },
+      {
+        subject: "Topical thymosin beta-4 for venous leg ulcers",
+        level: "limited",
+        why: "One phase 2 placebo-controlled trial in 73 patients found every dose about as safe as placebo, and the authors say a 0.03% dose may speed healing, with about a quarter of patients fully healed within 3 months. The abstract gives no comparison with placebo for healing. This is the full 43-amino-acid protein on wounds; TB-500, a distinct seven-amino-acid fragment, has no human wound study that we found.",
+      },
     ],
     gaps: [
       "No head-to-head trial of marine versus bovine collagen is summarised here.",
@@ -581,6 +586,30 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "We did not search other approved oral peptide drugs beyond oral semaglutide and the gut drugs linaclotide and plecanatide.",
       "Absorption into the blood is not evidence of benefit; the use-specific topic pages rate benefit.",
       "Safety and product testing are described on the oral peptides page for each entry, not rated here.",
+    ],
+    reviewedOn: "2026-11-12",
+  },
+  eye: {
+    slug: "eye",
+    measures: "benefit",
+    title: "Peptides for eyes: dry eye & cornea",
+    intro:
+      "Peptide eye drops have been tested for dry eye and for a corneal disease in which the surface of the eye does not heal. Peptides taken by mouth for eyesight are a different claim, and we found no human trial of them.",
+    ratings: [
+      {
+        subject: "Thymosin beta-4 eye drops (RGN-259) for dry eye and corneal healing",
+        level: "limited",
+        why: "Two small company-linked trials. In 9 patients with severe dry eye, treated eyes had less discomfort and corneal staining than vehicle at day 56. In 18 patients with neurotrophic keratopathy, full healing at 4 weeks was 6 of 10 against 1 of 8 on placebo, which was not statistically significant, though some later measures were. A 2025 Cochrane review rated the evidence from that trial as low certainty and judged the drops may not increase healing.",
+      },
+      {
+        subject: "Oral marine (fish-derived) peptides for eyesight",
+        level: "none",
+        why: "Our PubMed searches found no controlled human trial of oral marine peptides on eye or vision outcomes (see our oral marine peptides page).",
+      },
+    ],
+    gaps: [
+      "We searched only for thymosin beta-4 eye drops. Other eye treatments, such as nerve growth factor drops (a protein, not a peptide), are in the Cochrane review but are not rated here.",
+      "No eye study of TB-500 was found; the eye trials used the full thymosin beta-4 protein.",
     ],
     reviewedOn: "2026-11-12",
   },

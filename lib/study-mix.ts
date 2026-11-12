@@ -22,7 +22,7 @@ export const MIX_GROUPS: { key: string; label: string; term: string; kinds: Stud
     fill: "var(--mix-uncontrolled)",
   },
   { key: "review", term: "narrative-review", label: "Narrative reviews", kinds: ["review"], fill: "var(--track)" },
-  { key: "lab", term: "preclinical", label: "Animal & cell studies", kinds: ["animal", "in-vitro"], fill: "var(--warn)" },
+  { key: "lab", term: "preclinical", label: "Animal, cell & lab studies", kinds: ["animal", "in-vitro", "lab-analysis"], fill: "var(--warn)" },
 ];
 
 export function mixCounts(studies: Study[]) {

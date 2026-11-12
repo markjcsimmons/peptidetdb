@@ -84,6 +84,7 @@ export function ProfileFactsPanel({ path, reviewed }: { path: string; reviewed: 
           <dd className="mt-1 text-sm text-soft">
             <span className="mb-1.5 block">
               <StatusChip peptide={f.peptide} />
+              <span className="sr-only">. </span>
             </span>
             {withTerms(f.status)}{" "}
             <Link href="/peptides/legal-status" className="link">

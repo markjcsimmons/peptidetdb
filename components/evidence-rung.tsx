@@ -11,17 +11,19 @@ const RUNG_OF: Record<StudyKind, number | null> = {
   "meta-analysis": 4,
   "systematic-review": 4,
   review: null,
+  "lab-analysis": null,
 };
 
 /** Shows where a study design sits on the ladder of evidence. A review is not on it: it generates no data. */
 export function EvidenceRung({ kind }: { kind: StudyKind }) {
   const at = RUNG_OF[kind];
+  const off = kind === "lab-analysis" ? "a laboratory analysis tests a product or method, not a treatment" : "a review summarises other studies";
   return (
     <div className="rounded-tile border border-line bg-card p-5" data-noprint>
       <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted">Where this design sits</p>
       <ol
         className="mt-3 grid grid-cols-5 items-end gap-1.5"
-        aria-label={at === null ? "Not on the ladder: a review summarises other studies" : `Rung ${at + 1} of 5: ${RUNGS[at]}`}
+        aria-label={at === null ? `Not on the ladder: ${off}` : `Rung ${at + 1} of 5: ${RUNGS[at]}`}
       >
         {RUNGS.map((r, i) => {
           const on = i === at;
@@ -46,8 +48,9 @@ export function EvidenceRung({ kind }: { kind: StudyKind }) {
       </ol>
       {at === null && (
         <p className="mt-3 text-sm text-soft">
-          This is a review: it summarises other people&apos;s work and generates no new data, so it is not placed on the
-          ladder.
+          {kind === "lab-analysis"
+            ? "This is a laboratory analysis: it tests what a product contains or how to detect it, not whether it works in people, so it is not placed on the ladder."
+            : "This is a review: it summarises other people's work and generates no new data, so it is not placed on the ladder."}
         </p>
       )}
     </div>

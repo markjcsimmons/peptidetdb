@@ -30,19 +30,27 @@ export function Term({ id, children }: { id: string; children: ReactNode }) {
   if (!entry) throw new Error(`Term: no glossary entry "${id}"`);
   return (
     <span ref={ref} className="relative inline" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button
-        type="button"
+      {/* A span with button semantics rather than <button>, so the term's text stays in the markdown versions. */}
+      <span
+        role="button"
+        tabIndex={0}
         aria-expanded={open}
         aria-describedby={open ? tipId : undefined}
         onClick={() => setOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setOpen((v) => !v);
+          }
+        }}
         onFocus={() => setOpen(true)}
         onBlur={(e) => {
           if (!ref.current?.contains(e.relatedTarget as Node)) setOpen(false);
         }}
-        className="cursor-help text-left underline decoration-dotted decoration-1 underline-offset-4"
+        className="cursor-help underline decoration-dotted decoration-1 underline-offset-4"
       >
         {children}
-      </button>
+      </span>
       {open && (
         <span
           id={tipId}

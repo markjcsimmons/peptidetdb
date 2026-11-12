@@ -87,7 +87,7 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
   kpv: { kind: "fda-risk-list", note: WITHDRAWN + COMMITTEE, sources: [FDA_RISK] },
   "tb-500": {
     kind: "fda-risk-list",
-    note: "FDA lists thymosin beta-4 fragment (LKKTETQ), known as TB-500, among withdrawn nominations." + COMMITTEE,
+    note: "Not FDA-approved. FDA lists thymosin beta-4 fragment (LKKTETQ), known as TB-500, among withdrawn nominations. FDA's advisory committee voted in July 2026 to recommend it for the 503A bulks list for wound healing (not binding); no final FDA decision.",
     sources: [FDA_RISK],
   },
   "cjc-1295": { kind: "fda-risk-list", note: WITHDRAWN, sources: [FDA_RISK] },
@@ -135,5 +135,10 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
   },
   "thymic-peptides": { kind: "unclassified", note: "Thymus extracts; status varies by country and product.", sources: [] },
   thymalin: { kind: "unclassified", note: "A thymus extract used in Russia; not classified here for the US.", sources: [] },
+  "thymosin-beta-4": {
+    kind: "investigational",
+    note: "The full 43-amino-acid protein has been tested as eye drops (RGN-259), on wounds and given into a vein in trials. No FDA approval found in openFDA's drugs@FDA records (searched 2026-11-12).",
+    sources: [],
+  },
   "oral-peptide-delivery": { kind: "unclassified", note: "A research topic, not a product.", sources: [] },
 };

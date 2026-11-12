@@ -49,7 +49,7 @@ export const GUIDES: Guide[] = [
     kind: "list",
     blurb: "Topical peptide products, oral collagen, scalp injections, thymosin beta-4 and BPC-157.",
     topics: ["hair"],
-    peptides: ["cosmetic-peptides", "ghk-cu", "collagen", "tb-500", "bpc-157", "glp-1-agonists"],
+    peptides: ["cosmetic-peptides", "ghk-cu", "collagen", "thymosin-beta-4", "bpc-157", "glp-1-agonists"],
   },
   {
     path: "/peptides/peptides-for-joint-pain",
@@ -160,6 +160,14 @@ export const GUIDES: Guide[] = [
     blurb: "Anti-inflammatory tripeptide: laboratory and mouse studies, no human trial found.",
     topics: ["immune", "gut"],
     peptides: ["kpv"],
+  },
+  {
+    path: "/peptides/tb-500",
+    title: "TB-500",
+    kind: "profile",
+    blurb: "A thymosin beta-4 fragment: one rat study and lab work, no human trial found.",
+    topics: ["joints", "safety"],
+    peptides: ["tb-500"],
   },
   {
     path: "/peptides/selank",
