@@ -468,6 +468,58 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-12",
   },
+  gut: {
+    slug: "gut",
+    measures: "benefit",
+    title: "Peptides for gut health & digestion",
+    intro:
+      "Gut health covers very different problems, so ratings here are by condition. The best-evidenced peptides are prescription drugs for specific diagnoses (constipation with irritable bowel syndrome, short bowel syndrome). Supplements and research peptides sold for 'gut healing' have far less human evidence.",
+    ratings: [
+      {
+        subject: "Linaclotide and plecanatide (prescription) for IBS with constipation and chronic constipation",
+        level: "consistent",
+        why: "Meta-analyses of placebo-controlled trials agree: linaclotide beat placebo in 1,773 people with IBS-C (risk ratio for non-response 0.80 on the FDA endpoint), and plecanatide gave about 1.4 more bowel movements a week and better stool consistency across 6,319 people. Diarrhoea is the main side effect, and a network meta-analysis of 33 trials ranked other drugs (laxatives, prucalopride) at or above them.",
+      },
+      {
+        subject: "GLP-2 drugs (teduglutide and others) for short bowel syndrome",
+        level: "consistent",
+        why: "A 2024 network meta-analysis of 23 trials in 843 patients found teduglutide raised blood citrulline at every dose against controls with no significant extra safety problems, and a 2022 meta-analysis of ten studies found 64% to 82% of intravenous-nutrition-dependent adults cut their parenteral support by at least a fifth. This is a rare, serious condition treated under specialist care; the trials are small and the headline outcomes include blood markers.",
+      },
+      {
+        subject: "Larazotide acetate (investigational) for coeliac disease",
+        level: "mixed",
+        why: "A 2022 meta-analysis of four trials in 626 people found no change in a lab test of gut leakiness, and symptom gains only in people eating gluten as a challenge, not in those on a gluten-free diet. We found reports that a phase 3 trial was discontinued after an interim analysis. It is not something to buy as a supplement.",
+      },
+      {
+        subject: "Fish and milk protein hydrolysates for IBS symptoms",
+        level: "limited",
+        why: "Two small trials disagree. In 28 people, 2.5 g of cod protein hydrolysate for six weeks did no better than placebo on IBS severity. In a 10-day crossover of about 41 people, a partly hydrolysed milk protein drink lowered symptom scores more than an ordinary one, but no blood or urine marker differed, and dairy-industry employees are among the authors.",
+      },
+      {
+        subject: "BPC-157 for gut conditions (ulcers, colitis, fistulas)",
+        level: "preclinical",
+        why: "Rat experiments, summarised in two reviews that share authors, describe healing of gut joins and fistulas. A 2012 review mentions a phase II programme (PL 14736) but gives no results, and we found no controlled human trial of BPC-157 for a gut condition in PubMed.",
+      },
+      {
+        subject: "KPV for colitis",
+        level: "preclinical",
+        why: "Cell and mouse studies show less inflammation and less colitis in two chemically induced models, and a mouse study found KPV prevented colitis-associated cancer in normal mice. We found no human trial; our searches are noisy because KPV also abbreviates other terms.",
+      },
+      {
+        subject: "Oral collagen peptides for gut health, bloating or gut barrier",
+        level: "none",
+        why: "Our PubMed searches on 12 November 2026 for human trials of collagen peptides with gut-health outcomes found none (the searches returned mostly unrelated records). That is not proof none exists.",
+      },
+    ],
+    gaps: [
+      "GLP-1 drugs for weight and diabetes also act on the gut and cause gallstones and reflux more often than placebo (Chiang 2025). That is a side effect, not a benefit, so it is cited on the page but not rated here.",
+      "We did not search other approved peptide drugs for the gut (for example octreotide, secretin or the newer once-weekly GLP-2 analogues beyond what the network meta-analysis covers) or trials in inflammatory bowel disease.",
+      "Probiotics, glutamine, colostrum and lactoferrin are sold for gut health but are not peptides in the sense used here, so they were not searched.",
+      "Prescription trials are funded by the drug makers in several cases; we report funding for each study on its page.",
+      "The collagen and BPC-157 'none' and 'preclinical' ratings rest on narrow PubMed searches.",
+    ],
+    reviewedOn: "2026-11-12",
+  },
   safety: {
     slug: "safety",
     measures: "safety",

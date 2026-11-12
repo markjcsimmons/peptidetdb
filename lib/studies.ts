@@ -21,7 +21,7 @@ export type StudyKind =
   | "animal"
   | "in-vitro";
 
-export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "safety";
+export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "gut" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -34,6 +34,9 @@ export type PeptideId =
   | "cosmetic-peptides"
   | "glp-1-agonists"
   | "bremelanotide"
+  | "gc-c-agonists"
+  | "glp-2-analogues"
+  | "larazotide"
   | "type-ii-collagen"
   | "dsip"
   | "casein-hydrolysate"
@@ -120,6 +123,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   immune: "Immune function",
   weight: "Weight loss & GLP-1 drugs",
   "womens-health": "Women's health",
+  gut: "Gut health & digestion",
   safety: "Safety & regulation",
 };
 
@@ -134,6 +138,9 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   "cosmetic-peptides": "Cosmetic skin and hair peptides",
   "glp-1-agonists": "GLP-1 receptor agonists (drug class)",
   bremelanotide: "Bremelanotide (Vyleesi)",
+  "gc-c-agonists": "Linaclotide and plecanatide (guanylate cyclase-C agonists)",
+  "glp-2-analogues": "GLP-2 analogues (teduglutide and others)",
+  larazotide: "Larazotide acetate",
   "type-ii-collagen": "Undenatured type II collagen (UC-II)",
   dsip: "DSIP (delta sleep-inducing peptide)",
   "casein-hydrolysate": "Casein hydrolysate (Lactium)",
@@ -1609,6 +1616,276 @@ export const STUDIES: Study[] = [
     verifiedOn: "2026-11-12",
   },
 
+  // ── Gut health ──────────────────────────────────────────────────────────────
+  {
+    id: "atluri-2014",
+    authors: "Atluri DK, Chandar AK, Bharucha AE, Falck-Ytter Y",
+    year: 2014,
+    title: "Effect of linaclotide in irritable bowel syndrome with constipation (IBS-C): a systematic review and meta-analysis.",
+    journal: "Neurogastroenterol Motil",
+    ref: "26(4):499–509",
+    pmid: "24351035",
+    doi: "10.1111/nmo.12292",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["gc-c-agonists"],
+    delivery: ["oral"],
+    population: "Three randomised trials, 1,773 adults with irritable bowel syndrome with constipation",
+    design: "Systematic review and meta-analysis of placebo-controlled randomised trials lasting 12 weeks or longer",
+    finding:
+      "Fewer people on linaclotide than on placebo failed to respond by the FDA endpoint (risk ratio 0.80), by adequate relief of IBS symptoms (0.73) and by a meaningful gain in IBS quality of life (0.78). Diarrhoea severe enough to stop treatment was far more common on linaclotide (risk ratio 14.75). The authors rate the evidence moderate for the FDA endpoint and symptom relief, high for diarrhoea and low for quality of life, and call the drug moderately effective.",
+    caveat:
+      "Only three trials, mostly white women, with no data on earlier treatments, and too few patients to detect rare side effects. The authors say long-term effects still need study. The record states no funding.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "luthra-2019",
+    authors: "Luthra P, Camilleri M, Burr NE, Quigley EMM, Black CJ, Ford AC",
+    year: 2019,
+    title: "Efficacy of drugs in chronic idiopathic constipation: a systematic review and network meta-analysis.",
+    journal: "Lancet Gastroenterol Hepatol",
+    ref: "4(11):831–844",
+    pmid: "31474542",
+    doi: "10.1016/S2468-1253(19)30246-8",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["gc-c-agonists"],
+    delivery: [],
+    population: "33 randomised trials, 17,214 adults with chronic idiopathic constipation, comparing twelve drugs including linaclotide and plecanatide",
+    design: "Systematic review and network meta-analysis of randomised trials lasting at least 4 weeks",
+    finding:
+      "Almost all of the drugs beat placebo. At 4 weeks the stimulant laxatives bisacodyl and sodium picosulfate ranked first, and at 12 weeks prucalopride 2 mg did (relative risk of failing to reach three or more complete spontaneous bowel movements a week 0.82). On a second definition of response, linaclotide 290 µg and prucalopride 2 mg scored similarly. Bisacodyl ranked worst for adverse events overall and for abdominal pain.",
+    caveat:
+      "A network meta-analysis compares drugs indirectly, because no head-to-head trials exist. Most trials ran only 4 to 12 weeks, so long-term comparison is unknown, and the authors suggest the laxative trials may have included milder patients. The peptide drugs were two of twelve drugs and were not the top-ranked ones.",
+    funding: "None, as stated in the record.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "akram-2026",
+    authors: "Akram U, Ul Ain H, Ahmed S, Fatima E, Raza MA, Ahmad E, Ashraf H, Bharadwaj HR, Asif U, Chaudhary AJ, Buckles D",
+    year: 2026,
+    title: "Efficacy and tolerability of plecanatide for irritable bowel syndrome with constipation and chronic idiopathic constipation: a systematic review and meta-analysis.",
+    journal: "Eur J Gastroenterol Hepatol",
+    ref: "38(6):661–669",
+    pmid: "41604554",
+    doi: "10.1097/MEG.0000000000003115",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["gc-c-agonists"],
+    delivery: ["oral"],
+    population: "Seven randomised trials, 6,319 adults (3,707 with chronic idiopathic constipation, 2,612 with IBS-C)",
+    design: "Systematic review and meta-analysis of placebo-controlled randomised trials, searched to March 2025",
+    finding:
+      "Against placebo, plecanatide gave about 1.4 more spontaneous bowel movements a week in chronic idiopathic constipation (mean difference 1.39), improved stool consistency in both conditions and raised the chance of being an overall responder (risk ratio 1.73 in constipation, 1.64 in IBS-C). Diarrhoea was about four times as likely (risk ratio 4.11); other adverse events did not differ from placebo.",
+    caveat:
+      "Every trial compared plecanatide with placebo, so it does not show how the drug compares with laxatives or other prescription options. The abstract does not give trial lengths or who funded the trials.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "brenner-2024",
+    authors: "Brenner DM, Sharma A, Rao SSC, Laitman AP, Heimanson Z, Allen C, Sayuk GS",
+    year: 2024,
+    title: "Plecanatide Improves Abdominal Bloating and Bowel Symptoms of Irritable Bowel Syndrome with Constipation.",
+    journal: "Dig Dis Sci",
+    ref: "69(5):1731–1738",
+    pmid: "38594429",
+    pmcid: "PMC11098865",
+    doi: "10.1007/s10620-024-08330-y",
+    kind: "human-controlled",
+    topics: ["gut"],
+    peptides: ["gc-c-agonists"],
+    delivery: ["oral"],
+    population: "1,436 adults with IBS-C from two pooled phase 3 trials; 1,104 (76.9%) had moderate-to-severe bloating at the start",
+    design: "Post-hoc subgroup analysis of two pooled randomised, placebo-controlled phase 3 trials",
+    dose: "3 mg of plecanatide",
+    duration: "12 weeks",
+    finding:
+      "In people with moderate-to-severe bloating, plecanatide lowered bloating (change −1.7 against −1.3 on an 11-point scale, p = 0.002) and abdominal pain (−1.7 against −1.3) and raised complete spontaneous bowel movements. In people with mild bloating it helped pain and bowel movements but not bloating. More people on the drug improved by at least 30% in both bloating and pain (33.6% against 26.8% in the moderate-to-severe group).",
+    caveat:
+      "A post-hoc analysis: the bloating subgroups were drawn after the trials ended, so the results are exploratory. The gap between drug and placebo on bloating is about 0.4 points on the 11-point scale, and the abstract does not say how much change matters to a patient. The sponsor paid for the work, as the funding line says.",
+    funding: "The record lists Salix Pharmaceuticals as grant source, and three authors are Salix employees.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "sabra-2024",
+    authors: "Sabra HK, Remeih GS, Kereet IM, Hamad M, Ahmed YA, Jahangir K, Bakr MA, Alagelli FA, Sherif H, Elsaid M",
+    year: 2024,
+    title: "Efficacy and safety of glucagon-like peptide 2 in patients with short bowel syndrome: a systematic review and network meta-analysis.",
+    journal: "J Gastrointest Surg",
+    ref: "28(7):1194–1205",
+    pmid: "38663565",
+    doi: "10.1016/j.gassur.2024.04.009",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["glp-2-analogues"],
+    delivery: ["injectable"],
+    population: "23 trials, 843 patients with short bowel syndrome, aged 4 to 62",
+    design: "Systematic review and network meta-analysis of randomised and non-randomised trials",
+    duration: "1 to 32 weeks",
+    finding:
+      "Teduglutide raised blood citrulline, a marker of working gut lining, at all three doses compared with control groups, with the largest rise at 0.1 mg/kg/day (mean difference 14.77). Glepaglutide lowered alkaline phosphatase at its lowest dose. No dose of teduglutide or apraglutide had significantly more safety problems than control; bloodstream infection linked to the intravenous line was the most common adverse event. The authors conclude GLP-2 drugs seem safe and effective.",
+    caveat:
+      "Small numbers (843 patients across 23 trials), follow-up of 1 to 32 weeks, and randomised and non-randomised trials were pooled. The outcomes highlighted are blood markers, not days of intravenous nutrition saved. The abstract flags an inconsistent glepaglutide estimate.",
+    funding: "The authors declare no competing interests.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "bioletto-2022",
+    authors: "Bioletto F, D'Eusebio C, Merlo FD, Aimasso U, Ossola M, Pellegrini M, Ponzo V, Chiarotto A, De Francesco A, Ghigo E, Bo S",
+    year: 2022,
+    title: "Efficacy of Teduglutide for Parenteral Support Reduction in Patients with Short Bowel Syndrome: A Systematic Review and Meta-Analysis.",
+    journal: "Nutrients",
+    ref: "14(4)",
+    pmid: "35215445",
+    pmcid: "PMC8880479",
+    doi: "10.3390/nu14040796",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["glp-2-analogues"],
+    delivery: ["injectable"],
+    population: "Ten studies of adults with short bowel syndrome who depended on parenteral (intravenous) support",
+    design: "Systematic review and meta-analysis of response and weaning rates",
+    finding:
+      "Among adults who depended on intravenous nutrition, 64% had cut it by at least 20% at 6 months, 77% at 1 year and 82% at 2 years or more. Complete independence from intravenous support was rarer: 11% at 6 months, 17% at 1 year and 21% at 2 years or more. Having the colon connected lowered the response rate but raised the chance of coming off intravenous nutrition entirely.",
+    caveat:
+      "These are pooled rates in treated patients across ten studies; the abstract does not say how many were controlled, so it cannot show how many would have improved without the drug. Searched to July 2021, and it covers a rare condition in people with a short or surgically shortened bowel, not general gut health.",
+    funding: "Three authors received support for attending meetings from Takeda, as stated in the record.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "hoilat-2022",
+    authors: "Hoilat GJ, Altowairqi AK, Ayas MF, Alhaddab NT, Alnujaidi RA, Alharbi HA, Alyahyawi N, Kamal A, Alhabeeb H, Albazee E, Almustanyir S, Abu-Zaid A",
+    year: 2022,
+    title: "Larazotide acetate for treatment of celiac disease: A systematic review and meta-analysis of randomized controlled trials.",
+    journal: "Clin Res Hepatol Gastroenterol",
+    ref: "46(1):101782",
+    pmid: "34339872",
+    doi: "10.1016/j.clinre.2021.101782",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["larazotide"],
+    delivery: ["oral"],
+    population: "Four randomised trials, 626 adults with coeliac disease (465 on larazotide, 161 on placebo)",
+    design: "Systematic review and meta-analysis of randomised trials, searched to August 2020",
+    finding:
+      "Larazotide did not change the lactulose-to-mannitol ratio, a lab test of gut leakiness, whether people were eating gluten as a challenge or following a gluten-free diet. In people given a gluten challenge, symptom scores improved more than with placebo and gluten-related diarrhoea was reduced; in people on a gluten-free diet there was no difference. Other adverse events were similar to placebo.",
+    caveat:
+      "Only four trials, and the symptom benefit appeared only in the gluten-challenge setting, which is an artificial one. The authors say more trials are needed. The record states no funding.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "chiang-2025",
+    authors: "Chiang CH, Jaroenlapnopparat A, Colak SC, Yu CC, Xanthavanij N, Wang TH, See XY, Lo SW, Ko A, Chang YC, Song J, Hsia YP, Chiang CH",
+    year: 2025,
+    title: "Glucagon-Like Peptide-1 Receptor Agonists and Gastrointestinal Adverse Events: A Systematic Review and Meta-Analysis.",
+    journal: "Gastroenterology",
+    ref: "169(6):1268–1281",
+    pmid: "40499738",
+    doi: "10.1053/j.gastro.2025.06.003",
+    kind: "meta-analysis",
+    topics: ["gut"],
+    peptides: ["glp-1-agonists"],
+    delivery: ["injectable"],
+    population: "55 placebo-controlled randomised trials, 106,395 people with type 2 diabetes, overweight or obesity, or fatty liver disease",
+    design: "Systematic review and meta-analysis",
+    finding:
+      "Compared with placebo, GLP-1 drugs raised the risk of gallstones (risk ratio 1.46, about 2 more cases per 1,000 people) and probably of reflux (2.19, about 4 more per 1,000). They probably had little or no effect on the other serious gut and bile-system events counted, such as pancreatitis, ulcers, obstruction or gastroparesis. The raised risks looked larger in people with overweight or obesity, with weight-loss drugs and at high doses, but those differences were not statistically significant.",
+    caveat:
+      "The outcomes counted are the serious events the authors listed; the abstract does not report common side effects such as nausea, vomiting or diarrhoea. The trials were placebo-controlled and of limited length, so rare or late events may be missed. The record states no funding.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "dale-2019",
+    authors: "Dale HF, Jensen C, Hausken T, Valeur J, Hoff DAL, Lied GA",
+    year: 2019,
+    title: "Effects of a Cod Protein Hydrolysate Supplement on Symptoms, Gut Integrity Markers and Fecal Fermentation in Patients with Irritable Bowel Syndrome.",
+    journal: "Nutrients",
+    ref: "11(7)",
+    pmid: "31319590",
+    pmcid: "PMC6682970",
+    doi: "10.3390/nu11071635",
+    kind: "human-controlled",
+    topics: ["gut"],
+    peptides: ["fish-hydrolysate"],
+    delivery: ["oral"],
+    population: "28 adults with irritable bowel syndrome",
+    design: "Double-blind, randomised, parallel-group trial against placebo",
+    dose: "2.5 g a day",
+    duration: "6 weeks",
+    finding:
+      "IBS symptom scores fell in both groups (298 to 236 on the cod hydrolysate, 295 to 202 on placebo), and the groups did not differ at the end (p = 0.395). Blood markers of gut integrity and inflammation and stool short-chain fatty acids did not change in either group. The authors conclude a low dose for six weeks had no effect against placebo.",
+    caveat:
+      "A very small trial (about 13 people on the supplement and 15 on placebo; the PubMed abstract has lost some symbols, so check the group sizes in the full paper), so a real effect could be missed. The placebo group improved at least as much on symptoms, which is a reminder of how strong placebo responses are in IBS.",
+    funding: "The record lists no grants and states the authors have no conflicts of interest.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "laatikainen-2020",
+    authors: "Laatikainen R, Salmenkari H, Sibakov T, Vapaatalo H, Turpeinen A",
+    year: 2020,
+    title: "Randomised Controlled Trial: Partial Hydrolysation of Casein Protein in Milk Decreases Gastrointestinal Symptoms in Subjects with Functional Gastrointestinal Disorders.",
+    journal: "Nutrients",
+    ref: "12(7)",
+    pmid: "32708428",
+    pmcid: "PMC7400865",
+    doi: "10.3390/nu12072140",
+    kind: "human-controlled",
+    topics: ["gut"],
+    peptides: ["casein-hydrolysate"],
+    delivery: ["oral"],
+    population: "Adults with functional gastrointestinal disorders (about 41)",
+    design: "Randomised, placebo-controlled crossover trial of hydrolysed against ordinary lactose-free milkshake",
+    dose: "500 mL, 50 g protein, daily",
+    duration: "10 days per product, with a 10-day washout",
+    finding:
+      "Both the IBS symptom score (p = 0.001) and the daily total symptom score (p = 0.002) fell more on the partly hydrolysed high-protein milkshake than on the ordinary one. Flatulence and heartburn fell only on the hydrolysed product. Blood and urine markers of inflammation, gut permeability and immune activation did not differ between the two. The authors say the mechanism is unknown.",
+    caveat:
+      "Ten days per product in a crossover of about 41 people (the PubMed abstract has lost the exact count), and the drink was a 50 g protein milkshake, not a peptide supplement. The improvement is in symptoms the participants recorded themselves and not in any measured marker.",
+    funding: "Two authors are employees of Valio Ltd, and the first author owns a company providing dietetic services to IBS patients, as stated in the record.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "sikiric-2012",
+    authors: "Sikiric P, Seiwerth S, Rucman R, Turkovic B, Rokotov DS, Brcic L, Sever M, Klicek R, Radic B, Drmic D, Ilic S, Kolenc D, Stambolija V, Zoricic Z, Vrcic H, Sebecic B",
+    year: 2012,
+    title: "Focus on ulcerative colitis: stable gastric pentadecapeptide BPC 157.",
+    journal: "Curr Med Chem",
+    ref: "19(1):126–132",
+    pmid: "22300085",
+    doi: "10.2174/092986712803414015",
+    kind: "review",
+    topics: ["gut"],
+    peptides: ["bpc-157"],
+    delivery: [],
+    finding:
+      "Argues that BPC-157 is stable in gastric juice and may help in inflammatory bowel disease. It refers to a drug candidate, PL 14736, that it says has only been tested in clinical phase II, and to animal work on the healing of intestinal joins, fistulas and short bowel syndrome. It reports no toxic effect and no side effect in trials.",
+    caveat:
+      "The abstract gives no trial results, no numbers, no participant count and no statement that the phase II results were published. Claims about people are assertions without data here. Three of the authors (Sikiric, Seiwerth, Sever) also wrote the 2024 anastomoses review (Bajramagic 2024), which lists the University of Zagreb as grant source. We found no controlled human trial of BPC-157 for a gut condition in PubMed.",
+    unverified:
+      "The abstract calls BPC-157 'free of side effects' with 'a very safe profile'; it gives no trial data that would support either statement.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "bajramagic-2024",
+    authors: "Bajramagic S, Sever M, Rasic F, Staresinic M, Skrtic A, Beketic Oreskovic L, Oreskovic I, Strbe S, Loga Zec S, Hrabar J, Coric L, Prenc M, Blagaic V, Brcic K, Boban Blagaic A, Seiwerth S, Sikiric P",
+    year: 2024,
+    title: "Stable Gastric Pentadecapeptide BPC 157 and Intestinal Anastomoses Therapy in Rats-A Review.",
+    journal: "Pharmaceuticals (Basel)",
+    ref: "17(8)",
+    pmid: "39204186",
+    pmcid: "PMC11357423",
+    doi: "10.3390/ph17081081",
+    kind: "review",
+    topics: ["gut"],
+    peptides: ["bpc-157"],
+    delivery: [],
+    finding:
+      "Reviews rat experiments in which BPC-157 was given after surgery that joins segments of the gut (oesophagus to stomach, colon, small bowel) and for fistulas, and describes healing in all of them. It names conditions it says the treatment counteracted, among them oesophagitis, colitis and short bowel syndrome, but the abstract gives no numbers.",
+    caveat:
+      "Rats only. The abstract does not say how studies were chosen, so it cannot show whether unfavourable results were left out. Several authors (Sikiric, Seiwerth, Sever) also wrote the 2012 ulcerative colitis review (Sikiric 2012). The record lists the University of Zagreb as grant source and declares no conflicts of interest.",
+    funding: "University of Zagreb, as stated in the record.",
+    verifiedOn: "2026-11-12",
+  },
   // ── Oral marine (fish-derived) peptides ────────────────────────────────────
   {
     id: "evans-2021",
@@ -3143,7 +3420,7 @@ export const STUDIES: Study[] = [
     pmcid: "PMC2431115",
     doi: "10.1053/j.gastro.2007.10.026",
     kind: "animal",
-    topics: ["immune"],
+    topics: ["immune", "gut"],
     peptides: ["kpv"],
     delivery: ["oral"],
     design: "Human intestinal and T-cell lines plus two chemical models of colitis in mice, with KPV added to drinking water",
@@ -3165,7 +3442,7 @@ export const STUDIES: Study[] = [
     pmcid: "PMC4957955",
     doi: "10.1016/j.jcmgh.2016.01.006",
     kind: "animal",
-    topics: ["immune"],
+    topics: ["immune", "gut"],
     peptides: ["kpv"],
     delivery: [],
     design: "Mice engineered to overexpress or lack the PepT1 transporter, with colitis-associated cancer induced chemically; human colon biopsies were also analysed",
