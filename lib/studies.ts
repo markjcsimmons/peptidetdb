@@ -21,7 +21,7 @@ export type StudyKind =
   | "animal"
   | "in-vitro";
 
-export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "gut" | "safety";
+export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -35,6 +35,7 @@ export type PeptideId =
   | "glp-1-agonists"
   | "bremelanotide"
   | "gc-c-agonists"
+  | "kisspeptin"
   | "glp-2-analogues"
   | "larazotide"
   | "type-ii-collagen"
@@ -123,6 +124,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   immune: "Immune function",
   weight: "Weight loss & GLP-1 drugs",
   "womens-health": "Women's health",
+  "mens-health": "Men's health",
   gut: "Gut health & digestion",
   safety: "Safety & regulation",
 };
@@ -139,6 +141,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   "glp-1-agonists": "GLP-1 receptor agonists (drug class)",
   bremelanotide: "Bremelanotide (Vyleesi)",
   "gc-c-agonists": "Linaclotide and plecanatide (guanylate cyclase-C agonists)",
+  kisspeptin: "Kisspeptin-10",
   "glp-2-analogues": "GLP-2 analogues (teduglutide and others)",
   larazotide: "Larazotide acetate",
   "type-ii-collagen": "Undenatured type II collagen (UC-II)",
@@ -1616,6 +1619,184 @@ export const STUDIES: Study[] = [
     verifiedOn: "2026-11-12",
   },
 
+  // ── Men's health ────────────────────────────────────────────────────────────
+  {
+    id: "deameh-2026",
+    authors: "Deameh MG, Ramez M, Rowaiee R, Bani Irshid BA, Mohamed H, Abdelshafi A, Al-Osoufi MA, Mohamed T, Hegazin SB, Raheem O",
+    year: 2026,
+    title: "Effects of glucagon-like peptide-1 receptor agonists on male reproductive hormones, semen parameters, and metabolic outcomes: a systematic review.",
+    journal: "J Sex Med",
+    ref: "23(2)",
+    pmid: "41498523",
+    doi: "10.1093/jsxmed/qdaf381",
+    kind: "systematic-review",
+    topics: ["mens-health"],
+    peptides: ["glp-1-agonists"],
+    delivery: [],
+    population: "Ten studies, 639 adult men, of liraglutide, semaglutide, dulaglutide or exenatide",
+    design: "Systematic review of randomised trials and cohort studies, searched to April 2025",
+    finding:
+      "GLP-1 drugs were consistently linked to higher total testosterone, especially in men with obesity, type 2 diabetes or functional hypogonadism. Changes in free testosterone were inconsistent and often offset by a rise in sex hormone-binding globulin. Luteinising and follicle-stimulating hormone were kept or raised, unlike with testosterone therapy. Semen measures improved in obese or hypogonadal men but not in healthy ones.",
+    caveat:
+      "Ten small studies, mixing randomised trials and cohort studies. The authors suggest the drugs could be fertility-sparing alternatives to testosterone therapy in some men, which is their proposal and not a tested result, and they call for longer controlled studies with standard fertility measures. The record states no funding.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "la-vignera-2026",
+    authors: "La Vignera S, Condorelli R",
+    year: 2026,
+    title: "Effects of Incretin-Based Therapies on Testosterone Levels and Incretin Response in Men with Hypogonadism: A Systematic Literature Review Following PRISMA 2020 Guidelines.",
+    journal: "Pharmaceuticals (Basel)",
+    ref: "19(8)",
+    pmid: "42653816",
+    pmcid: "PMC13516258",
+    doi: "10.3390/ph19081321",
+    kind: "systematic-review",
+    topics: ["mens-health"],
+    peptides: ["glp-1-agonists", "semaglutide", "tirzepatide"],
+    delivery: [],
+    population: "29 studies of adult men (14 primary studies, 5 systematic reviews or meta-analyses, 10 narrative reviews or opinion pieces)",
+    design: "Systematic literature review following PRISMA 2020, searched to 31 December 2024",
+    finding:
+      "Semaglutide, liraglutide and tirzepatide significantly raised total testosterone in men with obesity-related functional hypogonadism, by a mean of 2.5 to 5.2 nmol/L. The authors say this is largely driven by weight loss and better insulin resistance rather than a direct hormonal action. Whether low testosterone changes how well men respond to these drugs is unclear: no adequately powered trial split men by baseline testosterone.",
+    caveat:
+      "No meta-analysis was possible because the studies differed too much. The randomised trials were small (12 to 42 men) and short (12 to 24 weeks), and the authors rate the overall risk of bias moderate to high. The PubMed abstract has lost some of its section headings. Of the 29 studies included, 10 were narrative reviews or opinion pieces.",
+    funding: "The authors declare no conflicts of interest.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "gregoric-2025",
+    authors: "Gregorič N, Šikonja J, Janež A, Jensterle M",
+    year: 2025,
+    title: "Semaglutide improved sperm morphology in obese men with type 2 diabetes mellitus and functional hypogonadism.",
+    journal: "Diabetes Obes Metab",
+    ref: "27(2):519–528",
+    pmid: "39511836",
+    pmcid: "PMC11701185",
+    doi: "10.1111/dom.16042",
+    kind: "human-controlled",
+    topics: ["mens-health"],
+    peptides: ["semaglutide"],
+    delivery: ["injectable"],
+    population: "25 men with type 2 diabetes, obesity and functional hypogonadism, median age 50",
+    design: "Randomised, open-label trial of semaglutide against injected testosterone undecanoate",
+    dose: "Semaglutide 1 mg a week, or testosterone undecanoate 1,000 mg every 10 to 12 weeks",
+    duration: "24 weeks",
+    finding:
+      "Morphologically normal sperm rose on semaglutide (2% to 4%, p = 0.012), while sperm concentration and total number fell on testosterone. Against testosterone, the semaglutide group had higher normal-form sperm, concentration and total number. Total testosterone and the ageing-symptoms score improved in both groups; the erectile-function score improved only on testosterone.",
+    caveat:
+      "Only 25 men, open-label, and the abstract does not say how many were in each group. Baseline sperm quality was poor, below the 5th percentile of reference values, and 4% normal sperm is still low. Three authors report honoraria from or advisory roles with Novo Nordisk, Eli Lilly and other companies.",
+    funding: "The record lists a research-agency grant (Javna Agencija za Raziskovalno Dejavnost RS) and honoraria or advisory roles with Novo Nordisk, Eli Lilly and other companies for three authors.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "yeung-2026",
+    authors: "Yeung AC, Phylactou M, Koysombat K, Tsoutsouki J, Nyunt SW, Young M, Patel AH, Daniels E, Pierret ACS, Mills EG, Comninos AN, Abbara A, Dhillo WS",
+    year: 2026,
+    title: "Chronic subcutaneous kisspeptin-10 stimulates gonadotropin secretion for 12 days in healthy men.",
+    journal: "Eur J Endocrinol",
+    ref: "195(2):206–216",
+    pmid: "42549827",
+    doi: "10.1093/ejendo/lvag134",
+    kind: "human-controlled",
+    topics: ["mens-health"],
+    peptides: ["kisspeptin"],
+    delivery: ["injectable"],
+    population: "15 healthy men across three studies (7, 4 and 7 men), plus 12 control men",
+    design: "Randomised, single-blind, placebo-controlled acute dose-response infusions, a 5-day continuous infusion and daily 8-hour infusions for 12 days",
+    dose: "Infusions of 1.25 to 10.0 nmol/kg/h acutely, 180 nmol/h continuously, 150 nmol/h for 8 hours a day",
+    duration: "Up to 12 days",
+    finding:
+      "Acute kisspeptin-10 infusions under the skin raised luteinising hormone, follicle-stimulating hormone and testosterone in a dose-dependent way (p < .0001). After 5 days of continuous infusion testosterone stayed raised but gonadotropins fell back to vehicle levels. Daily 8-hour infusions for 12 days kept gonadotropins raised (mean luteinising hormone rise +1.68 on day 1 and +1.14 on day 12, p = .003 against vehicle).",
+    caveat:
+      "Fifteen healthy men across three small experiments, with hormone levels as the only outcomes: no symptoms, muscle, sexual function or fertility were measured, and raising testosterone in men with normal levels is not shown to help them. It was a protocol-development study using timed pump infusions, not a self-administered product, and the authors frame it as groundwork for treating reproductive disorders.",
+    funding: "The record lists MRC and NIHR grants, and two authors report consultancy for companies outside this work.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "molinoff-2003",
+    authors: "Molinoff PB, Shadiack AM, Earle D, Diamond LE, Quon CY",
+    year: 2003,
+    title: "PT-141: a melanocortin agonist for the treatment of sexual dysfunction.",
+    journal: "Ann N Y Acad Sci",
+    ref: "994:96–102",
+    pmid: "12851303",
+    doi: "10.1111/j.1749-6632.2003.tb03167.x",
+    kind: "review",
+    topics: ["mens-health"],
+    peptides: ["bremelanotide"],
+    delivery: [],
+    finding:
+      "A short summary of the early PT-141 (bremelanotide) programme. It reports erections in rats and monkeys after dosing, activation of brain cells in the hypothalamus of rats, and a rapid, dose-dependent rise in erectile activity in normal men and in men with erectile dysfunction. The authors conclude it holds promise.",
+    caveat:
+      "An early, short report: the abstract gives no number of men, doses, design or comparison group, so the human result cannot be weighed. It predates the larger trials. The record lists no funding.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "safarinejad-2008",
+    authors: "Safarinejad MR, Hosseini SY",
+    year: 2008,
+    title: "Salvage of sildenafil failures with bremelanotide: a randomized, double-blind, placebo controlled study.",
+    journal: "J Urol",
+    ref: "179(3):1066–1071",
+    pmid: "18206919",
+    doi: "10.1016/j.juro.2007.10.063",
+    kind: "human-controlled",
+    topics: ["mens-health"],
+    peptides: ["bremelanotide"],
+    delivery: [],
+    population: "342 married men aged 28 to 59 with erectile dysfunction who had not responded to sildenafil",
+    design: "Randomised, double-blind, placebo-controlled trial of an intranasal bremelanotide spray, with at least 16 attempts at home",
+    dose: "10 mg intranasal spray 45 minutes to 2 hours before sexual stimulation",
+    finding:
+      "Positive clinical results were seen in 51 men (33.5%) on bremelanotide against 13 (8.5%) on placebo (p = 0.03), and intercourse satisfaction was higher (p = 0.03). Drug-related adverse effects were more frequent on bremelanotide (p = 0.01). The authors call it a possible alternative treatment but say more studies of doses and regimens are needed.",
+    caveat:
+      "The percentages imply only about 150 men per group were counted, not the 172 and 170 randomised, and the abstract does not explain the gap, define a 'positive clinical result' or say which adverse effects occurred. It is one trial, in men who had not responded to sildenafil, using a nasal spray, which is a different route from the injected form studied in women. The record lists no funding.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "able-2025",
+    authors: "Able C, Liao B, Saffati G, Maremanda A, Applewhite J, Nasrallah AA, Sonstein J, Alzweri L, Kohn TP",
+    year: 2025,
+    title: "Prescribing semaglutide for weight loss in non-diabetic, obese patients is associated with an increased risk of erectile dysfunction: a TriNetX database study.",
+    journal: "Int J Impot Res",
+    ref: "37(4):315–319",
+    pmid: "38778151",
+    doi: "10.1038/s41443-024-00895-6",
+    kind: "human-controlled",
+    topics: ["mens-health"],
+    peptides: ["semaglutide"],
+    delivery: ["injectable"],
+    population: "3,094 men aged 18 to 50 with obesity and no diabetes who were prescribed semaglutide, matched to 3,094 who were not",
+    design: "Retrospective matched cohort study using the TriNetX electronic-records database",
+    finding:
+      "Obese men without diabetes who were prescribed semaglutide were more likely to be diagnosed with erectile dysfunction or prescribed an erectile-dysfunction drug (1.47% against 0.32%; risk ratio 4.5) and to be diagnosed with testosterone deficiency (1.53% against 0.80%; risk ratio 1.9) than matched men who were never prescribed it.",
+    caveat:
+      "A retrospective records study, so it shows an association, not that the drug caused the diagnoses: why men were prescribed it, extra medical contact or weight change could play a part. The absolute rates are small. The abstract says outcomes were counted from at least one month after the prescription but gives no overall follow-up.",
+    verifiedOn: "2026-11-12",
+  },
+  {
+    id: "cowart-2025",
+    authors: "Cowart K, Murphy C, Carris N",
+    year: 2025,
+    title: "Association of tirzepatide with erectile dysfunction in people with type 2 diabetes.",
+    journal: "J Diabetes Complications",
+    ref: "39(10):109116",
+    pmid: "40614622",
+    doi: "10.1016/j.jdiacomp.2025.109116",
+    kind: "human-controlled",
+    topics: ["mens-health"],
+    peptides: ["tirzepatide"],
+    delivery: ["injectable"],
+    population: "Men aged 18 to 70 with type 2 diabetes and no earlier erectile dysfunction, in three matched comparisons",
+    design: "Retrospective propensity-matched cohort study using TriNetX, May 2022 to May 2025",
+    finding:
+      "In men aged 18 to 70 with type 2 diabetes and no earlier erectile dysfunction, tirzepatide was linked to a lower risk of an erectile-dysfunction diagnosis or an erectile-dysfunction drug prescription than sitagliptin (risk ratio 0.70), injectable semaglutide (0.67) and dulaglutide (0.55).",
+    caveat:
+      "A retrospective records study, so it shows an association; the authors say randomised trials are needed. It covers men with type 2 diabetes only and compares drugs with each other, not with no treatment, so it does not speak to other men. It looks at a different drug and population from Able 2025, so the two do not directly contradict each other. The abstract does not give sample sizes.",
+    funding: "Two authors report research funding from Sanofi Winthrop Industrie, one also from Abbott Diabetes Care, as stated in the record.",
+    verifiedOn: "2026-11-12",
+  },
   // ── Gut health ──────────────────────────────────────────────────────────────
   {
     id: "atluri-2014",

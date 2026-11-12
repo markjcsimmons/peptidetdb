@@ -468,6 +468,38 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-12",
   },
+  "mens-health": {
+    slug: "mens-health",
+    measures: "benefit",
+    title: "Peptides for men: testosterone, erections & fertility",
+    intro:
+      "Most peptide studies report men and women together, so this topic covers only outcomes specific to men: testosterone, erectile function and semen quality. Muscle, hair and weight, which men also search for, are rated on their own topic pages.",
+    ratings: [
+      {
+        subject: "GLP-1 drugs (semaglutide, liraglutide, tirzepatide) for testosterone in men with obesity-related low testosterone",
+        level: "limited",
+        why: "Two systematic reviews agree that these drugs raise total testosterone in men with obesity, type 2 diabetes or functional hypogonadism (by 2.5 to 5.2 nmol/L in one), and a 25-man trial found better sperm morphology than with testosterone injections. But the randomised trials had only 12 to 42 men and ran 12 to 24 weeks, and the authors say the rise is largely a result of weight loss, not a direct hormonal effect. These are prescription drugs.",
+      },
+      {
+        subject: "Bremelanotide (PT-141) for erectile dysfunction in men",
+        level: "limited",
+        why: "One randomised trial of 342 men who had not responded to sildenafil found a positive result in 33.5% on an intranasal spray against 8.5% on placebo, with more side effects, and a 2003 summary reported dose-dependent erections in a few men. The trial's counts do not add up to the numbers randomised, and the abstract defines no endpoint. We found no more recent trial in men.",
+      },
+      {
+        subject: "Kisspeptin-10 for raising testosterone",
+        level: "limited",
+        why: "In 15 healthy men, timed kisspeptin-10 infusions raised luteinising hormone, follicle-stimulating hormone and testosterone, and daily 8-hour infusions kept gonadotropins up for 12 days. It measured hormone levels only, in men without a hormone problem, and used pump infusions; no benefit to symptoms, muscle, sexual function or fertility was tested.",
+      },
+    ],
+    gaps: [
+      "GLP-1 drugs and erectile function: two records-based studies point in opposite directions. Obese non-diabetic men prescribed semaglutide had more erectile dysfunction diagnoses than matched men (1.47% against 0.32%), while men with type 2 diabetes on tirzepatide had fewer than on other diabetes drugs. These are database associations, not trials, so we cite them but do not rate them.",
+      "Gonadotropins such as hCG, and non-peptide drugs such as enclomiphene or testosterone itself, are used for male low testosterone but were outside this search.",
+      "We did not search prostate health, hair loss in men beyond the hair topic, or longevity and 'anti-aging' claims.",
+      "Several of the studies are small or short, and the kisspeptin and bremelanotide results come from single groups.",
+      "Peptides for muscle, hair and weight are rated on the muscle, hair and weight topic pages.",
+    ],
+    reviewedOn: "2026-11-12",
+  },
   gut: {
     slug: "gut",
     measures: "benefit",
