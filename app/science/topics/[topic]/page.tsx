@@ -11,6 +11,7 @@ import { StudyCard } from "@/components/study-parts";
 import { TopicGuides } from "@/components/guide-links";
 import { StudyMix } from "@/components/study-mix";
 import { StudyTimeline } from "@/components/study-timeline";
+import { FundingMix, KeyNumbers, StudySizes } from "@/components/evidence-charts";
 import { RatingsTable } from "@/components/ratings-table";
 import { PageContents } from "@/components/page-contents";
 import { CARD } from "@/components/ui";
@@ -67,7 +68,10 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
         measures={t.measures}
         rows={t.ratings.map((r, i) => ({ subject: r.subject, level: r.level, href: `#rating-${i + 1}` }))}
       />
-      <div className="mt-5 rounded-tile border border-line bg-card px-5 py-4">
+      <div className="mt-5">
+        <KeyNumbers studies={studies} />
+      </div>
+      <div className="mt-3 rounded-tile border border-line bg-card px-5 py-4">
         <StudyMix studies={studies} title={`The ${studies.length} studies behind these ratings`} />
         <div className="mt-6">
           <StudyTimeline studies={studies} />
@@ -105,6 +109,14 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
           </Link>
           .
         </p>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-3xl font-bold leading-[1.15]">Who was studied, and who paid</h2>
+        <div className="mt-6 space-y-8 rounded-card border border-line bg-card p-6 sm:p-7">
+          <StudySizes studies={studies} />
+          <FundingMix studies={studies} />
+        </div>
       </section>
 
       <section className="mt-14">

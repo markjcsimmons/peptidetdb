@@ -13,6 +13,8 @@ module.exports = {
         soft: "var(--soft)",
         line: "var(--line)",
         track: "var(--track)",
+        "mix-controlled": "var(--mix-controlled)",
+        "mix-uncontrolled": "var(--mix-uncontrolled)",
         accent: "var(--accent)",
         "accent-soft": "var(--accent-soft)",
         "on-accent": "var(--on-accent)",

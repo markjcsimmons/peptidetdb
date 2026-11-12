@@ -7,6 +7,8 @@ import { PeptideIndex, type IndexItem } from "@/components/peptide-index";
 import { GUIDES, listsCovering } from "@/lib/guides";
 import { PEPTIDE_LABEL, STUDIES, TOPIC_LABEL, type PeptideId, type Topic } from "@/lib/studies";
 import { TOPIC_SLUGS } from "@/lib/topics";
+import { PEPTIDE_STATUS, STATUS_CHECKED, STATUS_LABEL, type StatusKind } from "@/lib/peptide-status";
+import { formatDate } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Peptides A–Z: every peptide we cover",
@@ -31,6 +33,7 @@ export default function PeptidesAZPage() {
         profile,
         lists: listsCovering(id).map((g) => ({ path: g.path, title: g.title })),
         topics: topics.map((t) => ({ slug: t, label: TOPIC_LABEL[t] })),
+        status: { kind: PEPTIDE_STATUS[id].kind, label: STATUS_LABEL[PEPTIDE_STATUS[id].kind], note: PEPTIDE_STATUS[id].note, sources: PEPTIDE_STATUS[id].sources },
       };
     })
     .filter((i) => i.studies > 0)
@@ -71,7 +74,22 @@ export default function PeptidesAZPage() {
         .
       </p>
 
-      <PeptideIndex items={items} topics={usedTopics} />
+      <PeptideIndex
+        items={items}
+        topics={usedTopics}
+        statuses={(Object.keys(STATUS_LABEL) as StatusKind[])
+          .filter((k) => items.some((i) => i.status.kind === k))
+          .map((k) => ({ slug: k, label: STATUS_LABEL[k] }))}
+      />
+      <p className="mt-6 max-w-prose text-sm text-muted">
+        US status checked {formatDate(STATUS_CHECKED)} against FDA&rsquo;s approval records and its compounding
+        safety-risk page; each entry links its source. &ldquo;Sold as a supplement&rdquo; and &ldquo;cosmetic
+        ingredient&rdquo; describe how products are sold, not an FDA decision. Nothing here is legal advice: see the{" "}
+        <Link href="/peptides/legal-status" className="link">
+          legal status page
+        </Link>
+        .
+      </p>
 
       <p className="mt-14 max-w-prose text-sm text-muted">
         Not listed: peptides we have not yet summarised any study for, such as semax. That is a gap in our coverage, not a

@@ -10,15 +10,32 @@ export type IndexItem = {
   profile?: string;
   lists: { path: string; title: string }[];
   topics: { slug: string; label: string }[];
+  status: { kind: string; label: string; note: string; sources: { label: string; url: string }[] };
+};
+
+const STATUS_TONE: Record<string, string> = {
+  approved: "bg-accent-soft text-accent",
+  "fda-risk-list": "bg-warn-soft text-warn",
 };
 
 /**
  * A–Z list of every peptide with summarised studies. Everything is rendered on the server (so it is in the
  * HTML and the markdown); the topic chips only hide items in the browser.
  */
-export function PeptideIndex({ items, topics }: { items: IndexItem[]; topics: { slug: string; label: string }[] }) {
+export function PeptideIndex({
+  items,
+  topics,
+  statuses,
+}: {
+  items: IndexItem[];
+  topics: { slug: string; label: string }[];
+  statuses: { slug: string; label: string }[];
+}) {
   const [topic, setTopic] = useState("");
-  const shown = topic ? items.filter((i) => i.topics.some((t) => t.slug === topic)) : items;
+  const [status, setStatus] = useState("");
+  const shown = items
+    .filter((i) => (topic ? i.topics.some((t) => t.slug === topic) : true))
+    .filter((i) => (status ? i.status.kind === status : true));
   const letters = [...new Set(shown.map((i) => i.label[0].toUpperCase()))];
 
   return (
@@ -36,6 +53,24 @@ export function PeptideIndex({ items, topics }: { items: IndexItem[]; topics: { 
               onClick={() => setTopic(t.slug)}
               className={`inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium ${
                 topic === t.slug ? "border-accent bg-accent text-on-accent" : "border-line bg-card hover:border-accent"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <p id="az-status-label" className="mt-5 text-sm font-medium">
+          US status:
+        </p>
+        <div role="group" aria-labelledby="az-status-label" className="mt-2 flex flex-wrap gap-2">
+          {[{ slug: "", label: "Any" }, ...statuses].map((t) => (
+            <button
+              key={t.slug || "any"}
+              type="button"
+              aria-pressed={status === t.slug}
+              onClick={() => setStatus(t.slug)}
+              className={`inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium ${
+                status === t.slug ? "border-accent bg-accent text-on-accent" : "border-line bg-card hover:border-accent"
               }`}
             >
               {t.label}
@@ -78,7 +113,23 @@ export function PeptideIndex({ items, topics }: { items: IndexItem[]; topics: { 
                         i.label
                       )}
                     </h3>
-                    <p className="mt-1 text-sm text-muted">
+                    <p className="mt-2">
+                      <span className={`inline-flex items-center rounded-full px-3 py-0.5 text-caption font-semibold ${STATUS_TONE[i.status.kind] ?? "bg-line text-fg"}`}>
+                        {i.status.label}
+                      </span>
+                    </p>
+                    <p className="mt-1.5 text-sm text-soft">
+                      {i.status.note}
+                      {i.status.sources.map((src) => (
+                        <span key={src.url}>
+                          {" "}
+                          <a href={src.url} className="link" rel="noopener">
+                            {src.label.startsWith("FDA:") ? "FDA source" : src.label.replace("Drugs@FDA: ", "")}
+                          </a>
+                        </span>
+                      ))}
+                    </p>
+                    <p className="mt-2 text-sm text-muted">
                       <Link href={`/science?peptide=${i.id}#explore`} className="link">
                         {i.studies} {i.studies === 1 ? "study" : "studies"} summarised
                       </Link>

@@ -6,6 +6,8 @@ import { formatDate } from "@/lib/format";
 import { RatingBadge } from "@/components/evidence-meter";
 import { StudyMix } from "@/components/study-mix";
 import { StudyTimeline } from "@/components/study-timeline";
+import { FundingMix } from "@/components/evidence-charts";
+import { PEPTIDE_STATUS, STATUS_LABEL } from "@/lib/peptide-status";
 import { Term } from "@/components/term";
 import { ROUTE_LABEL } from "@/components/ranked-list";
 import { RouteIcon } from "@/components/route-icon";
@@ -37,6 +39,15 @@ function withTerms(text: string) {
 }
 
 const DT = "text-caption font-semibold uppercase tracking-[0.06em] text-muted";
+
+/** Short status label with its source, from lib/peptide-status.ts. */
+export function StatusChip({ peptide }: { peptide: keyof typeof PEPTIDE_STATUS }) {
+  const st = PEPTIDE_STATUS[peptide];
+  const tone = st.kind === "approved" ? "bg-accent-soft text-accent" : st.kind === "fda-risk-list" ? "bg-warn-soft text-warn" : "bg-line text-fg";
+  return (
+    <span className={`inline-flex items-center rounded-full px-3 py-0.5 text-caption font-semibold ${tone}`}>{STATUS_LABEL[st.kind]}</span>
+  );
+}
 
 /** Quick-facts panel at the top of a peptide profile. Data in lib/profiles.ts; counts and ratings are computed. */
 export function ProfileFactsPanel({ path, reviewed }: { path: string; reviewed: string }) {
@@ -71,6 +82,9 @@ export function ProfileFactsPanel({ path, reviewed }: { path: string; reviewed: 
         <div className={f.routes?.length ? "" : "sm:col-span-2"}>
           <dt className={DT}>US status (as of {formatDate(reviewed)})</dt>
           <dd className="mt-1 text-sm text-soft">
+            <span className="mb-1.5 block">
+              <StatusChip peptide={f.peptide} />
+            </span>
             {withTerms(f.status)}{" "}
             <Link href="/peptides/legal-status" className="link">
               Dated sources
@@ -115,6 +129,9 @@ export function ProfileFactsPanel({ path, reviewed }: { path: string; reviewed: 
             <StudyMix studies={studies} title={`The ${studies.length} studies we summarised`} />
             <div className="mt-6">
               <StudyTimeline studies={studies} />
+            </div>
+            <div className="mt-6">
+              <FundingMix studies={studies} />
             </div>
           </dd>
         </div>
