@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
+import { PeptideInGuides } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "CJC-1295: what the studies show",
@@ -187,6 +188,8 @@ export default function Cjc1295Page() {
           ))}
         </div>
       </section>
+
+      <PeptideInGuides peptide="cjc-1295" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.

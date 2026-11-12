@@ -8,6 +8,7 @@ import { absoluteUrl, formatDate, trimText } from "@/lib/format";
 import { SITE } from "@/lib/site";
 import { JsonLd } from "@/components/json-ld";
 import { StudyCard } from "@/components/study-parts";
+import { TopicGuides } from "@/components/guide-links";
 
 export const dynamicParams = false;
 
@@ -52,6 +53,7 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
       </nav>
       <h1 className="mt-3 text-3xl font-bold tracking-tight">{t.title}</h1>
       <p className="mt-3 max-w-prose text-lg text-muted">{t.intro}</p>
+      <TopicGuides topic={t.slug} />
 
       <section className="mt-8">
         <h2 className="text-xl font-semibold">What the evidence shows</h2>

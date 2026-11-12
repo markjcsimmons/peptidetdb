@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout, CARD } from "@/components/ui";
 import { RatingBadge } from "@/components/evidence-meter";
 import { TOPICS, type Level } from "@/lib/topics";
+import { RelatedGoals } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Peptides for joint pain: ranked by the evidence",
@@ -409,6 +410,8 @@ export default function PeptidesForJointPainPage() {
           ))}
         </div>
       </section>
+
+      <RelatedGoals path="/peptides/peptides-for-joint-pain" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.

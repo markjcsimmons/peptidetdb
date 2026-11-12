@@ -24,7 +24,7 @@ export function SiteHeader() {
           <span>{SITE.name}</span>
         </Link>
         <div className="flex items-center gap-1">
-          <nav aria-label="Main" className="mr-3 hidden gap-7 text-sm font-medium text-muted sm:flex">
+          <nav aria-label="Main" className="mr-3 hidden gap-6 whitespace-nowrap text-sm font-medium text-muted md:flex lg:gap-7">
             {NAV.map((n) => (
               <Link key={n.href} href={n.href} className="inline-flex min-h-11 items-center hover:text-fg">
                 {n.label}

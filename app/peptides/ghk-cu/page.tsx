@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
+import { PeptideInGuides } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "GHK-Cu copper peptide: what the studies show",
@@ -253,6 +254,8 @@ export default function GhkCuPage() {
           ))}
         </div>
       </section>
+
+      <PeptideInGuides peptide="ghk-cu" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.

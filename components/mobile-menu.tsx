@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-/** Small-screen navigation. Closes on navigation and on Escape. Hidden from sm up, where the inline nav shows. */
+/** Small-screen navigation. Closes on navigation and on Escape. Hidden from md up, where the inline nav shows. */
 export function MobileMenu({ links }: { links: { href: string; label: string }[] }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -18,7 +18,7 @@ export function MobileMenu({ links }: { links: { href: string; label: string }[]
   }, [open]);
 
   return (
-    <div className="relative sm:hidden">
+    <div className="relative md:hidden">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}

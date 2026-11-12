@@ -6,6 +6,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { SizeScale } from "@/components/size-scale";
+import { GOALS, GoalLinkGrid } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "What are peptides? Types, evidence and safety",
@@ -110,6 +111,21 @@ export default function PeptidesPillarPage() {
           on which one you mean.
         </p>
       </Callout>
+
+      <section className="mt-10" aria-labelledby="by-goal">
+        <h2 id="by-goal" className="text-2xl font-semibold">
+          Looking for a specific goal?
+        </h2>
+        <p className="mt-2 max-w-prose text-soft">
+          Each page ranks peptide types by the strength of the human evidence for one goal.
+        </p>
+        <GoalLinkGrid goals={GOALS} className="mt-4" />
+        <p className="mt-4">
+          <Link href="/peptides/by-goal" className="link-solo">
+            Compare all goals, with their best and least-supported ratings
+          </Link>
+        </p>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">What a peptide is</h2>

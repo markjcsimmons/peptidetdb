@@ -6,6 +6,7 @@ import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
+import { RelatedGoals } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Peptides for weight loss: what studies show",
@@ -229,6 +230,8 @@ export default function ForWeightLossPage() {
           ))}
         </div>
       </section>
+
+      <RelatedGoals path="/peptides/for-weight-loss" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.

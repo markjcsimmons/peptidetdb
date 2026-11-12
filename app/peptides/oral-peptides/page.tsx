@@ -9,6 +9,7 @@ import { RatingBadge } from "@/components/evidence-meter";
 import { DisclosureNote } from "@/components/disclosure-note";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
+import { RelatedGoals } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Oral peptides: do they work? Ranked by evidence",
@@ -629,6 +630,8 @@ export default function OralPeptidesPage() {
           ))}
         </div>
       </section>
+
+      <RelatedGoals path="/peptides/oral-peptides" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.

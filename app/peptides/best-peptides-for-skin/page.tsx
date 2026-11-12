@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Callout, CARD } from "@/components/ui";
 import { RatingBadge } from "@/components/evidence-meter";
 import { TOPICS, type Level } from "@/lib/topics";
+import { RelatedGoals } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Best peptides for skin: ranked by the evidence",
@@ -378,6 +379,8 @@ export default function BestPeptidesForSkinPage() {
           ))}
         </div>
       </section>
+
+      <RelatedGoals path="/peptides/best-peptides-for-skin" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.

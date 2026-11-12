@@ -29,6 +29,7 @@ export const SITE = {
 };
 
 export const NAV = [
+  { href: "/peptides/by-goal", label: "By goal" },
   { href: "/peptides", label: "Peptides" },
   { href: "/science", label: "Studies" },
   { href: "/peptides/legal-status", label: "Legal status" },

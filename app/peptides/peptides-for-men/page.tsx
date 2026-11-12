@@ -8,6 +8,7 @@ import { Callout, CARD } from "@/components/ui";
 import { RatingBadge } from "@/components/evidence-meter";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
+import { RelatedGoals } from "@/components/guide-links";
 
 export const metadata: Metadata = {
   title: "Peptides for men: ranked by the evidence",
@@ -522,6 +523,8 @@ export default function PeptidesForMenPage() {
           ))}
         </div>
       </section>
+
+      <RelatedGoals path="/peptides/peptides-for-men" />
 
       <p className="mt-10 text-sm text-muted">
         {SITE.disclaimer} Last reviewed {formatDate(REVIEWED)}.
