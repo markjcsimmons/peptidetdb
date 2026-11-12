@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
@@ -231,14 +231,14 @@ export default function PeptidesForSleepPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for sleep, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           No peptide has strong human evidence for sleep. Casein hydrolysate and collagen taken before bed each have one or two
           small trials with mixed results, and fish hydrolysate did not beat placebo. DSIP, the best-known sleep peptide, has a
           few small injected trials from 1987 to 1992 that disagree with each other, and we found no human sleep trial of
           epitalon.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

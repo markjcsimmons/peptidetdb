@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
@@ -75,14 +75,14 @@ export default function SelankPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Selank: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Selank is a peptide promoted for anxiety. The human evidence we found is three small Russian-language trials in
           60 to 70 patients, published 2008 to 2015, comparing it with benzodiazepines or adding it to one. None had a
           placebo group and the abstracts give no scores or doses, so they cannot show that selank works better than no
           treatment. Much of the rest of the literature we found is in rodents. It is not an approved drug.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <ProfileFactsPanel path="/peptides/selank" reviewed={REVIEWED} />
 

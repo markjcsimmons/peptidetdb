@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
@@ -75,14 +75,14 @@ export default function Cjc1295Page() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">CJC-1295: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           CJC-1295 is a long-acting analogue of growth-hormone-releasing hormone. Two small 2006 studies in healthy
           adults showed it raised growth hormone and IGF-I for days to weeks and caused no serious adverse reactions over
           28 to 49 days. We found no controlled human trial of it for muscle, strength or body composition, and none of
           it combined with ipamorelin. It is not FDA-approved.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <ProfileFactsPanel path="/peptides/cjc-1295" reviewed={REVIEWED} />
 

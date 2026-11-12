@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
@@ -254,14 +254,14 @@ export default function BestPeptidesForSkinPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Best peptides for skin, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Oral collagen peptides have the strongest human evidence of the peptides sold for skin: meta-analyses of
           randomised trials found better hydration and elasticity than placebo, though the trials have biases and the size of
           the benefit is uncertain. Fish-derived collagen, creams with cosmetic peptides such as argireline, and
           copper-peptide (GHK-Cu) products each rest on a handful of trials, most of them small. KPV has only laboratory and animal data.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

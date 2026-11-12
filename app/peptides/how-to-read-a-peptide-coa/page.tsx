@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
 
@@ -145,14 +145,14 @@ export default function PeptideCoaPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">How to read a peptide COA</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           A certificate of analysis (COA) is a lab report for one batch. Check that the lot number matches your container,
           that a named lab ran the tests, and that the report shows numbers, not just &ldquo;pass&rdquo;: identity by mass
           spectrometry, purity by HPLC, how much of the powder is actually peptide, and contaminant tests. A COA cannot
           show that a compound works, is safe, or is legal.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

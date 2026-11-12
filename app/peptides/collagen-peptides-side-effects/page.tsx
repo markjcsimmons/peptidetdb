@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
 
@@ -71,14 +71,14 @@ export default function CollagenSideEffectsPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptide side effects: what is known</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           In randomised trials, oral collagen peptides were generally well tolerated, with few adverse events reported.
           The main documented risk is allergy: fish collagen can trigger reactions, including anaphylaxis, in people with
           fish allergy. The evidence for safety is thinner than it sounds, because the trials were built to measure
           benefit, and most are rated at high risk of bias.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

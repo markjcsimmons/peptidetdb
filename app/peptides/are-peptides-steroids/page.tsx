@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
 
@@ -101,14 +101,14 @@ export default function ArePeptidesSteroidsPage() {
       <PageKindLabel path="/peptides/are-peptides-steroids" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Are peptides steroids?</h1>
 
-      <Callout label="Short answer" className="mt-7">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-7">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           No. Peptides are chains of amino acids. Anabolic steroids are synthetic substances similar to the male sex
           hormone testosterone, a different chemical class with different effects. People mix them up because both come
           up in sport and bodybuilding. &ldquo;Not a steroid&rdquo; does not mean &ldquo;safe&rdquo; or &ldquo;proven&rdquo;,
           though.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

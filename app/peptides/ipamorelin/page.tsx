@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
@@ -75,14 +75,14 @@ export default function IpamorelinPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Ipamorelin: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Ipamorelin is an injectable peptide that stimulates the release of growth hormone. It is promoted for muscle,
           fat loss and recovery, but we found no controlled human trial that tested it for any of those. The human
           studies we found are a 1999 hormone-level study and a phase 2 trial after bowel surgery that found no
           significant benefit. It is not FDA-approved, and recent reviews call this class of peptides experimental.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <ProfileFactsPanel path="/peptides/ipamorelin" reviewed={REVIEWED} />
 

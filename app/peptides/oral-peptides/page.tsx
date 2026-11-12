@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { DisclosureNote } from "@/components/disclosure-note";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
@@ -483,15 +483,15 @@ export default function OralPeptidesPage() {
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
       <DisclosureNote />
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Peptides can work by mouth, but mostly when they are engineered for it: oral semaglutide needs an absorption enhancer, and
           the prescription gut drugs act inside the gut. Oral collagen has consistent trial evidence for skin, and small trials of
           fish and milk hydrolysates are limited. For capsules of specific &ldquo;targeted&rdquo; peptides sold as supplements,
           including Pürblack&rsquo;s, the only human data we have seen are uncontrolled before-and-after results in papers we could
           not find in PubMed.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

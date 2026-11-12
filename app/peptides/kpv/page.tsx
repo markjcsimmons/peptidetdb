@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
@@ -75,13 +75,13 @@ export default function KpvPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">KPV peptide: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           KPV is a three-amino-acid peptide promoted for inflammation, gut problems and skin healing. The evidence we found
           is laboratory and mouse studies and a review proposing it for wounds. We found no human trial of KPV. It is not an
           approved drug, and FDA&rsquo;s advisory committee reviewed it in July 2026 without a final FDA decision.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <ProfileFactsPanel path="/peptides/kpv" reviewed={REVIEWED} />
 

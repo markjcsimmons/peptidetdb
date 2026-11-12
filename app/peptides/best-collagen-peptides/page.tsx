@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
-import { Callout, CARD, Pill } from "@/components/ui";
+import { CARD, Pill, ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
 import {
@@ -106,15 +106,15 @@ export default function BestCollagenPeptidesPage() {
         Documents checked {formatDate(COLLAGEN_CHECKED_ON)}. Page last reviewed {formatDate(COLLAGEN_CHECKED_ON)}.
       </p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           We checked 15 collagen brands for lab reports you can read. <strong>Three publish batch-specific reports</strong>{" "}
           (Momentous, Puori and Transparent Labs), and we opened and read them. <strong>Five more</strong> are listed by NSF
           but do not publish a batch report we could find. For the other seven we could not verify a testing claim. This
           page ranks documentation, not results: it does not say any brand&rsquo;s collagen works better than another&rsquo;s,
           and it is not a product grade.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

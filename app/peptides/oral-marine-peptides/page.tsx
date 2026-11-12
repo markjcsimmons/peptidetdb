@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { Level } from "@/lib/topics";
 import { RatingBadge } from "@/components/evidence-meter";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { STUDY_BY_ID, shortCite } from "@/lib/studies";
 import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
@@ -110,14 +110,14 @@ export default function OralMarinePeptidesPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Do oral marine peptides work?</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Partly. Fish-derived collagen peptides have randomised trials for skin, and a few small human studies
           exist for blood pressure, sleep, memory and recovery. Most are small, several report funding ties to a
           company with an interest in the product, and some found no benefit over placebo. For joints and tendons, immune function and
           vision, we found no human trials.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

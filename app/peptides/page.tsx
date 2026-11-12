@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { SizeScale } from "@/components/size-scale";
 import { GOALS, GoalLinkGrid } from "@/components/guide-links";
 
@@ -103,14 +103,14 @@ export default function PeptidesPillarPage() {
 
       <h1 className="text-4xl font-bold leading-[1.05] sm:text-5xl">What are peptides?</h1>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Peptides are short chains of amino acids, the same building blocks that make up proteins. The word covers
           very different things: prescription drugs such as insulin and GLP-1 medicines, collagen supplements,
           skin-care ingredients, and unapproved compounds sold for injury recovery. What the evidence shows depends
           on which one you mean.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <section className="mt-10" aria-labelledby="by-goal">
         <h2 id="by-goal" className="text-2xl font-semibold">

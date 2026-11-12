@@ -5,7 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { DigestionDiagram, SignalDiagram } from "@/components/diagrams";
-import { Callout, Pill, type Tone } from "@/components/ui";
+import { Pill, type Tone, ShortAnswer } from "@/components/ui";
 import { PageKindLabel } from "@/components/guide-links";
 
 export const metadata: Metadata = {
@@ -73,14 +73,14 @@ export default function HowPeptidesWorkPage() {
       <PageKindLabel path="/peptides/how-peptides-work" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">How do peptides work?</h1>
 
-      <Callout label="Short answer" className="mt-7">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-7">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           It depends on the peptide and on how it gets into the body. Some peptides act as signals: they attach to a
           receptor on a cell and change what the cell does. Peptides you swallow are mostly handled by digestion, like
           other protein. And for many peptides sold to consumers, the way they are said to work comes from lab and
           animal research, which is not proof they work in people.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       {/* 1. Signals */}
       <section className="mt-20">

@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
@@ -83,15 +83,15 @@ export default function GhkCuPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">GHK-Cu copper peptide: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           GHK-Cu is a copper-bound three-amino-acid peptide promoted for skin, hair and healing. Decades of cell and animal work
           support effects on collagen, inflammation and blood vessels, but the human evidence we found is a few small trials with
           mixed results (nothing objective after laser resurfacing, no better than placebo for leg ulcers, and a wrinkle benefit
           reported by one review, whose trial we have not read) plus reviews that call the clinical literature thin. We found no trial of injected GHK-Cu, and FDA&rsquo;s compounding page flags a risk of immune reactions with injectable
           products.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <ProfileFactsPanel path="/peptides/ghk-cu" reviewed={REVIEWED} />
 

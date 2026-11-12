@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { TOPIC_SLUGS } from "@/lib/topics";
 import { PageContents } from "@/components/page-contents";
@@ -71,14 +71,14 @@ export default function WhatDoPeptidesDoPage() {
       <PageKindLabel path="/peptides/what-do-peptides-do" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">What do peptides do?</h1>
 
-      <Callout label="Short answer" className="mt-7">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-7">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           It depends on which peptide you mean. In the body, some peptides act as signals between cells. Approved peptide
           drugs such as insulin and the GLP-1 medicines are built on that idea. For consumer products, human studies show
           a modest effect of oral collagen peptides on skin, smaller or mixed results for muscle and joints, and for most
           injectable peptides sold online, mainly animal evidence.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

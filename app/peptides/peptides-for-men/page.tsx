@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
@@ -377,13 +377,13 @@ export default function PeptidesForMenPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for men, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           The best-supported uses are collagen peptides added to resistance training for muscle and prescription GLP-1 drugs for
           weight loss. For men-specific outcomes (testosterone, erections) the human evidence is limited to a few small or short
           studies, BPC-157 has only animal evidence, and we found no controlled trial of ipamorelin or CJC-1295 for muscle.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

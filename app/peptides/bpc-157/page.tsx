@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PeptideInGuides, PageKindLabel } from "@/components/guide-links";
@@ -79,14 +79,14 @@ export default function Bpc157Page() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">BPC-157: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           BPC-157 is a synthetic peptide promoted for injury recovery. Nearly all the evidence is from animals. The human
           evidence is three small uncontrolled studies with 30 people in all, which a 2026 systematic review rated very
           low certainty. We found no randomised trial, and no human study of oral use. It is not FDA-approved, and its
           compounding status is changing in 2026 without a final FDA decision.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <ProfileFactsPanel path="/peptides/bpc-157" reviewed={REVIEWED} />
 

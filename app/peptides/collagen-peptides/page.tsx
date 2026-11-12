@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { STUDIES } from "@/lib/studies";
 import { PageContents } from "@/components/page-contents";
@@ -81,15 +81,15 @@ export default function CollagenPeptidesPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptides: what the evidence shows</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Collagen peptides are collagen broken into short fragments. They are among the best-studied peptide supplements. The
           human evidence is strongest for skin hydration and elasticity, weaker for muscle (they add to the effect of
           resistance training) and mixed for joints. The trials have biases, so how large any benefit is remains
           uncertain. They were generally well tolerated in trials, with fish allergy the documented risk. Nothing here
           shows they work for hair, nails or gut health, because we have not summarised those.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
@@ -243,14 +243,14 @@ export default function PeptidesForHairGrowthPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for hair growth, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           No peptide has strong human evidence for hair growth. The best-supported are scalp lotions and serums with cosmetic
           peptides, which have a few small trials and a favourable 2026 systematic review, but most combine the peptide with
           other ingredients. Oral collagen and scalp injections each rest on a few trials. Thymosin beta-4 has only animal
           data, and we found no hair study of TB-500 or BPC-157.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

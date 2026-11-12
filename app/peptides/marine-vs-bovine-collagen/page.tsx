@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { StudyCard } from "@/components/study-parts";
 import { STUDIES } from "@/lib/studies";
 import { PageContents } from "@/components/page-contents";
@@ -73,15 +73,15 @@ export default function MarineVsBovinePage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Marine vs bovine collagen: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           We found no human trial that compares marine and bovine collagen peptides head to head, so no one can say from
           the studies which is better. Fish-derived collagen peptides have been tested against placebo in several trials
           (below). One meta-analysis found the skin hydration effect varied by collagen source, but its abstract does not
           say which source did better. One real difference is allergy: fish collagen is a recognised allergen for people
           with fish allergy.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

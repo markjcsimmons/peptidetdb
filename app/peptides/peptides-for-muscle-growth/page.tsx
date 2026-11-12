@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
@@ -72,8 +72,8 @@ export default function PeptidesForMuscleGrowthPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for muscle growth: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           The best-supported option is also the least exotic: collagen peptides taken while doing resistance training. A
           2024 meta-analysis of 19 trials found a larger gain in fat-free mass than control, though the strength effect
           was small and everyone in these trials was exercising. For the injectable &ldquo;research&rdquo; peptides sold
@@ -81,7 +81,7 @@ export default function PeptidesForMuscleGrowthPage() {
           uncertain, and we found no controlled trial of ipamorelin or CJC-1295 with a muscle outcome. We did not find
           evidence that any peptide builds muscle without training.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

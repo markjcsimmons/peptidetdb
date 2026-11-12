@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
@@ -369,14 +369,14 @@ export default function PeptidesForWomenPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for women, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           The best-tested peptides for women are prescription drugs: bremelanotide for low sexual desire before menopause, and
           GLP-1 drugs for weight in polycystic ovary syndrome (PCOS). Collagen peptides have consistent but small and uncertain
           benefits for skin, mixed results for bone density after menopause, and limited evidence for hair. We found no trial of
           any peptide for menopause symptoms.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

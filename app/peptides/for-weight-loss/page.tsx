@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
@@ -77,15 +77,15 @@ export default function ForWeightLossPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for weight loss: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Yes, for one kind of peptide. The GLP-1-based drugs semaglutide and tirzepatide are peptides, and large
           placebo-controlled trials found average weight loss of about 15% to 21% over 68 to 72 weeks. They are
           prescription medicines with side effects, most of the weight returns after stopping, and they also reduce lean
           mass. We have not summarised any trial showing weight loss from non-prescription peptide supplements or
           unapproved injectables, and FDA warns against unapproved and compounded versions of these drugs.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

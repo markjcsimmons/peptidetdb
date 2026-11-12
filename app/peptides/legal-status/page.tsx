@@ -5,7 +5,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { VerticalTimeline } from "@/components/timeline";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
@@ -73,8 +73,8 @@ export default function LegalStatusPage() {
         for anything newer.
       </p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           It depends on the peptide and on how it is made and sold. Some peptides are FDA-approved prescription
           drugs. Many popular &ldquo;wellness&rdquo; peptides, such as BPC-157, are not approved for any use. Their
           status for pharmacy compounding changed through 2026: in July an FDA advisory committee recommended six
@@ -84,7 +84,7 @@ export default function LegalStatusPage() {
           while rulemaking is pending. That
           is not an approval and not a listing, and we found no final FDA decision as of {formatDate(LEGAL_REVIEWED)}.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

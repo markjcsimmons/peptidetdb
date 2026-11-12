@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
@@ -290,15 +290,15 @@ export default function PeptidesForJointPainPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for joint pain, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Collagen has the most human evidence of the peptide-type supplements sold for joints, but the results are mixed:
           meta-analyses in osteoarthritis disagree with each other on some measures, trials in people with sports-related knee
           pain split between benefit and no difference, and the placebo groups often improved too. Collagen for tendon
           problems rests on one 20-patient pilot. BPC-157 and TB-500 have animal data and no randomised human trial, and we
           found no human trial of marine collagen for joints.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

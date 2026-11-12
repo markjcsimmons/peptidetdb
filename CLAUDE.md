@@ -66,7 +66,8 @@ A `@` → 76.76.21.21 · CNAME `www` → cname.vercel-dns.com · TXT `@` `google
 - **Where:** topic pages = label, title, ratings table, key numbers, study mix + timeline, guides, contents, rating cards, "Who was studied, and who paid" (sizes + funding), studies. Profiles = quick facts (status chip + dated status line with glossary terms, all ratings, safety, study mix, timeline, funding). Goal cards = dot spread of levels. Ranked cards = "shows / does not show" side by side. A–Z = status chip, note and source per entry, status filter.
 - **Social images:** `lib/og.tsx`; each guide folder has `opengraph-image.tsx` + `twitter-image.tsx` (a new guide page needs both; copy an existing pair), topics use `app/science/topics/[topic]/opengraph-image.tsx`. Lists/topics show the rating spread, profiles the study mix.
 - Colour tokens added: `--mix-controlled`, `--mix-uncontrolled` (light and dark, both dark blocks).
-- Not done: per-option key numbers on ranked cards (sizes are per study, options are not mapped to studies); a stronger "Short answer" style.
+- Short answers use `<ShortAnswer>` from `components/ui.tsx` (accent outline, icon heading, larger text, bead motif); don't use `<Callout label="Short answer">` for new pages.
+- Not done: per-option key numbers on ranked cards (sizes are per study, options are not mapped to studies).
 
 ## Markdown versions for AI agents (added 2026-11-11, commit `7ad0144`)
 - Every page in `app/sitemap.ts` has a markdown twin at `<path>.md` (`/` is `/index.md`), plus `/llms-full.txt` (all pages joined). `scripts/build-markdown.ts` runs as npm `postbuild`: it converts the prerendered `.next/server/app/**.html` (`<main>` only) into `public/**/*.md`, and **fails the build** if a sitemap URL has no HTML, converts to almost nothing, or a prerendered page is missing from the sitemap. Generated files are gitignored. Run `npm run markdown` to redo it after a build (it needs `.next` from a build, and no `next dev` running).

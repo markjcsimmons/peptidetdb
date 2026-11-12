@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
@@ -314,14 +314,14 @@ export default function PeptidesForGutHealthPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Peptides for gut health, ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           The peptides with the best human evidence for the gut are prescription drugs for specific diagnoses: linaclotide and
           plecanatide for constipation with irritable bowel syndrome, and teduglutide for short bowel syndrome. The peptides
           sold for &ldquo;gut healing&rdquo;, BPC-157 and KPV, have only animal and cell studies. Protein hydrolysates have two
           small trials that disagree, and we found no human trial of collagen peptides for the gut.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 

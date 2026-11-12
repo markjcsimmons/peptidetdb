@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { Callout } from "@/components/ui";
+import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
@@ -72,15 +72,15 @@ export default function CollagenBenefitsPage() {
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Collagen peptide benefits: what the studies show</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
-      <Callout label="Short answer" className="mt-6">
-        <p className="max-w-prose text-lg [text-wrap:pretty]">
+      <ShortAnswer className="mt-6">
+        <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           The best-supported benefit is for skin. Meta-analyses of randomised trials found better skin hydration and
           elasticity from oral collagen peptides than from placebo, though the trials have biases and the size of the
           effect is uncertain. For muscle the evidence is one trial in older men who were also exercising, and for
           joints it is mixed: an overall improvement in osteoarthritis scores, but not on the pain and function
           subscores.
         </p>
-      </Callout>
+      </ShortAnswer>
 
       <PageContents />
 
