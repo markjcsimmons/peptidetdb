@@ -56,6 +56,7 @@ export function GET() {
     `- [Peptides for muscle growth](${SITE.url}/peptides/peptides-for-muscle-growth): collagen with resistance training, collagen vs whey, MK-677, and what reviews say about ipamorelin, CJC-1295 and BPC-157.`,
     `- [BPC-157: what the studies show](${SITE.url}/peptides/bpc-157): mostly animal evidence, three small uncontrolled human studies (30 people), no randomised trial found, oral use, safety, product quality and 2026 legal status.`,
     `- [KPV peptide: what the studies show](${SITE.url}/peptides/kpv): laboratory and mouse studies, no human trial found, and its July 2026 FDA advisory committee review.`,
+    `- [GHK-Cu copper peptide: what the studies show](${SITE.url}/peptides/ghk-cu): cell and animal work, a few small human trials with mixed results, no injected-use trial found, and FDA's view of injectable GHK-Cu.`,
     `- [Selank: what the studies show](${SITE.url}/peptides/selank): three small Russian-language trials against benzodiazepines with no placebo group, safety and legal status.`,
     `- [Ipamorelin: what the studies show](${SITE.url}/peptides/ipamorelin): the human studies, why none tests muscle, safety and product-quality concerns, and legal status.`,
     `- [CJC-1295: what the studies show](${SITE.url}/peptides/cjc-1295): two 2006 hormone-level trials, no trial for muscle, safety and legal status.`,

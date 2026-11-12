@@ -204,6 +204,10 @@ export default function PeptidesPillarPage() {
                 KPV
               </Link>
               ,{" "}
+              <Link href="/peptides/ghk-cu" className="link">
+                GHK-Cu
+              </Link>
+              ,{" "}
               <Link href="/peptides/selank" className="link">
                 selank
               </Link>

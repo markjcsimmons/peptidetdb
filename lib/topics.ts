@@ -63,7 +63,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "Topical GHK-Cu (copper peptide)",
         level: "limited",
-        why: "One small randomised trial (13 patients completing, after laser resurfacing) found no objective difference in redness, wrinkles or skin quality with GHK-Cu products, only higher patient satisfaction. A 2025 review says clinical studies of GHK-Cu and its palmitoyl form are surprisingly absent, and that the case for it rests mostly on cell studies. Whether injected or ingested GHK-Cu does anything for skin is not covered by these studies.",
+        why: "One small randomised trial (13 patients completing, after laser resurfacing) found no objective difference in redness, wrinkles or skin quality with GHK-Cu products, only higher patient satisfaction. A 2025 review says clinical studies of GHK-Cu and its palmitoyl form are surprisingly absent, and that the case for it rests mostly on cell studies. A 2026 aesthetic-medicine review found only two randomised trials among 20 studies and reports one with fewer wrinkles than controls (not read by us), and a 1992 trial of a copper tripeptide cream in leg ulcers found no difference from placebo. Whether injected or ingested GHK-Cu does anything for skin is not covered by these studies.",
       },
     ],
     gaps: [
