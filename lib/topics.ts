@@ -97,9 +97,9 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "A 24-week placebo-controlled trial in 114 women reported a rise in hair shaft diameter, a 24-week trial in people with damaged hair but no hair loss reported better gloss and elasticity, and an 83-person trial found a collagen-and-amino-acid tablet added to drug treatment beat drugs alone. The last had no placebo, used a mixed supplement and was written by employees of its maker. No trial of collagen alone in hair loss is summarised.",
       },
       {
-        subject: "Thymosin beta-4 (TB-500)",
+        subject: "Thymosin beta-4 (TB-500 is a related, distinct fragment)",
         level: "preclinical",
-        why: "Rat and mouse experiments, and a review of animal work including cashmere goats, report that thymosin beta-4 speeds hair growth. We summarise no human hair trial of it.",
+        why: "Rat and mouse experiments, and a review of animal work including cashmere goats, report that thymosin beta-4 speeds hair growth. We summarise no human hair trial of it, and no hair study of TB-500, which a 2026 orthopaedic review describes as a distinct seven-amino-acid fragment that is not validated as equivalent to thymosin beta-4.",
       },
       {
         subject: "BPC-157",
@@ -182,12 +182,27 @@ export const TOPICS: Record<Topic, TopicPage> = {
     measures: "benefit",
     title: "Peptides for joints & tendons",
     intro:
-      "Joint and tendon claims range from collagen supplements for osteoarthritis to injected BPC-157 for injuries. The human evidence is stronger for the first than the second, but neither is clear-cut.",
+      "Joint and tendon claims range from collagen supplements for osteoarthritis, sports-related knee pain and tendon problems to injected BPC-157 and TB-500 for injuries. The human evidence is stronger for collagen than for the injectables, but even for collagen the trials disagree.",
     ratings: [
       {
         subject: "Oral collagen for osteoarthritis symptoms",
         level: "mixed",
-        why: "A meta-analysis of randomised trials found lower total WOMAC scores and pain scores than placebo, but no significant difference in the WOMAC pain and function subscores.",
+        why: "A 2019 meta-analysis of randomised trials found lower total WOMAC and pain scores than placebo but no difference on the WOMAC pain and function subscores. A 2025 update pooled 11 trials (870 people) and favoured collagen for both pain and function, but with large differences between trials (I² of 75% and 88%). A 68-patient trial of a hydrolysed-plus-UC-II tablet found no difference from placebo at 12 weeks.",
+      },
+      {
+        subject: "Oral collagen peptides for exercise-related knee and joint pain (no arthritis)",
+        level: "mixed",
+        why: "Two 12-week trials of about 180 people each (one in 18 to 30-year-olds, one in adults with knee and hip pain) and a 24-week athletes trial reported less pain than placebo, though in the first the placebo group's pain also fell by about two-thirds as much. A 167-person trial in people with a median age of 63 found no difference. Two of the positive trials have authors with ties to a collagen-peptide maker.",
+      },
+      {
+        subject: "Oral collagen for tendon problems (tendinopathy)",
+        level: "limited",
+        why: "One 20-patient pilot crossover trial of collagen peptides with calf-strengthening exercise in Achilles tendinopathy reported larger symptom-score gains while on collagen, and was funded by Gelita AG. A 2022 systematic review calls the supplement studies promising but says high-quality studies are scarce and no firm recommendation can be made.",
+      },
+      {
+        subject: "Undenatured type II collagen (UC-II, not a peptide) for knee osteoarthritis",
+        level: "mixed",
+        why: "A 191-person trial reported lower WOMAC scores than placebo and than glucosamine plus chondroitin after 180 days, while a 68-patient trial of UC-II combined with hydrolysed collagen found no difference from placebo at 12 weeks. UC-II is a whole protein in a small dose, not a collagen peptide.",
       },
       {
         subject: "Oral marine (fish-derived) collagen peptides for joints and tendons",
@@ -197,13 +212,21 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "BPC-157 for tendon, ligament and joint problems",
         level: "preclinical",
-        why: "Reviews describe mostly animal evidence. A 2026 systematic review found only three small uncontrolled human studies (30 people in all, one a retrospective review of 16 knee-pain patients), judged them poor quality with very low certainty, and found no randomised trial; a 2026 orthopaedic review likewise found no controlled human evidence.",
+        why: "Reviews describe mostly animal evidence, and a 2026 rat study of Achilles tendon repair found BPC-157 gave numerically better but non-significant results. A 2026 systematic review found only three small uncontrolled human studies (30 people in all, one a retrospective review of 16 knee-pain patients), judged them poor quality with very low certainty, and found no randomised trial; a 2026 orthopaedic review likewise found no controlled human evidence.",
+      },
+      {
+        subject: "TB-500 for tendon and ligament injury",
+        level: "preclinical",
+        why: "In a 2026 rat model of a cut Achilles tendon, TB-500 gave stronger tendons and better microscopic scores than no treatment. The rat study calls TB-500 synthetic thymosin beta-4, while a 2026 orthopaedic review describes it as a distinct fragment with no validated equivalence, and says human experience with thymosin beta-4 comes from eye, skin and heart uses that cannot establish effects on tendons or joints. We summarise no human trial of TB-500 for tendons or joints.",
       },
     ],
     gaps: [
-      "Individual randomised trials of collagen for tendon problems are not summarised here yet.",
+      "Collagen trials in other joints, bone density and cartilage imaging are not summarised here.",
+      "Glucosamine, chondroitin, hyaluronic acid and other non-peptide supplements are outside this site's scope.",
+      "We did not search for trials comparing collagen with exercise, physiotherapy or anti-inflammatory drugs.",
+      "Several trial abstracts give no funding statement; where they do, two of the positive trials have ties to a collagen-peptide maker.",
     ],
-    reviewedOn: "2026-11-10",
+    reviewedOn: "2026-11-11",
   },
   "blood-pressure": {
     slug: "blood-pressure",

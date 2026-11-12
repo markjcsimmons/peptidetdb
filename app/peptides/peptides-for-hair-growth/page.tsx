@@ -129,9 +129,9 @@ const OPTIONS: Option[] = [
     ),
   },
   {
-    name: "Thymosin beta-4 (TB-500)",
+    name: "Thymosin beta-4 (not the same as TB-500)",
     level: "preclinical",
-    topicSubject: "Thymosin beta-4 (TB-500)",
+    topicSubject: "Thymosin beta-4 (TB-500 is a related, distinct fragment)",
     shows: (
       <>
         Thymosin beta-4 sped hair growth in{" "}
@@ -147,8 +147,9 @@ const OPTIONS: Option[] = [
     ),
     notShown: (
       <>
-        We summarise no human hair trial of it. The animal papers study thymosin beta-4 itself, and their abstracts do not
-        mention products sold online, so they cannot be used to judge those products.
+        We summarise no human hair trial of it. The animal papers study thymosin beta-4 itself. TB-500, the name used for
+        products sold online, is described by a 2026 orthopaedic review as a distinct seven-amino-acid fragment that is not
+        validated as equivalent, and we found no hair study of it, so these papers cannot be used to judge those products.
       </>
     ),
   },
@@ -188,7 +189,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Is TB-500 or BPC-157 good for hair?",
-    a: "There is no human trial. Thymosin beta-4 sped hair growth in rats and mice, and our search found no study of BPC-157 for hair.",
+    a: "There is no human trial. Thymosin beta-4 sped hair growth in rats and mice, but TB-500 is described as a distinct fragment that is not validated as equivalent, and our search found no hair study of TB-500 or BPC-157.",
   },
 ];
 
@@ -245,7 +246,7 @@ export default function PeptidesForHairGrowthPage() {
           No peptide has strong human evidence for hair growth. The best-supported are scalp lotions and serums with cosmetic
           peptides, which have a few small trials and a favourable 2026 systematic review, but most combine the peptide with
           other ingredients. Oral collagen and scalp injections each rest on a few trials. Thymosin beta-4 has only animal
-          data, and we found no study of BPC-157 for hair.
+          data, and we found no hair study of TB-500 or BPC-157.
         </p>
       </Callout>
 

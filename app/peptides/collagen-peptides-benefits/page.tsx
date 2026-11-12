@@ -181,6 +181,7 @@ export default function CollagenBenefitsPage() {
             { href: "/peptides/how-to-read-a-peptide-coa", label: "How to read a peptide COA" },
             { href: "/peptides/best-collagen-peptides", label: "Collagen brands with batch test results" },
             { href: "/peptides/best-peptides-for-skin", label: "Best peptides for skin, ranked" },
+            { href: "/peptides/peptides-for-joint-pain", label: "Peptides for joint pain, ranked" },
           ].map((l) => (
             <Link
               key={l.href}

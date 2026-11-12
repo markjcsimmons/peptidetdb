@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-11",
+    page: "/peptides/peptides-for-hair-growth",
+    was: "Ranked \"Thymosin beta-4 (TB-500)\" as one option, treating the two names as the same compound.",
+    now: "A 2026 orthopaedic review (Tham 2026) describes TB-500 as a distinct seven-amino-acid fragment that is not validated as equivalent to thymosin beta-4. The hair studies we cite are of thymosin beta-4 itself, so the page now labels the option \"Thymosin beta-4 (not the same as TB-500)\" and says we found no hair study of TB-500.",
+  },
+  {
     date: "2026-11-10",
     page: "/peptides/legal-status",
     was: "Said comments on the HHS enforcement-discretion policy \"were due\" 13 November 2026, and stated that the policy covers six peptides without saying where that list came from.",
