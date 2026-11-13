@@ -380,18 +380,26 @@ const TESTING: Record<string, React.ReactNode> = {
   ),
   "Pürblack's oral targeted peptide capsules (Muscle+, Joint+, Vascular+ and related products)": (
     <>
-      Pürblack&rsquo;s certificate-of-analysis page lists an internal COA and an NSF COA for each of its eight peptide products, and
-      says Muscle+ and Joint+ are NSF Certified for Sport. We read the public internal COAs for Muscle+ (batch 00034, reported 2
-      December 2025) and Joint+ (batch 00031, reported 12 November 2025). Heavy metals (lead, arsenic, cadmium, mercury) and
-      microbiology (plate count, E. coli, Salmonella, S. aureus) are within the stated limits. Four things the COAs do not show: no
-      laboratory is named on them; they give no peptide purity or content result and no banned-substance test; the L-valine result
-      (24.0% and 23.5%) is below the stated range of 27.0 to 27.5% and the COA does not explain it, which may be a typing error in
-      the range; and the peptide complex itself is listed at its 5.0% limit. We could not read the NSF COAs, which sit on NSF&rsquo;s
-      platform. NSF&rsquo;s Certified for Sport listing shows two Pürblack products, &ldquo;Pepts ReJoint&rdquo; and &ldquo;Pepts
+      Pürblack&rsquo;s certificate-of-analysis page links two public reports for each of its eight peptide products: an internal
+      one and a third-party one, which the page labels NSF. We read the third-party certificates for all eight (batches tested in
+      March and April 2026). Each is issued by Cambium Analytica, a laboratory in Michigan that{" "}
+      <a href="https://www.nsf.org/news/nsf-acquires-cambium-analytica" className="link">
+        NSF acquired in October 2025
+      </a>
+      , and which states ISO/IEC 17025:2017 accreditation from Perry Johnson Laboratory Accreditation (we could not confirm it in
+      the accreditor&rsquo;s own directory). Each certificate names the batch and reports microbiology (E.
+      coli and coliforms, total aerobic bacteria, yeast and mould) and heavy metals (arsenic, cadmium, lead, mercury) with methods
+      and results. They give no pass or fail limits, no peptide identity, purity or content result, and no banned-substance test.
+      Two results stand out: Multivitamin+ (batch 00032) had a total aerobic count of 30,000 CFU/g and coliforms of 2,000 CFU/g,
+      where most products were below detection, and Immune+ (batch 00021) had the highest heavy metals of the eight (for example,
+      lead 0.326 µg/g). Without stated limits or the daily dose in grams, the certificates do not say whether either matters. We
+      also read Pürblack&rsquo;s internal COAs for earlier batches of Muscle+ (00034) and Joint+ (00031): they name no laboratory,
+      report heavy metals and microbiology within their own stated limits, list the peptide complex at its 5.0% limit, and give
+      L-valine (24.0% and 23.5%) below the stated range of 27.0 to 27.5% without explanation, which may be a typing error in the
+      range. NSF&rsquo;s Certified for Sport listing shows two Pürblack products, &ldquo;Pepts ReJoint&rdquo; and &ldquo;Pepts
       ReMuscle&rdquo;, which Pürblack confirms are the same products as Joint+ and Muscle+ (we did not check this against the
-      formulas). As we
-      understand it, that certification covers what is in the product, not whether it works or its long-term safety. We found no
-      human safety data on these peptides beyond the uncontrolled studies described above.
+      formulas). As we understand it, that certification covers what is in the product, not whether it works or its long-term
+      safety. We found no human safety data on these peptides beyond the uncontrolled studies described above.
     </>
   ),
   "BPC-157 capsules and other oral research peptides": (

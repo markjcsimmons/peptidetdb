@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-13",
+    page: "/peptides/oral-peptides",
+    was: "The safety and product testing note for Pürblack's capsules said its COAs name no laboratory and that we could not read the third-party (NSF) COAs, based on Pürblack's internal COAs for Muscle+ and Joint+.",
+    now: "We have now read the third-party certificates for all eight Pürblack peptide products, linked publicly from its COA page. They are issued by Cambium Analytica, a laboratory NSF acquired in October 2025, and report microbiology and heavy metals by batch, with no pass or fail limits, no peptide identity, purity or content result and no banned-substance test. The note now says so and keeps the earlier points about the internal COAs, which still name no laboratory.",
+  },
+  {
     date: "2026-11-12",
     page: "Per-page Pürblack notes (several pages)",
     was: "Pages on weight loss, sleep, gut health, marine vs bovine collagen and oral marine peptides carried a boxed note about Pürblack, and the full disclosure was repeated in the footer text of several guide pages.",
