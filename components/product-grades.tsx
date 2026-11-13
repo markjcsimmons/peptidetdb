@@ -3,7 +3,11 @@ import Link from "next/link";
 import { formatDate } from "@/lib/format";
 import { RUBRIC, DEDUCTIONS } from "@/lib/rubric";
 import {
+  CRITERIA,
   GRADES_CHECKED_ON,
+  SCORING_RULES,
+  SHEETS_PAGE,
+  isPurblack,
   categoryPoints,
   ranked,
   result,
@@ -13,9 +17,7 @@ import {
   type Source,
 } from "@/lib/grades";
 import { CARD, Pill, type Tone } from "@/components/ui";
-
-/** Where every scoring sheet lives. List pages link here instead of repeating the sheets. */
-export const SHEETS_PATH = "/peptides/best-collagen-peptides";
+import { DisclosureNote } from "@/components/disclosure-note";
 
 const bandTone = (b: BandLabel): Tone => (b === "Well documented" || b === "Documented" ? "accent" : b === "Not graded" ? "neutral" : "warn");
 
@@ -33,10 +35,10 @@ function ScoreBar({ total }: { total: number }) {
 }
 
 /**
- * Summary table of graded products, best documented first. `sheetHref` points each row at its scoring sheet
- * (on the same page, or on the collagen page from a list page).
+ * Summary table of graded products, best documented first. With `linkToSheetPage`, each row links to the page that
+ * carries its group's scoring sheets; otherwise to the sheet on the same page.
  */
-export function GradeTable({ grades, sheetHref = "" }: { grades: ProductGrade[]; sheetHref?: string }) {
+export function GradeTable({ grades, linkToSheetPage = false }: { grades: ProductGrade[]; linkToSheetPage?: boolean }) {
   return (
     <div className="mt-6 overflow-hidden rounded-card border border-line bg-card">
       <table className="w-full text-left text-sm">
@@ -62,7 +64,7 @@ export function GradeTable({ grades, sheetHref = "" }: { grades: ProductGrade[];
             return (
               <tr key={g.id} className="border-t border-line">
                 <td className="px-3 py-3 pl-5 align-top sm:pl-6">
-                  <a href={`${sheetHref}#grade-${g.id}`} className="link font-medium">
+                  <a href={`${linkToSheetPage ? SHEETS_PAGE[g.group].path : ""}#grade-${g.id}`} className="link font-medium">
                     {g.brand} {g.product}
                   </a>
                   <span className="sr-only">: </span>
@@ -206,6 +208,29 @@ export function ScoringSheet({ g }: { g: ProductGrade }) {
   );
 }
 
+/** The steps used below each criterion's maximum, the same for every product. */
+export function ScoringRules() {
+  return (
+    <details className="mt-4 rounded-card border border-line bg-card p-5 sm:p-6">
+      <summary className="cursor-pointer font-semibold">How partial points were given</summary>
+      <p className="mt-3 max-w-prose text-sm text-soft [text-wrap:pretty]">
+        The rubric sets the maximum for each criterion. These are the steps we used below the maximum, the same for every
+        product.
+      </p>
+      <dl className="mt-3 space-y-3 text-sm">
+        {CRITERIA.map((k) => (
+          <div key={k.id}>
+            <dt className="font-semibold text-fg">
+              {k.name} ({k.points})
+            </dt>
+            <dd className="max-w-prose text-soft [text-wrap:pretty]">{SCORING_RULES[k.id]}</dd>
+          </div>
+        ))}
+      </dl>
+    </details>
+  );
+}
+
 const AREA_WORDS: Record<ClaimArea, string> = {
   skin: "skin",
   joints: "joints",
@@ -215,36 +240,49 @@ const AREA_WORDS: Record<ClaimArea, string> = {
   muscle: "muscle",
   gut: "gut health",
   sleep: "sleep",
+  brain: "memory or focus",
+  stress: "stress",
+  "blood-pressure": "blood pressure or blood vessels",
+  eye: "the eyes",
+  immune: "immune function",
 };
 
 /**
- * For a list page: the graded collagen products whose sellers claim this benefit area, with links to their full
- * scoring sheets. Grades score documentation and claims, not whether the product works.
+ * For a list page: every graded product whose seller claims this benefit for its peptide or collagen ingredients,
+ * with links to the full scoring sheets. Grades score documentation and claims, not whether a product works. If a
+ * Pürblack product is in the table, the section carries the one-line disclosure (the operator works for Pürblack).
  */
-export function GradedCollagenProducts({ area, ratingNote }: { area: ClaimArea; ratingNote: ReactNode }) {
-  const grades = ranked("collagen", area);
-  const all = ranked("collagen");
+export function GradedProducts({ area, ratingNote }: { area: ClaimArea; ratingNote: ReactNode }) {
+  const grades = ranked(undefined, area);
+  if (grades.length === 0) return null;
+  const groups = [...new Set(grades.map((g) => g.group))];
+  const hasPurblack = grades.some(isPurblack);
   return (
     <section className="mt-14">
-      <h2 className="text-3xl font-bold leading-[1.15]">Collagen products that claim {AREA_WORDS[area]}, graded</h2>
+      <h2 className="text-3xl font-bold leading-[1.15]">Products that claim {AREA_WORDS[area]}, graded</h2>
+      {hasPurblack && <DisclosureNote>Pürblack products below are graded by the same published rules as every other product.</DisclosureNote>}
       <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-        {grades.length} of the {all.length} collagen products we graded make a claim about {AREA_WORDS[area]} on their
-        own pages. Each is scored out of 100 with our{" "}
+        {grades.length === 1 ? "One product" : `${grades.length} products`} we graded make a claim about {AREA_WORDS[area]}{" "}
+        on their own pages. Each is scored out of 100 with our{" "}
         <Link href="/grading-rubric" className="link">
           published rubric
         </Link>
         : lab reports for the lot you buy, certification listings we found in the certifier&rsquo;s own directory, the
         label, and whether the claims stay within the human evidence. {ratingNote} A grade is about what can be checked,
-        not whether one product works better than another: no trial has compared these brands.
+        not whether one product works better than another: no trial has compared these products.
       </p>
-      <GradeTable grades={grades} sheetHref={SHEETS_PATH} />
+      <GradeTable grades={grades} linkToSheetPage />
       <p className="mt-3 text-sm text-muted [text-wrap:pretty]">
-        Checked {formatDate(GRADES_CHECKED_ON)}. Select a product to see its full scoring sheet, with the points, what we
-        found and a link for every criterion, on{" "}
-        <Link href={`${SHEETS_PATH}#grades`} className="link">
-          best collagen peptides: 15 brands graded
-        </Link>
-        . We take no payment or affiliate commission from any brand.
+        Checked {formatDate(GRADES_CHECKED_ON)}. Select a product for its full scoring sheet, with the points, what we found
+        and a link for every criterion ({groups.map((gr, i) => (
+          <span key={gr}>
+            {i > 0 && "; "}
+            <Link href={`${SHEETS_PAGE[gr].path}#grades`} className="link">
+              {SHEETS_PAGE[gr].title}
+            </Link>
+          </span>
+        ))}
+        ). We take no payment or affiliate commission from any brand.
       </p>
     </section>
   );

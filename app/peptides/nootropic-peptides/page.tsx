@@ -9,6 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradedProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Nootropic peptides: ranked by the evidence",
@@ -309,6 +310,11 @@ export default function NootropicPeptidesPage() {
           ).
         </p>
       </section>
+
+      <GradedProducts
+        area="brain"
+        ratingNote={<>Our rating for food-derived peptides and memory is &ldquo;limited&rdquo;, so a memory or focus claim costs points under the claims criterion.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>

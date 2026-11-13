@@ -59,7 +59,7 @@ export function GET() {
     `- [Peptides for eye health, ranked by the evidence](${SITE.url}/peptides/peptides-for-eye-health): cyclosporine and insulin eye drops, thymosin beta-4 drops, Retinalamin, semax and oral marine peptides ordered by the strength of the human studies for dry eye, corneal healing, glaucoma and optic nerve disease. Not a product ranking.`,
     `- [Peptides for anti-aging and longevity, ranked by the evidence](${SITE.url}/peptides/peptides-for-anti-aging): oral collagen for skin, growth hormone, elamipretide, cosmetic peptides, MK-677, epitalon and Russian peptide bioregulators, MOTS-c, FOXO4-DRI, ipamorelin and CJC-1295 ordered by the strength of the human studies. Not a product ranking.`,
     `- [Peptides for men, ranked by the evidence](${SITE.url}/peptides/peptides-for-men): collagen for muscle, GLP-1 drugs, testosterone, erectile dysfunction, kisspeptin, hair loss, BPC-157 and growth-hormone peptides ordered by the strength of the human studies, with what each does not show.`,
-    `- [Oral peptides: do they work? Ranked by the evidence](${SITE.url}/peptides/oral-peptides): oral semaglutide, linaclotide, collagen, fish and milk hydrolysates, Pürblack capsules and BPC-157 ordered by the strength of the human studies, with what each does not show.`,
+    `- [Oral peptides: do they work? Ranked by the evidence](${SITE.url}/peptides/oral-peptides): oral semaglutide, linaclotide, collagen, fish and milk hydrolysates, Pürblack capsules and BPC-157 ordered by the strength of the human studies, with what each does not show; also grades 10 oral peptide products (Pürblack's eight capsules, a Lactium capsule and a bonito-fish tablet) with the rubric, each with a scoring sheet. The site's operator works for Pürblack.`,
     `- [Peptides for muscle growth](${SITE.url}/peptides/peptides-for-muscle-growth): collagen with resistance training, collagen vs whey, MK-677, and what reviews say about ipamorelin, CJC-1295 and BPC-157.`,
     `- [BPC-157: what the studies show](${SITE.url}/peptides/bpc-157): mostly animal evidence, three small uncontrolled human studies (30 people), no randomised trial found, oral use, safety, product quality and 2026 legal status.`,
     `- [KPV peptide: what the studies show](${SITE.url}/peptides/kpv): laboratory and mouse studies, no human trial found, and its July 2026 FDA advisory committee review.`,
@@ -86,7 +86,7 @@ export function GET() {
     `- [Editorial policy](${SITE.url}/editorial-policy)`,
     `- [Corrections log](${SITE.url}/corrections)`,
     `- [About and disclosure](${SITE.url}/about)`,
-    `- [Product-grading rubric](${SITE.url}/grading-rubric): the rules for grading product documentation (version 1.0), published before any product was graded.`,
+    `- [Product-grading rubric](${SITE.url}/grading-rubric): the rules for grading product documentation (version 1.1; first published as a draft before any product was graded).`,
     `- [Study registry as CSV](${SITE.url}/data/studies.csv) and [JSON](${SITE.url}/data/studies.json)`,
     "",
   );

@@ -9,7 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedCollagenProducts } from "@/components/product-grades";
+import { GradedProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Best peptides for skin: ranked by the evidence",
@@ -293,7 +293,7 @@ export default function BestPeptidesForSkinPage() {
         </p>
       </section>
 
-      <GradedCollagenProducts
+      <GradedProducts
         area="skin"
         ratingNote={<>Our rating for swallowed collagen peptides and skin is &ldquo;consistent&rdquo;; that rates collagen in general, not any brand.</>}
       />

@@ -8,7 +8,7 @@ import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
-import { GradedCollagenProducts } from "@/components/product-grades";
+import { GradedProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for muscle growth: what studies show",
@@ -261,9 +261,9 @@ export default function PeptidesForMuscleGrowthPage() {
         </p>
       </section>
 
-      <GradedCollagenProducts
+      <GradedProducts
         area="muscle"
-        ratingNote={<>The human evidence for collagen with resistance training is rated &ldquo;consistent&rdquo; for fat-free mass and &ldquo;mixed&rdquo; for strength; that rates collagen in general, not any brand.</>}
+        ratingNote={<>The human evidence for collagen with resistance training is rated &ldquo;consistent&rdquo; for fat-free mass and &ldquo;mixed&rdquo; for strength, and Pürblack&rsquo;s capsules &ldquo;limited&rdquo;; those rate the ingredients, not any brand.</>}
       />
 
       <section className="mt-14">

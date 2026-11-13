@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const COMMITMENTS = [
   "The rubric was published before any product was graded, so the rules could not be fitted to a result.",
-  "Every product is graded by the same rules, including products sold by Pürblack. A Pürblack grade, if there is one, will carry the disclosure above and the full scoring sheet.",
+  "Every product is graded by the same rules, including products sold by Pürblack. Pürblack's grades carry the disclosure above and a full scoring sheet, like every other grade.",
   "The site takes no payment, sponsorship, free product or affiliate commission from any company it grades.",
   "Every point awarded or withheld is backed by a dated link or document, shown in the scoring sheet, so a reader can check it.",
   "Companies can send documents or point out errors; accepted changes are dated and logged on the corrections page.",
@@ -44,10 +44,14 @@ export default function GradingRubricPage() {
       </nav>
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How we grade products</h1>
       <p className="mt-2 text-sm text-muted">
-        Version {RUBRIC_VERSION}, confirmed {formatDate(RUBRIC_DATE)} (first published as a draft {formatDate(RUBRIC_FIRST_PUBLISHED)}).
+        Version {RUBRIC_VERSION}, updated {formatDate(RUBRIC_DATE)} (first published as a draft {formatDate(RUBRIC_FIRST_PUBLISHED)}; version 1.0 confirmed 13 November 2026; changes are listed below).
         Graded so far: 15 collagen products, on{" "}
         <Link href="/peptides/best-collagen-peptides#grades" className="link">
           the collagen page
+        </Link>
+        , and 10 other oral peptide products, including Pürblack&rsquo;s eight, on{" "}
+        <Link href="/peptides/oral-peptides#grades" className="link">
+          the oral peptides page
         </Link>
         .
       </p>

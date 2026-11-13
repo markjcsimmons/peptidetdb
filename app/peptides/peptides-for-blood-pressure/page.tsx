@@ -9,6 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradedProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for blood pressure: ranked by evidence",
@@ -237,6 +238,11 @@ export default function PeptidesForBloodPressurePage() {
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
         <RankedList options={OPTIONS} />
       </section>
+
+      <GradedProducts
+        area="blood-pressure"
+        ratingNote={<>Our ratings for fish peptides and for Pürblack&rsquo;s capsules on blood vessels are &ldquo;limited&rdquo;, below the &ldquo;consistent&rdquo; rating for lactotripeptides, which we found in no graded product.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>

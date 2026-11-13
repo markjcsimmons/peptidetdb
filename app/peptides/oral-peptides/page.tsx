@@ -11,6 +11,8 @@ import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradeTable, ScoringRules, ScoringSheet } from "@/components/product-grades";
+import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
 
 export const metadata: Metadata = {
   title: "Oral peptides: do they work? Ranked by evidence",
@@ -395,10 +397,10 @@ const TESTING: Record<string, React.ReactNode> = {
       lead 0.326 µg/g). Without stated limits or the daily dose in grams, the certificates do not say whether either matters. We
       also read Pürblack&rsquo;s internal COAs for earlier batches of Muscle+ (00034) and Joint+ (00031): they name no laboratory,
       report heavy metals and microbiology within their own stated limits, list the peptide complex at its 5.0% limit, and give
-      L-valine (24.0% and 23.5%) below the stated range of 27.0 to 27.5% without explanation, which may be a typing error in the
-      range. NSF&rsquo;s Certified for Sport listing shows two Pürblack products, &ldquo;Pepts ReJoint&rdquo; and &ldquo;Pepts
-      ReMuscle&rdquo;, which Pürblack confirms are the same products as Joint+ and Muscle+ (we did not check this against the
-      formulas). As we understand it, that certification covers what is in the product, not whether it works or its long-term
+      L-valine (24.0% and 23.5%) below the stated range of 27.0 to 27.5% without explanation. The labels&rsquo; own amounts put
+      valine at about 24% of the formula, so the range, not the product, is probably wrong. NSF&rsquo;s Certified for Sport listing shows two Pürblack products, &ldquo;Pepts ReJoint&rdquo; and &ldquo;Pepts
+      ReMuscle&rdquo;. The labels NSF holds for them have the same formulas as Joint+ and Muscle+, with 45 servings and a
+      different distributor; Pürblack confirms they are the same products renamed. As we understand it, that certification covers what is in the product, not whether it works or its long-term
       safety. We found no human safety data on these peptides beyond the uncontrolled studies described above.
     </>
   ),
@@ -559,10 +561,38 @@ export default function OralPeptidesPage() {
           options={OPTIONS.map((o) => ({ ...o, extra: { label: "Safety and product testing.", body: TESTING[o.name] } }))}
         />
         <p className="mt-5 max-w-prose text-sm text-muted">
-          Not covered: other approved oral peptide drugs, and absorption studies of research peptides taken by mouth. Pürblack
-          products other than those named, such as its vision, brain and immune capsules, were not reviewed beyond the booklet
-          description.
+          Not covered: other approved oral peptide drugs, and absorption studies of research peptides taken by mouth. The
+          research papers behind Pürblack&rsquo;s vision, brain and immune capsules were not reviewed; their labels, claims and
+          certificates are graded below.
         </p>
+      </section>
+
+      <section id="grades" className="mt-14 scroll-mt-6">
+        <h2 className="text-3xl font-bold leading-[1.15]">Oral peptide products, graded</h2>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          The ranking above rates ingredients. Here we grade products: Pürblack&rsquo;s eight peptide capsules and two other
+          oral peptide supplements, a milk-peptide capsule (Lactium) and a bonito-fish tablet, each scored out of 100 with
+          our{" "}
+          <Link href="/grading-rubric" className="link">
+            published rubric
+          </Link>{" "}
+          on {formatDate(GRADES_CHECKED_ON)}. Pürblack is graded by exactly the same rules as everyone else; the
+          disclosure above applies. A grade is about what can be checked, not whether a product works. Collagen products are
+          graded on{" "}
+          <Link href="/peptides/best-collagen-peptides#grades" className="link">
+            their own page
+          </Link>
+          . Two other fish-hydrolysate products, Seacure and Stabilium 200, are not graded: we could not find a label from
+          the maker to read.
+        </p>
+        <GradeTable grades={ranked("oral")} />
+        <ScoringRules />
+        <h3 className="mt-10 text-2xl font-bold leading-tight">Scoring sheets</h3>
+        <div className="mt-4 grid gap-4">
+          {ranked("oral").map((g) => (
+            <ScoringSheet key={g.id} g={g} />
+          ))}
+        </div>
       </section>
 
       <section className="mt-14">

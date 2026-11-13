@@ -7,7 +7,7 @@
  * points for two safety concerns (banned or undeclared drug substances, unapproved injectables). It does not score
  * whether the product works.
  */
-export const RUBRIC_VERSION = "1.0";
+export const RUBRIC_VERSION = "1.1";
 export const RUBRIC_DATE = "2026-11-13";
 export const RUBRIC_FIRST_PUBLISHED = "2026-11-10";
 
@@ -49,7 +49,7 @@ export const RUBRIC: Category[] = [
         name: "Independent certification programme",
         points: 8,
         asks:
-          "Is the product listed, under the name it is sold as, in the public directory of an independent certification programme? Programmes that test for substances banned in sport, such as NSF Certified for Sport, Informed Sport or BSCG Certified Drug Free, earn 8 points; contents-only certification, such as NSF/ANSI 173 Contents Certified, earns 4. A badge on the product's own website without a matching directory listing earns nothing.",
+          "Is the product listed, under the name it is sold as, in the public directory of an independent certification programme? Programmes that test for substances banned in sport, such as NSF Certified for Sport, Informed Sport or BSCG Certified Drug Free, earn 8 points; contents-only certification, such as NSF/ANSI 173 Contents Certified, earns 4. A badge on the product's own website without a matching directory listing earns nothing. A listing under a former name of the product counts only if the directory shows the same brand, the label held in the directory has the same formula, and the seller's own product page links to that listing.",
       },
     ],
   },
@@ -140,6 +140,12 @@ export const CAPS: string[] = [
 
 /** Dated changes to the rubric, newest first. Say who asked for a change and whom it could favour. */
 export const VERSIONS: { date: string; version: string; text: string }[] = [
+  {
+    date: "2026-11-13",
+    version: "1.1",
+    text:
+      "A certification listing under a product's former name now counts, if the directory shows the same brand, the label held in the directory has the same formula, and the seller's own product page links to the listing. Requested by the site's operator, who works for Pürblack: Pürblack's Muscle+ and Joint+ are listed by NSF Certified for Sport under their earlier names, Pepts ReMuscle and Pepts ReJoint. The change raises both by 8 points and favours Pürblack; it changes no other graded product's score. We judged it fair because NSF's listed labels match the current formulas and Pürblack's pages link the listings, so a buyer can check the link themselves.",
+  },
   {
     date: "2026-11-13",
     version: "1.0",

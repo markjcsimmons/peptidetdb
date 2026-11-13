@@ -14,8 +14,24 @@ import { DEDUCTIONS, RUBRIC, RUBRIC_VERSION, TOTAL_POINTS, type Criterion } from
 export type Source = { label: string; href: string };
 export type Score = { points: number | null; note: string; sources: Source[] };
 
-/** Benefit areas a seller claims, matched to this site's evidence ratings. Used to pick products for each list page. */
-export type ClaimArea = "skin" | "joints" | "tendons" | "bone" | "hair" | "muscle" | "gut" | "sleep";
+/**
+ * Benefit areas a seller claims for the product's peptide (or collagen) ingredients, matched to this site's evidence
+ * ratings. Used to pick products for each list page. Claims made only for added vitamins or herbs do not count here.
+ */
+export type ClaimArea =
+  | "skin"
+  | "joints"
+  | "tendons"
+  | "bone"
+  | "hair"
+  | "muscle"
+  | "gut"
+  | "sleep"
+  | "brain"
+  | "stress"
+  | "blood-pressure"
+  | "eye"
+  | "immune";
 
 export type ProductGrade = {
   id: string;
@@ -23,8 +39,8 @@ export type ProductGrade = {
   product: string;
   /** What it is, in a few words. */
   form: string;
-  /** Group of products graded together, e.g. "collagen". */
-  group: "collagen";
+  /** Group of products graded together; each group's scoring sheets live on one page (SHEETS_PAGE). */
+  group: Group;
   /** Product page and label details checked on this date; reports and registries on `documentsCheckedOn`. */
   checkedOn: string;
   documentsCheckedOn: string;
@@ -40,6 +56,14 @@ export type ProductGrade = {
 
 export const GRADES_CHECKED_ON = "2026-11-13";
 
+export type Group = "collagen" | "oral";
+/** The page that carries each group's full scoring sheets. */
+export const SHEETS_PAGE: Record<Group, { path: string; title: string }> = {
+  collagen: { path: "/peptides/best-collagen-peptides", title: "best collagen peptides: 15 brands graded" },
+  oral: { path: "/peptides/oral-peptides", title: "oral peptides: do they get absorbed?" },
+};
+export const isPurblack = (g: { brand: string }) => /p[üu]rblack/i.test(g.brand);
+
 /** How partial points were given. Shown with the grades. Same rules for every product. */
 export const SCORING_RULES: Record<string, string> = {
   "coa-batch":
@@ -47,23 +71,25 @@ export const SCORING_RULES: Record<string, string> = {
   "coa-lab":
     "8: named independent lab, accreditation found in the accreditor's own directory for the tests reported. 6: as 8 but the accreditation covers only some of the tests. 5: named independent lab, accreditation not checked or not stated. 2: report from the seller's own lab. 0: no lot report.",
   "coa-numbers":
-    "10: identity and content of the active ingredient, with methods, limits and results. 7: collagen or active-ingredient content with limits and results, no separate identity test. 5: protein content only, with a result. 3: a content result in some reports but not the latest. 0: none, or no lot report.",
+    "10: identity and content of the active ingredient, with methods, limits and results. 7: collagen or active-ingredient content with limits and results, no separate identity test. 5: protein content only, with a result. 3: a content result in some reports but not the latest, or results that cannot be told apart from formula values (no limits, or every result identical to its target). 0: none, no lot report, or a report whose contents do not match the product's label.",
   "coa-contaminants":
     "6: heavy metals and microbes, each with limits and results. 4: both tested but one group has no stated limits, or only one group tested with limits. 2: one group, no limits. 0: none, or no lot report.",
   certification:
-    "As the rubric says: 8 for a listing in the directory of a programme that tests for substances banned in sport; 4 for a contents-only certification listing; 0 for a badge with no matching listing. Gluten-free and non-GMO marks are not counted.",
+    "As the rubric says: 8 for a listing in the directory of a programme that tests for substances banned in sport; 4 for a contents-only certification listing; 0 for a badge with no matching listing. Since version 1.1, a listing under a former name counts if the directory shows the same brand, its label has the same formula and the seller's page links the listing. Gluten-free and non-GMO marks are not counted.",
   amount: "8: the amount of every active ingredient per serving. 4: the total collagen or protein per serving only, or some actives without amounts. 0: no amount we could find.",
-  source: "4: the animal (and fish species where relevant) named for every collagen source. 2: the source implied (for example “grass-fed”) but the animal not named. 0: not stated.",
+  source:
+    "4: the animal (and fish species where relevant) named for every collagen or protein source the peptides come from. 2: the source implied (for example “grass-fed”) but the animal not named. 0: not stated (“from natural source” does not count).",
   allergen:
-    "5: allergen ingredients declared, or none in the product. 3: only a shared-equipment warning seen for a product that contains an allergen source. 0: an allergen source with no declaration.",
+    "5: allergen ingredients declared, or none in the product. 3: only a shared-equipment warning seen for a product that contains an allergen source. 0: an allergen source with no declaration. Could not check (0): the label does not say what the peptides are made from, so we cannot tell whether an allergen such as fish or milk should be declared.",
   blend: "6: every active ingredient listed with its amount, or a single ingredient. 0: a named blend or complex whose parts have no amounts.",
   "claims-match":
-    "Start at 15. Take off 2 for each benefit area claimed where this site rates the human evidence as limited, and 4 where it is preclinical or no human trials were found. Claims in areas this site has not rated (for example nails, recovery, satiety) are listed but not scored. Ratings used: skin consistent; joints and bone mixed; tendons and ligaments limited; hair limited; muscle mass with training consistent; gut none; sleep limited.",
+    "Start at 15. Take off 2 for each benefit area claimed where this site rates the human evidence as limited, and 4 where it is preclinical or no human trials were found. Claims in areas this site has not rated (for example nails, recovery, satiety) are listed but not scored. A specific claim that rests only on cell or animal results counts as preclinical (−4). Ratings used: collagen for skin consistent; joints and bone mixed; tendons and ligaments limited; hair limited; muscle mass with training consistent; gut none; sleep limited. Food-derived peptides and hydrolysates: sleep, memory, stress and blood pressure limited; eyesight and immune function none. Pürblack's own capsules for muscle, joints and blood vessels limited (uncontrolled studies).",
   "dose-match":
-    "5: no study cited (nothing to compare), or cited trials used a similar daily dose. 3: some cited trials used a similar dose and some a very different one. 2: the page appeals to “studies” or “clinically studied” ingredients without naming a paper, so the dose cannot be compared. 0: cited trials used a clearly different dose throughout.",
+    "5: no human trial cited (nothing to compare), or cited trials used a similar daily dose. 3: some cited trials used a similar dose and some a very different one, or the cited trial's abstract gives no dose. 2: the page appeals to “studies” or “clinically studied” ingredients without naming a paper, so the dose cannot be compared. 0: cited trials used a clearly different dose throughout.",
   "cites-real":
-    "5: no study cited, or every cited paper can be found and is described accurately. 2: an appeal to studies without naming them, so a reader cannot find them. 0: a cited paper cannot be found or is misdescribed.",
-  category: "5: sold as a dietary supplement with the FDA statement, no “research use only” labelling. 0 otherwise.",
+    "5: no study cited, or every cited paper can be found and is described accurately. 3: every cited paper can be found, but with citation errors (wrong journal, year or title). 2: an appeal to studies without naming them, so a reader cannot find them. 0: a cited paper cannot be found in PubMed, is misdescribed (for example animal or cell results presented without saying so), or concerns ingredients the product does not contain.",
+  category:
+    "5: sold as a dietary supplement with the FDA statement, no “research use only” labelling. 3: as 5, but the packaging carries FDA's name as a logo (for example “FDA registered facility”), which can suggest FDA approval. 0 otherwise.",
   identity:
     "5: legal name, postal address and a contact route on the seller's site. 3: two of the three. 1: one. 0: none.",
 };
@@ -834,6 +860,493 @@ export const GRADES: ProductGrade[] = [
   },
 ];
 
+// ---------- batch 2: oral peptide products (checked 2026-11-13) ----------
+// Pürblack is graded by exactly the same rules as everyone else; the operator of this site works for Pürblack.
+const PB = (handle: string, name: string) => ({ label: `Pürblack ${name} product page`, href: `https://purblack.com/products/${handle}` });
+const PB_COA = (slug: string, name: string) => ({ label: `Pürblack internal certificate, ${name}`, href: `https://purblack.com/pages/coa/${slug}` });
+const PB_COA_PAGE = { label: "Pürblack certificate-of-analysis page (links the third-party reports)", href: "https://purblack.com/pages/certificate-of-analysis" };
+const CAMBIUM = { label: "NSF news release: NSF acquires Cambium Analytica", href: "https://www.nsf.org/news/nsf-acquires-cambium-analytica" };
+const ORAL_TESTING = { label: "Our oral peptides page (testing notes)", href: "/peptides/oral-peptides" };
+const NSF_REMUSCLE = { label: "NSF listing: Pepts ReMuscle (Pürblack)", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1665709" };
+const NSF_REJOINT = { label: "NSF listing: Pepts ReJoint (Pürblack)", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1665654" };
+const PB_RATING = { label: "Our rating of Pürblack's capsules", href: "/science/topics/oral-peptides" };
+const TOPIC2 = {
+  brain: { label: "Sleep, memory and stress evidence", href: "/science/topics/brain" },
+  bp: { label: "Blood pressure evidence", href: "/science/topics/blood-pressure" },
+  eye: { label: "Eye evidence", href: "/science/topics/eye" },
+  immune: { label: "Immune evidence", href: "/science/topics/immune" },
+};
+
+/** The parts every Pürblack sheet shares; each product overrides what differs. */
+function purblack(o: {
+  id: string;
+  product: string;
+  form: string;
+  handle: string;
+  coaSlug: string;
+  claimAreas: ClaimArea[];
+  summary: string;
+  scores: Partial<Record<string, Score>>;
+}): ProductGrade {
+  const page = PB(o.handle, o.product);
+  const coa = PB_COA(o.coaSlug, o.product);
+  const base: Record<string, Score> = {
+    "coa-batch": {
+      points: 8,
+      note: "Pürblack's certificate page links two lot-specific reports for this product: an internal one and a third-party one. Each covers a single batch, so most batches on sale have no public report.",
+      sources: [PB_COA_PAGE, coa],
+    },
+    "coa-lab": {
+      points: 5,
+      note: "The third-party report is from Cambium Analytica, an independent laboratory that NSF acquired in October 2025; it states ISO/IEC 17025 accreditation, which we could not confirm in the accreditor's own directory. The internal report names no laboratory (it is Pürblack's own).",
+      sources: [PB_COA_PAGE, CAMBIUM],
+    },
+    "coa-numbers": {
+      points: 7,
+      note: "The internal report gives the content of each ingredient, including the peptide complex, as a percentage with a target range and a result. There is no separate identity test, and the third-party report has no content results.",
+      sources: [coa],
+    },
+    "coa-contaminants": {
+      points: 4,
+      note: "Both reports cover heavy metals and microbes, but the metals never have a limit and a number in the same report: the internal report gives limits with “complies”, the third-party report gives numbers with no limits.",
+      sources: [coa, PB_COA_PAGE],
+    },
+    certification: {
+      points: 0,
+      note: "We found no certification listing under this product's name.",
+      sources: [NSF_SPORT_LIST, page],
+    },
+    amount: { points: 8, note: "The label lists every ingredient with its amount per serving.", sources: [page] },
+    source: {
+      points: 0,
+      note: "The label calls the peptides “from natural source” but does not say what protein they are made from. (Pürblack's own buying guide lists “clearly disclosed marine or protein origin” as a mark of quality.)",
+      sources: [page, { label: "Pürblack buying guide", href: "https://purblack.com/pages/peptides-quality-guide" }],
+    },
+    allergen: {
+      points: null,
+      note: "Because the label does not say what the peptides are made from, we cannot tell whether an allergen such as fish should be declared. The label has no allergen statement.",
+      sources: [page],
+    },
+    blend: { points: 6, note: "Every ingredient, including each peptide complex, is listed with its amount.", sources: [page] },
+    "dose-match": NONE_CITED(page),
+    "cites-real": NONE_CITED(page),
+    category: {
+      points: 5,
+      note: "Labelled a dietary supplement, with the FDA statement on the label (the product page text itself does not carry it).",
+      sources: [page],
+    },
+    identity: {
+      points: 5,
+      note: "Pürblack Inc., with a postal address (on its certificates and packaging) and a contact email.",
+      sources: [coa, PB_COA_PAGE],
+    },
+  };
+  const scores = { ...base, ...o.scores } as Record<string, Score>;
+  return {
+    id: o.id,
+    brand: "Pürblack",
+    product: o.product,
+    form: o.form,
+    group: "oral",
+    checkedOn: "2026-11-13",
+    documentsCheckedOn: "2026-11-13",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: o.claimAreas,
+    diseaseClaims: false,
+    deductions: [],
+    summary: o.summary,
+    scores,
+  };
+}
+
+const NSF_NAME_NOTE = (listed: string, listingLot?: string) =>
+  `NSF Certified for Sport lists “${listed}”, this product's earlier name, under the brand Pürblack${listingLot ? ` (lot ${listingLot})` : ""}, and the product page links to that listing. The label NSF holds has the same formula, with 45 servings and a different distributor (23 Century LLC). Counted under rubric version 1.1, which accepts a former name on those conditions.`;
+
+export const ORAL_GRADES: ProductGrade[] = [
+  purblack({
+    id: "purblack-muscle",
+    product: "Muscle+",
+    form: "Capsules: leucine, valine, isoleucine and a 50 mg peptide complex (IPH AGAA)",
+    handle: "muscle-peptide",
+    coaSlug: "muscle-plus",
+    claimAreas: ["muscle"],
+    summary:
+      "Lot reports, a full label and an NSF Certified for Sport listing under its earlier name, but the peptide source is not stated and one cited paper cannot be found.",
+    scores: {
+      "coa-numbers": {
+        points: 7,
+        note: "Internal batch 00034: leucine, valine, isoleucine and the peptide complex (5.0% against a limit of 5.0%) with targets and results. L-valine is 24.0% against a stated range of 27.0 to 27.5%; the label's own amounts put valine at about 24%, so the range is probably the error.",
+        sources: [PB_COA("muscle-plus", "Muscle+")],
+      },
+      certification: { points: 8, note: NSF_NAME_NOTE("Pepts ReMuscle", "230504"), sources: [NSF_REMUSCLE, PB("muscle-peptide", "Muscle+")] },
+      amount: {
+        points: 8,
+        note: "Per 2 capsules: leucine 470 mg, valine 237 mg, isoleucine 234 mg, peptide complex IPH AGAA 50 mg (stated as 60% proteins, 1% of the tetrapeptide H-Asp-Glu-Arg-Ala-OH, 39% free amino acids).",
+        sources: [PB("muscle-peptide", "Muscle+")],
+      },
+      "claims-match": {
+        points: 9,
+        note: "Claims more muscle mass and strength (our rating for Pürblack's capsules: limited, −2) and that it raises alpha-actinin-3 “by up to 4.5 times”, a result that in the company's own 2019 paper came from cultured cells (preclinical, −4). Fat loss and recovery claims are not rated.",
+        sources: [PB("muscle-peptide", "Muscle+"), PB_RATING, ORAL_TESTING],
+      },
+      "dose-match": {
+        points: 0,
+        note: "The only human trial cited (Wilkinson 2013) gave 3.42 g of leucine; a serving has 470 mg.",
+        sources: [pubmed("23551944", "Wilkinson 2013")],
+      },
+      "cites-real": {
+        points: 0,
+        note: "One of the four references (Perez 2018, Int J Mol Sci) could not be found in PubMed. The other three, on leucine and amino acids, exist.",
+        sources: [PB("muscle-peptide", "Muscle+"), pubmed("16424142", "Norton 2006"), pubmed("16424141", "Shimomura 2006")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-joint",
+    product: "Joint+",
+    form: "Capsules: leucine, valine, isoleucine and a 50 mg peptide complex (IPH AEN)",
+    handle: "joint-peptide",
+    coaSlug: "joint-plus",
+    claimAreas: ["joints", "bone"],
+    summary: "Lot reports, a full label and an NSF Certified for Sport listing under its earlier name, but the peptide source is not stated.",
+    scores: {
+      "coa-numbers": {
+        points: 7,
+        note: "Internal batch 00031: the amino acids and the peptide complex (5.0% against a limit of 5.0%) with targets and results. L-valine is 23.5% against a stated range of 27.0 to 27.5%, which the label's own amounts suggest is a range error.",
+        sources: [PB_COA("joint-plus", "Joint+")],
+      },
+      certification: { points: 8, note: NSF_NAME_NOTE("Pepts ReJoint"), sources: [NSF_REJOINT, PB("joint-peptide", "Joint+")] },
+      amount: {
+        points: 8,
+        note: "Per 2 capsules: leucine 470 mg, valine 237 mg, isoleucine 234 mg, peptide complex IPH AEN 50 mg (stated as 60% proteins, 24% of the tripeptide H-Glu-Ala-Asp-OH, 16% free amino acids).",
+        sources: [PB("joint-peptide", "Joint+")],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Claims cartilage repair, joint mobility and less discomfort (our rating for Pürblack's capsules: limited, −2). Bone and gene-activation claims are not rated.",
+        sources: [PB("joint-peptide", "Joint+"), PB_RATING],
+      },
+      "cites-real": {
+        points: 3,
+        note: "All four references exist, but one is cited with the wrong journal (Liu 2018 is in Am J Transl Res, not J Orthop Translation). Three concern leucine and amino acids in muscle rather than joints.",
+        sources: [pubmed("29511444", "Liu 2018"), pubmed("19301095", "Wu 2009"), pubmed("16424142", "Norton 2006")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-vascular",
+    product: "Vascular+",
+    form: "Capsules: amino acids (arginine, glycine, GABA and others) and a 57 mg peptide (AVN)",
+    handle: "vascular-peptide-1",
+    coaSlug: "vascular-plus",
+    claimAreas: ["blood-pressure", "brain", "stress"],
+    summary: "Lot reports and a full label, but it claims NSF Certified for Sport with no listing, and two of three cited papers cannot be found.",
+    scores: {
+      certification: {
+        points: 0,
+        note: "The product page says Vascular+ is NSF Certified for Sport, but we found no NSF listing for it (NSF lists only Pürblack's joint and muscle formulas, under their earlier names).",
+        sources: [NSF_SPORT_LIST, PB("vascular-peptide-1", "Vascular+")],
+      },
+      amount: {
+        points: 8,
+        note: "Per 2 capsules: L-arginine 345 mg, L-glycine 300 mg, GABA 255 mg, L-glutamine 210 mg, L-leucine 93 mg, L-lysine 90 mg, L-asparagine 75 mg, beta-alanine 75 mg, AVN peptide 57 mg.",
+        sources: [PB("vascular-peptide-1", "Vascular+")],
+      },
+      "claims-match": {
+        points: 9,
+        note: "Claims blood-vessel repair and healthy blood pressure (our rating for Pürblack's capsules: limited, −2), memory and focus (limited, −2) and stress resistance (limited, −2).",
+        sources: [PB("vascular-peptide-1", "Vascular+"), PB_RATING, TOPIC2.bp, TOPIC2.brain],
+      },
+      "cites-real": {
+        points: 0,
+        note: "Two of three references could not be found in PubMed (Li & Delaney 2019, “Glycine and cardiovascular health”; Sander 2017, on GABA and blood pressure). Wu 2009 exists.",
+        sources: [PB("vascular-peptide-1", "Vascular+"), pubmed("19301095", "Wu 2009")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-vision",
+    product: "Vision+",
+    form: "Capsules: acerola, bilberry anthocyanins, lutein, zeaxanthin and two peptide complexes",
+    handle: "vision-peptide",
+    coaSlug: "vision-plus",
+    claimAreas: ["eye"],
+    summary: "Lot reports and a full label, but its eye claims have no human trial behind them and its references are about muscle and cartilage.",
+    scores: {
+      amount: {
+        points: 8,
+        note: "Per 2 capsules: acerola extract 345 mg, anthocyanins (Vaccinium uliginosum) 300 mg, lutein 255 mg, zeaxanthin 210 mg, peptide complex IPH AEN 93 mg, IPH VIS 57 mg. The product page text names IPH AVN instead of IPH AEN.",
+        sources: [PB("vision-peptide", "Vision+")],
+      },
+      "claims-match": {
+        points: 11,
+        note: "Claims that its peptides improve retinal sensitivity, macular health, optic-nerve function and tear production. We found no human trial of oral peptides for eyesight (−4).",
+        sources: [PB("vision-peptide", "Vision+"), TOPIC2.eye],
+      },
+      "cites-real": {
+        points: 0,
+        note: "The four references are about leucine, amino acids, muscle and cartilage, none about eyes, and Vision+ contains none of the amino acids they study.",
+        sources: [PB("vision-peptide", "Vision+"), pubmed("16424142", "Norton 2006"), pubmed("29511444", "Liu 2018")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-brain-am",
+    product: "Brain AM",
+    form: "Capsules: amino acids, vitamin B6 and two 12 mg peptide complexes (AGAP, AVN)",
+    handle: "brain-am",
+    coaSlug: "brain-am",
+    claimAreas: ["brain", "stress"],
+    summary: "Lot reports and a full label, but two of its four references cannot be found as cited.",
+    scores: {
+      amount: {
+        points: 8,
+        note: "Per 2 capsules: vitamin B6 2 mg, L-glutamic acid 227 mg, beta-alanine 92 mg, L-aspartic acid 92 mg, L-lysine 77 mg, L-leucine 77 mg, GABA 65 mg, L-glycine 65 mg, AGAP peptide complex 12 mg, AVN peptide complex 12 mg.",
+        sources: [PB("brain-am", "Brain AM")],
+      },
+      "claims-match": {
+        points: 11,
+        note: "Claims better memory, learning and focus (food-derived peptides for memory: limited, −2) and resistance to mental fatigue and stress (limited, −2).",
+        sources: [PB("brain-am", "Brain AM"), TOPIC2.brain],
+      },
+      "dose-match": {
+        points: 3,
+        note: "The one human study cited (Abdou 2006, GABA) gives no dose in its abstract.",
+        sources: [pubmed("16971751", "Abdou 2006")],
+      },
+      "cites-real": {
+        points: 0,
+        note: "Dakshinamurti 2016, “Vitamin B6 and brain function”, could not be found in PubMed, and Fernstrom 2000 is cited under a title we could not find (his 2000 paper is “Can nutrient supplements modify brain function?”). Abdou 2006 and Fonnum 1984 exist.",
+        sources: [PB("brain-am", "Brain AM"), pubmed("16971751", "Abdou 2006"), pubmed("6139418", "Fonnum 1984")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-brain-pm",
+    product: "Brain PM",
+    form: "Capsules: glycine, GABA and other amino acids, vitamin B6 and two 25 mg peptide complexes (AVN, GAA)",
+    handle: "brain-pm",
+    coaSlug: "brain-pm",
+    claimAreas: ["sleep", "stress", "brain"],
+    summary: "Its published internal certificate is Brain AM's, not Brain PM's, and the box shows an FDA logo.",
+    scores: {
+      "coa-batch": {
+        points: 8,
+        note: "The third-party report is for a Brain PM batch. The internal report linked as Brain PM carries the same batch number and contents as Brain AM's (see the next rows), so only one usable lot report is public.",
+        sources: [PB_COA_PAGE, PB_COA("brain-pm", "Brain PM"), PB_COA("brain-am", "Brain AM")],
+      },
+      "coa-numbers": {
+        points: 0,
+        note: "The internal certificate titled Brain PM (batch 00023, 27 May 2025) lists Brain AM's formula, including L-glutamic acid and the AGAP peptide, which are not on the Brain PM label; it is identical to the Brain AM certificate. The label lists glycine, GABA, taurine and a GAA peptide instead.",
+        sources: [PB_COA("brain-pm", "Brain PM"), PB_COA("brain-am", "Brain AM"), PB("brain-pm", "Brain PM")],
+      },
+      amount: {
+        points: 8,
+        note: "Per 2 capsules (box label): vitamin B6 5 mg, L-glycine 500 mg, GABA 380 mg, beta-alanine 125 mg, L-leucine 125 mg, L-lysine 125 mg, L-taurine 125 mg, AVN peptide complex 25 mg, GAA peptide complex 25 mg.",
+        sources: [PB("brain-pm", "Brain PM")],
+      },
+      "claims-match": {
+        points: 9,
+        note: "Claims deeper sleep (limited, −2), lower stress and cortisol (limited, −2) and overnight cognitive recovery (memory: limited, −2).",
+        sources: [PB("brain-pm", "Brain PM"), TOPIC2.brain],
+      },
+      "dose-match": {
+        points: 0,
+        note: "The human trial cited (Suzuki 2020) gave 3 or 6 g a day of seven essential amino acids; Brain PM has 250 mg of the two of those it contains. The other sleep paper cited is an animal study.",
+        sources: [pubmed("33324669", "Suzuki 2020"), pubmed("30707852", "Kim 2019")],
+      },
+      "cites-real": {
+        points: 3,
+        note: "All four references exist, but with errors: Kim 2019 is in Pharm Biol (not PLoS ONE), Nguyen 2013 in Neural Plast (not Neuroscience), and the Rafiee 2022 and Suzuki 2020 titles are misquoted.",
+        sources: [pubmed("30707852", "Kim 2019"), pubmed("24379976", "Nguyen 2013"), pubmed("35334949", "Rafiee 2022"), pubmed("33324669", "Suzuki 2020")],
+      },
+      category: {
+        points: 3,
+        note: "Labelled a dietary supplement with the FDA statement, but the box shows “FDA” as a logo (“Manufactured in an FDA registered facility”), which can suggest FDA approval.",
+        sources: [PB("brain-pm", "Brain PM")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-multivitamin",
+    product: "Multivitamin+",
+    form: "Capsule: vitamins and minerals with three 10 mg peptide complexes (AVN, LIV, SGS)",
+    handle: "multi-vitamin-peptide-capsules-60-count-30-servings",
+    coaSlug: "multivitamin-plus",
+    claimAreas: [],
+    summary: "Full label and lot reports; the internal report gives quantities without limits, and the third-party report had a high microbe count.",
+    scores: {
+      "coa-batch": {
+        points: 8,
+        note: "An internal and a third-party report, both for batch 00032; other batches have no public report.",
+        sources: [PB_COA_PAGE, PB_COA("multivitamin-plus", "Multivitamin+")],
+      },
+      "coa-numbers": {
+        points: 3,
+        note: "The internal report lists each ingredient's share of the formula with no target or limit (it says it “features ingredients and their quantity”), so the results cannot be told apart from the recipe.",
+        sources: [PB_COA("multivitamin-plus", "Multivitamin+")],
+      },
+      "coa-contaminants": {
+        points: 4,
+        note: "Metals and microbes in both reports, without limit and number together for metals. The third-party report for this batch gave a total aerobic count of 30,000 CFU/g and coliforms of 2,000 CFU/g; the internal report for the same batch gives a plate count below 10 CFU/g.",
+        sources: [PB_COA("multivitamin-plus", "Multivitamin+"), ORAL_TESTING],
+      },
+      amount: {
+        points: 8,
+        note: "Every vitamin, mineral and peptide complex is listed with an amount per capsule (for example vitamin B12 472 mcg, biotin 1,500 mcg, IPH AVN, LIV and SGS 10 mg each).",
+        sources: [PB("multi-vitamin-peptide-capsules-60-count-30-servings", "Multivitamin+")],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Peptide claims: vascular tone and circulation (limited, −2); liver function and antioxidant defence are not rated. Vitamin and mineral claims are outside this site's ratings.",
+        sources: [PB("multi-vitamin-peptide-capsules-60-count-30-servings", "Multivitamin+"), TOPIC2.bp],
+      },
+      "cites-real": {
+        points: 3,
+        note: "All four references exist; one has the wrong year (Schwalfenberg is 2017, not 2011). They are reviews of vitamins and choline, not of the peptides.",
+        sources: [pubmed("28698808", "Schwalfenberg 2017"), pubmed("17101959", "Ames 2006"), pubmed("31963293", "Gombart 2020"), pubmed("19906248", "Zeisel 2009")],
+      },
+    },
+  }),
+  purblack({
+    id: "purblack-immune",
+    product: "Immune+",
+    form: "Capsules: herbal extracts, vitamins D and K2, zinc, selenium and three 9 mg peptide complexes",
+    handle: "immune-peptide",
+    coaSlug: "immune-plus",
+    claimAreas: ["immune"],
+    summary: "Lot reports, but the label's selenium and zinc figures read as many times the daily value, and its peptide immune claims have no human trial.",
+    scores: {
+      "coa-batch": {
+        points: 8,
+        note: "An internal and a third-party report, both for batch 00021; other batches have no public report.",
+        sources: [PB_COA_PAGE, PB_COA("immune-plus", "Immune+")],
+      },
+      "coa-numbers": {
+        points: 3,
+        note: "Every result in the internal report is identical to its target (for example 17.69% for each of four extracts, 0.59% for each peptide), so the results cannot be told apart from the recipe.",
+        sources: [PB_COA("immune-plus", "Immune+")],
+      },
+      "coa-contaminants": {
+        points: 4,
+        note: "Metals and microbes in both reports, without limit and number together for metals. This batch had the highest metals of Pürblack's eight third-party reports (for example lead 0.326 µg/g).",
+        sources: [PB_COA("immune-plus", "Immune+"), ORAL_TESTING],
+      },
+      amount: {
+        points: 4,
+        note: "Amounts are listed, but selenium (8,850 mcg, 12,642% of the daily value) and zinc (133 mg, 886%) are given as the weight of the compound, while the daily-value figures treat them as the mineral. The internal report says the selenium compound is 1% selenium, so a serving has about 89 mcg of selenium, not 8,850. Vitamin D is 4,425 IU.",
+        sources: [PB("immune-peptide", "Immune+"), PB_COA("immune-plus", "Immune+")],
+      },
+      "claims-match": {
+        points: 11,
+        note: "Claims that its peptides support the thymus, lungs and immune cells. We found no human trial of oral peptides for immune function (−4). Vitamin and herb claims are outside this site's ratings.",
+        sources: [PB("immune-peptide", "Immune+"), TOPIC2.immune],
+      },
+      "dose-match": {
+        points: 3,
+        note: "Vitamin D (4,425 IU) is within the range of the cited meta-analysis, but the fucoidan trial used 1 g a day (a serving has 265 mg) and the elderberry meta-analysis tested the berry, while Immune+ contains elder flower.",
+        sources: [pubmed("28202713", "Martineau 2017"), pubmed("37331983", "McFadden 2023"), pubmed("30670267", "Hawkins 2019")],
+      },
+      "cites-real": {
+        points: 3,
+        note: "All five references exist; the fucoidan trial is cited with the wrong journal and title (it is in J Int Soc Sports Nutr).",
+        sources: [pubmed("37331983", "McFadden 2023"), pubmed("38719213", "Nault 2024"), pubmed("18384097", "Hoffmann 2008")],
+      },
+    },
+  }),
+  {
+    id: "life-extension-milk-peptides",
+    brand: "Life Extension",
+    product: "Bioactive Milk Peptides",
+    form: "Capsule: 150 mg casein decapeptide (Lactium)",
+    group: "oral",
+    checkedOn: "2026-11-13",
+    documentsCheckedOn: "2026-11-13",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["sleep", "stress"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Clear label at the dose of the main human trial, but no public lot report, and its sleep claim cites a cat study and a mouse study.",
+    scores: {
+      "coa-batch": { points: 0, note: "No public lot report found on the product page.", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
+      "coa-lab": NO_LOT({ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }),
+      "coa-numbers": NO_LOT({ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }),
+      "coa-contaminants": NO_LOT({ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }),
+      certification: { points: 0, note: "No sport or contents certification listing found; the gluten-free and non-GMO marks are not counted.", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
+      amount: { points: 8, note: "150 mg of casein decapeptide per capsule, single active.", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
+      source: { points: 4, note: "Casein from milk (Lactium, a milk protein hydrolysate).", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
+      allergen: { points: 5, note: "“Contains milk (casein decapeptide).”", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
+      blend: { points: 6, note: "Single active ingredient.", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
+      "claims-match": {
+        points: 13,
+        note: "Claims restful sleep (casein hydrolysate for sleep: limited, −2) and a healthy stress response and cortisol (not rated for casein).",
+        sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }, TOPIC2.brain],
+      },
+      "dose-match": {
+        points: 3,
+        note: "The 30-day trial in women with stress symptoms used 150 mg a day, the same as a capsule; another cited human study gave 1,200 mg over one day.",
+        sources: [pubmed("17136040", "Kim 2007 (150 mg/day)"), pubmed("15517308", "Messaoudi 2005")],
+      },
+      "cites-real": {
+        points: 0,
+        note: "All seven references exist, but the sentence “published studies reveal that these bioactive milk peptides promote restful sleep and support relief from stress” cites a cat study and a mouse study without saying so.",
+        sources: [pubmed("27677831", "Landsberg 2017 (cats)"), pubmed("27401107", "Dela Peña 2016 (mice)")],
+      },
+      category: {
+        points: 5,
+        note: "Sold as a dietary supplement with the FDA statement.",
+        sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }],
+      },
+      identity: {
+        points: 5,
+        note: "Life Extension Foundation Buyers Club, Inc., with a Fort Lauderdale address and a legal email, in the terms of use.",
+        sources: [{ label: "Life Extension terms of use", href: "https://www.lifeextension.com/legal/terms-of-use" }],
+      },
+    },
+  },
+  {
+    id: "metagenics-vasotensin",
+    brand: "Metagenics",
+    product: "Vasotensin",
+    form: "Tablets: 750 mg bonito (skipjack tuna) and mackerel fish protein per 2 tablets",
+    group: "oral",
+    checkedOn: "2026-11-13",
+    documentsCheckedOn: "2026-11-13",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["blood-pressure"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Clear label, fish declared and a modest claim, but no public lot report or certification listing.",
+    scores: {
+      "coa-batch": { points: 0, note: "No public lot report found.", sources: [{ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }] },
+      "coa-lab": NO_LOT({ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }),
+      "coa-numbers": NO_LOT({ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }),
+      "coa-contaminants": NO_LOT({ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }),
+      certification: { points: 0, note: "No sport or contents certification listing found; the Non-GMO Project and gluten-free marks are not counted.", sources: [{ label: "Label record in NIH's Dietary Supplement Label Database", href: "https://dsld.od.nih.gov/label/295886" }] },
+      amount: { points: 8, note: "750 mg of fish protein powder per 2 tablets (4 tablets a day suggested).", sources: [{ label: "Label record in NIH's Dietary Supplement Label Database", href: "https://dsld.od.nih.gov/label/295886" }] },
+      source: { points: 4, note: "Bonito fish; the allergen line names skipjack tuna and mackerel.", sources: [{ label: "Label record in NIH's Dietary Supplement Label Database", href: "https://dsld.od.nih.gov/label/295886" }] },
+      allergen: { points: 5, note: "“Contains: Fish (skipjack tuna and mackerel).”", sources: [{ label: "Label record in NIH's Dietary Supplement Label Database", href: "https://dsld.od.nih.gov/label/295886" }] },
+      blend: { points: 6, note: "Single active ingredient.", sources: [{ label: "Label record in NIH's Dietary Supplement Label Database", href: "https://dsld.od.nih.gov/label/295886" }] },
+      "claims-match": {
+        points: 13,
+        note: "Claims support for blood pressure already in the normal range (fish peptides and blood pressure: limited, −2).",
+        sources: [{ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }, TOPIC2.bp],
+      },
+      "dose-match": NONE_CITED({ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }),
+      "cites-real": NONE_CITED({ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }),
+      category: SUPPLEMENT({ label: "Label record in NIH's Dietary Supplement Label Database", href: "https://dsld.od.nih.gov/label/295886" }),
+      identity: {
+        points: 5,
+        note: "Metagenics, LLC, with a Jersey City address and a support route, on the product page.",
+        sources: [{ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }],
+      },
+    },
+  },
+];
+
+/** Every graded product. */
+export const ALL_GRADES: ProductGrade[] = [...GRADES, ...ORAL_GRADES];
+
 // ---------- scoring ----------
 export type BandLabel = "Well documented" | "Documented" | "Partly documented" | "Poorly documented" | "Not graded";
 const BAND_MIN: { label: Exclude<BandLabel, "Not graded">; min: number }[] = [
@@ -886,14 +1399,14 @@ export function categoryPoints(g: ProductGrade, categoryId: string) {
 }
 
 /** Graded products, best documented first (ties by brand). */
-export function ranked(group: ProductGrade["group"], area?: ClaimArea) {
-  return GRADES.filter((g) => g.group === group && (!area || g.claimAreas.includes(area))).sort(
+export function ranked(group?: Group, area?: ClaimArea) {
+  return ALL_GRADES.filter((g) => (!group || g.group === group) && (!area || g.claimAreas.includes(area))).sort(
     (a, b) => result(b).total - result(a).total || a.brand.localeCompare(b.brand),
   );
 }
 
 // ---------- build checks ----------
-for (const g of GRADES) {
+for (const g of ALL_GRADES) {
   const ids = new Set(Object.keys(g.scores));
   for (const k of CRITERIA) {
     const s = g.scores[k.id];
@@ -909,5 +1422,5 @@ for (const g of GRADES) {
     if (!DEDUCTIONS.some((x) => x.id === d.id) || d.sources.length === 0) throw new Error(`grades: ${g.id} has a bad deduction`);
   }
 }
-if (new Set(GRADES.map((g) => g.id)).size !== GRADES.length) throw new Error("grades: duplicate ids");
+if (new Set(ALL_GRADES.map((g) => g.id)).size !== ALL_GRADES.length) throw new Error("grades: duplicate ids");
 if (TOTAL_POINTS !== 100) throw new Error("grades: rubric total is not 100");

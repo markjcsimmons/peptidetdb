@@ -6,8 +6,8 @@ import { JsonLd } from "@/components/json-ld";
 import { CARD, Pill, ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
-import { GradeTable, ScoringSheet } from "@/components/product-grades";
-import { CRITERIA, GRADES_CHECKED_ON, SCORING_RULES, ranked } from "@/lib/grades";
+import { GradeTable, ScoringRules, ScoringSheet } from "@/components/product-grades";
+import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
 import {
   CERTIFIED,
   COLLAGEN_CHECKED_ON,
@@ -147,7 +147,7 @@ export default function BestCollagenPeptidesPage() {
             <Link href="/grading-rubric" className="link">
               grading rubric
             </Link>{" "}
-            (version 1.0, published before any product was graded): 42 points for batch testing and certification, 23 for
+            (version 1.1; version 1.0 was confirmed before any product was graded): 42 points for batch testing and certification, 23 for
             the label, 25 for claims against the human evidence and 10 for regulatory status and company identity. Every
             point has a note and a source in the product&rsquo;s scoring sheet.
           </li>
@@ -210,23 +210,7 @@ export default function BestCollagenPeptidesPage() {
           regrade it and date the change.
         </p>
         <GradeTable grades={ranked("collagen")} />
-        <details className="mt-4 rounded-card border border-line bg-card p-5 sm:p-6">
-          <summary className="cursor-pointer font-semibold">How partial points were given</summary>
-          <p className="mt-3 max-w-prose text-sm text-soft [text-wrap:pretty]">
-            The rubric sets the maximum for each criterion. These are the steps we used below the maximum, the same for every
-            product.
-          </p>
-          <dl className="mt-3 space-y-3 text-sm">
-            {CRITERIA.map((k) => (
-              <div key={k.id}>
-                <dt className="font-semibold text-fg">
-                  {k.name} ({k.points})
-                </dt>
-                <dd className="max-w-prose text-soft [text-wrap:pretty]">{SCORING_RULES[k.id]}</dd>
-              </div>
-            ))}
-          </dl>
-        </details>
+        <ScoringRules />
         <h3 className="mt-10 text-2xl font-bold leading-tight">Scoring sheets</h3>
         <div className="mt-4 grid gap-4">
           {ranked("collagen").map((g) => (

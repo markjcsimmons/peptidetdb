@@ -9,7 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedCollagenProducts } from "@/components/product-grades";
+import { GradedProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for hair growth: ranked by the evidence",
@@ -280,7 +280,7 @@ export default function PeptidesForHairGrowthPage() {
         </p>
       </section>
 
-      <GradedCollagenProducts
+      <GradedProducts
         area="hair"
         ratingNote={<>The human evidence for swallowed collagen and hair is rated &ldquo;limited&rdquo;, so a hair claim costs points under the claims criterion.</>}
       />

@@ -9,6 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradedProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for the immune system: ranked by evidence",
@@ -397,6 +398,11 @@ export default function PeptidesForImmuneSystemPage() {
           </Callout>
         )}
       </section>
+
+      <GradedProducts
+        area="immune"
+        ratingNote={<>We found no human trial of oral food-derived peptides for immune function, so an immune claim for a peptide costs 4 points under the claims criterion.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
