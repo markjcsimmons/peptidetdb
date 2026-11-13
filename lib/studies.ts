@@ -63,7 +63,10 @@ export type PeptideId =
   | "cerebrolysin"
   | "noopept"
   | "dihexa"
-  | "lactotripeptides";
+  | "lactotripeptides"
+  | "cyclosporine"
+  | "insulin"
+  | "retinalamin";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -137,7 +140,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   "mens-health": "Men's health",
   gut: "Gut health & digestion",
   "oral-peptides": "Oral peptides: do they get absorbed?",
-  eye: "Eyes: dry eye & cornea",
+  eye: "Eye health",
   safety: "Safety & regulation",
 };
 
@@ -178,6 +181,9 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   noopept: "Noopept (omberacetam)",
   dihexa: "Dihexa",
   lactotripeptides: "Milk lactotripeptides (IPP and VPP)",
+  cyclosporine: "Cyclosporine eye drops",
+  insulin: "Insulin eye drops",
+  retinalamin: "Retinalamin (Russian retinal peptide drug)",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -4443,6 +4449,159 @@ export const STUDIES: Study[] = [
       "At every dose, tirzepatide lowered systolic blood pressure: by a median of 4.20 mm Hg at 5 mg, 5.34 mm Hg at 10 mg and 5.77 mm Hg at 15 mg. Total and LDL cholesterol and triglycerides fell and HDL cholesterol rose.",
     caveat:
       "Seven trials, and the abstract does not say how many people or what the comparison groups were. Blood pressure was not the trials' main outcome.",
+    verifiedOn: "2026-11-13",
+  },
+  // --- Eye health (added 2026-11-13 for /peptides/peptides-for-eye-health) ---
+  {
+    id: "priyadarshini-2026",
+    authors: "Priyadarshini SR, Sadhu S, Tzang CC, Niedert C, Holt CA, Han G, de Paiva CS, Pflugfelder SC, Akpek EK, Li T",
+    year: 2026,
+    title: "Topical cyclosporine A therapy for dry eye disease.",
+    journal: "Cochrane Database Syst Rev",
+    ref: "7(7):CD010051",
+    pmid: "42464966",
+    pmcid: "PMC13377591",
+    doi: "10.1002/14651858.CD010051.pub3",
+    kind: "meta-analysis",
+    topics: ["eye"],
+    peptides: ["cyclosporine"],
+    delivery: ["topical"],
+    population: "58 randomised trials, 10,225 people with dry eye disease (60% of trials from South Korea, the USA and China)",
+    design: "Cochrane systematic review and meta-analysis (searched to March 2026)",
+    finding:
+      "Cyclosporine 0.05% eye drops may improve dry-eye symptoms and corneal staining at 3 months compared with vehicle or artificial tears (low certainty), and 0.1% probably improves corneal and conjunctival staining (moderate certainty). People on cyclosporine were probably about twice as likely to stop because of side effects (risk ratio 1.99 for 0.05%). Results for symptoms and tear measures were inconsistent between trials.",
+    caveat:
+      "Most evidence is low certainty, with high variation between trials, and follow-up was usually only 3 months. The authors ask for trials that separate types and severities of dry eye and look at long-term benefit and harm.",
+    funding:
+      "The Cochrane Eyes and Vision US Project is funded by the US National Eye Institute. Several authors report consulting, grants or royalties from companies including Allergan, Bausch & Lomb, Novartis, Shire and Senju, as stated in the record.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "amaral-2025",
+    authors: "Amaral DC, Carvalho Soares Valentim C, Cheidde L, Cheidde L, Ladeira Júnior PP, Weba ETP, Donato KO, Filho HNF, Guedes J, Louzada RN",
+    year: 2025,
+    title: "Impact of topical insulin as a therapeutic intervention for corneal wounds: A comprehensive systematic review and meta-analysis.",
+    journal: "Eur J Ophthalmol",
+    ref: "35(6):2321–2335",
+    pmid: "40696883",
+    doi: "10.1177/11206721251361649",
+    kind: "meta-analysis",
+    topics: ["eye"],
+    peptides: ["insulin"],
+    delivery: ["topical"],
+    population: "13 studies, 390 eyes with persistent corneal epithelial defects or defects after vitrectomy surgery",
+    design: "Systematic review and meta-analysis",
+    finding:
+      "Across the studies, 94% of eyes treated with insulin drops healed completely, with an odds ratio of 5.41 in favour of insulin over controls, and failure to heal was about 5%. Average healing time was about 21 days, with large differences between studies.",
+    caveat:
+      "The abstract does not say how many of the 13 studies were randomised or had a control group, and results varied a great deal. The authors ask for well-controlled studies with long-term outcomes.",
+    funding: "The record lists no grants; the authors declare no conflicts of interest.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "dasrilsyah-2023",
+    authors: "Dasrilsyah AM, Wan Abdul Halim WH, Mustapha M, Tang SF, Kaur B, Ong EY, Bastion MLC",
+    year: 2023,
+    title: "Randomized Clinical Trial of Topical Insulin Versus Artificial Tears for Healing Rates of Iatrogenic Corneal Epithelial Defects Induced During Vitreoretinal Surgery in Diabetics.",
+    journal: "Cornea",
+    ref: "42(11):1395–1403",
+    pmid: "37267451",
+    doi: "10.1097/ICO.0000000000003308",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["insulin"],
+    delivery: ["topical"],
+    population: "38 patients with diabetes and a corneal defect after eye surgery (19 per group)",
+    design: "Double-blind randomised trial: insulin eye drops (0.5 units, four times a day) against hyaluronate artificial tears",
+    duration: "Followed for 3 months",
+    finding:
+      "The corneal defects healed faster with insulin drops, 1.20 against 0.78 mm² per hour (p < 0.001), and healing rates were higher at 36, 48 and 144 hours. No side effects were reported in either group.",
+    caveat: "38 eyes in one hospital, after one kind of surgery, in people with diabetes. Faster closure of a surgical wound is not the same as treating a chronic eye disease.",
+    funding: "The record lists no grants; the authors declare no conflict of interest.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "strakhov-2020",
+    authors: "Strakhov VV, Egorov EA, Erichev VP, Yartsev AV, Petrov SY, Dorofeev DA",
+    year: 2020,
+    title: "[The influence of long-term retinal protective therapy on glaucoma progression according to structural and functional tests].",
+    journal: "Vestn Oftalmol",
+    ref: "136(5):58–66",
+    pmid: "33056965",
+    doi: "10.17116/oftalma202013605158",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["retinalamin"],
+    delivery: [],
+    population: "147 patients (249 eyes) with early open-angle glaucoma and controlled eye pressure: 69 on Retinalamin, 78 controls",
+    design: "Randomised trial with a no-treatment control group (Russian-language article)",
+    duration: "A Retinalamin course every 6 months for 24 months",
+    finding:
+      "Within the Retinalamin group the nerve-fibre layer did not thin significantly while it thinned in the control group, and one optic-nerve measure rose in the treated group and fell in controls. But at 24 months there was no significant difference between the groups on any structural or visual-field measure, and visual acuity did not change in either group. The authors conclude Retinalamin arrests glaucoma damage.",
+    caveat:
+      "The comparison that matters, between the groups, showed no difference at the end, so the authors' conclusion rests on changes within each group. The abstract does not say whether patients or assessors were blinded.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "dorofeev-2025",
+    authors: "Dorofeev DA, Kozlova IV, Vereshchagina AI",
+    year: 2025,
+    title: "[Neuroprotective therapy in advanced primary open-angle glaucoma].",
+    journal: "Vestn Oftalmol",
+    ref: "141(6):75–80",
+    pmid: "41432508",
+    doi: "10.17116/oftalma202514106175",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["retinalamin"],
+    delivery: ["injectable"],
+    population: "56 patients (98 eyes) with advanced open-angle glaucoma and controlled eye pressure at two Russian centres",
+    design: "Prospective cohort study: patients given Retinalamin compared with patients given no neuroprotective treatment (not randomised)",
+    dose: "10 intramuscular injections of 5 mg every 3 months",
+    duration: "2 years",
+    finding:
+      "Visual-field loss progressed more slowly in the Retinalamin group (mean deviation fell by 0.98 dB a year against 1.65 dB in controls), and the nerve-fibre layer thinned by 1.5 µm a year against 3.0 µm. The authors conclude long-term treatment is justified when eye pressure is controlled.",
+    caveat:
+      "Not randomised, so the groups may have differed in ways that affect progression, and the abstract does not say whether the differences were statistically significant. The abstract names the manufacturer, Geropharm.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "malakhova-2024",
+    authors: "Malakhova AI, Strakhov VV, Malakhova YA",
+    year: 2024,
+    title: "[Objective structural and functional monitoring of polypeptide retinal neuroprotective therapy in diabetic retinopathy].",
+    journal: "Vestn Oftalmol",
+    ref: "140(5):97–104",
+    pmid: "39569781",
+    doi: "10.17116/oftalma202414005197",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["retinalamin"],
+    delivery: ["injectable"],
+    population: "56 patients (112 eyes) with diabetic retinopathy and no macular oedema: 28 given Retinalamin, 28 controls",
+    design: "Clinical comparison with an untreated control group, using retinal scans and electrical tests of the retina (Russian-language article; not described as randomised)",
+    finding:
+      "The authors describe Retinalamin as a polypeptide drug and report convincing objective evidence of positive changes in the treated group, and they see a role for peptide 'bioregulators' in early diabetic retinopathy.",
+    caveat: "The abstract gives no numbers or statistics for any result, so its claim of positive changes cannot be checked from it, and the study is not described as randomised or blinded.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "polunin-2000",
+    authors: "Polunin GS, Nurieva SM, Baiandin DL, Sheremet NL, Andreeva LA",
+    year: 2000,
+    title: "[Evaluation of therapeutic effect of new Russian drug semax in optic nerve disease].",
+    journal: "Vestn Oftalmol",
+    ref: "116(1):15–18",
+    pmid: "10741256",
+    kind: "human-controlled",
+    topics: ["eye"],
+    peptides: ["semax"],
+    delivery: [],
+    population: "Patients with vascular, toxic-allergic or inflammatory optic nerve disease or partial optic atrophy (number not given in the abstract)",
+    design: "Controlled trial in three groups: semax nasal drops, semax by nasal electrophoresis, or control, all alongside standard treatment (Russian-language article)",
+    finding:
+      "Adding semax was followed by faster and greater recovery, with better visual acuity, wider visual fields, better optic-nerve electrical sensitivity and conduction, and better colour vision, especially in the acute stage.",
+    caveat: "The abstract gives no patient numbers, results or statistics, and does not say the groups were randomised or blinded.",
     verifiedOn: "2026-11-13",
   },
 ];

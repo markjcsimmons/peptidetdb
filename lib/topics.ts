@@ -630,14 +630,34 @@ export const TOPICS: Record<Topic, TopicPage> = {
   eye: {
     slug: "eye",
     measures: "benefit",
-    title: "Peptides for eyes: dry eye & cornea",
+    title: "Peptides for eye health: dry eye, cornea & glaucoma",
     intro:
-      "Peptide eye drops have been tested for dry eye and for a corneal disease in which the surface of the eye does not heal. Peptides taken by mouth for eyesight are a different claim, and we found no human trial of them.",
+      "Peptide medicines used in the eye include cyclosporine, a ring-shaped peptide drug that is a prescription eye drop for dry eye, insulin (a peptide hormone) used as eye drops for slow-healing corneal wounds, and thymosin beta-4 eye drops. Russian peptide drugs, Retinalamin and semax, have been tested for glaucoma and optic nerve disease. Peptides taken by mouth for eyesight are a different claim, and we found no human trial of them.",
     ratings: [
+      {
+        subject: "Cyclosporine eye drops (prescription) for dry eye",
+        level: "mixed",
+        why: "A 2026 Cochrane review of 58 randomised trials (10,225 people) found the drops may improve symptoms and probably improve corneal and conjunctival staining at 3 months compared with vehicle or artificial tears, but symptom and tear results were inconsistent between trials and most evidence was low certainty. People using cyclosporine were probably about twice as likely to stop because of side effects.",
+      },
+      {
+        subject: "Insulin eye drops for slow-healing corneal wounds",
+        level: "limited",
+        why: "A 2025 meta-analysis of 13 studies (390 eyes) reports complete healing in 94% of treated eyes and an odds ratio of 5.41 in favour of insulin over controls, but its abstract does not say how many studies were controlled, and results varied a lot. One double-blind trial in 38 people with diabetes found corneal defects after eye surgery closed faster than with artificial tears. Insulin is approved for diabetes, not as an eye drop.",
+      },
       {
         subject: "Thymosin beta-4 eye drops (RGN-259) for dry eye and corneal healing",
         level: "limited",
         why: "Two small company-linked trials. In 9 patients with severe dry eye, treated eyes had less discomfort and corneal staining than vehicle at day 56. In 18 patients with neurotrophic keratopathy, full healing at 4 weeks was 6 of 10 against 1 of 8 on placebo, which was not statistically significant, though some later measures were. A 2025 Cochrane review rated the evidence from that trial as low certainty and judged the drops may not increase healing.",
+      },
+      {
+        subject: "Retinalamin injections for glaucoma and diabetic retinopathy",
+        level: "limited",
+        why: "In a randomised trial of 147 people with early glaucoma, measures held steadier within the Retinalamin group, but the groups did not differ on any measure at 24 months. A non-randomised study of 56 people with advanced glaucoma reports slower visual-field loss, and a 56-person study in diabetic retinopathy reports benefits without giving numbers. All three are Russian-language studies; we read only their English abstracts.",
+      },
+      {
+        subject: "Semax nasal drops for optic nerve disease",
+        level: "limited",
+        why: "One Russian controlled study from 2000 reports better vision, visual fields and optic-nerve function when semax was added to standard treatment, but its abstract gives no patient numbers or results and does not say it was randomised.",
       },
       {
         subject: "Oral marine (fish-derived) peptides for eyesight",
@@ -646,10 +666,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
       },
     ],
     gaps: [
-      "We searched only for thymosin beta-4 eye drops. Other eye treatments, such as nerve growth factor drops (a protein, not a peptide), are in the Cochrane review but are not rated here.",
+      "Nerve growth factor drops and anti-VEGF injections are proteins, not peptides, and are not rated here. Lacritin, a tear-film peptide, appeared only in animal work in our search.",
+      "We did not compare any of these with other dry-eye or glaucoma treatments, and the glaucoma studies tested Retinalamin alongside eye-pressure treatment, not instead of it.",
       "No eye study of TB-500 was found; the eye trials used the full thymosin beta-4 protein.",
     ],
-    reviewedOn: "2026-11-12",
+    reviewedOn: "2026-11-13",
   },
   safety: {
     slug: "safety",

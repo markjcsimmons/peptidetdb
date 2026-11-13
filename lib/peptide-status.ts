@@ -157,5 +157,23 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
     sources: [],
   },
   lactotripeptides: { kind: "supplement", note: "Milk-derived peptides tested as a food or supplement ingredient.", sources: [] },
+  cyclosporine: {
+    kind: "approved",
+    note: "Cyclosporine eye drops are approved for dry eye, for example as Cequa and Vevye.",
+    sources: [
+      { label: "Drugs@FDA: NDA 210913 (Cequa)", url: DAF("210913") },
+      { label: "Drugs@FDA: NDA 217469 (Vevye)", url: DAF("217469") },
+    ],
+  },
+  insulin: {
+    kind: "approved",
+    note: "Insulin is approved for diabetes, but we found no FDA-approved insulin eye drop in openFDA's records (searched 2026-11-13); the eye studies used it outside an approved product.",
+    sources: [{ label: "Drugs@FDA: BLA 019717 (Humulin)", url: DAF("019717") }],
+  },
+  retinalamin: {
+    kind: "unclassified",
+    note: "A Russian drug (the manufacturer named in a 2025 study is Geropharm). No FDA approval found in openFDA's records (searched 2026-11-13).",
+    sources: [],
+  },
   "oral-peptide-delivery": { kind: "unclassified", note: "A research topic, not a product.", sources: [] },
 };

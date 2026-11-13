@@ -5,13 +5,14 @@ import { EvidenceMeter, RatingBadge, levelTone } from "@/components/evidence-met
 import { RouteIcon } from "@/components/route-icon";
 
 /** How an option is taken. Set only where the page itself makes the route plain; omit it otherwise. */
-export type Route = "oral" | "topical" | "injected" | "nasal";
+export type Route = "oral" | "topical" | "eye" | "injected" | "nasal";
 
 export const ROUTE_LABEL: Record<Route, string> = {
   oral: "By mouth",
   topical: "On the skin",
+  eye: "Eye drops",
   injected: "Injected",
-  nasal: "Nasal spray",
+  nasal: "Nasal",
 };
 
 export type RankedOption = {

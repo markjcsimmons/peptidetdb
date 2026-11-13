@@ -32,6 +32,13 @@ export function RouteIcon({ route, size = 18 }: { route: Route; size?: number })
           <path d="M3.5 20.5h17" />
         </svg>
       );
+    case "eye": // eye
+      return (
+        <svg {...common}>
+          <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+          <circle cx="12" cy="12" r="2.6" />
+        </svg>
+      );
     case "injected": // syringe
       return (
         <svg {...common}>
