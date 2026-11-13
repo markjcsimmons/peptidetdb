@@ -62,7 +62,8 @@ export type PeptideId =
   | "semax"
   | "cerebrolysin"
   | "noopept"
-  | "dihexa";
+  | "dihexa"
+  | "lactotripeptides";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -176,6 +177,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   cerebrolysin: "Cerebrolysin (pig-brain peptide mixture)",
   noopept: "Noopept (omberacetam)",
   dihexa: "Dihexa",
+  lactotripeptides: "Milk lactotripeptides (IPP and VPP)",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -4330,6 +4332,117 @@ export const STUDIES: Study[] = [
       "A combined score of functional and neuropsychological outcomes favoured Cerebrolysin at day 30 and day 90, a small-to-medium effect (at day 90, standardised mean difference 0.34, p = 0.0146). Safety and tolerability were similar to placebo.",
     caveat:
       "Two trials and 185 patients, measured with a combined 'ensemble' of scales rather than one clinical outcome. The record has no funding or conflict-of-interest statement. It concerns treatment after a serious brain injury, not cognitive enhancement in healthy people.",
+    verifiedOn: "2026-11-13",
+  },
+  // --- Blood pressure (added 2026-11-13 for /peptides/peptides-for-blood-pressure) ---
+  {
+    id: "qin-2013",
+    authors: "Qin LQ, Xu JY, Dong JY, Zhao Y, van Bladeren P, Zhang W",
+    year: 2013,
+    title: "Lactotripeptides intake and blood pressure management: a meta-analysis of randomised controlled clinical trials.",
+    journal: "Nutr Metab Cardiovasc Dis",
+    ref: "23(5):395–402",
+    pmid: "23566677",
+    doi: "10.1016/j.numecd.2013.02.006",
+    kind: "meta-analysis",
+    topics: ["blood-pressure"],
+    peptides: ["lactotripeptides"],
+    delivery: [],
+    population: "24 studies with 28 randomised trials and 1,919 people",
+    design: "Meta-analysis of randomised controlled trials of the milk peptides IPP and VPP",
+    finding:
+      "The milk peptides lowered blood pressure slightly: systolic by 1.66 mm Hg (95% CI −2.48 to −0.84) and diastolic by 0.76 mm Hg on clinic readings, and systolic by 1.30 mm Hg on 24-hour monitoring. The effect appeared to depend on starting blood pressure, ethnicity, how long people took them and whether trials were double-blind.",
+    caveat:
+      "Statistically significant but small, and the authors note earlier trial results were inconsistent and call for more double-blind trials with 24-hour monitoring. The 24-hour diastolic change was not significant.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "cicero-2013",
+    authors: "Cicero AF, Aubin F, Azais-Braesco V, Borghi C",
+    year: 2013,
+    title: "Do the lactotripeptides isoleucine-proline-proline and valine-proline-proline reduce systolic blood pressure in European subjects? A meta-analysis of randomized controlled trials.",
+    journal: "Am J Hypertens",
+    ref: "26(3):442–449",
+    pmid: "23382495",
+    pmcid: "PMC3565599",
+    doi: "10.1093/ajh/hps044",
+    kind: "meta-analysis",
+    topics: ["blood-pressure"],
+    peptides: ["lactotripeptides"],
+    delivery: [],
+    population: "14 randomised trials (15 data sets), 1,306 European participants",
+    design: "Meta-analysis of randomised controlled trials",
+    finding:
+      "In Europeans, IPP and VPP lowered systolic blood pressure by 1.28 mm Hg (95% CI −2.09 to −0.48) and diastolic by 0.59 mm Hg more than placebo, with no sign of publication bias. The effect was smaller in older people.",
+    caveat:
+      "A small effect, and not every trial on its own was significant. The authors describe it as moderate and say the peptides merit further study.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "chanson-rolle-2015",
+    authors: "Chanson-Rolle A, Aubin F, Braesco V, Hamasaki T, Kitakaze M",
+    year: 2015,
+    title: "Influence of the Lactotripeptides Isoleucine-Proline-Proline and Valine-Proline-Proline on Systolic Blood Pressure in Japanese Subjects: A Systematic Review and Meta-Analysis of Randomized Controlled Trials.",
+    journal: "PLoS One",
+    ref: "10(11):e0142235",
+    pmid: "26536628",
+    pmcid: "PMC4633157",
+    doi: "10.1371/journal.pone.0142235",
+    kind: "meta-analysis",
+    topics: ["blood-pressure"],
+    peptides: ["lactotripeptides"],
+    delivery: ["oral"],
+    population: "18 randomised trials, 1,194 Japanese participants",
+    design: "Systematic review and meta-analysis of randomised controlled trials (registered on PROSPERO)",
+    finding:
+      "In Japanese participants, IPP and VPP lowered systolic blood pressure by 5.63 mm Hg more than placebo (95% CI −6.87 to −4.39): by 8.35 mm Hg in people with hypertension and 3.42 mm Hg in those without. The effect held at doses below 5 mg a day.",
+    caveat:
+      "Results varied between trials, mainly with starting blood pressure. Three authors were paid by Calpis to do the review, and another had a research agreement with the company on lactotripeptides. The effect is much larger than in the European meta-analysis, and the reasons are not settled.",
+    funding:
+      "Three authors received payment from Calpis for performing the review, and one received a grant for lactotripeptide experiments under a research agreement with Calpis, as stated in the record.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "kennedy-2024",
+    authors: "Kennedy C, Hayes P, Cicero AFG, Dobner S, Le Roux CW, McEvoy JW, Zgaga L, Hennessy M",
+    year: 2024,
+    title: "Semaglutide and blood pressure: an individual patient data meta-analysis.",
+    journal: "Eur Heart J",
+    ref: "45(38):4124–4134",
+    pmid: "39217502",
+    pmcid: "PMC11458150",
+    doi: "10.1093/eurheartj/ehae564",
+    kind: "meta-analysis",
+    topics: ["blood-pressure", "weight"],
+    peptides: ["semaglutide"],
+    delivery: [],
+    population: "3,136 participants in three randomised trials of semaglutide 2.4 mg for weight (2,109 on semaglutide, 1,027 on placebo)",
+    design: "Individual patient data meta-analysis of three 68-week randomised trials",
+    finding:
+      "Systolic blood pressure fell 4.95 mm Hg more on semaglutide than placebo (95% CI −5.86 to −4.05), with similar falls in people with hypertension (−4.78 mm Hg) and those above 140 mm Hg at the start (−4.09 mm Hg). People on semaglutide also needed less blood-pressure medicine. Much of the fall was explained by weight loss.",
+    caveat:
+      "The trials were designed to test weight loss, not blood pressure. Part of the result may reflect changes to blood-pressure medicines, and the result in resistant hypertension was not significant. It applies to the prescription drug at a weight-loss dose.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "kanbay-2023",
+    authors: "Kanbay M, Copur S, Siriopol D, Yildiz AB, Gaipov A, van Raalte DH, Tuttle KR",
+    year: 2023,
+    title: "Effect of tirzepatide on blood pressure and lipids: A meta-analysis of randomized controlled trials.",
+    journal: "Diabetes Obes Metab",
+    ref: "25(12):3766–3778",
+    pmid: "37700437",
+    doi: "10.1111/dom.15272",
+    kind: "meta-analysis",
+    topics: ["blood-pressure", "weight"],
+    peptides: ["tirzepatide"],
+    delivery: [],
+    population: "7 randomised controlled trials of tirzepatide (the abstract does not give the number of people)",
+    design: "Meta-analysis of randomised controlled trials",
+    finding:
+      "At every dose, tirzepatide lowered systolic blood pressure: by a median of 4.20 mm Hg at 5 mg, 5.34 mm Hg at 10 mg and 5.77 mm Hg at 15 mg. Total and LDL cholesterol and triglycerides fell and HDL cholesterol rose.",
+    caveat:
+      "Seven trials, and the abstract does not say how many people or what the comparison groups were. Blood pressure was not the trials' main outcome.",
     verifiedOn: "2026-11-13",
   },
 ];

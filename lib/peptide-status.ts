@@ -156,5 +156,6 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
     note: "No FDA approval found in openFDA's drugs@FDA records (searched 2026-11-13).",
     sources: [],
   },
+  lactotripeptides: { kind: "supplement", note: "Milk-derived peptides tested as a food or supplement ingredient.", sources: [] },
   "oral-peptide-delivery": { kind: "unclassified", note: "A research topic, not a product.", sources: [] },
 };

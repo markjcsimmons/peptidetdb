@@ -236,10 +236,20 @@ export const TOPICS: Record<Topic, TopicPage> = {
   "blood-pressure": {
     slug: "blood-pressure",
     measures: "benefit",
-    title: "Marine peptides for blood pressure & vessels",
+    title: "Peptides for blood pressure & blood vessels",
     intro:
-      "Some peptides from fish are claimed to lower blood pressure by blocking an enzyme (ACE) that tightens blood vessels. The human trials are few and small, and they tested different products.",
+      "Two very different kinds of peptide lower blood pressure in trials. Prescription GLP-1 drugs such as semaglutide and tirzepatide lower it by about 4 to 6 mm Hg, largely through weight loss. Food-derived peptides from milk (lactotripeptides) and fish are claimed to work by blocking an enzyme (ACE) that tightens blood vessels; the milk peptides have many trials showing a small effect, and the fish peptides a few small trials of different products.",
     ratings: [
+      {
+        subject: "Prescription GLP-1 drugs (semaglutide, tirzepatide) and blood pressure",
+        level: "consistent",
+        why: "An analysis of individual data from three 68-week semaglutide trials (3,136 people) found systolic blood pressure about 5 mm Hg lower than placebo, including in people with hypertension, and a meta-analysis of seven tirzepatide trials found falls of about 4 to 6 mm Hg depending on dose. Much of the effect comes with weight loss, the trials were designed for weight or diabetes rather than blood pressure, and these are prescription drugs, not supplements.",
+      },
+      {
+        subject: "Milk lactotripeptides (IPP and VPP) for blood pressure",
+        level: "consistent",
+        why: "Three meta-analyses of randomised trials point the same way. Across 28 trials (1,919 people) systolic pressure fell by about 1.7 mm Hg, and across 14 European trials (1,306 people) by about 1.3 mm Hg. In 18 Japanese trials (1,194 people) the fall was 5.6 mm Hg, larger in people with hypertension, in a review paid for by a company with a research agreement on these peptides. The direction is consistent, but outside Japan the effect is small.",
+      },
       {
         subject: "Valyl-tyrosine, a defined sardine-derived peptide",
         level: "limited",
@@ -258,9 +268,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     gaps: [
       "No large or long randomised trial of a marine peptide supplement for blood pressure is summarised here.",
+      "None of the lactotripeptide or GLP-1 analyses here measured heart attacks or strokes as a result of the blood-pressure change; for semaglutide and cardiovascular events see the weight topic.",
+      "We did not search for other food-derived blood-pressure peptides (soy, whey, egg) or compare any of these with standard blood-pressure medicines.",
       "The hub does not yet cover the animal and laboratory work on ACE-inhibitory fish peptides.",
     ],
-    reviewedOn: "2026-11-09",
+    reviewedOn: "2026-11-13",
   },
   brain: {
     slug: "brain",

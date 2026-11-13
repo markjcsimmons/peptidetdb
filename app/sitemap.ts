@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/nootropic-peptides", TOPICS.brain.reviewedOn),
     stat("/peptides/peptides-for-women", TOPICS["womens-health"].reviewedOn),
     stat("/peptides/peptides-for-gut-health", TOPICS.gut.reviewedOn),
+    stat("/peptides/peptides-for-blood-pressure", TOPICS["blood-pressure"].reviewedOn),
     stat("/peptides/peptides-for-immune-system", TOPICS.immune.reviewedOn),
     stat("/peptides/peptides-for-men", TOPICS["mens-health"].reviewedOn),
     stat("/peptides/oral-peptides", TOPICS["oral-peptides"].reviewedOn),
