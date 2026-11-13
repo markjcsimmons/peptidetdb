@@ -265,9 +265,9 @@ export const TOPICS: Record<Topic, TopicPage> = {
   brain: {
     slug: "brain",
     measures: "benefit",
-    title: "Peptides for sleep, memory & stress",
+    title: "Peptides for the brain: sleep, memory & stress",
     intro:
-      "Peptides are promoted for sleep (DSIP, casein and fish hydrolysates, collagen taken at bedtime, epitalon), memory and stress (fish hydrolysate, selank). The human studies are small, the oral-product trials often have ties to a company with an interest in the product, and several found no difference from placebo. The DSIP trials are decades old and injected, and the selank trials are older, small and had no placebo group.",
+      "Peptides are promoted for sleep (DSIP, casein and fish hydrolysates, collagen taken at bedtime, epitalon), for memory and focus (fish hydrolysate, semax, Noopept, dihexa, Cerebrolysin) and for stress and anxiety (fish peptides, selank). The best-studied is Cerebrolysin, a prescription drug in some countries given by intravenous infusion, and its trials disagree. Most of the rest rests on small trials, often without a placebo group or with ties to a company that sells the product, and several found no difference from placebo.",
     ratings: [
       {
         subject: "Fish hydrolysate for sleep quality",
@@ -309,14 +309,35 @@ export const TOPICS: Record<Topic, TopicPage> = {
         level: "limited",
         why: "Three small Russian-language trials in 60 to 70 patients compared selank with benzodiazepines (medazepam, phenazepam) or added it to one, and none used a placebo. The authors report similar anxiolytic effect to medazepam and fewer side effects when selank was added to phenazepam. The abstracts give no scores or doses.",
       },
+      {
+        subject: "Cerebrolysin (pig-brain peptide mixture) for stroke, brain injury and vascular dementia",
+        level: "mixed",
+        why: "Randomised trials exist and point different ways. A 2023 Cochrane review of 7 trials (1,773 people) found it probably makes little or no difference to deaths after an acute stroke and may increase non-fatal serious adverse events. A meta-analysis of two trials in 185 people with traumatic brain injury reported a small-to-medium benefit on a combined outcome score, and a 2019 Cochrane review in vascular dementia found small gains on very low-quality, industry-supported evidence. It is given as a course of intravenous infusions; none of this tests it as a memory aid for healthy people.",
+      },
+      {
+        subject: "Semax after stroke and for reduced blood flow to the brain",
+        level: "limited",
+        why: "Three Russian-language studies from one research group (110 to 187 patients) report better recovery after stroke or slower progression of cerebrovascular disease. None is described as randomised or placebo-controlled, one had no comparison group, and the abstracts give few or no numbers. We found no trial of semax as a memory or focus aid in healthy people.",
+      },
+      {
+        subject: "Noopept for thinking problems after stroke",
+        level: "limited",
+        why: "One open-label study of 60 stroke patients with mild cognitive impairment reported better MMSE and word-association scores after 2 months than in controls. It was not described as randomised, and the abstract gives no group sizes or scores.",
+      },
+      {
+        subject: "Dihexa for memory and brain disease",
+        level: "preclinical",
+        why: "Only animal work: earlier studies reported pro-cognitive effects in animal models of Alzheimer's and Parkinson's disease, and a 2024 rat study found it did not protect against a Huntington's-like toxin. Our PubMed search found no human trial.",
+      },
     ],
     gaps: [
       "No independently funded randomised trial of a marine peptide supplement for sleep, memory or stress is summarised here.",
-      "We found no placebo-controlled human trial of selank. Semax, which has trial-type records in PubMed, is not covered here yet.",
+      "We found no placebo-controlled human trial of selank or semax. The semax and Noopept studies are Russian-language articles; we read only their English abstracts.",
+      "We found no trial of any of these peptides as a memory or focus aid in healthy people. Non-peptide nootropics (piracetam and similar drugs, caffeine, herbal products) are outside this site's scope.",
       "We did not search for trials comparing any of these with melatonin, sleep hygiene or cognitive behavioural therapy for insomnia.",
       "Glycine and other amino acids, melatonin and herbal sleep aids are outside this site's scope.",
     ],
-    reviewedOn: "2026-11-11",
+    reviewedOn: "2026-11-13",
   },
   immune: {
     slug: "immune",

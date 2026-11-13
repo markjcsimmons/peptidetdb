@@ -58,7 +58,11 @@ export type PeptideId =
   | "tirzepatide"
   | "kpv"
   | "selank"
-  | "thymosin-beta-4";
+  | "thymosin-beta-4"
+  | "semax"
+  | "cerebrolysin"
+  | "noopept"
+  | "dihexa";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -125,7 +129,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   muscle: "Muscle & strength",
   joints: "Joints & tendons",
   "blood-pressure": "Blood pressure & vessels",
-  brain: "Sleep, memory & stress",
+  brain: "Brain: sleep, memory & stress",
   immune: "Immune function",
   weight: "Weight loss & GLP-1 drugs",
   "womens-health": "Women's health",
@@ -168,6 +172,10 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   kpv: "KPV (Lys-Pro-Val)",
   selank: "Selank",
   "thymosin-beta-4": "Thymosin beta-4 (full protein)",
+  semax: "Semax",
+  cerebrolysin: "Cerebrolysin (pig-brain peptide mixture)",
+  noopept: "Noopept (omberacetam)",
+  dihexa: "Dihexa",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -4144,6 +4152,185 @@ export const STUDIES: Study[] = [
     funding:
       "The National Eye Institute (US) and UK public bodies, as stated in the record; the authors declare no conflicts relating to this review.",
     verifiedOn: "2026-11-12",
+  },
+  // --- Nootropic peptides (added 2026-11-13 for /peptides/nootropic-peptides) ---
+  {
+    id: "gusev-2018",
+    authors: "Gusev EI, Martynov MY, Kostenko EV, Petrova LV, Bobyreva SN",
+    year: 2018,
+    title: "[The efficacy of semax in the tretament of patients at different stages of ischemic stroke].",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "118(3. Vyp. 2):61–68",
+    pmid: "29798983",
+    doi: "10.17116/jnevro20181183261-68",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["semax"],
+    delivery: [],
+    population:
+      "110 adults after ischaemic stroke (mean age 58) in early (about 3 months) or late (about 7 months) rehabilitation, each group split into semax and no-semax subgroups",
+    design: "Comparison of patients who did and did not receive semax during rehabilitation (Russian-language article; the abstract does not say how patients were assigned)",
+    dose: "6,000 mcg a day in two 10-day courses, 20 days apart",
+    finding:
+      "Patients given semax had higher blood levels of BDNF, a nerve growth factor, throughout the study, and the authors report faster functional recovery and better final Barthel index scores (a measure of independence in daily activities). Earlier rehabilitation was also linked with better motor recovery.",
+    caveat:
+      "The abstract does not say patients were randomised or blinded and gives no subgroup sizes or effect sizes; much of the analysis is correlation. Blood BDNF is a marker, not an outcome patients feel. All three semax trials we found come from the same Russian research group.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "gusev-1997",
+    authors: "Gusev EI, Skvortsova VI, Miasoedov NF, Nezavibat'ko VN, Zhuravleva EIu, Vanichkin AV",
+    year: 1997,
+    title: "[Effectiveness of semax in acute period of hemispheric ischemic stroke (a clinical and electrophysiological study)].",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "97(6):26–34",
+    pmid: "11517472",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["semax"],
+    delivery: [],
+    population: "30 patients given semax in the acute period of ischaemic stroke, compared with 80 patients with similar strokes on conventional treatment",
+    design: "Controlled clinical trial against conventional treatment (Russian-language article; not described as randomised or blinded)",
+    dose: "12 mg a day for moderate strokes, 18 mg a day for severe strokes",
+    duration: "5 or 10 days",
+    finding:
+      "Adding semax to intensive treatment had some influence on how quickly neurological function recovered, with greater improvement in general and focal, especially motor, deficits. The authors name 12 mg and 18 mg a day as the most effective doses.",
+    caveat:
+      "The abstract gives no scores or statistics, the groups were unequal in size and not described as randomised, and 'some influence' is a modest claim. It does not say how semax was given.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "gusev-2005",
+    authors: "Gusev EI, Skvortsova VI, Chukanova EI",
+    year: 2005,
+    title: "[Semax in prevention of disease progress and development of exacerbations in patients with cerebrovascular insufficiency].",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "105(2):35–40",
+    pmid: "15792140",
+    kind: "human-uncontrolled",
+    topics: ["brain"],
+    peptides: ["semax"],
+    delivery: [],
+    population: "187 patients at different stages of chronic cerebrovascular insufficiency (reduced blood supply to the brain)",
+    design: "Evaluation of tolerability and effect (Russian-language article; the abstract describes no comparison group)",
+    finding:
+      "The authors report significant clinical improvement, slower disease progression and a lower risk of stroke and transient ischaemic attacks with semax, with few side effects, including in older patients.",
+    caveat:
+      "The abstract describes no comparison group, gives no numbers for any outcome and does not say how semax was given, so the claimed lower stroke risk cannot be judged from it.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "amelin-2011",
+    authors: "Amelin AV, Iliukhina AIu, Shmonin AA",
+    year: 2011,
+    title: "[Noopept in the treatment of mild cognitive impairment in patients with stroke].",
+    journal: "Zh Nevrol Psikhiatr Im S S Korsakova",
+    ref: "111(10 Pt 1):44–46",
+    pmid: "22500312",
+    kind: "human-controlled",
+    topics: ["brain"],
+    peptides: ["noopept"],
+    delivery: [],
+    population: "60 patients with mild cognitive impairment after stroke (the abstract does not say how many were controls)",
+    design: "Open prospective study with a control group (Russian-language article)",
+    dose: "20 mg a day",
+    duration: "2 months of treatment; patients followed for 12 months",
+    finding:
+      "After 2 months, MMSE scores and word-association tests improved significantly more with Noopept than in the controls, and the overall assessment showed mild improvement with Noopept and no change in controls. The authors describe it as safe.",
+    caveat:
+      "Open-label, so everyone knew who got the drug; not described as randomised; and the abstract gives no group sizes or scores. One small study from one centre.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "wells-2024",
+    authors: "Wells RG, Azzam AF, Hiller AL, Sardinia MF",
+    year: 2024,
+    title: "Effects of an Angiotensin IV Analog on 3-Nitropropionic Acid-Induced Huntington's Disease-Like Symptoms in Rats.",
+    journal: "J Huntingtons Dis",
+    ref: "13(1):55–66",
+    pmid: "38489193",
+    doi: "10.3233/JHD-231507",
+    kind: "animal",
+    topics: ["brain"],
+    peptides: ["dihexa"],
+    delivery: [],
+    population: "40 male rats given a toxin that mimics Huntington's disease",
+    design: "Randomised animal experiment: vehicle, toxin, or toxin plus dihexa (PNB-0408)",
+    duration: "5 weeks",
+    finding:
+      "Dihexa did not protect the rats from the weight, learning, memory and movement deficits caused by the toxin. The authors note earlier reports of neuroprotective and pro-cognitive effects in animal models of Alzheimer's and Parkinson's disease.",
+    caveat:
+      "One rat model, and the abstract does not give the dose. It reports no human data.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "ziganshina-2023",
+    authors: "Ziganshina LE, Abakumova T, Nurkhametova D, Ivanchenko K",
+    year: 2023,
+    title: "Cerebrolysin for acute ischaemic stroke.",
+    journal: "Cochrane Database Syst Rev",
+    ref: "10(10):CD007026",
+    pmid: "37818733",
+    pmcid: "PMC10565895",
+    doi: "10.1002/14651858.CD007026.pub7",
+    kind: "meta-analysis",
+    topics: ["brain"],
+    peptides: ["cerebrolysin"],
+    delivery: [],
+    population: "7 randomised trials, 1,773 people with acute ischaemic stroke (one trial, of 272 people, tested the similar product Cortexin)",
+    design: "Cochrane systematic review with meta-analysis (databases searched to June 2022)",
+    finding:
+      "Cerebrolysin, a mixture of peptides and amino acids from pig brain, or similar products probably make little or no difference to deaths (risk ratio 0.96, 95% CI 0.65 to 1.41; 6 trials, 1,689 people; moderate certainty) and probably do not reduce serious adverse events; there may be more non-fatal serious adverse events. No trial reported death or dependence, quality of life or return to work.",
+    caveat:
+      "Risk of bias was unclear for most trials, and the manufacturer supported three of the multicentre studies. The review covers treatment started within 48 hours of a stroke, not later rehabilitation or use in healthy people.",
+    funding: "The record lists non-US government support; one author is a Cochrane director who was not involved in editing the review.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "cui-2019",
+    authors: "Cui S, Chen N, Yang M, Guo J, Zhou M, Zhu C, He L",
+    year: 2019,
+    title: "Cerebrolysin for vascular dementia.",
+    journal: "Cochrane Database Syst Rev",
+    ref: "2019(11)",
+    pmid: "31710397",
+    pmcid: "PMC6844361",
+    doi: "10.1002/14651858.CD008900.pub3",
+    kind: "meta-analysis",
+    topics: ["brain"],
+    peptides: ["cerebrolysin"],
+    delivery: ["injectable"],
+    population: "6 randomised trials, 597 people, mostly with mild to moderate vascular dementia",
+    design: "Cochrane systematic review with meta-analysis (searched to May 2019)",
+    finding:
+      "Courses of intravenous Cerebrolysin improved cognition (standardised mean difference 0.36; 3 trials, 420 people) and global function (risk ratio 2.69; 2 trials, 379 people), with no difference in adverse effects, all on very low-quality evidence. The authors say any benefit may be too small to matter clinically and call the evidence base weak.",
+    caveat:
+      "High risk of bias and differences between trials, and every trial that reported its funding was supported by the pharmaceutical industry. No new trials had appeared since 2013.",
+    funding: "The record lists non-US government support; the authors declare no known conflicts.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "vester-2021",
+    authors:
+      "Vester JC, Buzoianu AD, Florian SI, Hömberg V, Kim SH, Lee TMC, Matula C, Poon WS, Sandesc D, von Steinbüchel N, Strilciuc S, Vos PE, von Wild K, Muresanu D",
+    year: 2021,
+    title: "Cerebrolysin after moderate to severe traumatic brain injury: prospective meta-analysis of the CAPTAIN trial series.",
+    journal: "Neurol Sci",
+    ref: "42(11):4531–4541",
+    pmid: "33620612",
+    doi: "10.1007/s10072-020-04974-6",
+    kind: "meta-analysis",
+    topics: ["brain"],
+    peptides: ["cerebrolysin"],
+    delivery: [],
+    population: "185 patients with moderate to severe traumatic brain injury in two randomised trials",
+    design: "Prospective meta-analysis of two phase IIIb/IV randomised, double-blind, placebo-controlled trials (CAPTAIN I and II), added to usual care",
+    dose: "50 mL a day for 10 days, then two more 10-day cycles of 10 mL a day",
+    finding:
+      "A combined score of functional and neuropsychological outcomes favoured Cerebrolysin at day 30 and day 90, a small-to-medium effect (at day 90, standardised mean difference 0.34, p = 0.0146). Safety and tolerability were similar to placebo.",
+    caveat:
+      "Two trials and 185 patients, measured with a combined 'ensemble' of scales rather than one clinical outcome. The record has no funding or conflict-of-interest statement. It concerns treatment after a serious brain injury, not cognitive enhancement in healthy people.",
+    verifiedOn: "2026-11-13",
   },
 ];
 

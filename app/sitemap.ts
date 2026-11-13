@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/peptides-for-hair-growth", TOPICS.hair.reviewedOn),
     stat("/peptides/peptides-for-joint-pain", TOPICS.joints.reviewedOn),
     stat("/peptides/peptides-for-sleep", TOPICS.brain.reviewedOn),
+    stat("/peptides/nootropic-peptides", TOPICS.brain.reviewedOn),
     stat("/peptides/peptides-for-women", TOPICS["womens-health"].reviewedOn),
     stat("/peptides/peptides-for-gut-health", TOPICS.gut.reviewedOn),
     stat("/peptides/peptides-for-men", TOPICS["mens-health"].reviewedOn),

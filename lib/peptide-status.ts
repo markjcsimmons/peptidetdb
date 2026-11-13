@@ -140,5 +140,21 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
     note: "The full 43-amino-acid protein has been tested as eye drops (RGN-259), on wounds and given into a vein in trials. No FDA approval found in openFDA's drugs@FDA records (searched 2026-11-12).",
     sources: [],
   },
+  semax: {
+    kind: "fda-risk-list",
+    note: "Listed by FDA as Semax (heptapeptide) among withdrawn nominations. FDA's advisory committee voted in July 2026 to recommend it for the 503A bulks list (not binding); no final FDA decision.",
+    sources: [FDA_RISK],
+  },
+  dihexa: { kind: "fda-risk-list", note: "Listed by FDA as dihexa acetate among withdrawn nominations.", sources: [FDA_RISK] },
+  cerebrolysin: {
+    kind: "unclassified",
+    note: "A Cochrane review describes it as widely used for stroke in Russia, Eastern Europe, China and other countries. No FDA approval found in openFDA's drugs@FDA records (searched 2026-11-13).",
+    sources: [],
+  },
+  noopept: {
+    kind: "unclassified",
+    note: "No FDA approval found in openFDA's drugs@FDA records (searched 2026-11-13).",
+    sources: [],
+  },
   "oral-peptide-delivery": { kind: "unclassified", note: "A research topic, not a product.", sources: [] },
 };
