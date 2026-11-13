@@ -397,6 +397,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "One 2007 article by researchers in the field summarises trials and says vaccine responses were enhanced in animals and people, but its abstract gives no trial sizes or numbers and no clinical outcome such as fewer infections. We did not find or summarise the underlying trials.",
       },
       {
+        subject: "Oral marine (fish-derived) peptides for immune function",
+        level: "none",
+        why: "Our PubMed searches found no controlled human trial of oral marine peptides on immune outcomes (see our oral marine peptides page).",
+      },
+      {
         subject: "Thymus extracts or peptides for infection prevention, allergies and healthy adults",
         level: "unassessed",
         why: "None of the trials summarised here tests these uses, and none tests an oral or over-the-counter thymus product. This is a gap in our coverage, not a finding that no trial exists.",
@@ -409,7 +414,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "Several of the trials report grants or fees from SciClone Pharmaceuticals; see each study page for the stated funding.",
       "Legal and regulatory status, including thymosin alpha-1, is not part of these ratings; it has its own dated page (see Legal status).",
     ],
-    reviewedOn: "2026-11-10",
+    reviewedOn: "2026-11-13",
   },
   weight: {
     slug: "weight",
