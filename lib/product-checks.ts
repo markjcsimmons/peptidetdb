@@ -77,10 +77,10 @@ export const REPORTED: ReportedProduct[] = [
     certification:
       "Listed in NSF's Certified for Sport list and as an NSF/ANSI 173 dietary-supplement listing (both checked in NSF's public registries).",
     gaps: [
-      "The PDFs filed as “Collagen Peptides” are titled “Performance Collagen”. We have not confirmed they are the same product as the one NSF lists.",
+      "The PDFs filed as “Collagen Peptides” are titled “Performance Collagen”. On 13 November 2026 the product page listed the same formula as the reports (11.6 g collagen peptides, 5.2 g FORTIGEL, vitamin C), so we treat them as the same product.",
       "Metal limits are not stated, so the numbers cannot be judged against a threshold from the report alone.",
     ],
-    claims: "We did not read the product page (it blocked automated access).",
+    claims: "Read 13 November 2026: joints and mobility, tendons and ligaments, skin elasticity, and lean muscle and recovery. The page cites five papers by title.",
     links: [
       { label: "Momentous certificate library", href: "https://www.livemomentous.com/pages/coa-page" },
       { label: "Report, lot 0277B6B", href: "https://www.livemomentous.com/cdn/shop/files/Collagen_Peptides_0277B6B.pdf" },
@@ -219,13 +219,13 @@ export const CERTIFIED: CertifiedProduct[] = [
     id: "vital-proteins",
     brand: "Vital Proteins",
     product: "Collagen Peptides",
-    what: "Bovine hide collagen peptides. (The product page we read was the version with hyaluronic acid and vitamin C.)",
+    what: "Bovine hide collagen peptides, single ingredient. (Its old page address now shows a version with hyaluronic acid and vitamin C; the link below is the plain product.)",
     registry:
       "Several Vital Proteins collagen products are in NSF's Certified for Sport list, and the company (Nestlé Healthcare Nutrition, Inc. DBA Vital Proteins) has NSF/ANSI 173 listings for Collagen Peptides and its variants. The product page itself does not mention certification.",
     batchReport: "None found; the page we read has no testing information.",
     claims: "The page says it supports hair, nails, skin, bones and joints, with the FDA disclaimer.",
     links: [
-      { label: "Product page", href: "https://www.vitalproteins.com/products/collagen-peptides" },
+      { label: "Product page", href: "https://www.vitalproteins.com/products/vp-collagen-peptides" },
       { label: "NSF Certified for Sport list", href: NSF_SPORT_LIST },
       { label: "NSF/ANSI 173 listing", href: nsf173("Nestle Healthcare") },
     ],
@@ -251,7 +251,7 @@ export const UNVERIFIED: UnverifiedProduct[] = [
     id: "garden-of-life",
     brand: "Garden of Life",
     product: "Grass Fed Collagen Peptides",
-    note: "The product pages we found cite non-GMO and gluten-free certifications. NSF's registry returned collagen products under Garden of Life when we searched, but we have not read the listings closely enough to say which products or which NSF programme they cover. We found no batch report.",
+    note: "The product page cites non-GMO and gluten-free marks. NSF's dietary-supplement listings for Garden of Life (checked 13 November 2026) include two other collagen products, a turmeric multi-sourced collagen and a collagen with hyaluronic acid, but not Grass Fed Collagen Peptides. We found no batch report.",
     links: [
       { label: "Product page", href: "https://www.gardenoflife.com/collagen-peptides" },
       { label: "NSF/ANSI 173 search", href: nsf173("Garden of Life") },
@@ -268,7 +268,7 @@ export const UNVERIFIED: UnverifiedProduct[] = [
     id: "naked-nutrition",
     brand: "Naked Nutrition",
     product: "Collagen Peptides",
-    note: "The product page says the contents are NSF certified, with testing for heavy metals and pesticides. When we searched NSF's public dietary-supplement registry on 11 November 2026 under the company name (Naked Whey, Inc.) and under “collagen”, we could not match a Naked collagen listing; it may be listed under another name. We found no public batch report.",
+    note: "The product page says the contents are NSF certified, with testing for heavy metals and pesticides. When we searched NSF's public dietary-supplement registry on 11 and 13 November 2026 under the company name (Naked Whey, Inc.) and under “collagen”, we could not match a Naked collagen listing (it showed seven energy and creatine products); it may be listed under another name. We found no public batch report.",
     links: [
       { label: "Product page", href: "https://nakednutrition.com/products/collagen-peptides-powder" },
       { label: "NSF/ANSI 173 search for “Naked”", href: nsf173("Naked") },
@@ -285,7 +285,7 @@ export const UNVERIFIED: UnverifiedProduct[] = [
     id: "sports-research",
     brand: "Sports Research",
     product: "Collagen Peptides",
-    note: "The product page shows an Informed Choice badge, “third party tested” and a non-GMO tested badge. We could not check Informed Choice's registry because its site blocks automated access, and we found no Sports Research collagen in NSF's lists. We found no batch report.",
+    note: "The product page shows an Informed Choice badge, “third party tested” and a non-GMO tested badge. On 13 November 2026 Informed Choice's registry search listed “Collagen Peptides Powder” under Sports Research; the listing page itself was behind a bot check, so we could not read its dates. We found no Sports Research collagen in NSF's lists and no batch report.",
     links: [{ label: "Product page", href: "https://www.sportsresearch.com/products/collagen-peptides-hydrolyzed-gelatin-2" }],
   },
 ];

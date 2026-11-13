@@ -219,9 +219,9 @@ export default function CollagenPeptidesPage() {
           <Link href="/peptides/how-to-read-a-peptide-coa" className="link">
             how to read a peptide COA
           </Link>
-          , goes line by line, and we checked which collagen brands publish batch reports in{" "}
+          , goes line by line, and we graded 15 collagen brands, including which publish batch reports, in{" "}
           <Link href="/peptides/best-collagen-peptides" className="link">
-            collagen peptides with published batch test results
+            best collagen peptides: 15 brands graded
           </Link>
           .
         </p>

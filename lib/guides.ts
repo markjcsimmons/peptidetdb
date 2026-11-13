@@ -250,9 +250,9 @@ export const GUIDES: Guide[] = [
   // Documentation checks
   {
     path: "/peptides/best-collagen-peptides",
-    title: "Collagen peptides with published batch test results",
+    title: "Best collagen peptides: 15 brands graded",
     kind: "check",
-    blurb: "Which of 15 collagen brands publish batch lab reports. A documentation check, not a product grade.",
+    blurb: "15 collagen brands graded out of 100 on lab reports, certification, label and claims, with a scoring sheet for each.",
     topics: [],
     peptides: ["collagen"],
   },

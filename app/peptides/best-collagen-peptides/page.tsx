@@ -6,6 +6,8 @@ import { JsonLd } from "@/components/json-ld";
 import { CARD, Pill, ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
+import { GradeTable, ScoringSheet } from "@/components/product-grades";
+import { CRITERIA, GRADES_CHECKED_ON, SCORING_RULES, ranked } from "@/lib/grades";
 import {
   CERTIFIED,
   COLLAGEN_CHECKED_ON,
@@ -15,9 +17,9 @@ import {
 } from "@/lib/product-checks";
 
 export const metadata: Metadata = {
-  title: "Collagen peptides with published batch test results",
+  title: "Best collagen peptides: 15 brands graded",
   description:
-    "Looking for the best collagen peptides? We checked 15 brands for batch-specific lab reports and NSF listings, read the reports, and show what each one does and does not document. It does not rank effectiveness.",
+    "Looking for the best collagen peptides? We graded 15 brands out of 100 on batch lab reports, certification listings, labels and claims, with a scoring sheet for each. It does not rank effectiveness.",
   alternates: { canonical: "/peptides/best-collagen-peptides" },
 };
 
@@ -27,7 +29,7 @@ const NSF_SPORT_PAGE = "https://www.nsfsport.com/our-mark.php";
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What is the best collagen peptide supplement?",
-    a: "This page does not name one. Human trials of collagen peptides test a collagen preparation, not a brand, and we found no study comparing brands. What we can check is documentation: whether a brand publishes lab reports for the batch you hold. Of 15 brands checked on 11 November 2026, three did.",
+    a: "No study has compared brands, so no one can say which works best. Human trials of collagen peptides test a collagen preparation, not a brand. What we can check is documentation. Of 15 brands graded on 13 November 2026, Momentous (86 of 100), Puori (81) and Transparent Labs (80) scored highest, and they were the only three that publish lab reports for the lot you buy.",
   },
   {
     q: "Do collagen peptide supplements contain heavy metals?",
@@ -86,7 +88,7 @@ export default function BestCollagenPeptidesPage() {
             {
               "@type": "ListItem",
               position: 3,
-              name: "Collagen peptides with published batch test results",
+              name: "Best collagen peptides: 15 brands graded",
               item: absoluteUrl("/peptides/best-collagen-peptides"),
             },
           ],
@@ -96,23 +98,24 @@ export default function BestCollagenPeptidesPage() {
         <Link href="/peptides" className="link">
           What are peptides?
         </Link>{" "}
-        / Collagen peptides with published batch test results
+        / Best collagen peptides: 15 brands graded
       </nav>
       <PageKindLabel path="/peptides/best-collagen-peptides" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">
-        Collagen peptides with published batch test results
+        Best collagen peptides: 15 brands graded
       </h1>
       <p className="mt-2 text-sm text-muted">
-        Documents checked {formatDate(COLLAGEN_CHECKED_ON)}. Page last reviewed {formatDate(COLLAGEN_CHECKED_ON)}.
+        Grades checked {formatDate(GRADES_CHECKED_ON)}; lab reports and registries first read {formatDate(COLLAGEN_CHECKED_ON)}.
+        Page last reviewed {formatDate(GRADES_CHECKED_ON)}.
       </p>
 
       <ShortAnswer className="mt-6">
         <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
-          We checked 15 collagen brands for lab reports you can read. <strong>Three publish batch-specific reports</strong>{" "}
-          (Momentous, Puori and Transparent Labs), and we opened and read them. <strong>Five more</strong> are listed by NSF
-          but do not publish a batch report we could find. For the other seven we could not verify a testing claim. This
-          page ranks documentation, not results: it does not say any brand&rsquo;s collagen works better than another&rsquo;s,
-          and it is not a product grade.
+          We graded 15 collagen brands out of 100 with our published rubric. <strong>Momentous scored highest (86)</strong>,
+          followed by Puori (81) and Transparent Labs (80): the only three that publish lab reports for the lot you buy.
+          Without such a report a product cannot rate above &ldquo;Partly documented&rdquo;, and the other twelve scored 32
+          to 64. The grades measure what can be checked, not results: they do not say any brand&rsquo;s collagen works better
+          than another&rsquo;s.
         </p>
       </ShortAnswer>
 
@@ -140,12 +143,13 @@ export default function BestCollagenPeptidesPage() {
             one lot, and a company can change them.
           </li>
           <li>
-            <strong className="text-fg">Not a grade.</strong> Our{" "}
+            <strong className="text-fg">How the grades work.</strong> Each product is scored with our{" "}
             <Link href="/grading-rubric" className="link">
-              draft grading rubric
+              grading rubric
             </Link>{" "}
-            has not been applied: no points are given here, and no product is graded. Within each group, brands are in
-            alphabetical order.
+            (version 1.0, published before any product was graded): 42 points for batch testing and certification, 23 for
+            the label, 25 for claims against the human evidence and 10 for regulatory status and company identity. Every
+            point has a note and a source in the product&rsquo;s scoring sheet.
           </li>
           <li>
             <strong className="text-fg">No money changes hands.</strong> We take no payment, free product or affiliate
@@ -198,10 +202,44 @@ export default function BestCollagenPeptidesPage() {
         </p>
       </section>
 
+      <section id="grades" className="mt-14 scroll-mt-6">
+        <h2 className="text-3xl font-bold leading-[1.15]">The grades</h2>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          Highest first. Select a product, or open its sheet below, for every criterion with its points, what we found and
+          a link to the document. &ldquo;Could not check&rdquo; counts as 0; if a brand sends us the missing document, we will
+          regrade it and date the change.
+        </p>
+        <GradeTable grades={ranked("collagen")} />
+        <details className="mt-4 rounded-card border border-line bg-card p-5 sm:p-6">
+          <summary className="cursor-pointer font-semibold">How partial points were given</summary>
+          <p className="mt-3 max-w-prose text-sm text-soft [text-wrap:pretty]">
+            The rubric sets the maximum for each criterion. These are the steps we used below the maximum, the same for every
+            product.
+          </p>
+          <dl className="mt-3 space-y-3 text-sm">
+            {CRITERIA.map((k) => (
+              <div key={k.id}>
+                <dt className="font-semibold text-fg">
+                  {k.name} ({k.points})
+                </dt>
+                <dd className="max-w-prose text-soft [text-wrap:pretty]">{SCORING_RULES[k.id]}</dd>
+              </div>
+            ))}
+          </dl>
+        </details>
+        <h3 className="mt-10 text-2xl font-bold leading-tight">Scoring sheets</h3>
+        <div className="mt-4 grid gap-4">
+          {ranked("collagen").map((g) => (
+            <ScoringSheet key={g.id} g={g} />
+          ))}
+        </div>
+      </section>
+
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Group 1: publish batch-specific lab reports ({REPORTED.length})</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          For each brand below we opened the reports ourselves. Each has strengths and gaps, shown side by side.
+          The sections below are the documentation record behind the grades, grouped by what we found. For each brand in
+          this group we opened the reports ourselves. Each has strengths and gaps, shown side by side.
         </p>
         <div className="mt-6 grid gap-6">
           {REPORTED.map((p) => (
@@ -373,7 +411,7 @@ export default function BestCollagenPeptidesPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclaimer} Documents checked {formatDate(COLLAGEN_CHECKED_ON)}.
+        {SITE.disclaimer} Lab reports first read {formatDate(COLLAGEN_CHECKED_ON)}; grades checked {formatDate(GRADES_CHECKED_ON)}.
       </p>
     </article>
   );

@@ -17,9 +17,10 @@ const sections: { h: string; body: React.ReactNode }[] = [
       <p>
         Peptides and the scientific evidence about them: collagen and other oral peptides, skin-care peptides, and
         unapproved compounds sold for injury recovery or performance, plus the regulatory picture for the latter.
-        Products are not graded or scored yet; a draft rubric is published at /grading-rubric before any product is graded.
-        The collagen page at /peptides/best-collagen-peptides records which brands publish batch lab reports and which
-        certifications we could verify, with a link to each document; it is a documentation check, not a grade.
+        Products are graded with the rubric at /grading-rubric (version 1.0, confirmed 13 November 2026), which was
+        published as a draft before any product was graded. Grades score public documentation and claims, not whether a
+        product works. The first grades, for 15 collagen products, are at /peptides/best-collagen-peptides, each with a
+        scoring sheet that links the source for every point.
       </p>
     ),
   },
@@ -97,8 +98,9 @@ const sections: { h: string; body: React.ReactNode }[] = [
       <>
         <p>{SITE.disclosure}</p>
         <p className="mt-3">
-          No product is currently graded or ranked on this site. Any page that names, links or grades a Pürblack
-          product will carry this disclosure beside it.
+          Products are graded by the same published rules, including any Pürblack product. Pürblack does not sell
+          collagen, so none of the first graded products competes with it. Any page that names, links or grades a
+          Pürblack product carries a short disclosure note beside it.
         </p>
       </>
     ),

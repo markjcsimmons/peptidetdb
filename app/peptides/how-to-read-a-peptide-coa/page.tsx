@@ -221,9 +221,9 @@ export default function PeptideCoaPage() {
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           For collagen and other swallowed products the useful lines are identity, contaminants (heavy metals, microbes)
           and the amount per serving. We found no published study of contaminants in collagen supplements, so a
-          batch-level report is the only way to check. We checked which brands publish them in{" "}
+          batch-level report is the only way to check. We graded 15 collagen brands, including which publish them, in{" "}
           <Link href="/peptides/best-collagen-peptides" className="link">
-            collagen peptides with published batch test results
+            best collagen peptides: 15 brands graded
           </Link>
           . See{" "}
           <Link href="/peptides/collagen-peptides-side-effects" className="link">

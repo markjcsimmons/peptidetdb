@@ -1,5 +1,5 @@
 /**
- * Draft grading rubric for stage 2 (product grading). Published BEFORE any product is graded, at
+ * Grading rubric for stage 2 (product grading). Published BEFORE any product was graded, at
  * /grading-rubric. If this changes, bump `RUBRIC_VERSION`, update `RUBRIC_DATE`, and log the
  * change on the page. Grades must record the version they used.
  *
@@ -7,7 +7,7 @@
  * points for two safety concerns (banned or undeclared drug substances, unapproved injectables). It does not score
  * whether the product works.
  */
-export const RUBRIC_VERSION = "0.2 (draft)";
+export const RUBRIC_VERSION = "1.0";
 export const RUBRIC_DATE = "2026-11-13";
 export const RUBRIC_FIRST_PUBLISHED = "2026-11-10";
 
@@ -140,6 +140,12 @@ export const CAPS: string[] = [
 
 /** Dated changes to the rubric, newest first. Say who asked for a change and whom it could favour. */
 export const VERSIONS: { date: string; version: string; text: string }[] = [
+  {
+    date: "2026-11-13",
+    version: "1.0",
+    text:
+      "The site's operator confirmed the rubric, its point values, bands, caps, deductions and commitments, with no changes from version 0.2. Product grades published from this date name the version they used.",
+  },
   {
     date: "2026-11-13",
     version: "0.2 (draft)",

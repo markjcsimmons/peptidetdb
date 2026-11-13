@@ -8,14 +8,14 @@ import { DisclosureNote } from "@/components/disclosure-note";
 import { BANDS, CAPS, DEDUCTIONS, RUBRIC, RUBRIC_DATE, RUBRIC_FIRST_PUBLISHED, RUBRIC_VERSION, TOTAL_POINTS, VERSIONS } from "@/lib/rubric";
 
 export const metadata: Metadata = {
-  title: "How we will grade products (draft rubric)",
+  title: "How we grade peptide products",
   description:
-    "The draft rubric PeptideTDB will use to grade peptide products, published before any product is graded. It scores how well a product's documentation can be checked, not whether it works.",
+    "The rubric PeptideTDB uses to grade peptide products, published before any product was graded. It scores how well a product's documentation can be checked, not whether it works.",
   alternates: { canonical: "/grading-rubric" },
 };
 
 const COMMITMENTS = [
-  "The rubric is published before any product is graded, so the rules cannot be fitted to a result.",
+  "The rubric was published before any product was graded, so the rules could not be fitted to a result.",
   "Every product is graded by the same rules, including products sold by Pürblack. A Pürblack grade, if there is one, will carry the disclosure above and the full scoring sheet.",
   "The site takes no payment, sponsorship, free product or affiliate commission from any company it grades.",
   "Every point awarded or withheld is backed by a dated link or document, shown in the scoring sheet, so a reader can check it.",
@@ -42,15 +42,19 @@ export default function GradingRubricPage() {
         </Link>{" "}
         / Grading rubric
       </nav>
-      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How we will grade products</h1>
+      <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How we grade products</h1>
       <p className="mt-2 text-sm text-muted">
-        Draft version {RUBRIC_VERSION}, updated {formatDate(RUBRIC_DATE)} (first published {formatDate(RUBRIC_FIRST_PUBLISHED)}).
-        No product has been graded yet.
+        Version {RUBRIC_VERSION}, confirmed {formatDate(RUBRIC_DATE)} (first published as a draft {formatDate(RUBRIC_FIRST_PUBLISHED)}).
+        Graded so far: 15 collagen products, on{" "}
+        <Link href="/peptides/best-collagen-peptides#grades" className="link">
+          the collagen page
+        </Link>
+        .
       </p>
 
       <DisclosureNote>
         Pürblack sells peptide supplements. The operator of this site works for Pürblack, so we are publishing the rules
-        first and will apply them to every product the same way, including Pürblack&rsquo;s.
+        first and apply them to every product the same way, including Pürblack&rsquo;s.
       </DisclosureNote>
 
       <Callout label="What a grade means" className="mt-6">
@@ -71,7 +75,7 @@ export default function GradingRubricPage() {
           <Link href="/peptides/how-to-read-a-peptide-coa" className="link">
             reading a peptide COA
           </Link>{" "}
-          tells readers to make themselves. This draft is open to comment; email{" "}
+          tells readers to make themselves. Comments are welcome; email{" "}
           {SITE.contactEmail ? (
             <a href={`mailto:${SITE.contactEmail}`} className="link">
               {SITE.contactEmail}
@@ -79,7 +83,7 @@ export default function GradingRubricPage() {
           ) : (
             "us"
           )}
-          . The point values are proposals, and we expect to change them after feedback.
+          . Any change to the rubric gets a new version number and a dated entry below, and each grade names the version it used.
         </p>
       </section>
 

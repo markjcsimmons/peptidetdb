@@ -1,6 +1,6 @@
 import { OG_SIZE, guideOgImage } from "@/lib/og";
 
-export const alt = "Collagen peptides with published batch test results | PeptideTDB";
+export const alt = "Best collagen peptides: 15 brands graded | PeptideTDB";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

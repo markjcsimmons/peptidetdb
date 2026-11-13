@@ -9,6 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradedCollagenProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for hair growth: ranked by the evidence",
@@ -278,6 +279,11 @@ export default function PeptidesForHairGrowthPage() {
           includes GHK-containing formulations. Biotin and other non-peptide supplements are outside this site&rsquo;s scope.
         </p>
       </section>
+
+      <GradedCollagenProducts
+        area="hair"
+        ratingNote={<>The human evidence for swallowed collagen and hair is rated &ldquo;limited&rdquo;, so a hair claim costs points under the claims criterion.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">A peptide drug linked to hair loss</h2>

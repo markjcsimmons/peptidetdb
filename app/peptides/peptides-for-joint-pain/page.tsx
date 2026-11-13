@@ -9,6 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradedCollagenProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for joint pain: ranked by the evidence",
@@ -329,6 +330,11 @@ export default function PeptidesForJointPainPage() {
           than the knee and hip, and bone density. That is a gap in our coverage, not a finding.
         </p>
       </section>
+
+      <GradedCollagenProducts
+        area="joints"
+        ratingNote={<>The human evidence for collagen and joint pain is rated &ldquo;mixed&rdquo;; that rates collagen in general, not any brand.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>

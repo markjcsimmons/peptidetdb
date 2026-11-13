@@ -46,7 +46,7 @@ export function GET() {
     `- [What do peptides do?](${SITE.url}/peptides/what-do-peptides-do): what human studies show for skin, hair, muscle, joints, blood pressure, brain, immune function, weight, women's health, men's health and gut health, with the best and least-supported rating for each.`,
     `- [Are peptides steroids?](${SITE.url}/peptides/are-peptides-steroids): why peptides and anabolic steroids are different substances, what the muscle studies show, and why that does not make a peptide safe.`,
     `- [Collagen peptides: what the evidence shows](${SITE.url}/peptides/collagen-peptides): what collagen peptides are, what trials show for skin, muscle and joints, safety, and how to check a product.`,
-    `- [Collagen peptides with published batch test results](${SITE.url}/peptides/best-collagen-peptides): which of 15 collagen brands publish batch-specific lab reports (three do), which are listed by NSF without a batch report, and which testing claims could not be verified. Documents checked ${COLLAGEN_CHECKED_ON}; not a product grade.`,
+    `- [Best collagen peptides: 15 brands graded](${SITE.url}/peptides/best-collagen-peptides): 15 collagen products graded out of 100 with the rubric (lab reports for the lot, certification listings, label, claims against the evidence, company identity), each with a scoring sheet. Three publish batch-specific lab reports. Lab reports first read ${COLLAGEN_CHECKED_ON}; grades checked 2026-11-13. A grade is about documentation, not whether a product works.`,
     `- [Best peptides for skin, ranked by the evidence](${SITE.url}/peptides/best-peptides-for-skin): oral collagen, fish-derived collagen, topical cosmetic peptides, GHK-Cu and KPV ordered by the strength of the human studies, with what each does not show. Not a product ranking.`,
     `- [Peptides for hair growth, ranked by the evidence](${SITE.url}/peptides/peptides-for-hair-growth): topical peptide products, oral collagen, scalp injections, thymosin beta-4 and BPC-157 ordered by the strength of the human studies, plus GLP-1 drugs and hair loss. Not a product ranking.`,
     `- [Peptides for joint pain, ranked by the evidence](${SITE.url}/peptides/peptides-for-joint-pain): collagen for osteoarthritis, sports-related knee pain and tendons, UC-II, BPC-157, TB-500 and marine collagen ordered by the strength of the human studies. Not a product ranking.`,
@@ -86,7 +86,7 @@ export function GET() {
     `- [Editorial policy](${SITE.url}/editorial-policy)`,
     `- [Corrections log](${SITE.url}/corrections)`,
     `- [About and disclosure](${SITE.url}/about)`,
-    `- [Draft product-grading rubric](${SITE.url}/grading-rubric): the rules for grading product documentation, published before any product is graded.`,
+    `- [Product-grading rubric](${SITE.url}/grading-rubric): the rules for grading product documentation (version 1.0), published before any product was graded.`,
     `- [Study registry as CSV](${SITE.url}/data/studies.csv) and [JSON](${SITE.url}/data/studies.json)`,
     "",
   );

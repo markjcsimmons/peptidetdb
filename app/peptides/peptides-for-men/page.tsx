@@ -10,6 +10,7 @@ import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
+import { GradedCollagenProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for men: ranked by the evidence",
@@ -435,6 +436,11 @@ export default function PeptidesForMenPage() {
           enclomiphene are outside this site&rsquo;s scope.
         </p>
       </section>
+
+      <GradedCollagenProducts
+        area="muscle"
+        ratingNote={<>The human evidence for collagen with resistance training is rated &ldquo;consistent&rdquo; for fat-free mass and &ldquo;mixed&rdquo; for strength; that rates collagen in general, not any brand.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>

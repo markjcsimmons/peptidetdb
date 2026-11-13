@@ -8,6 +8,7 @@ import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
+import { GradedCollagenProducts } from "@/components/product-grades";
 
 export const metadata: Metadata = {
   title: "Peptides for muscle growth: what studies show",
@@ -259,6 +260,11 @@ export default function PeptidesForMuscleGrowthPage() {
           studies behind it.
         </p>
       </section>
+
+      <GradedCollagenProducts
+        area="muscle"
+        ratingNote={<>The human evidence for collagen with resistance training is rated &ldquo;consistent&rdquo; for fat-free mass and &ldquo;mixed&rdquo; for strength; that rates collagen in general, not any brand.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Before you buy anything</h2>
