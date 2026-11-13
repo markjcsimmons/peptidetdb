@@ -47,7 +47,8 @@ const FUNDING: Record<string, Exclude<FundingType, "not-stated">> = {
   "qi-2026": "public", "laverde-2026": "public", "mateescu-2026": "public", "dalmasso-2008": "public",
   "viennois-2016": "public", "bohm-2019": "public", "delcourt-2023": "public", "rahaman-2024": "public",
   "kruoch-2025": "public", "sosne-2022": "industry", "ziganshina-2023": "public", "cui-2019": "public", "chanson-rolle-2015": "industry", "priyadarshini-2026": "other", "amaral-2025": "public",
-  "dasrilsyah-2023": "public",
+  "dasrilsyah-2023": "public", "reynolds-2021": "other", "karaa-2023": "industry", "thompson-2024": "industry",
+  "mavrych-2026": "public",
 };
 
 export const fundingType = (id: string): FundingType => FUNDING[id] ?? "not-stated";
@@ -92,7 +93,8 @@ export const SIZE: Record<string, StudySize> = {
   "qin-2013": { people: 1919, trials: 28 }, "cicero-2013": { people: 1306, trials: 14 }, "chanson-rolle-2015": { people: 1194, trials: 18 },
   "kennedy-2024": { people: 3136, trials: 3 },
   "priyadarshini-2026": { people: 10225, trials: 58 }, "dasrilsyah-2023": { people: 38 }, "strakhov-2020": { people: 147 },
-  "dorofeev-2025": { people: 56 }, "malakhova-2024": { people: 56 }, "cui-2019": { people: 597, trials: 6 }, "vester-2021": { people: 185, trials: 2 },
+  "dorofeev-2025": { people: 56 }, "malakhova-2024": { people: 56 },
+  "khavinson-2003": { people: 266 }, "karaa-2023": { people: 218 }, "thompson-2024": { people: 10 }, "cui-2019": { people: 597, trials: 6 }, "vester-2021": { people: 185, trials: 2 },
 };
 
 // Every id must exist in the registry, so a renamed study cannot leave a stale value behind.

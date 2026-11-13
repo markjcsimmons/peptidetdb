@@ -22,7 +22,7 @@ export type StudyKind =
   | "in-vitro"
   | "lab-analysis"; // tests a product or a detection method: no people, animals or cells
 
-export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "oral-peptides" | "eye" | "safety";
+export type Topic = "skin" | "hair" | "muscle" | "joints" | "blood-pressure" | "brain" | "immune" | "weight" | "womens-health" | "mens-health" | "gut" | "oral-peptides" | "eye" | "longevity" | "safety";
 
 export type PeptideId =
   | "collagen"
@@ -66,7 +66,9 @@ export type PeptideId =
   | "lactotripeptides"
   | "cyclosporine"
   | "insulin"
-  | "retinalamin";
+  | "retinalamin"
+  | "elamipretide"
+  | "foxo4-dri";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -141,6 +143,7 @@ export const TOPIC_LABEL: Record<Topic, string> = {
   gut: "Gut health & digestion",
   "oral-peptides": "Oral peptides: do they get absorbed?",
   eye: "Eye health",
+  longevity: "Ageing & longevity",
   safety: "Safety & regulation",
 };
 
@@ -163,7 +166,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   "type-ii-collagen": "Undenatured type II collagen (UC-II)",
   dsip: "DSIP (delta sleep-inducing peptide)",
   "casein-hydrolysate": "Casein hydrolysate (Lactium)",
-  epitalon: "Epitalon",
+  epitalon: "Epitalon / Epithalamin",
   "cjc-1295": "CJC-1295",
   ipamorelin: "Ipamorelin",
   "mk-677": "MK-677 (ibutamoren)",
@@ -184,6 +187,8 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   cyclosporine: "Cyclosporine eye drops",
   insulin: "Insulin eye drops",
   retinalamin: "Retinalamin (Russian retinal peptide drug)",
+  elamipretide: "Elamipretide (SS-31)",
+  "foxo4-dri": "FOXO4-DRI (senolytic peptide)",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -1354,7 +1359,7 @@ export const STUDIES: Study[] = [
     pmcid: "PMC13664938",
     doi: "10.3390/ijms27198922",
     kind: "review",
-    topics: ["brain"],
+    topics: ["brain", "longevity"],
     peptides: ["epitalon"],
     delivery: [],
     design: "Narrative review of the tetrapeptide epitalon (Ala-Glu-Asp-Gly) and of epithalamin, a distinct pineal-derived preparation, in the context of regenerative and longevity medicine",
@@ -4602,6 +4607,161 @@ export const STUDIES: Study[] = [
     finding:
       "Adding semax was followed by faster and greater recovery, with better visual acuity, wider visual fields, better optic-nerve electrical sensitivity and conduction, and better colour vision, especially in the acute stage.",
     caveat: "The abstract gives no patient numbers, results or statistics, and does not say the groups were randomised or blinded.",
+    verifiedOn: "2026-11-13",
+  },
+  // --- Ageing and longevity (added 2026-11-13 for /peptides/peptides-for-anti-aging) ---
+  {
+    id: "khavinson-2003",
+    authors: "Khavinson VKh, Morozov VG",
+    year: 2003,
+    title: "Peptides of pineal gland and thymus prolong human life.",
+    journal: "Neuro Endocrinol Lett",
+    ref: "24(3-4):233–240",
+    pmid: "14523363",
+    kind: "human-controlled",
+    topics: ["longevity"],
+    peptides: ["thymalin", "epitalon"],
+    delivery: [],
+    population: "266 older people in St Petersburg and Kiev",
+    design: "Clinical study of the thymus extract Thymalin and the pineal extract Epithalamin against a control group, given for the first 2 to 3 years",
+    duration: "6 to 8 years of follow-up",
+    finding:
+      "The authors report fewer respiratory infections (2.0 to 2.4 times fewer), less heart disease, high blood pressure, osteoarthritis and osteoporosis, and lower death rates than controls: 2.0 to 2.1 times lower with Thymalin, 1.6 to 1.8 times with Epithalamin and 2.5 times with both, and 4.1 times lower in a group treated with both every year for 6 years.",
+    caveat:
+      "The abstract gives no group sizes, no description of how patients were assigned or blinded, and no confidence intervals, so the very large effects cannot be checked from it. Both studies we found come from the same research group, and a 2026 review finds no adequately powered randomised trial of epitalon.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "korkushko-2006",
+    authors: "Korkushko OV, Khavinson VKh, Shatilo VB, Antonyuk-Shcheglova IA",
+    year: 2006,
+    title: "Geroprotective effect of epithalamine (pineal gland peptide preparation) in elderly subjects with accelerated aging.",
+    journal: "Bull Exp Biol Med",
+    ref: "142(3):356–359",
+    pmid: "17426848",
+    doi: "10.1007/s10517-006-0365-z",
+    kind: "human-controlled",
+    topics: ["longevity"],
+    peptides: ["epitalon"],
+    delivery: [],
+    population: "Older patients with coronary heart disease and 'accelerated ageing' of the cardiovascular system (number not given in the abstract)",
+    design: "Randomised clinical study of the pineal extract Epithalamin added to usual treatment",
+    duration: "12 years",
+    finding:
+      "After 12 years, 28% fewer people had died in the Epithalamin group than in the control group, cardiovascular deaths were half as common, and heart failure and respiratory disease were half as frequent. Exercise tolerance and measures of 'functional age' improved.",
+    caveat:
+      "The abstract gives no patient numbers, no statistics and no description of blinding, so the size and reliability of the effect cannot be judged.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "reynolds-2021",
+    authors: "Reynolds JC, Lai RW, Woodhead JST, Joly JH, Mitchell CJ, Cameron-Smith D, Lu R, Cohen P, Graham NA, Benayoun BA, Merry TL, Lee C",
+    year: 2021,
+    title: "MOTS-c is an exercise-induced mitochondrial-encoded regulator of age-dependent physical decline and muscle homeostasis.",
+    journal: "Nat Commun",
+    ref: "12(1):470",
+    pmid: "33473109",
+    pmcid: "PMC7817689",
+    doi: "10.1038/s41467-020-20790-0",
+    kind: "animal",
+    topics: ["longevity"],
+    peptides: ["mots-c"],
+    delivery: [],
+    population: "Young, middle-aged and old mice, muscle cells, and human exercise samples",
+    design: "Mouse experiments with MOTS-c treatment, cell studies, and measurements of natural MOTS-c in people who exercised",
+    finding:
+      "MOTS-c improved physical performance in young, middle-aged and old mice, and treatment started late in life (three times a week) increased physical capacity and 'healthspan' in mice. In people, exercise raised the body's own MOTS-c in muscle and blood.",
+    caveat:
+      "The treatment results are in mice. The human part measured natural MOTS-c after exercise; no one was given MOTS-c. Two authors are consultants to and shareholders of CohBar.",
+    funding: "The record lists US National Institute on Aging grants; two authors are consultants and shareholders of CohBar, Inc.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "karaa-2023",
+    authors:
+      "Karaa A, Bertini E, Carelli V, Cohen BH, Enns GM, Falk MJ, Goldstein A, Gorman GS, Haas R, Hirano M, Klopstock T, Koenig MK, Kornblum C, Lamperti C, Lehman A, Longo N, Molnar MJ, Parikh S, Phan H, Pitceathly RDS, Saneto R, Scaglia F, Servidei S, Tarnopolsky M, Toscano A, Van Hove JLK, Vissing J, Vockley J, Finman JS, Brown DA, Shiffer JA, Mancuso M, MMPOWER-3 Trial Investigators",
+    year: 2023,
+    title: "Efficacy and Safety of Elamipretide in Individuals With Primary Mitochondrial Myopathy: The MMPOWER-3 Randomized Clinical Trial.",
+    journal: "Neurology",
+    ref: "101(3):e238–e252",
+    pmid: "37268435",
+    pmcid: "PMC10382259",
+    doi: "10.1212/WNL.0000000000207402",
+    kind: "human-controlled",
+    topics: ["longevity"],
+    peptides: ["elamipretide"],
+    delivery: ["injectable"],
+    population: "218 adults with genetically confirmed primary mitochondrial myopathy (109 per group)",
+    design: "Phase 3 randomised, double-blind, placebo-controlled trial of elamipretide 40 mg a day under the skin",
+    duration: "24 weeks",
+    finding:
+      "Elamipretide did not improve the 6-minute walk distance (difference −3.2 m, p = 0.69) or fatigue compared with placebo, the trial's two main outcomes. It was well tolerated, with mostly mild or moderate side effects.",
+    caveat: "A rare inherited disease, so it says nothing directly about ageing in healthy people. Several authors report grants or fees from companies including Stealth BioTherapeutics.",
+    funding:
+      "The record lists Medical Research Council and NIH grants; several authors report research grants, trial funding or consulting payments from companies including Stealth BioTherapeutics.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "thompson-2024",
+    authors: "Thompson WR, Manuel R, Abbruscato A, Carr J, Campbell J, Hornby B, Vaz FM, Vernon HJ",
+    year: 2024,
+    title: "Long-term efficacy and safety of elamipretide in patients with Barth syndrome: 168-week open-label extension results of TAZPOWER.",
+    journal: "Genet Med",
+    ref: "26(7):101138",
+    pmid: "38602181",
+    doi: "10.1016/j.gim.2024.101138",
+    kind: "human-uncontrolled",
+    topics: ["longevity"],
+    peptides: ["elamipretide"],
+    delivery: ["injectable"],
+    population: "10 patients with Barth syndrome (a rare inherited mitochondrial disease) who entered the extension; 8 reached week 168",
+    design: "168-week open-label extension of a 28-week randomised trial; everyone received elamipretide 40 mg a day under the skin",
+    duration: "168 weeks",
+    finding:
+      "Elamipretide was well tolerated, mainly causing injection-site reactions. Walking distance improved by a cumulative 96.1 m by week 168 (p = .003), fatigue scores improved, and heart volumes and a cardiolipin biomarker moved in a favourable direction.",
+    caveat:
+      "Ten patients and no placebo group in this phase, so improvements cannot be separated from other causes. Three authors are employees of Stealth BioTherapeutics and two received research support from it.",
+    funding: "Three authors are employees of Stealth BioTherapeutics and two have received research support from it, as stated in the record.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "mavrych-2026",
+    authors: "Mavrych V, Shypilova I, Bolgova O",
+    year: 2026,
+    title: "Therapeutic peptides in gerontology: mechanisms and applications for healthy aging.",
+    journal: "Front Aging",
+    ref: "7:1790247",
+    pmid: "42021992",
+    pmcid: "PMC13095733",
+    doi: "10.3389/fragi.2026.1790247",
+    kind: "review",
+    topics: ["longevity"],
+    peptides: ["tirzepatide", "epitalon", "ghk-cu", "bpc-157", "tb-500", "semax", "cjc-1295", "ipamorelin", "bremelanotide"],
+    delivery: [],
+    design: "Narrative review based on 20 selected sources (searched to January 2026)",
+    finding:
+      "The review covers nine peptides promoted for ageing (tirzepatide, epitalon, GHK-Cu, BPC-157, TB-500, semax, CJC-1295, ipamorelin and bremelanotide). FDA-approved agents had robust safety data from large trials, while non-approved peptides showed promising preclinical and limited clinical evidence but lacked long-term safety data and systematic validation. The authors say investigational peptides need well-designed trials before they can be used for healthspan.",
+    caveat: "A narrative review built on 20 hand-picked sources; it pools no data.",
+    funding: "The authors declare no commercial or financial relationships.",
+    verifiedOn: "2026-11-13",
+  },
+  {
+    id: "krimpenfort-2017",
+    authors: "Krimpenfort P, Berns A",
+    year: 2017,
+    title: "Rejuvenation by Therapeutic Elimination of Senescent Cells.",
+    journal: "Cell",
+    ref: "169(1):3–5",
+    pmid: "28340347",
+    doi: "10.1016/j.cell.2017.03.014",
+    kind: "review",
+    topics: ["longevity"],
+    peptides: ["foxo4-dri"],
+    delivery: [],
+    design: "Commentary on an animal study (Baar et al., Cell 2017)",
+    finding:
+      "The commentary describes how a peptide made of mirror-image (D) amino acids, FOXO4-DRI, frees the protein p53 to trigger death of senescent ('zombie') cells, and how this eased the loss of tissue function linked to senescence in the study it discusses.",
+    caveat: "A short commentary on laboratory and mouse work; there are no human data, and we have not read the underlying study.",
     verifiedOn: "2026-11-13",
   },
 ];

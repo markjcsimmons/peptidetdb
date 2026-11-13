@@ -672,6 +672,41 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     reviewedOn: "2026-11-13",
   },
+  longevity: {
+    slug: "longevity",
+    measures: "benefit",
+    title: "Peptides for ageing & longevity",
+    intro:
+      "Peptides sold for anti-ageing and longevity include Russian 'peptide bioregulators' (Epithalamin, epitalon, Thymalin), mitochondrial peptides (MOTS-c, elamipretide) and experimental senolytics (FOXO4-DRI). This page rates claims about ageing and lifespan itself; skin ageing and growth-hormone peptides have their own evidence pages. No trial we found shows that any peptide slows ageing in healthy people.",
+    ratings: [
+      {
+        subject: "Elamipretide (SS-31) in inherited mitochondrial diseases",
+        level: "mixed",
+        why: "A phase 3 placebo-controlled trial in 218 adults with primary mitochondrial myopathy found no improvement in walking distance or fatigue at 24 weeks. In Barth syndrome, a 168-week open-label extension with 10 patients reported better walking distance and heart measures, with company employees among the authors. It is FDA-approved as Forzinity; none of these trials tested ageing in healthy people.",
+      },
+      {
+        subject: "Epithalamin, epitalon and Thymalin (Russian 'peptide bioregulators') for ageing and lifespan",
+        level: "limited",
+        why: "Two Russian studies from one research group report large drops in deaths among older people (about half, or 28% fewer over 12 years), but their abstracts give no group sizes, statistics or blinding. A 2026 review says human evidence for epitalon is limited to small physiological and biomarker studies, with no adequately powered randomised trial.",
+      },
+      {
+        subject: "MOTS-c for ageing and physical decline",
+        level: "preclinical",
+        why: "In mice, MOTS-c improved physical performance at all ages and treatment started late in life increased 'healthspan'. In people, exercise raises the body's own MOTS-c, but our searches found no trial that gave MOTS-c to people.",
+      },
+      {
+        subject: "FOXO4-DRI and other senolytic peptides",
+        level: "preclinical",
+        why: "A peptide designed to make senescent cells die eased signs of senescence-related tissue decline in mice, according to a 2017 commentary on the study. We found no human trial.",
+      },
+    ],
+    gaps: [
+      "We did not search for every peptide marketed for longevity (for example humanin, or other Russian bioregulators), and we have not read the underlying FOXO4-DRI study.",
+      "None of the trials here measured ageing in healthy people; the elamipretide trials are in rare inherited diseases.",
+      "Skin-ageing peptides are rated on the skin evidence page, and growth hormone and growth-hormone-releasing peptides on the muscle evidence page.",
+    ],
+    reviewedOn: "2026-11-13",
+  },
   safety: {
     slug: "safety",
     measures: "safety",

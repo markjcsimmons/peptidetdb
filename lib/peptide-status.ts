@@ -175,5 +175,15 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
     note: "A Russian drug (the manufacturer named in a 2025 study is Geropharm). No FDA approval found in openFDA's records (searched 2026-11-13).",
     sources: [],
   },
+  elamipretide: {
+    kind: "approved",
+    note: "Approved as Forzinity (Stealth BioTherapeutics).",
+    sources: [{ label: "Drugs@FDA: NDA 215244 (Forzinity)", url: DAF("215244") }],
+  },
+  "foxo4-dri": {
+    kind: "unclassified",
+    note: "An experimental compound tested in laboratory and animal studies. No FDA approval found in openFDA's records (searched 2026-11-13).",
+    sources: [],
+  },
   "oral-peptide-delivery": { kind: "unclassified", note: "A research topic, not a product.", sources: [] },
 };
