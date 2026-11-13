@@ -9,7 +9,8 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { GradeTable, GradedProducts, ScoringRules, ScoringSheet } from "@/components/product-grades";
+import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
 
 export const metadata: Metadata = {
   title: "Best peptides for skin: ranked by the evidence",
@@ -295,8 +296,26 @@ export default function BestPeptidesForSkinPage() {
 
       <GradedProducts
         area="skin"
-        ratingNote={<>Our rating for swallowed collagen peptides and skin is &ldquo;consistent&rdquo;; that rates collagen in general, not any brand.</>}
+        ratingNote={<>Our rating for swallowed collagen peptides and skin is &ldquo;consistent&rdquo;, and for peptides applied to the skin &ldquo;limited&rdquo;; those rate the ingredients, not any brand.</>}
       />
+
+      <section id="grades" className="mt-14 scroll-mt-6">
+        <h2 className="text-3xl font-bold leading-[1.15]">Topical peptide products: scoring sheets</h2>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          Seven peptide creams and serums, six for skin and one for the scalp, graded on {formatDate(GRADES_CHECKED_ON)} with the
+          same rubric as supplements. Some criteria were written for capsules and powders; the notes under &ldquo;How partial
+          points were given&rdquo; say how we applied them to creams and serums (for example, concentration in place of
+          amount per serving). None of these brands publishes a lot report, so none can rate above &ldquo;Partly
+          documented&rdquo;. A grade is about what can be checked, not whether a product works.
+        </p>
+        <GradeTable grades={ranked("topical")} />
+        <ScoringRules />
+        <div className="mt-6 grid gap-4">
+          {ranked("topical").map((g) => (
+            <ScoringSheet key={g.id} g={g} />
+          ))}
+        </div>
+      </section>
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>

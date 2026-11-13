@@ -62,6 +62,10 @@ export default function AboutPage() {
             <Link href="/peptides/oral-peptides" className="link">
               the oral peptides page
             </Link>
+            , and for 7 peptide creams and serums on{" "}
+            <Link href="/peptides/best-peptides-for-skin" className="link">
+              the skin page
+            </Link>
             , each with a full scoring sheet. A grade does not say whether a product works.
           </li>
         </ul>

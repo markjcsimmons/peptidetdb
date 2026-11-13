@@ -53,6 +53,10 @@ export default function GradingRubricPage() {
         <Link href="/peptides/oral-peptides#grades" className="link">
           the oral peptides page
         </Link>
+        , and 7 peptide creams and serums on{" "}
+        <Link href="/peptides/best-peptides-for-skin#grades" className="link">
+          the skin page
+        </Link>
         .
       </p>
 

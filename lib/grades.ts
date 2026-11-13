@@ -56,11 +56,12 @@ export type ProductGrade = {
 
 export const GRADES_CHECKED_ON = "2026-11-13";
 
-export type Group = "collagen" | "oral";
+export type Group = "collagen" | "oral" | "topical";
 /** The page that carries each group's full scoring sheets. */
 export const SHEETS_PAGE: Record<Group, { path: string; title: string }> = {
   collagen: { path: "/peptides/best-collagen-peptides", title: "best collagen peptides: 15 brands graded" },
   oral: { path: "/peptides/oral-peptides", title: "oral peptides: do they get absorbed?" },
+  topical: { path: "/peptides/best-peptides-for-skin", title: "best peptides for skin (topical products)" },
 };
 export const isPurblack = (g: { brand: string }) => /p[üu]rblack/i.test(g.brand);
 
@@ -76,20 +77,22 @@ export const SCORING_RULES: Record<string, string> = {
     "6: heavy metals and microbes, each with limits and results. 4: both tested but one group has no stated limits, or only one group tested with limits. 2: one group, no limits. 0: none, or no lot report.",
   certification:
     "As the rubric says: 8 for a listing in the directory of a programme that tests for substances banned in sport; 4 for a contents-only certification listing; 0 for a badge with no matching listing. Since version 1.1, a listing under a former name counts if the directory shows the same brand, its label has the same formula and the seller's page links the listing. Gluten-free and non-GMO marks are not counted.",
-  amount: "8: the amount of every active ingredient per serving. 4: the total collagen or protein per serving only, or some actives without amounts. 0: no amount we could find.",
+  amount:
+    "8: the amount of every active ingredient per serving. 4: the total collagen or protein per serving only, or some actives without amounts. 0: no amount we could find. For creams and serums, “amount” means the concentration of each peptide (4 if only some are given, or only the share of a supplier's branded solution).",
   source:
-    "4: the animal (and fish species where relevant) named for every collagen or protein source the peptides come from. 2: the source implied (for example “grass-fed”) but the animal not named. 0: not stated (“from natural source” does not count).",
+    "4: the animal (and fish species where relevant) named for every collagen or protein source the peptides come from. 2: the source implied (for example “grass-fed”) but the animal not named. 0: not stated (“from natural source” does not count). For creams and serums, naming each peptide by its standard cosmetic ingredient (INCI) name counts as 4, because the name defines the molecule.",
   allergen:
-    "5: allergen ingredients declared, or none in the product. 3: only a shared-equipment warning seen for a product that contains an allergen source. 0: an allergen source with no declaration. Could not check (0): the label does not say what the peptides are made from, so we cannot tell whether an allergen such as fish or milk should be declared.",
-  blend: "6: every active ingredient listed with its amount, or a single ingredient. 0: a named blend or complex whose parts have no amounts.",
+    "5: allergen ingredients declared, or none in the product. 3: only a shared-equipment warning seen for a product that contains an allergen source. 0: an allergen source with no declaration. Could not check (0): the label does not say what the peptides are made from, so we cannot tell whether an allergen such as fish or milk should be declared. For creams and serums, a published full ingredient list counts as 5.",
+  blend:
+    "6: every active ingredient listed with its amount, or a single ingredient. 0: a named blend or complex whose parts have no amounts. For creams and serums, which list ingredients by name rather than amount, 6 when every branded complex is broken down in the full ingredient list.",
   "claims-match":
-    "Start at 15. Take off 2 for each benefit area claimed where this site rates the human evidence as limited, and 4 where it is preclinical or no human trials were found. Claims in areas this site has not rated (for example nails, recovery, satiety) are listed but not scored. A specific claim that rests only on cell or animal results counts as preclinical (−4). Ratings used: collagen for skin consistent; joints and bone mixed; tendons and ligaments limited; hair limited; muscle mass with training consistent; gut none; sleep limited. Food-derived peptides and hydrolysates: sleep, memory, stress and blood pressure limited; eyesight and immune function none. Pürblack's own capsules for muscle, joints and blood vessels limited (uncontrolled studies).",
+    "Start at 15. Take off 2 for each benefit area claimed where this site rates the human evidence as limited, and 4 where it is preclinical or no human trials were found. Claims in areas this site has not rated (for example nails, recovery, satiety) are listed but not scored. A specific claim that rests only on cell or animal results counts as preclinical (−4). Ratings used: collagen for skin consistent; joints and bone mixed; tendons and ligaments limited; hair limited; muscle mass with training consistent; gut none; sleep limited. Food-derived peptides and hydrolysates: sleep, memory, stress and blood pressure limited; eyesight and immune function none. Pürblack's own capsules for muscle, joints and blood vessels limited (uncontrolled studies). Peptides on the skin (cosmetic peptides, GHK-Cu) and on the scalp for hair: limited.",
   "dose-match":
     "5: no human trial cited (nothing to compare), or cited trials used a similar daily dose. 3: some cited trials used a similar dose and some a very different one, or the cited trial's abstract gives no dose. 2: the page appeals to “studies” or “clinically studied” ingredients without naming a paper, so the dose cannot be compared. 0: cited trials used a clearly different dose throughout.",
   "cites-real":
     "5: no study cited, or every cited paper can be found and is described accurately. 3: every cited paper can be found, but with citation errors (wrong journal, year or title). 2: an appeal to studies without naming them, so a reader cannot find them. 0: a cited paper cannot be found in PubMed, is misdescribed (for example animal or cell results presented without saying so), or concerns ingredients the product does not contain.",
   category:
-    "5: sold as a dietary supplement with the FDA statement, no “research use only” labelling. 3: as 5, but the packaging carries FDA's name as a logo (for example “FDA registered facility”), which can suggest FDA approval. 0 otherwise.",
+    "5: sold as a dietary supplement with the FDA statement, no “research use only” labelling. 3: as 5, but the packaging carries FDA's name as a logo (for example “FDA registered facility”), which can suggest FDA approval, or a cosmetic claims to change how the body works (for example to boost collagen or improve circulation), which US rules treat as a drug claim. 0 otherwise.",
   identity:
     "5: legal name, postal address and a contact route on the seller's site. 3: two of the three. 1: one. 0: none.",
 };
@@ -1344,8 +1347,237 @@ export const ORAL_GRADES: ProductGrade[] = [
   },
 ];
 
+// ---------- batch 3: topical peptide products (checked 2026-11-13) ----------
+const TOPIC3 = {
+  skin: { label: "Skin evidence (topical peptides)", href: "/science/topics/skin" },
+  hair: { label: "Hair evidence (topical peptides)", href: "/science/topics/hair" },
+};
+const TO = (path: string, name: string) => ({ label: `The Ordinary ${name} page`, href: `https://theordinary.com/en-us/${path}` });
+const DECIEM_TERMS = { label: "DECIEM terms and conditions", href: "https://theordinary.com/en-us/terms.html" };
+
+/** Shared parts of a topical sheet: cosmetics have no public lot reports or certification programme listings in this batch. */
+function topical(o: {
+  id: string;
+  brand: string;
+  product: string;
+  form: string;
+  page: Source;
+  claimAreas: ClaimArea[];
+  summary: string;
+  scores: Partial<Record<string, Score>> & Pick<Record<string, Score>, "amount" | "claims-match" | "identity">;
+}): ProductGrade {
+  const base: Record<string, Score> = {
+    "coa-batch": { points: 0, note: "No public lot report found (cosmetic makers rarely publish them).", sources: [o.page] },
+    "coa-lab": NO_LOT(o.page),
+    "coa-numbers": NO_LOT(o.page),
+    "coa-contaminants": NO_LOT(o.page),
+    certification: { points: 0, note: "No contents or purity certification listing found; vegan and cruelty-free marks are not counted.", sources: [o.page] },
+    source: { points: 4, note: "Each peptide is named by its standard cosmetic ingredient (INCI) name in the full ingredient list.", sources: [o.page] },
+    allergen: { points: 5, note: "The full ingredient list is published, so allergen sources can be identified.", sources: [o.page] },
+    blend: { points: 6, note: "Branded peptide complexes are broken down into their ingredients in the full list.", sources: [o.page] },
+    "dose-match": NONE_CITED(o.page),
+    "cites-real": NONE_CITED(o.page),
+    category: { points: 5, note: "Sold as a cosmetic, with claims about appearance.", sources: [o.page] },
+  };
+  return {
+    id: o.id,
+    brand: o.brand,
+    product: o.product,
+    form: o.form,
+    group: "topical",
+    checkedOn: "2026-11-13",
+    documentsCheckedOn: "2026-11-13",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: o.claimAreas,
+    diseaseClaims: false,
+    deductions: [],
+    summary: o.summary,
+    scores: { ...base, ...o.scores } as Record<string, Score>,
+  };
+}
+
+const UNNAMED_TEST = (page: Source, what: string): Pick<Record<string, Score>, "dose-match" | "cites-real"> => ({
+  "dose-match": { points: 2, note: `${what} No study is named, so the concentration tested cannot be compared.`, sources: [page] },
+  "cites-real": { points: 2, note: "The result is not linked to a published study a reader could find.", sources: [page] },
+});
+
+const TO_HA = TO("multi-peptide-ha-serum-100613.html", "Multi-Peptide + HA Serum");
+const TO_CU = TO("multi-peptide-copper-peptides-1-serum-100625.html", "Multi-Peptide + Copper Peptides 1% Serum");
+const TO_ARG = TO("argireline-solution-10-serum-100403.html", "Argireline Solution 10%");
+const TO_HAIR = TO("multi-peptide-serum-for-hair-density-hair-scalp-treatment-100434.html", "Multi-Peptide Serum for Hair Density");
+const NIOD = { label: "NIOD product page", href: "https://niod.com/en-us/copper-amino-isolate-serum-3-11-cais3-serum-100368.html" };
+const DE = { label: "Drunk Elephant product page", href: "https://www.drunkelephant.com/collections/moisturizers/protini-polypeptide-firming-refillable-moisturizer-999DE00000103.html" };
+const OLAY = { label: "Olay product page", href: "https://www.olay.com/products/regenerist-micro-sculpting-cream-moisturizer" };
+
+export const TOPICAL_GRADES: ProductGrade[] = [
+  topical({
+    id: "the-ordinary-argireline",
+    brand: "The Ordinary",
+    product: "Argireline Solution 10%",
+    form: "Water-based serum with acetyl hexapeptide-8 (Argireline)",
+    page: TO_ARG,
+    claimAreas: ["skin"],
+    summary: "Short, clear ingredient list and modest claims, but no lot report, and the 10% refers to the supplier's solution, not the peptide.",
+    scores: {
+      amount: {
+        points: 4,
+        note: "“10%” is the share of Argireline, the supplier's branded solution, not the concentration of the peptide itself, which is not stated.",
+        sources: [TO_ARG],
+      },
+      "claims-match": { points: 13, note: "Claims to target fine lines and wrinkles (topical cosmetic peptides for skin: limited, −2).", sources: [TO_ARG, TOPIC3.skin] },
+      identity: { points: 3, note: "DECIEM Beauty Group Inc. is named, with an online contact form; we found no postal address in the terms.", sources: [DECIEM_TERMS] },
+    },
+  }),
+  topical({
+    id: "the-ordinary-multi-peptide-copper",
+    brand: "The Ordinary",
+    product: "Multi-Peptide + Copper Peptides 1% Serum",
+    form: "Serum with copper tripeptide-1 (GHK-Cu) and six other peptides",
+    page: TO_CU,
+    claimAreas: ["skin"],
+    summary: "Full ingredient list and the copper-peptide share stated, but no lot report and an unnamed appeal to “well-studied” peptides.",
+    scores: {
+      amount: { points: 4, note: "Copper peptides are given as 1%; the other six peptides have no stated concentration.", sources: [TO_CU] },
+      "claims-match": {
+        points: 13,
+        note: "Claims the look of fine lines, elasticity, smoothness and firmness (topical cosmetic peptides and topical GHK-Cu for skin: limited, −2).",
+        sources: [TO_CU, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(TO_CU, "The page calls its peptides “well-studied”."),
+      identity: { points: 3, note: "DECIEM Beauty Group Inc. is named, with an online contact form; we found no postal address in the terms.", sources: [DECIEM_TERMS] },
+    },
+  }),
+  topical({
+    id: "the-ordinary-multi-peptide-ha",
+    brand: "The Ordinary",
+    product: "Multi-Peptide + HA Serum",
+    form: "Serum with seven peptides and hyaluronic acid (formerly “Buffet”)",
+    page: TO_HA,
+    claimAreas: ["skin"],
+    summary: "Full ingredient list, but no concentrations, no lot report and an unnamed appeal to “well-studied” peptides.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for any of the peptides.", sources: [TO_HA] },
+      "claims-match": {
+        points: 13,
+        note: "Claims fewer visible crow's feet and better elasticity and firmness (topical cosmetic peptides for skin: limited, −2).",
+        sources: [TO_HA, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(TO_HA, "The page calls its five peptide technologies “well-studied”."),
+      identity: { points: 3, note: "DECIEM Beauty Group Inc. is named, with an online contact form; we found no postal address in the terms.", sources: [DECIEM_TERMS] },
+    },
+  }),
+  topical({
+    id: "the-ordinary-hair-density",
+    brand: "The Ordinary",
+    product: "Multi-Peptide Serum for Hair Density",
+    form: "Scalp serum with biotinoyl tripeptide-1, acetyl tetrapeptide-3, caffeine and plant extracts",
+    page: TO_HAIR,
+    claimAreas: ["hair"],
+    summary: "Full ingredient list, but no concentrations or lot report, an unsourced “+111%” figure and a circulation claim.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for any active (the branded complexes are named without percentages).", sources: [TO_HAIR] },
+      allergen: {
+        points: 5,
+        note: "The full ingredient list is published; it names wheat germ (Triticum vulgare) and soy germ (Glycine soja) extracts by their Latin names.",
+        sources: [TO_HAIR],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Claims the look of thicker, denser hair (topical peptide products for hair: limited, −2). The scalp-hydration figure is not rated.",
+        sources: [TO_HAIR, TOPIC3.hair],
+      },
+      ...UNNAMED_TEST(TO_HAIR, "The page says the serum “instantly boosts scalp hydration by +111%”."),
+      category: {
+        points: 3,
+        note: "Sold as a cosmetic, but says it can “help improve microcirculation to the scalp”, a claim about how the body works that US rules treat as a drug claim.",
+        sources: [TO_HAIR],
+      },
+      identity: { points: 3, note: "DECIEM Beauty Group Inc. is named, with an online contact form; we found no postal address in the terms.", sources: [DECIEM_TERMS] },
+    },
+  }),
+  topical({
+    id: "niod-cais3",
+    brand: "NIOD",
+    product: "Copper Amino Isolate Serum 3 1:1",
+    form: "Serum with 1% GHK-Cu, 1% GHK and four other peptides",
+    page: NIOD,
+    claimAreas: ["skin"],
+    summary: "States its two main peptide concentrations, but cites only its own unpublished tests and claims to boost collagen.",
+    scores: {
+      amount: { points: 4, note: "1% GHK-Cu and 1% GHK are stated; the other four peptides have no concentration.", sources: [NIOD] },
+      "claims-match": {
+        points: 13,
+        note: "Claims fewer fine lines and wrinkles, firmer skin and better texture (topical GHK-Cu for skin: limited, −2).",
+        sources: [NIOD, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(NIOD, "Results are quoted from the company's own tests in 31 and 32 people over 4 to 12 weeks, with no control group described."),
+      category: {
+        points: 3,
+        note: "Sold as a cosmetic, but says it “promotes natural collagen” and boosts the skin's own collagen, claims about how the body works that US rules treat as drug claims.",
+        sources: [NIOD],
+      },
+      identity: { points: 3, note: "NIOD is a DECIEM brand: DECIEM Beauty Group Inc. is named, with an online contact form; we found no postal address.", sources: [DECIEM_TERMS] },
+    },
+  }),
+  topical({
+    id: "drunk-elephant-protini",
+    brand: "Drunk Elephant",
+    product: "Protini Polypeptide Cream",
+    form: "Moisturiser with nine peptides and growth-factor peptides (sh-oligopeptides, sh-polypeptides)",
+    page: DE,
+    claimAreas: ["skin"],
+    summary: "Full ingredient list and a clear company address, but no concentrations, contradictory statements about where the peptides come from, and a collagen claim.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for any peptide.", sources: [DE] },
+      source: {
+        points: 2,
+        note: "The ingredient list names each peptide, but the page says the formula contains “plant-derived peptides” while the founder's note calls its growth factors synthetic; the “sh-” names in the list denote synthetic human-identical peptides.",
+        sources: [DE],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Claims fewer lines and wrinkles and firmer skin (topical cosmetic peptides for skin: limited, −2).",
+        sources: [DE, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(DE, "“Clinically proven” results are quoted from “a clinical study with 31 people after 8 weeks”."),
+      category: {
+        points: 3,
+        note: "Sold as a cosmetic, but says it “supports healthy collagen production”, a claim about how the body works that US rules treat as a drug claim.",
+        sources: [DE],
+      },
+      identity: {
+        points: 5,
+        note: "Shiseido Americas Corporation, with a New York address, in the terms; the site has a contact page.",
+        sources: [{ label: "Drunk Elephant terms and conditions", href: "https://www.drunkelephant.com/terms.html" }],
+      },
+    },
+  }),
+  topical({
+    id: "olay-micro-sculpting",
+    brand: "Olay",
+    product: "Regenerist Micro-Sculpting Cream",
+    form: "Moisturiser with niacinamide and three peptides (palmitoyl pentapeptide-4 and others)",
+    page: OLAY,
+    claimAreas: ["skin"],
+    summary: "Full ingredient list and appearance-only claims, but no concentrations, no lot report and no postal address on the brand site.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for any peptide.", sources: [OLAY] },
+      "claims-match": {
+        points: 13,
+        note: "Claims the look of fine lines, wrinkles, sagging and elasticity (topical cosmetic peptides for skin: limited, −2).",
+        sources: [OLAY, TOPIC3.skin],
+      },
+      identity: {
+        points: 3,
+        note: "Procter & Gamble is named and the site has a contact route; we found no postal address on the Olay pages we checked.",
+        sources: [OLAY],
+      },
+    },
+  }),
+];
+
 /** Every graded product. */
-export const ALL_GRADES: ProductGrade[] = [...GRADES, ...ORAL_GRADES];
+export const ALL_GRADES: ProductGrade[] = [...GRADES, ...ORAL_GRADES, ...TOPICAL_GRADES];
 
 // ---------- scoring ----------
 export type BandLabel = "Well documented" | "Documented" | "Partly documented" | "Poorly documented" | "Not graded";

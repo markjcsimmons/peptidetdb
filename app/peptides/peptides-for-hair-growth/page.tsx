@@ -282,7 +282,7 @@ export default function PeptidesForHairGrowthPage() {
 
       <GradedProducts
         area="hair"
-        ratingNote={<>The human evidence for swallowed collagen and hair is rated &ldquo;limited&rdquo;, so a hair claim costs points under the claims criterion.</>}
+        ratingNote={<>The human evidence for swallowed collagen and for peptide scalp products and hair is rated &ldquo;limited&rdquo;, so a hair claim costs points under the claims criterion.</>}
       />
 
       <section className="mt-14">
