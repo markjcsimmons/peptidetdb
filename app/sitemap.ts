@@ -46,7 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/ipamorelin", "2026-11-10"),
     stat("/peptides/cjc-1295", "2026-11-10"),
     stat("/peptides/for-weight-loss", "2026-11-10"),
-    stat("/grading-rubric", "2026-11-10"),
+    stat("/grading-rubric", "2026-11-13"),
     stat("/peptides/legal-status", LEGAL_REVIEWED),
     stat("/peptides/oral-marine-peptides", SITE.lastReviewed),
     stat("/science", SITE.lastReviewed),

@@ -5,7 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { DisclosureNote } from "@/components/disclosure-note";
-import { BANDS, CAPS, RUBRIC, RUBRIC_DATE, RUBRIC_VERSION, TOTAL_POINTS } from "@/lib/rubric";
+import { BANDS, CAPS, DEDUCTIONS, RUBRIC, RUBRIC_DATE, RUBRIC_FIRST_PUBLISHED, RUBRIC_VERSION, TOTAL_POINTS, VERSIONS } from "@/lib/rubric";
 
 export const metadata: Metadata = {
   title: "How we will grade products (draft rubric)",
@@ -44,7 +44,8 @@ export default function GradingRubricPage() {
       </nav>
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How we will grade products</h1>
       <p className="mt-2 text-sm text-muted">
-        Draft version {RUBRIC_VERSION}, published {formatDate(RUBRIC_DATE)}. No product has been graded yet.
+        Draft version {RUBRIC_VERSION}, updated {formatDate(RUBRIC_DATE)} (first published {formatDate(RUBRIC_FIRST_PUBLISHED)}).
+        No product has been graded yet.
       </p>
 
       <DisclosureNote>
@@ -54,8 +55,9 @@ export default function GradingRubricPage() {
 
       <Callout label="What a grade means" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">
-          A grade says how well a product&rsquo;s public documentation can be checked: lab reports, label, claims and
-          company details. It does not say the product works, is safe, or is legal. We do not test products ourselves, so
+          A grade mainly says how well a product&rsquo;s public documentation can be checked: lab reports, certification,
+          label, claims and company details. Points are also taken off for two safety concerns: banned or undeclared drug
+          substances, and unapproved injectables. A grade does not say the product works, is safe, or is legal. We do not test products ourselves, so
           a grade describes documents as they were on the date we looked.
         </p>
       </Callout>
@@ -106,6 +108,24 @@ export default function GradingRubricPage() {
             );
           })}
         </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-3xl font-bold leading-[1.15]">Deductions</h2>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          Taken off after the points above are added up; a total cannot go below zero. Each deduction needs a dated source in
+          the scoring sheet.
+        </p>
+        <ul className="mt-4 grid gap-4">
+          {DEDUCTIONS.map((d) => (
+            <li key={d.id} className="rounded-card border border-line bg-card p-6">
+              <p className="font-semibold">
+                {d.name} <span className="font-normal text-warn">({d.points} points)</span>
+              </p>
+              <p className="mt-1 max-w-prose text-soft [text-wrap:pretty]">{d.asks}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mt-14">
@@ -174,9 +194,14 @@ export default function GradingRubricPage() {
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Version history</h2>
         <ul className="mt-4 max-w-prose list-disc space-y-2 pl-6 text-soft">
-          <li>
-            {formatDate(RUBRIC_DATE)}: version {RUBRIC_VERSION} published for comment.
-          </li>
+          {VERSIONS.map((v) => (
+            <li key={v.version}>
+              <strong className="text-fg">
+                {formatDate(v.date)}, version {v.version}.
+              </strong>{" "}
+              {v.text}
+            </li>
+          ))}
         </ul>
       </section>
 
