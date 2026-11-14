@@ -9,7 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for hair growth: ranked by the evidence",
@@ -280,10 +280,6 @@ export default function PeptidesForHairGrowthPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="hair"
-        ratingNote={<>The human evidence for swallowed collagen and for peptide scalp products and hair is rated &ldquo;limited&rdquo;, so a hair claim costs points under the claims criterion.</>}
-      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">A peptide drug linked to hair loss</h2>
@@ -337,6 +333,8 @@ export default function PeptidesForHairGrowthPage() {
           several causes, and a clinician can tell you which one you have.
         </p>
       </section>
+
+      <ProductsForGoal areas={["hair"]} title="Products for hair" label="hair" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

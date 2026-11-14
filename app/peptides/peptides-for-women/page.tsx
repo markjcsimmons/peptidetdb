@@ -10,7 +10,7 @@ import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for women: ranked by the evidence",
@@ -418,10 +418,6 @@ export default function PeptidesForWomenPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="bone"
-        ratingNote={<>The human evidence for collagen and bone density after menopause is rated &ldquo;mixed&rdquo;; that rates collagen in general, not any brand. Joint+ appears because its page claims bone support, which this site has not rated for Pürblack&rsquo;s capsules.</>}
-      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
@@ -460,6 +456,8 @@ export default function PeptidesForWomenPage() {
           </li>
         </ul>
       </section>
+
+      <ProductsForGoal areas={["bone"]} title="Products for bone health" label="bones" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

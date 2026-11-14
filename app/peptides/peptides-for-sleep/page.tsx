@@ -9,7 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for sleep: ranked by the evidence",
@@ -271,10 +271,6 @@ export default function PeptidesForSleepPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="sleep"
-        ratingNote={<>Our ratings for casein hydrolysate, fish hydrolysate and collagen before bed for sleep are all &ldquo;limited&rdquo;, so a sleep claim costs points under the claims criterion.</>}
-      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
@@ -314,6 +310,8 @@ export default function PeptidesForSleepPage() {
           causes, and a clinician can tell you which one you have.
         </p>
       </section>
+
+      <ProductsForGoal areas={["sleep"]} title="Products for sleep" label="sleep" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

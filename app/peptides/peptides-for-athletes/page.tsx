@@ -10,7 +10,7 @@ import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { SportListedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for athletes: evidence and doping rules",
@@ -458,8 +458,6 @@ export default function PeptidesForAthletesPage() {
         </p>
       </section>
 
-      <SportListedProducts />
-
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are a tested athlete</h2>
         <ul className="mt-4 max-w-prose list-disc space-y-2 pl-6 text-soft">
@@ -494,6 +492,20 @@ export default function PeptidesForAthletesPage() {
           </li>
         </ul>
       </section>
+
+      <ProductsForGoal
+        areas={["muscle", "joints", "tendons"]}
+        title="Sport-tested products for muscle and joints"
+        label="muscle, joints or tendons"
+        sportOnly
+        note={
+          <>
+            Sport-testing programmes here are NSF Certified for Sport and Informed Choice. WADA does not test or approve
+            supplements, and says such schemes reduce but do not remove the risk of an inadvertent doping finding. Check your
+            exact product, flavour and lot in the programme&rsquo;s own directory before use.
+          </>
+        }
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

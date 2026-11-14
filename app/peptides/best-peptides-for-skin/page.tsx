@@ -9,7 +9,8 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradeTable, GradedProducts, ScoringRules, ScoringSheet } from "@/components/product-grades";
+import { GradeTable, ScoringRules, ScoringSheet } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
 
 export const metadata: Metadata = {
@@ -294,10 +295,6 @@ export default function BestPeptidesForSkinPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="skin"
-        ratingNote={<>Our rating for swallowed collagen peptides and skin is &ldquo;consistent&rdquo;, and for peptides applied to the skin &ldquo;limited&rdquo;; those rate the ingredients, not any brand.</>}
-      />
 
       <section id="grades" className="mt-14 scroll-mt-6">
         <h2 className="text-3xl font-bold leading-[1.15]">Topical peptide products: scoring sheets</h2>
@@ -354,6 +351,8 @@ export default function BestPeptidesForSkinPage() {
           retinoids or other established skin treatments, so this page cannot tell you how peptides compare with them.
         </p>
       </section>
+
+      <ProductsForGoal areas={["skin"]} title="Products for skin" label="the skin" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

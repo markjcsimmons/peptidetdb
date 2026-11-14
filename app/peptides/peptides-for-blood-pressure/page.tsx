@@ -9,7 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for blood pressure: ranked by evidence",
@@ -239,10 +239,6 @@ export default function PeptidesForBloodPressurePage() {
         <RankedList options={OPTIONS} />
       </section>
 
-      <GradedProducts
-        area="blood-pressure"
-        ratingNote={<>Our ratings for fish peptides and for Pürblack&rsquo;s capsules on blood vessels are &ldquo;limited&rdquo;, below the &ldquo;consistent&rdquo; rating for lactotripeptides, which we found in no graded product.</>}
-      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
@@ -264,6 +260,10 @@ export default function PeptidesForBloodPressurePage() {
           </li>
         </ul>
       </section>
+
+      <ProductsForGoal areas={["blood-pressure"]} title="Products for blood pressure" label="blood pressure or blood vessels"
+        note={<>We found no graded product containing milk lactotripeptides, the option rated &ldquo;consistent&rdquo; in the ranking above.</>}
+      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

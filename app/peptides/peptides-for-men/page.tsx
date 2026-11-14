@@ -10,7 +10,7 @@ import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for men: ranked by the evidence",
@@ -437,10 +437,6 @@ export default function PeptidesForMenPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="muscle"
-        ratingNote={<>The human evidence for collagen with resistance training is rated &ldquo;consistent&rdquo; for fat-free mass and &ldquo;mixed&rdquo; for strength, and Pürblack&rsquo;s capsules &ldquo;limited&rdquo;; those rate the ingredients, not any brand.</>}
-      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
@@ -480,6 +476,8 @@ export default function PeptidesForMenPage() {
           </li>
         </ul>
       </section>
+
+      <ProductsForGoal areas={["muscle"]} title="Products for muscle" label="muscle" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

@@ -8,7 +8,7 @@ import { ShortAnswer } from "@/components/ui";
 import { TopicCard } from "@/components/topic-card";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for muscle growth: what studies show",
@@ -261,10 +261,6 @@ export default function PeptidesForMuscleGrowthPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="muscle"
-        ratingNote={<>The human evidence for collagen with resistance training is rated &ldquo;consistent&rdquo; for fat-free mass and &ldquo;mixed&rdquo; for strength, and Pürblack&rsquo;s capsules &ldquo;limited&rdquo;; those rate the ingredients, not any brand.</>}
-      />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Before you buy anything</h2>
@@ -298,6 +294,8 @@ export default function PeptidesForMuscleGrowthPage() {
           </li>
         </ul>
       </section>
+
+      <ProductsForGoal areas={["muscle"]} title="Products for muscle" label="muscle" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

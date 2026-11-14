@@ -9,7 +9,7 @@ import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
-import { GradedProducts } from "@/components/product-grades";
+import { ProductsForGoal } from "@/components/products-for-goal";
 
 export const metadata: Metadata = {
   title: "Peptides for joint pain: ranked by the evidence",
@@ -331,11 +331,6 @@ export default function PeptidesForJointPainPage() {
         </p>
       </section>
 
-      <GradedProducts
-        area="joints"
-        ratingNote={<>The human evidence for collagen and joint pain is rated &ldquo;mixed&rdquo;, and for Pürblack&rsquo;s capsules &ldquo;limited&rdquo;; those rate the ingredients, not any brand.</>}
-      />
-
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
         <ul className="mt-4 max-w-prose list-disc space-y-2 pl-6 text-soft">
@@ -373,6 +368,8 @@ export default function PeptidesForJointPainPage() {
           one you have.
         </p>
       </section>
+
+      <ProductsForGoal areas={["joints", "tendons"]} title="Products for joints and tendons" label="joints or tendons" />
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>
