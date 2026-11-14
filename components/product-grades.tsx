@@ -3,6 +3,7 @@ import Link from "next/link";
 import { formatDate } from "@/lib/format";
 import { RUBRIC, DEDUCTIONS } from "@/lib/rubric";
 import {
+  ALL_GRADES,
   CRITERIA,
   GRADES_CHECKED_ON,
   SCORING_RULES,
@@ -283,6 +284,50 @@ export function GradedProducts({ area, ratingNote }: { area: ClaimArea; ratingNo
           </span>
         ))}
         ). We take no payment or affiliate commission from any brand.
+      </p>
+    </section>
+  );
+}
+
+/**
+ * For the athletes page: graded products found in the directory of a programme that tests for substances banned in
+ * sport (8 points on the certification criterion). A listing is not a WADA endorsement and does not remove all risk.
+ */
+export function SportListedProducts() {
+  const grades = ALL_GRADES.filter((g) => g.scores.certification.points === 8).sort(
+    (a, b) => result(b).total - result(a).total || a.brand.localeCompare(b.brand),
+  );
+  if (grades.length === 0) return null;
+  const groups = [...new Set(grades.map((g) => g.group))];
+  return (
+    <section className="mt-14">
+      <h2 className="text-3xl font-bold leading-[1.15]">Graded products listed by a sport-testing programme</h2>
+      {grades.some(isPurblack) && (
+        <DisclosureNote>Pürblack products below are graded by the same published rules as every other product.</DisclosureNote>
+      )}
+      <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+        Of the products we have graded, these {grades.length} appear in the public directory of a programme that tests for
+        substances banned in sport (NSF Certified for Sport or Informed Choice). WADA does not test or approve supplements,
+        and says such schemes reduce but do not remove the risk of an inadvertent doping finding. Each product is scored out
+        of 100 with our{" "}
+        <Link href="/grading-rubric" className="link">
+          published rubric
+        </Link>
+        , which measures what can be checked, not whether a product works. Check your exact product, flavour and lot in the
+        programme&rsquo;s own directory before use.
+      </p>
+      <GradeTable grades={grades} linkToSheetPage />
+      <p className="mt-3 text-sm text-muted [text-wrap:pretty]">
+        Checked {formatDate(GRADES_CHECKED_ON)}. Full scoring sheets:{" "}
+        {groups.map((gr, i) => (
+          <span key={gr}>
+            {i > 0 && "; "}
+            <Link href={`${SHEETS_PAGE[gr].path}#grades`} className="link">
+              {SHEETS_PAGE[gr].title}
+            </Link>
+          </span>
+        ))}
+        . We take no payment or affiliate commission from any brand.
       </p>
     </section>
   );

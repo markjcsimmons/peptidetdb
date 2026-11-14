@@ -38,6 +38,7 @@ function checkRegistry() {
 }
 
 const SECTIONS: { kind: GuideKind; title: string; intro: string }[] = [
+  { kind: "index", title: "Most searched", intro: "Ordered by how often people search for each peptide, with the evidence beside it." },
   { kind: "profile", title: "Peptide profiles", intro: "One peptide at a time: every study we summarised, safety and legal status." },
   { kind: "check", title: "Checking a product", intro: "What brands publish about their testing. Not a product grade." },
   { kind: "explainer", title: "Background", intro: "What peptides are, how they work and how to read the evidence." },

@@ -71,7 +71,11 @@ export default function PeptidesAZPage() {
         <Link href="/peptides/by-goal" className="link">
           goal pages
         </Link>
-        .
+        , or the{" "}
+        <Link href="/peptides/most-popular-peptides" className="link">
+          most-searched peptides
+        </Link>{" "}
+        with their evidence.
       </p>
 
       <PeptideIndex
@@ -92,7 +96,7 @@ export default function PeptidesAZPage() {
       </p>
 
       <p className="mt-14 max-w-prose text-sm text-muted">
-        Not listed: peptides we have not yet summarised any study for, such as semax. That is a gap in our coverage, not a
+        Not listed: peptides we have not yet summarised any study for, such as IGF-1 LR3. That is a gap in our coverage, not a
         finding about the peptide. {SITE.disclaimer}
       </p>
     </div>

@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-14",
+    page: "/peptides/a-z",
+    was: "The note at the foot of the A–Z list gave semax as an example of a peptide we had not yet summarised any study for.",
+    now: "Semax studies were added on 2026-11-13 and semax has been in the list since then, so the example was out of date. The note now gives IGF-1 LR3, for which we have no study summaries.",
+  },
+  {
     date: "2026-11-13",
     page: "/peptides/oral-peptides",
     was: "The safety and product testing note for Pürblack's capsules said its COAs name no laboratory and that we could not read the third-party (NSF) COAs, based on Pürblack's internal COAs for Muscle+ and Joint+.",

@@ -36,6 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/peptides-for-anti-aging", TOPICS.longevity.reviewedOn),
     stat("/peptides/peptides-for-immune-system", TOPICS.immune.reviewedOn),
     stat("/peptides/peptides-for-men", TOPICS["mens-health"].reviewedOn),
+    stat("/peptides/peptides-for-athletes", "2026-11-13"),
+    stat("/peptides/most-popular-peptides", "2026-11-14"),
     stat("/peptides/oral-peptides", TOPICS["oral-peptides"].reviewedOn),
     stat("/peptides/peptides-for-muscle-growth", "2026-11-10"),
     stat("/peptides/bpc-157", "2026-11-10"),

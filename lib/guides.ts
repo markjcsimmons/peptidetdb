@@ -10,7 +10,7 @@ import { TOPICS, type TopicRating } from "./topics";
  * Do not write new claims here: ratings are read from lib/topics.ts by subject, and blurbs only describe
  * what a page covers.
  */
-export type GuideKind = "list" | "guide" | "profile" | "explainer" | "check";
+export type GuideKind = "list" | "guide" | "profile" | "explainer" | "check" | "index";
 
 export const KIND_LABEL: Record<GuideKind, string> = {
   list: "Ranked by the evidence",
@@ -18,6 +18,7 @@ export const KIND_LABEL: Record<GuideKind, string> = {
   profile: "Peptide profile",
   explainer: "Explainer",
   check: "Documentation check",
+  index: "Ranked by searches",
 };
 
 export type Guide = {
@@ -153,6 +154,14 @@ export const GUIDES: Guide[] = [
     peptides: ["bremelanotide", "glp-1-agonists", "collagen", "cosmetic-peptides"],
   },
   {
+    path: "/peptides/peptides-for-athletes",
+    title: "Peptides for athletes",
+    kind: "list",
+    blurb: "Collagen for muscle and joints, growth hormone, MK-677, BPC-157, TB-500, ipamorelin and CJC-1295, with each one's anti-doping status.",
+    topics: ["muscle", "joints", "safety"],
+    peptides: ["collagen", "growth-hormone", "fish-hydrolysate", "mk-677", "bpc-157", "tb-500", "ipamorelin", "cjc-1295"],
+  },
+  {
     path: "/peptides/peptides-for-men",
     title: "Peptides for men",
     kind: "list",
@@ -245,6 +254,36 @@ export const GUIDES: Guide[] = [
     blurb: "Two 2006 hormone-level trials; no trial for muscle.",
     topics: ["muscle", "safety"],
     peptides: ["cjc-1295"],
+  },
+
+  // Popularity index (ordered by search volume, not evidence)
+  {
+    path: "/peptides/most-popular-peptides",
+    title: "Most popular peptides",
+    kind: "index",
+    blurb: "The 19 most-searched peptides in the US, from tirzepatide to thymosin beta-4, with what the evidence shows for each.",
+    topics: [],
+    peptides: [
+      "tirzepatide",
+      "semaglutide",
+      "collagen",
+      "tesamorelin",
+      "sermorelin",
+      "ghk-cu",
+      "bpc-157",
+      "ipamorelin",
+      "kpv",
+      "mots-c",
+      "semax",
+      "cjc-1295",
+      "selank",
+      "tb-500",
+      "thymosin-alpha-1",
+      "epitalon",
+      "marine-collagen",
+      "dsip",
+      "thymosin-beta-4",
+    ],
   },
 
   // Documentation checks
@@ -481,6 +520,24 @@ export const GOALS: Goal[] = [
       ["skin", "Topical cosmetic peptides (argireline, palmitoyl peptides and similar)"],
       ["hair", "Oral collagen peptides for hair"],
       ["womens-health", "Peptides or collagen for menopausal symptoms (hot flushes, mood, sleep)"],
+    ],
+  },
+  {
+    id: "athletes",
+    label: "Athletes",
+    guide: "/peptides/peptides-for-athletes",
+    topic: "muscle",
+    ratings: [
+      ["muscle", "Oral collagen peptides with resistance training: fat-free mass"],
+      ["joints", "Oral collagen peptides for exercise-related knee and joint pain (no arthritis)"],
+      ["muscle", "Oral collagen peptides with resistance training: strength"],
+      ["muscle", "Injected growth hormone itself in healthy adults (context for these peptides)"],
+      ["joints", "Oral collagen for tendon problems (tendinopathy)"],
+      ["muscle", "Fish protein hydrolysate (oral marine peptides)"],
+      ["muscle", "Oral ghrelin mimetic MK-677 (ibutamoren)"],
+      ["joints", "BPC-157 for tendon, ligament and joint problems"],
+      ["joints", "TB-500 for tendon and ligament injury"],
+      ["muscle", "Ipamorelin and CJC-1295"],
     ],
   },
   {
