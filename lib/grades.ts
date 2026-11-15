@@ -59,7 +59,7 @@ export const GRADES_CHECKED_ON = "2026-11-13";
 export type Group = "collagen" | "oral" | "topical";
 /** The page that carries each group's full scoring sheets. */
 export const SHEETS_PAGE: Record<Group, { path: string; title: string }> = {
-  collagen: { path: "/peptides/best-collagen-peptides", title: "best collagen peptides: 16 brands graded" },
+  collagen: { path: "/peptides/best-collagen-peptides", title: "best collagen peptides (set below from the count)" },
   oral: { path: "/peptides/oral-peptides", title: "oral peptides: do they get absorbed?" },
   topical: { path: "/peptides/best-peptides-for-skin", title: "best peptides for skin (topical products)" },
 };
@@ -142,7 +142,16 @@ const P = {
   further: { label: "Further Food product page", href: "https://www.furtherfood.com/products/collagen-peptides-powder" },
   ancient: { label: "Ancient Nutrition product page", href: "https://ancientnutrition.com/pages/multi-collagen-100serv2" },
   bpn: { label: "Bare Performance Nutrition product page", href: "https://www.bareperformancenutrition.com/products/collagen-protein" },
+  gnarly: { label: "Gnarly Nutrition product page", href: "https://gognarly.com/products/gnarly-collagen-pro" },
+  bulletproof: { label: "Bulletproof product page", href: "https://www.bulletproof.com/products/collagen-protein-17-6oz" },
 };
+const GNARLY_LABEL = {
+  label: "Gnarly Collagen Pro package back panel (product page image)",
+  href: "https://gognarly.com/cdn/shop/files/GN-COTB-UN_D3-WEB.webp",
+};
+const GNARLY_NSF = { label: "NSF listing: Gnarly Collagen Pro", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1330416" };
+const GNARLY_SEARCH = { label: "Gnarly Nutrition site search: “certificate of analysis”", href: "https://gognarly.com/search?q=certificate+of+analysis" };
+const BP_TESTING = { label: "Bulletproof testing standards page", href: "https://www.bulletproof.com/testing-standards/" };
 const BPN_FACTS = {
   label: "Bare Performance Nutrition Supplement Facts panel (product page image)",
   href: "https://www.bareperformancenutrition.com/cdn/shop/files/Collagen_8_-_NFP_4cb7845c-0ada-413a-9052-71b8d6fa0aa7.jpg",
@@ -921,6 +930,97 @@ export const GRADES: ProductGrade[] = [
         sources: [{ label: "Bare Performance Nutrition terms of service", href: "https://www.bareperformancenutrition.com/policies/terms-of-service" }],
       },
     },
+  },  {
+    id: "gnarly-collagen-pro",
+    brand: "Gnarly Nutrition",
+    product: "Collagen Pro",
+    form: "Bovine collagen peptides with vitamin C, zinc and copper, powder",
+    group: "collagen",
+    checkedOn: "2026-11-15",
+    documentsCheckedOn: "2026-11-15",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["joints", "tendons", "skin", "hair"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "An NSF Certified for Sport listing and a full label, but no public lot report, an appeal to research without a named study, and no company name or street address.",
+    scores: {
+      "coa-batch": { points: 0, note: "No public lot report; a search of the maker's site for “certificate of analysis” finds only a blog post.", sources: [P.gnarly, GNARLY_SEARCH] },
+      "coa-lab": NO_LOT(P.gnarly),
+      "coa-numbers": NO_LOT(P.gnarly),
+      "coa-contaminants": NO_LOT(P.gnarly),
+      certification: {
+        points: 8,
+        note: "“Gnarly Collagen Pro” is in NSF's Certified for Sport list, with five lot numbers named on the listing.",
+        sources: [GNARLY_NSF, NSF_SPORT_LIST],
+      },
+      amount: {
+        points: 8,
+        note: "The label gives 15 g of hydrolysed bovine collagen, 90 mg vitamin C, 15 mg zinc and 1 mg copper per 15 g serving. The page's benefits text says “20g of collagen protein per serving”, which does not match the label.",
+        sources: [GNARLY_LABEL, P.gnarly],
+      },
+      source: { points: 4, note: "Bovine hide from pasture-raised US cattle (page FAQ).", sources: [P.gnarly] },
+      allergen: NO_ALLERGEN(GNARLY_LABEL, "bovine collagen, vitamin C, zinc and copper"),
+      blend: { points: 6, note: "Each ingredient is listed with its amount; no proprietary blend.", sources: [GNARLY_LABEL] },
+      "claims-match": {
+        points: 11,
+        note: "Claims joint health and mobility (joints mixed), tendons and ligaments (limited, −2), skin (consistent) and “Skin, Hair & Nails health” (hair limited, −2; nails not rated). Tissue regeneration and fewer repeat injuries are not rated.",
+        sources: [P.gnarly, TOPIC.joints, TOPIC.skin, TOPIC.hair],
+      },
+      "dose-match": {
+        points: 2,
+        note: "“Most research points to consistent daily use of 10–20g over 8–12 weeks”, with no study named, so the dose cannot be compared with a particular trial.",
+        sources: [P.gnarly],
+      },
+      "cites-real": { points: 2, note: "“Backed by research” and “most research points to” name no paper a reader could find.", sources: [P.gnarly] },
+      category: { points: 5, note: "Sold as a dietary supplement; the FDA statement is on the package label shown on the page.", sources: [GNARLY_LABEL] },
+      identity: {
+        points: 3,
+        note: "The label gives a Salt Lake City PO box and the site has a contact form and email. We found no legal company name; the only street address in the terms is the copyright agent's.",
+        sources: [GNARLY_LABEL, { label: "Gnarly Nutrition terms of service", href: "https://gognarly.com/policies/terms-of-service" }],
+      },
+    },
+  },
+  {
+    id: "bulletproof-collagen",
+    brand: "Bulletproof",
+    product: "Collagen Peptides (unflavored)",
+    form: "Bovine collagen peptides, single ingredient, powder",
+    group: "collagen",
+    checkedOn: "2026-11-15",
+    documentsCheckedOn: "2026-11-15",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["joints", "bone", "skin"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "A clear single-ingredient label and full company details, but no public lot report or certification listing, and “backed by clinical studies” without a named study.",
+    scores: {
+      "coa-batch": {
+        points: 0,
+        note: "No public lot report. The testing-standards page says each production lot is analysed by accredited third-party labs, but no report is published.",
+        sources: [P.bulletproof, BP_TESTING],
+      },
+      "coa-lab": NO_LOT(BP_TESTING),
+      "coa-numbers": NO_LOT(BP_TESTING),
+      "coa-contaminants": NO_LOT(BP_TESTING),
+      certification: { points: 0, note: "No sport or contents certification listing found (not in NSF's Certified for Sport list).", sources: [NSF_SPORT_LIST] },
+      amount: { points: 8, note: "20 g of hydrolysed collagen (18 g protein) per serving.", sources: [P.bulletproof] },
+      source: { points: 4, note: "Grass-fed, pasture-raised cows.", sources: [P.bulletproof] },
+      allergen: NO_ALLERGEN(P.bulletproof),
+      blend: SINGLE(P.bulletproof),
+      "claims-match": {
+        points: 15,
+        note: "Claims joint flexibility (joints mixed), bone strength (bone mixed) and skin hydration and elasticity (consistent). “Fights the effects of aging” is not rated.",
+        sources: [P.bulletproof, TOPIC.joints, TOPIC.bone, TOPIC.skin],
+      },
+      "dose-match": { points: 2, note: "“Ingredients that are backed by clinical studies”, with no study named, so the dose cannot be compared.", sources: [P.bulletproof] },
+      "cites-real": { points: 2, note: "The appeal to clinical studies names no paper a reader could find.", sources: [P.bulletproof] },
+      category: SUPPLEMENT(P.bulletproof),
+      identity: {
+        points: 5,
+        note: "Bulletproof 360, Inc., with a Seattle postal address and a customer-care email, in the terms of service.",
+        sources: [{ label: "Bulletproof terms of service", href: "https://www.bulletproof.com/policies/terms-of-service" }],
+      },
+    },
   },
 ];
 
@@ -939,7 +1039,21 @@ const TOPIC2 = {
   bp: { label: "Blood pressure evidence", href: "/science/topics/blood-pressure" },
   eye: { label: "Eye evidence", href: "/science/topics/eye" },
   immune: { label: "Immune evidence", href: "/science/topics/immune" },
+  muscle: { label: "Muscle evidence", href: "/science/topics/muscle" },
 };
+
+// batch 5 sources (checked 2026-11-15)
+const DFS = { label: "Designs for Sport product page", href: "https://www.designsforhealth.com/products/pro-formance-peptides-ds/" };
+const DFS_FACTS = {
+  label: "Pro-Formance Peptides Supplement Facts panel (product page image)",
+  href: "https://cdn.sanity.io/images/lemtscrs/production-www/1a5447d129ae90300d405dc17b4b09710176646d-1200x1083.jpg",
+};
+const DFS_NSF = { label: "NSF listing: Pro-Formance Peptides (Designs for Sport)", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1799974" };
+const DFH_COA_PAGE = { label: "Designs for Health certificates of analysis by lot", href: "https://www.designsforhealth.com/certificate-of-analysis" };
+const DFS_COA_66621 = { label: "Report, lot 66621 (September 2026)", href: "https://cdn.sanity.io/files/lemtscrs/production-www/8a5158b00273ce0c1efb373f7d78dadacc0ea32b.pdf" };
+const DFS_COA_66951 = { label: "Report, lot 66951 (March 2026)", href: "https://cdn.sanity.io/files/lemtscrs/production-www/15c6155f904286edf2a2c1eb77ac0ef9f7073a5e.pdf" };
+const DFH_HTN = { label: "Designs for Health product page", href: "https://www.designsforhealth.com/products/htn-supreme/" };
+const DFH_TERMS = { label: "Designs for Health terms of use", href: "https://www.designsforhealth.com/terms-of-use" };
 
 // batch 4 sources (checked 2026-11-14)
 const NF = { label: "Natural Factors product page", href: "https://naturalfactors.com/products/peptace-fish-peptides" };
@@ -1558,6 +1672,106 @@ export const ORAL_GRADES: ProductGrade[] = [
       },
     },
   },
+  {
+    id: "dfs-pro-formance-peptides",
+    brand: "Designs for Sport",
+    product: "Pro-Formance Peptides",
+    form: "Capsules: 2.4 g fava bean protein hydrolysate (PeptiStrong) per 4 capsules",
+    group: "oral",
+    checkedOn: "2026-11-15",
+    documentsCheckedOn: "2026-11-15",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["muscle"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Public lot reports and an NSF Certified for Sport listing, but the reports name no laboratory, give the peptide only as “Complies” by a protein method, and give no metal results.",
+    scores: {
+      "coa-batch": {
+        points: 10,
+        note: "The maker's certificate page lists reports by lot number for buyers to match to the label; two lots of this product are listed (66951 and 66621).",
+        sources: [DFH_COA_PAGE, DFS_COA_66621, DFS_COA_66951],
+      },
+      "coa-lab": {
+        points: 2,
+        note: "The reports are issued on the seller's letterhead and mark results as “3rd party testing”, but name no laboratory.",
+        sources: [DFS_COA_66621],
+      },
+      "coa-numbers": {
+        points: 3,
+        note: "Lot 66621 gives the fava bean hydrolysate (2.4 g, range 2.28–3.6 g) only as “Complies”, measured by Dumas, a nitrogen (protein) method that does not identify the peptides; lot 66951 gives the amount as “Complies” by input, that is, from the formula.",
+        sources: [DFS_COA_66621, DFS_COA_66951],
+      },
+      "coa-contaminants": {
+        points: 4,
+        note: "Six microbe tests, each with a limit and a result. Heavy metals appear only in a note that the lot was “within specifications”, with no limits or results.",
+        sources: [DFS_COA_66621],
+      },
+      certification: {
+        points: 8,
+        note: "“Pro-Formance Peptides” by Designs for Sport is in NSF's Certified for Sport list (lot: all), with the same 4-capsule serving as the label; the lot 66621 report also notes NSF approval for banned substances.",
+        sources: [DFS_NSF, DFS_COA_66621],
+      },
+      amount: { points: 8, note: "2.4 g of PeptiStrong fava bean (Vicia faba) protein hydrolysate per 4 capsules.", sources: [DFS_FACTS] },
+      source: { points: 4, note: "Fava bean (Vicia faba) protein.", sources: [DFS_FACTS] },
+      allergen: { points: 5, note: "No major allergen in the ingredients (fava bean hydrolysate, cellulose, vegetable stearate); labelled free of gluten, dairy and soy.", sources: [DFS_FACTS, DFS] },
+      blend: { points: 6, note: "Single active ingredient with its amount.", sources: [DFS_FACTS] },
+      "claims-match": {
+        points: 13,
+        note: "Claims muscle strength, endurance, recovery and retention (fava bean peptides for muscle: limited, −2). Athletic performance and exercise-induced inflammation are not rated.",
+        sources: [DFS, TOPIC2.muscle],
+      },
+      "dose-match": NONE_CITED(DFS),
+      "cites-real": NONE_CITED(DFS),
+      category: SUPPLEMENT(DFS),
+      identity: {
+        points: 5,
+        note: "Designs for Health, Inc., with a Palm Coast, Florida address and support and legal email addresses, in the terms of use.",
+        sources: [DFH_TERMS],
+      },
+    },
+  },
+  {
+    id: "dfh-htn-supreme",
+    brand: "Designs for Health",
+    product: "HTN Supreme",
+    form: "Capsules: 1.5 g bonito peptide powder (85% peptides) and 200 mg grape seed extract per 4 capsules",
+    group: "oral",
+    checkedOn: "2026-11-15",
+    documentsCheckedOn: "2026-11-15",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["blood-pressure"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Every amount and the fish source are on the label, but this product is not on the maker's lot-report page and has no certification listing.",
+    scores: {
+      "coa-batch": {
+        points: 0,
+        note: "The maker publishes lot reports for many products, but HTN Supreme is not on the list; the page says to call customer service for products not shown.",
+        sources: [DFH_COA_PAGE, DFH_HTN],
+      },
+      "coa-lab": NO_LOT(DFH_HTN),
+      "coa-numbers": NO_LOT(DFH_HTN),
+      "coa-contaminants": NO_LOT(DFH_HTN),
+      certification: { points: 0, note: "No sport or contents certification listing found (not in NSF's Certified for Sport list).", sources: [NSF_SPORT_LIST] },
+      amount: { points: 8, note: "1.5 g bonito peptide powder (standardised to 85% peptides) and 200 mg grape seed extract (90% polyphenols) per 4 capsules.", sources: [DFH_HTN] },
+      source: { points: 4, note: "Bonito fish, “from dried smoked fish”; the allergen line names tuna and mackerel.", sources: [DFH_HTN] },
+      allergen: { points: 5, note: "“Contains fish (tuna, mackerel).”", sources: [DFH_HTN] },
+      blend: { points: 6, note: "Each active ingredient is listed with its amount.", sources: [DFH_HTN] },
+      "claims-match": {
+        points: 13,
+        note: "Claims healthy blood pressure (fish peptides and blood pressure: limited, −2). Blood vessels, platelet function, blood flow and antioxidant status are not rated.",
+        sources: [DFH_HTN, TOPIC2.bp],
+      },
+      "dose-match": { points: 5, note: "No study is cited; the page says bonito peptides are “traditionally used in Japan”.", sources: [DFH_HTN] },
+      "cites-real": NONE_CITED(DFH_HTN),
+      category: SUPPLEMENT(DFH_HTN),
+      identity: {
+        points: 5,
+        note: "Designs for Health, Inc., with a Palm Coast, Florida address and support and legal email addresses, in the terms of use.",
+        sources: [DFH_TERMS],
+      },
+    },
+  },
 ];
 
 // ---------- batch 3: topical peptide products (checked 2026-11-13) ----------
@@ -1577,6 +1791,8 @@ function topical(o: {
   page: Source;
   claimAreas: ClaimArea[];
   summary: string;
+  /** Defaults to batch 3's date. */
+  checkedOn?: string;
   scores: Partial<Record<string, Score>> & Pick<Record<string, Score>, "amount" | "claims-match" | "identity">;
 }): ProductGrade {
   const base: Record<string, Score> = {
@@ -1598,8 +1814,8 @@ function topical(o: {
     product: o.product,
     form: o.form,
     group: "topical",
-    checkedOn: "2026-11-13",
-    documentsCheckedOn: "2026-11-13",
+    checkedOn: o.checkedOn ?? "2026-11-13",
+    documentsCheckedOn: o.checkedOn ?? "2026-11-13",
     rubricVersion: RUBRIC_VERSION,
     claimAreas: o.claimAreas,
     diseaseClaims: false,
@@ -1618,6 +1834,7 @@ const TO_HA = TO("multi-peptide-ha-serum-100613.html", "Multi-Peptide + HA Serum
 const TO_CU = TO("multi-peptide-copper-peptides-1-serum-100625.html", "Multi-Peptide + Copper Peptides 1% Serum");
 const TO_ARG = TO("argireline-solution-10-serum-100403.html", "Argireline Solution 10%");
 const TO_HAIR = TO("multi-peptide-serum-for-hair-density-hair-scalp-treatment-100434.html", "Multi-Peptide Serum for Hair Density");
+const VEGAMOUR = { label: "Vegamour product page", href: "https://vegamour.com/products/gro-hair-serum" };
 const NIOD = { label: "NIOD product page", href: "https://niod.com/en-us/copper-amino-isolate-serum-3-11-cais3-serum-100368.html" };
 const DE = { label: "Drunk Elephant product page", href: "https://www.drunkelephant.com/collections/moisturizers/protini-polypeptide-firming-refillable-moisturizer-999DE00000103.html" };
 const OLAY = { label: "Olay product page", href: "https://www.olay.com/products/regenerist-micro-sculpting-cream-moisturizer" };
@@ -1787,10 +2004,52 @@ export const TOPICAL_GRADES: ProductGrade[] = [
       },
     },
   }),
+  topical({
+    id: "vegamour-gro",
+    brand: "Vegamour",
+    product: "GRO Hair Serum",
+    form: "Scalp serum with plant-made peptides (sh-oligopeptide-2, sh-polypeptide-9 and -86), caffeine and plant extracts",
+    page: VEGAMOUR,
+    claimAreas: ["hair"],
+    checkedOn: "2026-11-15",
+    summary: "Full ingredient list and company details, but no peptide concentrations or lot report, and a claim to reduce hair shedding.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for any peptide or other active.", sources: [VEGAMOUR] },
+      "claims-match": {
+        points: 13,
+        note: "Claims fuller, thicker-looking hair and less shedding (topical peptide products for hair: limited, −2). Less breakage is not rated.",
+        sources: [VEGAMOUR, TOPIC3.hair],
+      },
+      category: {
+        points: 3,
+        note: "Sold as a cosmetic, but says it “helps reduce hair shedding”, a claim about hair loss that US rules treat as a drug claim (other lines say “visibly”).",
+        sources: [VEGAMOUR],
+      },
+      identity: {
+        points: 5,
+        note: "Vegamour, LLC, with a Los Angeles postal address and a support email, in the terms of service.",
+        sources: [{ label: "Vegamour terms of service", href: "https://vegamour.com/policies/terms-of-service" }],
+      },
+    },
+  }),
 ];
 
 /** Every graded product. */
 export const ALL_GRADES: ProductGrade[] = [...GRADES, ...ORAL_GRADES, ...TOPICAL_GRADES];
+
+/** Counts used in page text, so adding a product never leaves a number stale. */
+export const GRADE_COUNTS = {
+  collagen: GRADES.length,
+  /** Collagen products without a public lot report. */
+  collagenNoLot: GRADES.filter((g) => !g.scores["coa-batch"].points).length,
+  purblack: ORAL_GRADES.filter(isPurblack).length,
+  /** Oral peptide products other than Pürblack's. */
+  oralOther: ORAL_GRADES.filter((g) => !isPurblack(g)).length,
+  topical: TOPICAL_GRADES.length,
+};
+/** Title of the collagen grades page (also used in guides, breadcrumbs and social cards). */
+export const COLLAGEN_PAGE_TITLE = `Best collagen peptides: ${GRADES.length} brands graded`;
+SHEETS_PAGE.collagen.title = COLLAGEN_PAGE_TITLE.charAt(0).toLowerCase() + COLLAGEN_PAGE_TITLE.slice(1);
 
 // ---------- scoring ----------
 export type BandLabel = "Well documented" | "Documented" | "Partly documented" | "Poorly documented" | "Not graded";

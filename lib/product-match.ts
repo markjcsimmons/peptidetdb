@@ -19,6 +19,7 @@ export type Ingredient =
   | "purblack-iph"
   | "casein-hydrolysate"
   | "fish-protein"
+  | "fava-bean-peptides"
   | "topical-peptides"
   | "topical-ghk-cu";
 
@@ -28,6 +29,7 @@ export const INGREDIENT_LABEL: Record<Ingredient, string> = {
   "purblack-iph": "Pürblack peptide complexes (IPH)",
   "casein-hydrolysate": "Casein hydrolysate (Lactium)",
   "fish-protein": "Fish protein peptides",
+  "fava-bean-peptides": "Fava bean peptides (PeptiStrong)",
   "topical-peptides": "Cosmetic peptides on the skin",
   "topical-ghk-cu": "Copper peptide (GHK-Cu) on the skin",
 };
@@ -62,6 +64,11 @@ export const PRODUCT_URL: Record<string, string> = {
   "further-food": "https://www.furtherfood.com/products/collagen-peptides-powder",
   "ancient-nutrition": "https://ancientnutrition.com/pages/multi-collagen-100serv2",
   "bpn-collagen": "https://www.bareperformancenutrition.com/products/collagen-protein",
+  "gnarly-collagen-pro": "https://gognarly.com/products/gnarly-collagen-pro",
+  "bulletproof-collagen": "https://www.bulletproof.com/products/collagen-protein-17-6oz",
+  "dfs-pro-formance-peptides": "https://www.designsforhealth.com/products/pro-formance-peptides-ds/",
+  "dfh-htn-supreme": "https://www.designsforhealth.com/products/htn-supreme/",
+  "vegamour-gro": "https://vegamour.com/products/gro-hair-serum",
   "purblack-muscle": "https://purblack.com/products/muscle-peptide",
   "purblack-joint": "https://purblack.com/products/joint-peptide",
   "purblack-vascular": "https://purblack.com/products/vascular-peptide-1",
@@ -106,6 +113,11 @@ export const PRODUCT_FACTS: Record<string, ProductFacts> = {
   "further-food": { ingredient: "collagen", format: "Powder", source: GRASS_FED },
   "ancient-nutrition": { ingredient: "multi-collagen", format: "Powder", source: "Several sources, not all named" },
   "bpn-collagen": { ingredient: "collagen", format: "Powder", source: "Bovine (hide)" },
+  "gnarly-collagen-pro": { ingredient: "collagen", format: "Powder", source: "Bovine (hide)" },
+  "bulletproof-collagen": { ingredient: "collagen", format: "Powder", source: "Bovine" },
+  "dfs-pro-formance-peptides": { ingredient: "fava-bean-peptides", format: "Capsules", source: "Fava bean (plant)" },
+  "dfh-htn-supreme": { ingredient: "fish-protein", format: "Capsules", source: "Fish (bonito)" },
+  "vegamour-gro": { ingredient: "topical-peptides", format: "Serum", source: INCI },
   "purblack-muscle": PB,
   "purblack-joint": PB,
   "purblack-vascular": PB,
@@ -188,6 +200,7 @@ export const CLAIM_EVIDENCE: Record<Ingredient, Partial<Record<ClaimArea, ClaimE
       unassessed: "The fish-peptide trials we summarised used sardine or other fish hydrolysates, not bonito peptides.",
     },
   },
+  "fava-bean-peptides": { muscle: { ratings: [["muscle", "Fava bean peptide hydrolysate (PeptiStrong)"]] } },
   "topical-peptides": {
     skin: { ratings: [["skin", "Topical cosmetic peptides (argireline, palmitoyl peptides and similar)"]] },
     hair: { ratings: [["hair", "Topical peptide products for hair loss (GPIGS, acetyl tetrapeptide-3 and similar)"]] },

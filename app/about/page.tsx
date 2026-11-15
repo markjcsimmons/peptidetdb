@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GRADE_COUNTS } from "@/lib/grades";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
@@ -54,15 +55,15 @@ export default function AboutPage() {
             <Link href="/grading-rubric" className="link">
               /grading-rubric
             </Link>
-            , which was published before any product was graded. Grades for 16 collagen products are on{" "}
+            , which was published before any product was graded. Grades for {GRADE_COUNTS.collagen} collagen products are on{" "}
             <Link href="/peptides/best-collagen-peptides" className="link">
               the collagen page
             </Link>{" "}
-            and for 13 other oral peptide products, including Pürblack&rsquo;s, on{" "}
+            and for {GRADE_COUNTS.oralOther} other oral peptide products, including Pürblack&rsquo;s, on{" "}
             <Link href="/peptides/oral-peptides" className="link">
               the oral peptides page
             </Link>
-            , and for 7 peptide creams and serums on{" "}
+            , and for {GRADE_COUNTS.topical} peptide creams and serums on{" "}
             <Link href="/peptides/best-peptides-for-skin" className="link">
               the skin page
             </Link>

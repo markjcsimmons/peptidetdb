@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { absoluteUrl, formatDate } from "@/lib/format";
+import { absoluteUrl, formatDate, numberWord } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { ShortAnswer } from "@/components/ui";
@@ -12,7 +12,24 @@ import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedList, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
 import { GradeTable, ScoringRules, ScoringSheet } from "@/components/product-grades";
-import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
+import { GRADE_COUNTS, GRADES_CHECKED_ON, isPurblack, ranked } from "@/lib/grades";
+import { PRODUCT_FACTS, type Ingredient } from "@/lib/product-match";
+
+/** The non-Pürblack oral products by ingredient, for the grades intro. */
+const ORAL_KIND: Partial<Record<Ingredient, [string, string]>> = {
+  "casein-hydrolysate": ["milk-peptide capsule containing Lactium", "milk-peptide capsules containing Lactium"],
+  "fish-protein": ["bonito-fish product", "bonito-fish products"],
+  "fava-bean-peptides": ["fava bean peptide capsule", "fava bean peptide capsules"],
+};
+const ORAL_OTHERS = ranked("oral").filter((g) => !isPurblack(g));
+const ORAL_MIX = (Object.keys(ORAL_KIND) as Ingredient[])
+  .map((k) => [k, ORAL_OTHERS.filter((g) => PRODUCT_FACTS[g.id].ingredient === k).length] as const)
+  .filter(([, n]) => n > 0)
+  .map(([k, n]) => `${numberWord(n)} ${ORAL_KIND[k]![n === 1 ? 0 : 1]}`)
+  .join(", ")
+  .replace(/, ([^,]*)$/, " and $1");
+if (ORAL_OTHERS.some((g) => !ORAL_KIND[PRODUCT_FACTS[g.id].ingredient])) throw new Error("oral-peptides: an oral product's ingredient has no wording in ORAL_KIND");
+const ORAL_LATEST = ranked("oral").map((g) => g.checkedOn).sort().at(-1)!;
 
 export const metadata: Metadata = {
   title: "Oral peptides: do they work? Ranked by evidence",
@@ -345,7 +362,7 @@ const TESTING: Record<string, React.ReactNode> = {
       <PaperLink id="bassila-2026" via="doi">
         Bassila 2026
       </PaperLink>
-      ). Collagen supplements are not pre-approved, and test reports vary by brand: of 16 brands we checked, we could read batch
+      ). Collagen supplements are not pre-approved, and test reports vary by brand: of {GRADE_COUNTS.collagen} brands we checked, we could read batch
       reports for three (see{" "}
       <Link href="/peptides/best-collagen-peptides" className="link">
         which collagen brands publish batch test results
@@ -570,13 +587,13 @@ export default function OralPeptidesPage() {
       <section id="grades" className="mt-14 scroll-mt-6">
         <h2 className="text-3xl font-bold leading-[1.15]">Oral peptide products, graded</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          The ranking above rates ingredients. Here we grade products: Pürblack&rsquo;s eight peptide capsules and five other
-          oral peptide supplements (three milk-peptide capsules containing Lactium and two bonito-fish products), each scored
-          out of 100 with our{" "}
+          The ranking above rates ingredients. Here we grade products: Pürblack&rsquo;s {numberWord(GRADE_COUNTS.purblack)} peptide
+          capsules and {numberWord(GRADE_COUNTS.oralOther)} other oral peptide supplements ({ORAL_MIX}), each scored out of 100
+          with our{" "}
           <Link href="/grading-rubric" className="link">
             published rubric
           </Link>{" "}
-          on {formatDate(GRADES_CHECKED_ON)} or, for the three added later, on {formatDate("2026-11-14")}. Pürblack is graded by exactly the same rules as everyone else; the
+          between {formatDate(GRADES_CHECKED_ON)} and {formatDate(ORAL_LATEST)} (each sheet gives its date). Pürblack is graded by exactly the same rules as everyone else; the
           disclosure above applies. A grade is about what can be checked, not whether a product works. Collagen products are
           graded on{" "}
           <Link href="/peptides/best-collagen-peptides#grades" className="link">

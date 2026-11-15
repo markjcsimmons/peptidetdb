@@ -68,7 +68,8 @@ export type PeptideId =
   | "insulin"
   | "retinalamin"
   | "elamipretide"
-  | "foxo4-dri";
+  | "foxo4-dri"
+  | "fava-bean-peptides";
 
 export type Delivery = "oral" | "injectable" | "topical";
 
@@ -189,6 +190,7 @@ export const PEPTIDE_LABEL: Record<PeptideId, string> = {
   retinalamin: "Retinalamin (Russian retinal peptide drug)",
   elamipretide: "Elamipretide (SS-31)",
   "foxo4-dri": "FOXO4-DRI (senolytic peptide)",
+  "fava-bean-peptides": "Fava bean peptides (PeptiStrong)",
   "thymic-peptides": "Thymic peptides", // kept short: it feeds the page title (page part must stay ≤52 chars)
   "thymosin-alpha-1": "Thymosin alpha-1",
   thymalin: "Thymalin",
@@ -4763,6 +4765,55 @@ export const STUDIES: Study[] = [
       "The commentary describes how a peptide made of mirror-image (D) amino acids, FOXO4-DRI, frees the protein p53 to trigger death of senescent ('zombie') cells, and how this eased the loss of tissue function linked to senescence in the study it discusses.",
     caveat: "A short commentary on laboratory and mouse work; there are no human data, and we have not read the underlying study.",
     verifiedOn: "2026-11-13",
+  },
+  {
+    id: "kerr-2023",
+    authors: "Kerr A, Hart L, Davis H, Wall A, Lacey S, Franklyn-Miller A, Khaldi N, Keogh B",
+    year: 2023,
+    title: "Improved Strength Recovery and Reduced Fatigue with Suppressed Plasma Myostatin Following Supplementation of a Vicia faba Hydrolysate, in a Healthy Male Population.",
+    journal: "Nutrients",
+    ref: "15(4):986",
+    pmid: "36839344",
+    pmcid: "PMC9967853",
+    doi: "10.3390/nu15040986",
+    kind: "human-controlled",
+    topics: ["muscle"],
+    peptides: ["fava-bean-peptides"],
+    delivery: ["oral"],
+    population: "30 healthy men aged 30 to 45",
+    design: "Randomised, double-blind, placebo-controlled (NCT05159375); muscle soreness induced by resistance exercise on day 14",
+    dose: "2.4 g a day of a fava bean (Vicia faba) protein hydrolysate (PeptiStrong, NPN_1) or placebo",
+    duration: "About 17 days (14 days before the exercise, then 72 hours of follow-up)",
+    finding:
+      "Over the 72 hours after hard resistance exercise, strength (peak torque per body weight) recovered better with the hydrolysate than with placebo (p = 0.027), though not at any single time point. Muscle fatigue (p = 0.041) and blood myostatin (p = 0.006) were lower over the same period.",
+    caveat:
+      "Thirty men, a short exercise-recovery test rather than weeks of training, and no measure of muscle size. The difference over 72 hours was not seen at individual time points. Funded by the company that makes the ingredient, which also designed and analysed the study.",
+    funding:
+      "Financially supported by Nuritas Ltd; five authors are Nuritas employees. The record says Nuritas and SSC Sports Medicine were responsible for the design, data collection, analysis and decision to publish.",
+    verifiedOn: "2026-11-15",
+  },
+  {
+    id: "weijzen-2023",
+    authors: "Weijzen MEG, Holwerda AM, Jetten GHJ, Houben LHP, Kerr A, Davis H, Keogh B, Khaldi N, Verdijk LB, van Loon LJC",
+    year: 2023,
+    title: "Vicia faba Peptide Network Supplementation Does Not Differ From Milk Protein in Modulating Changes in Muscle Size During Short-Term Immobilization and Subsequent Remobilization, but Increases Muscle Protein Synthesis Rates During Remobilization in Healthy Young Men.",
+    journal: "J Nutr",
+    ref: "153(6):1718–1729",
+    pmid: "37277162",
+    doi: "10.1016/j.tjnut.2023.01.014",
+    kind: "human-controlled",
+    topics: ["muscle"],
+    peptides: ["fava-bean-peptides"],
+    delivery: ["oral"],
+    population: "30 healthy young men (mean age 24)",
+    design: "Randomised comparison with milk protein; 7 days of one-leg knee immobilisation, then 14 days of normal activity",
+    dose: "10 g of a fava bean peptide network (NPN_1) twice a day, against the same amount of nitrogen from milk protein concentrate",
+    duration: "21 days",
+    finding:
+      "Thigh muscle cross-section (the main outcome) fell during immobilisation and partly recovered afterwards, with no difference between the fava bean peptides and milk protein. Muscle protein synthesis did not differ during immobilisation; during recovery it was higher in the immobilised leg with the fava bean peptides (1.53% against 1.23% a day, p = 0.027).",
+    caveat:
+      "Thirty men for three weeks, compared with milk protein rather than placebo, and the main outcome (muscle size) showed no difference. The dose (20 g a day) is about eight times that of the capsule products sold with this ingredient. Four authors are also authors of the company-funded trial (Kerr 2023), but this record states no funding or conflicts.",
+    verifiedOn: "2026-11-15",
   },
 ];
 

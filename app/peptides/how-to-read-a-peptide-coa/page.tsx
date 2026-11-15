@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GRADE_COUNTS, SHEETS_PAGE } from "@/lib/grades";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
@@ -221,9 +222,9 @@ export default function PeptideCoaPage() {
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           For collagen and other swallowed products the useful lines are identity, contaminants (heavy metals, microbes)
           and the amount per serving. We found no published study of contaminants in collagen supplements, so a
-          batch-level report is the only way to check. We graded 16 collagen brands, including which publish them, in{" "}
+          batch-level report is the only way to check. We graded {GRADE_COUNTS.collagen} collagen brands, including which publish them, in{" "}
           <Link href="/peptides/best-collagen-peptides" className="link">
-            best collagen peptides: 16 brands graded
+            {SHEETS_PAGE.collagen.title}
           </Link>
           . See{" "}
           <Link href="/peptides/collagen-peptides-side-effects" className="link">

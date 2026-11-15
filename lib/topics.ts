@@ -148,6 +148,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "Two small crossover studies. One found fish hydrolysate raised blood amino acids after exercise about as much as whey hydrolysate, which measures digestion rather than muscle gain. The other found no benefit for recovery between two cycling sessions, and was funded by a company with an interest in the product.",
       },
       {
+        subject: "Fava bean peptide hydrolysate (PeptiStrong)",
+        level: "limited",
+        why: "Two small trials of 30 men each; four authors of each are named as employees of the ingredient's maker (Nuritas) in the funded trial's record. In a placebo-controlled trial at 2.4 g a day, strength recovered better over the 72 hours after hard exercise, though not at any single time point; it was funded by the maker. A second trial at 20 g a day found no difference from milk protein in muscle size lost and regained around a week of leg immobilisation, the main outcome, though muscle protein synthesis was higher during recovery. Neither tested weeks of training.",
+      },
+      {
         subject: "Oral ghrelin mimetic MK-677 (ibutamoren)",
         level: "limited",
         why: "Two randomised trials in older people. One in 65 healthy adults found a 1-year gain in fat-free mass with no change in strength or function, and higher fasting glucose and cortisol. A trial in 123 hip-fracture patients found mixed results on function and was stopped early because of a congestive-heart-failure signal. It is taken by mouth and is not an injectable peptide.",

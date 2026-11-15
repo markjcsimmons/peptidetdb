@@ -1,5 +1,6 @@
 import type { PeptideId, Topic } from "./studies";
 import { TOPICS, type TopicRating } from "./topics";
+import { COLLAGEN_PAGE_TITLE, GRADE_COUNTS } from "./grades";
 
 /**
  * Registry of every guide page under /peptides. The goal hub (/peptides/by-goal), the related-guide
@@ -289,9 +290,9 @@ export const GUIDES: Guide[] = [
   // Documentation checks
   {
     path: "/peptides/best-collagen-peptides",
-    title: "Best collagen peptides: 16 brands graded",
+    title: COLLAGEN_PAGE_TITLE,
     kind: "check",
-    blurb: "16 collagen brands graded out of 100 on lab reports, certification, label and claims, with a scoring sheet for each.",
+    blurb: `${GRADE_COUNTS.collagen} collagen brands graded out of 100 on lab reports, certification, label and claims, with a scoring sheet for each.`,
     topics: [],
     peptides: ["collagen"],
   },

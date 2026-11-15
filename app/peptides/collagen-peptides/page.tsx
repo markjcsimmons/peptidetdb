@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GRADE_COUNTS, SHEETS_PAGE } from "@/lib/grades";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { absoluteUrl, formatDate } from "@/lib/format";
@@ -219,9 +220,9 @@ export default function CollagenPeptidesPage() {
           <Link href="/peptides/how-to-read-a-peptide-coa" className="link">
             how to read a peptide COA
           </Link>
-          , goes line by line, and we graded 16 collagen brands, including which publish batch reports, in{" "}
+          , goes line by line, and we graded {GRADE_COUNTS.collagen} collagen brands, including which publish batch reports, in{" "}
           <Link href="/peptides/best-collagen-peptides" className="link">
-            best collagen peptides: 16 brands graded
+            {SHEETS_PAGE.collagen.title}
           </Link>
           .
         </p>

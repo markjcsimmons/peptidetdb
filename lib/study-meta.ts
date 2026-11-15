@@ -29,7 +29,7 @@ const FUNDING: Record<string, Exclude<FundingType, "not-stated">> = {
   "eckert-2024": "industry", "chataigner-2026": "industry", "mjos-2019": "industry", "oddoux-2022": "industry",
   "wu-2025": "industry", "ke-2022": "industry", "zdzieblik-2021": "industry", "russo-2024": "industry",
   "wilding-2021": "industry", "jastreboff-2022": "industry", "lincoff-2023": "industry", "wilding-2022": "industry",
-  "nong-2026": "industry",
+  "nong-2026": "industry", "kerr-2023": "industry",
   // other ties
   "vasireddi-2025": "other", "mendias-2026": "other", "jain-2026": "other", "yeung-2026": "other", "cowart-2025": "other",
   "bassila-2026": "other", "khatri-2021": "other",
@@ -64,7 +64,7 @@ export const SIZE: Record<string, StudySize> = {
   "cheng-2026": { people: 4114, trials: 9 }, "simental-mendia-2025": { people: 870, trials: 11 },
   "yuenyongviwat-2025": { people: 68 }, "schulze-2024": { people: 182 }, "zdzieblik-2021-knee": { people: 180 },
   "bongers-2020": { people: 167 }, "clark-2008": { people: 147 }, "praet-2019": { people: 20 }, "lugo-2016": { people: 191 },
-  "bes-1992": { people: 16 }, "schneider-helmert-1987": { people: 14 }, "chang-2024": { people: 36 }, "lim-2024": { people: 40 },
+  "bes-1992": { people: 16 }, "schneider-helmert-1987": { people: 14 }, "chang-2024": { people: 36 }, "kerr-2023": { people: 30 }, "weijzen-2023": { people: 30 }, "lim-2024": { people: 40 },
   "thomas-2024": { people: 13 }, "kingsberg-2019": { people: 1267 }, "clayton-2022": { people: 1247 },
   "konig-2018": { people: 131 }, "zdzieblik-2021-bone": { people: 31 }, "cuneo-2010": { people: 71 },
   "elkind-hirsch-2022": { people: 82 }, "chen-2025": { people: 100 }, "bishop-1992": { people: 86 }, "knop-2023": { people: 667 },

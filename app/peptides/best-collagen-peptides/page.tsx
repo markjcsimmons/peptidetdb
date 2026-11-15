@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { absoluteUrl, formatDate } from "@/lib/format";
+import { absoluteUrl, formatDate, numberWord } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { CARD, Pill, ShortAnswer } from "@/components/ui";
 import { PageContents } from "@/components/page-contents";
 import { PageKindLabel } from "@/components/guide-links";
 import { GradeTable, ScoringRules, ScoringSheet } from "@/components/product-grades";
-import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
+import { COLLAGEN_PAGE_TITLE, GRADE_COUNTS, GRADES_CHECKED_ON, ranked, result } from "@/lib/grades";
 import {
   CERTIFIED,
   COLLAGEN_CHECKED_ON,
@@ -17,14 +17,19 @@ import {
 } from "@/lib/product-checks";
 
 export const metadata: Metadata = {
-  title: "Best collagen peptides: 16 brands graded",
+  title: COLLAGEN_PAGE_TITLE,
   description:
-    "Looking for the best collagen peptides? We graded 16 brands out of 100 on batch lab reports, certification listings, labels and claims, with a scoring sheet for each. It does not rank effectiveness.",
+    `Looking for the best collagen peptides? We graded ${GRADE_COUNTS.collagen} brands out of 100 on batch lab reports, certification listings, labels and claims, with a scoring sheet for each. It does not rank effectiveness.`,
   alternates: { canonical: "/peptides/best-collagen-peptides" },
 };
 
 /** Latest date any collagen product was checked (Bare Performance Nutrition was added after the first fifteen). */
 const LATEST_CHECK = ranked("collagen").map((g) => g.checkedOn).sort().at(-1)!;
+/** Brands graded after the first fifteen, and the score range of brands without a lot report. */
+const ADDED_LATER = ranked("collagen").filter((g) => g.checkedOn > GRADES_CHECKED_ON).length;
+const NO_LOT_TOTALS = ranked("collagen")
+  .filter((g) => !g.scores["coa-batch"].points)
+  .map((g) => result(g).total);
 
 const NSF_SUPPLEMENT_PAGE = "https://www.nsf.org/consumer-resources/articles/supplement-vitamin-certification";
 const NSF_SPORT_PAGE = "https://www.nsfsport.com/our-mark.php";
@@ -32,7 +37,7 @@ const NSF_SPORT_PAGE = "https://www.nsfsport.com/our-mark.php";
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What is the best collagen peptide supplement?",
-    a: "No study has compared brands, so no one can say which works best. Human trials of collagen peptides test a collagen preparation, not a brand. What we can check is documentation. Of 16 brands graded on 13 and 15 November 2026, Momentous (86 of 100), Puori (81) and Transparent Labs (80) scored highest, and they were the only three that publish lab reports for the lot you buy.",
+    a: `No study has compared brands, so no one can say which works best. Human trials of collagen peptides test a collagen preparation, not a brand. What we can check is documentation. Of ${GRADE_COUNTS.collagen} brands graded between 13 and 15 November 2026, Momentous (86 of 100), Puori (81) and Transparent Labs (80) scored highest, and they were the only three that publish lab reports for the lot you buy.`,
   },
   {
     q: "Do collagen peptide supplements contain heavy metals?",
@@ -91,7 +96,7 @@ export default function BestCollagenPeptidesPage() {
             {
               "@type": "ListItem",
               position: 3,
-              name: "Best collagen peptides: 16 brands graded",
+              name: COLLAGEN_PAGE_TITLE,
               item: absoluteUrl("/peptides/best-collagen-peptides"),
             },
           ],
@@ -101,23 +106,23 @@ export default function BestCollagenPeptidesPage() {
         <Link href="/peptides" className="link">
           What are peptides?
         </Link>{" "}
-        / Best collagen peptides: 16 brands graded
+        / {COLLAGEN_PAGE_TITLE}
       </nav>
       <PageKindLabel path="/peptides/best-collagen-peptides" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">
-        Best collagen peptides: 16 brands graded
+        {COLLAGEN_PAGE_TITLE}
       </h1>
       <p className="mt-2 text-sm text-muted">
-        Grades checked {formatDate(GRADES_CHECKED_ON)} (Bare Performance Nutrition added {formatDate(LATEST_CHECK)}); lab reports
+        Grades checked {formatDate(GRADES_CHECKED_ON)} ({numberWord(ADDED_LATER)} brands added by {formatDate(LATEST_CHECK)}); lab reports
         and registries first read {formatDate(COLLAGEN_CHECKED_ON)}. Page last reviewed {formatDate(LATEST_CHECK)}.
       </p>
 
       <ShortAnswer className="mt-6">
         <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
-          We graded 16 collagen brands out of 100 with our published rubric. <strong>Momentous scored highest (86)</strong>,
+          We graded {GRADE_COUNTS.collagen} collagen brands out of 100 with our published rubric. <strong>Momentous scored highest (86)</strong>,
           followed by Puori (81) and Transparent Labs (80): the only three that publish lab reports for the lot you buy.
-          Without such a report a product cannot rate above &ldquo;Partly documented&rdquo;, and the other thirteen scored 32
-          to 64. The grades measure what can be checked, not results: they do not say any brand&rsquo;s collagen works better
+          Without such a report a product cannot rate above &ldquo;Partly documented&rdquo;, and the other {numberWord(GRADE_COUNTS.collagenNoLot)} scored{" "}
+          {Math.min(...NO_LOT_TOTALS)} to {Math.max(...NO_LOT_TOTALS)}. The grades measure what can be checked, not results: they do not say any brand&rsquo;s collagen works better
           than another&rsquo;s.
         </p>
       </ShortAnswer>

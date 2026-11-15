@@ -50,12 +50,13 @@ export const ROUTE_LABEL: Record<Route, string> = { mouth: "By mouth", skin: "On
 export const routeOf = (f: ProductFacts): Route => (f.format === "Serum" || f.format === "Cream" ? "skin" : "mouth");
 
 /** What the peptides are made from, grouped for a reader with an allergy or a diet. From the source criterion. */
-export type MadeFrom = "Beef (bovine)" | "Several animals" | "Animal not named" | "Fish" | "Milk" | "Cosmetic peptides" | "Not stated";
-export const MADE_FROM_ORDER: MadeFrom[] = ["Beef (bovine)", "Fish", "Milk", "Several animals", "Animal not named", "Cosmetic peptides", "Not stated"];
+export type MadeFrom = "Beef (bovine)" | "Several animals" | "Animal not named" | "Fish" | "Milk" | "Plant" | "Cosmetic peptides" | "Not stated";
+export const MADE_FROM_ORDER: MadeFrom[] = ["Beef (bovine)", "Fish", "Milk", "Plant", "Several animals", "Animal not named", "Cosmetic peptides", "Not stated"];
 export const MADE_FROM_NOTE: Record<MadeFrom, string> = {
   "Beef (bovine)": "Collagen from cattle (hide or unspecified tissue).",
   Fish: "Peptides from fish protein.",
   Milk: "Peptides from milk protein (casein).",
+  Plant: "Peptides from plant protein (for example fava bean).",
   "Several animals": "Collagen from more than one animal; may include fish, chicken or egg.",
   "Animal not named": "The seller says “grass-fed” but does not name the animal.",
   "Cosmetic peptides": "Peptides named by their cosmetic ingredient names on a cream or serum.",
@@ -66,6 +67,7 @@ export function madeFromOf(f: ProductFacts): MadeFrom {
   if (f.ingredient === "multi-collagen") return "Several animals";
   if (f.ingredient === "fish-protein") return "Fish";
   if (f.ingredient === "casein-hydrolysate") return "Milk";
+  if (f.ingredient === "fava-bean-peptides") return "Plant";
   if (f.ingredient === "purblack-iph") return "Not stated";
   if (f.ingredient === "topical-peptides" || f.ingredient === "topical-ghk-cu") {
     return f.source.startsWith("Unclear") ? "Not stated" : "Cosmetic peptides";

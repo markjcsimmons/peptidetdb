@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { GRADE_COUNTS } from "@/lib/grades";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { absoluteUrl, formatDate } from "@/lib/format";
+import { absoluteUrl, formatDate, numberWord } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { Callout } from "@/components/ui";
 import { DisclosureNote } from "@/components/disclosure-note";
@@ -45,15 +46,15 @@ export default function GradingRubricPage() {
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How we grade products</h1>
       <p className="mt-2 text-sm text-muted">
         Version {RUBRIC_VERSION}, updated {formatDate(RUBRIC_DATE)} (first published as a draft {formatDate(RUBRIC_FIRST_PUBLISHED)}; version 1.0 confirmed 13 November 2026; changes are listed below).
-        Graded so far: 16 collagen products, on{" "}
+        Graded so far: {GRADE_COUNTS.collagen} collagen products, on{" "}
         <Link href="/peptides/best-collagen-peptides#grades" className="link">
           the collagen page
         </Link>
-        , and 13 other oral peptide products, including Pürblack&rsquo;s eight, on{" "}
+        , and {GRADE_COUNTS.oralOther} other oral peptide products, including Pürblack&rsquo;s {numberWord(GRADE_COUNTS.purblack)}, on{" "}
         <Link href="/peptides/oral-peptides#grades" className="link">
           the oral peptides page
         </Link>
-        , and 7 peptide creams and serums on{" "}
+        , and {GRADE_COUNTS.topical} peptide creams and serums on{" "}
         <Link href="/peptides/best-peptides-for-skin#grades" className="link">
           the skin page
         </Link>

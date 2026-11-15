@@ -235,6 +235,24 @@ export default function PeptidesForMuscleGrowthPage() {
       </section>
 
       <section className="mt-14">
+        <h2 className="text-3xl font-bold leading-[1.15]">Fava bean peptides (PeptiStrong)</h2>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          A plant peptide ingredient sold in capsules for muscle. In a{" "}
+          <PaperLink id="kerr-2023" via="pmc">
+            placebo-controlled trial of 30 men
+          </PaperLink>{" "}
+          funded by the ingredient&rsquo;s maker, 2.4 g a day for two weeks was followed by better strength recovery over
+          the 72 hours after hard exercise, though not at any single time point. A{" "}
+          <PaperLink id="weijzen-2023" via="doi">
+            second trial of 30 young men
+          </PaperLink>{" "}
+          gave 20 g a day around a week of leg immobilisation and found no difference from milk protein in muscle size,
+          its main outcome, though muscle protein synthesis was higher during recovery. Neither tested weeks of training,
+          so we rate the evidence as limited.
+        </p>
+      </section>
+
+      <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">BPC-157</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           BPC-157 is promoted for recovery rather than size. Reviews describe mostly animal evidence and say the claimed

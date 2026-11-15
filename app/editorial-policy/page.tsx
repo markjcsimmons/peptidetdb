@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { GRADE_COUNTS } from "@/lib/grades";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { formatDate } from "@/lib/format";
+import { formatDate, numberWord } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Editorial policy",
@@ -19,8 +20,8 @@ const sections: { h: string; body: React.ReactNode }[] = [
         unapproved compounds sold for injury recovery or performance, plus the regulatory picture for the latter.
         Products are graded with the rubric at /grading-rubric (version 1.0 confirmed 13 November 2026, now version 1.1), which was
         published as a draft before any product was graded. Grades score public documentation and claims, not whether a
-        product works. Grades for 16 collagen products are at /peptides/best-collagen-peptides and for 13 other oral
-        peptide products, including Pürblack&rsquo;s eight, at /peptides/oral-peptides, and for 7 peptide creams and serums at
+        product works. Grades for {GRADE_COUNTS.collagen} collagen products are at /peptides/best-collagen-peptides and for {GRADE_COUNTS.oralOther} other oral
+        peptide products, including Pürblack&rsquo;s {numberWord(GRADE_COUNTS.purblack)}, at /peptides/oral-peptides, and for {GRADE_COUNTS.topical} peptide creams and serums at
         /peptides/best-peptides-for-skin, each with a scoring sheet that links the source for every point.
       </p>
     ),
@@ -99,7 +100,7 @@ const sections: { h: string; body: React.ReactNode }[] = [
       <>
         <p>{SITE.disclosure}</p>
         <p className="mt-3">
-          Products are graded by the same published rules, including Pürblack&rsquo;s. Pürblack&rsquo;s eight peptide
+          Products are graded by the same published rules, including Pürblack&rsquo;s. Pürblack&rsquo;s {numberWord(GRADE_COUNTS.purblack)} peptide
           capsules are graded alongside other oral peptide products, with the same criteria, point steps and sources. Any
           page that names, links or grades a Pürblack product carries a short disclosure note beside it.
         </p>

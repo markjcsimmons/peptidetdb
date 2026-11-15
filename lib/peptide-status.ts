@@ -125,6 +125,7 @@ export const PEPTIDE_STATUS: Record<PeptideId, PeptideStatus> = {
   collagen: { kind: "supplement", note: "Sold as powders, capsules and drinks.", sources: [] },
   "marine-collagen": { kind: "supplement", note: "Fish-derived collagen sold as a supplement.", sources: [] },
   "fish-hydrolysate": { kind: "supplement", note: "Fish protein hydrolysates sold as supplements and food ingredients.", sources: [] },
+  "fava-bean-peptides": { kind: "supplement", note: "Fava bean protein hydrolysate sold as a supplement ingredient (PeptiStrong).", sources: [] },
   "casein-hydrolysate": { kind: "supplement", note: "Milk-protein hydrolysate sold as a supplement (e.g. Lactium).", sources: [] },
   "type-ii-collagen": { kind: "supplement", note: "Undenatured type II collagen sold as a supplement (UC-II).", sources: [] },
   "valyl-tyrosine": { kind: "supplement", note: "Tested as a food or drink ingredient.", sources: [] },

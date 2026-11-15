@@ -245,6 +245,19 @@ export const CERTIFIED: CertifiedProduct[] = [
       { label: "Light Labs testing page", href: "https://app.lightlabs.com/comprehensive-testing-report/404/2393" },
     ],
   },
+  {
+    id: "gnarly-collagen-pro",
+    brand: "Gnarly Nutrition",
+    product: "Collagen Pro",
+    what: "Bovine hide collagen peptides, 15 g per serving on the label, with vitamin C, zinc and copper. Added 15 November 2026.",
+    registry: "Listed in NSF's Certified for Sport list, with five lot numbers named on the listing.",
+    batchReport: "None found on the maker's site.",
+    claims: "The page claims joint health, tendons, ligaments, skin, hair and nails, mobility and tissue regeneration; the label carries the FDA disclaimer.",
+    links: [
+      { label: "Product page", href: "https://gognarly.com/products/gnarly-collagen-pro" },
+      { label: "NSF Certified for Sport listing", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1330416" },
+    ],
+  },
 ];
 
 export const UNVERIFIED: UnverifiedProduct[] = [
@@ -302,5 +315,15 @@ export const UNVERIFIED: UnverifiedProduct[] = [
     product: "Collagen Peptides",
     note: "The product page shows an Informed Choice badge, “third party tested” and a non-GMO tested badge. On 13 November 2026 Informed Choice's registry search listed “Collagen Peptides Powder” under Sports Research; the listing page itself was behind a bot check, so we could not read its dates. We found no Sports Research collagen in NSF's lists and no batch report.",
     links: [{ label: "Product page", href: "https://www.sportsresearch.com/products/collagen-peptides-hydrolyzed-gelatin-2" }],
+  },
+  {
+    id: "bulletproof-collagen",
+    brand: "Bulletproof",
+    product: "Collagen Peptides (unflavored)",
+    note: "Added 15 November 2026. The brand's testing page says each lot is analysed by accredited third-party labs, but we found no published batch report and no NSF listing.",
+    links: [
+      { label: "Product page", href: "https://www.bulletproof.com/products/collagen-protein-17-6oz" },
+      { label: "Testing standards page", href: "https://www.bulletproof.com/testing-standards/" },
+    ],
   },
 ];
