@@ -230,6 +230,21 @@ export const CERTIFIED: CertifiedProduct[] = [
       { label: "NSF/ANSI 173 listing", href: nsf173("Nestle Healthcare") },
     ],
   },
+  {
+    id: "bpn-collagen",
+    brand: "Bare Performance Nutrition",
+    product: "Collagen Protein",
+    what: "Grass-fed bovine collagen peptides, 22 g per scoop, with sea salt. Added 15 November 2026.",
+    registry: "Listed in NSF's Certified for Sport list (all lots), with the same serving and protein as the label.",
+    batchReport:
+      "None found. The product page links a Light Labs testing page with results for samples tested in December 2025 (protein, four heavy metals, gluten and microbes), but it gives no lot number.",
+    claims: "The page says it helps support joint and ligament health, joint comfort, skin, and healthy hair and nails, with the FDA disclaimer.",
+    links: [
+      { label: "Product page", href: "https://www.bareperformancenutrition.com/products/collagen-protein" },
+      { label: "NSF Certified for Sport listing", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1646928" },
+      { label: "Light Labs testing page", href: "https://app.lightlabs.com/comprehensive-testing-report/404/2393" },
+    ],
+  },
 ];
 
 export const UNVERIFIED: UnverifiedProduct[] = [

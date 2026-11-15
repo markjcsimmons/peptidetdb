@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-15",
+    page: "/about, /editorial-policy and /grading-rubric",
+    was: "Said 10 oral peptide products other than collagen had been graded.",
+    now: "Three more were graded on 2026-11-14 (13 in all), and the count was not updated at the time. All three pages now say 13. Found while adding a sixteenth collagen product.",
+  },
+  {
     date: "2026-11-14",
     page: "/peptides/oral-peptides",
     was: "Life Extension Bioactive Milk Peptides scored 13 of 15 on the claims criterion (49/100): its sleep claim lost 2 points, but its stress claim was left unscored as 'not rated for casein'.",

@@ -345,7 +345,7 @@ const TESTING: Record<string, React.ReactNode> = {
       <PaperLink id="bassila-2026" via="doi">
         Bassila 2026
       </PaperLink>
-      ). Collagen supplements are not pre-approved, and test reports vary by brand: of 15 brands we checked, we could read batch
+      ). Collagen supplements are not pre-approved, and test reports vary by brand: of 16 brands we checked, we could read batch
       reports for three (see{" "}
       <Link href="/peptides/best-collagen-peptides" className="link">
         which collagen brands publish batch test results

@@ -59,7 +59,7 @@ export const GRADES_CHECKED_ON = "2026-11-13";
 export type Group = "collagen" | "oral" | "topical";
 /** The page that carries each group's full scoring sheets. */
 export const SHEETS_PAGE: Record<Group, { path: string; title: string }> = {
-  collagen: { path: "/peptides/best-collagen-peptides", title: "best collagen peptides: 15 brands graded" },
+  collagen: { path: "/peptides/best-collagen-peptides", title: "best collagen peptides: 16 brands graded" },
   oral: { path: "/peptides/oral-peptides", title: "oral peptides: do they get absorbed?" },
   topical: { path: "/peptides/best-peptides-for-skin", title: "best peptides for skin (topical products)" },
 };
@@ -141,6 +141,20 @@ const P = {
   orgain: { label: "Orgain product page", href: "https://orgain.com/products/grass-fed-pasture-raised-collagen-peptides" },
   further: { label: "Further Food product page", href: "https://www.furtherfood.com/products/collagen-peptides-powder" },
   ancient: { label: "Ancient Nutrition product page", href: "https://ancientnutrition.com/pages/multi-collagen-100serv2" },
+  bpn: { label: "Bare Performance Nutrition product page", href: "https://www.bareperformancenutrition.com/products/collagen-protein" },
+};
+const BPN_FACTS = {
+  label: "Bare Performance Nutrition Supplement Facts panel (product page image)",
+  href: "https://www.bareperformancenutrition.com/cdn/shop/files/Collagen_8_-_NFP_4cb7845c-0ada-413a-9052-71b8d6fa0aa7.jpg",
+};
+const BPN_LIGHT_LABS = {
+  label: "Light Labs testing page for BPN Collagen Protein (linked from the product page)",
+  href: "https://app.lightlabs.com/comprehensive-testing-report/404/2393",
+};
+const BPN_NSF = { label: "NSF listing: Collagen Protein (Bare Performance Nutrition)", href: "https://www.nsfsport.com/certified-products/listing-detail.php?id=1646928" };
+const BPN_SEARCH = {
+  label: "Bare Performance Nutrition site search: “certificate of analysis”",
+  href: "https://www.bareperformancenutrition.com/search?q=certificate+of+analysis",
 };
 
 const pubmed = (pmid: string, label: string) => ({ label, href: `https://pubmed.ncbi.nlm.nih.gov/${pmid}/` });
@@ -858,6 +872,53 @@ export const GRADES: ProductGrade[] = [
         points: 5,
         note: "Ancient Brands, LLC dba Ancient Nutrition, with a Franklin, Tennessee address, in the terms.",
         sources: [{ label: "Ancient Nutrition terms of use", href: "https://ancientnutrition.com/policies/terms-of-service" }],
+      },
+    },
+  },
+  {
+    id: "bpn-collagen",
+    brand: "Bare Performance Nutrition",
+    product: "Collagen Protein",
+    form: "Bovine collagen peptides with sea salt, powder",
+    group: "collagen",
+    checkedOn: "2026-11-15",
+    documentsCheckedOn: "2026-11-15",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["joints", "tendons", "skin", "hair"],
+    diseaseClaims: false,
+    deductions: [],
+    summary:
+      "Clear single-ingredient label and an NSF Certified for Sport listing; its test results page gives no lot number, so it does not count as a lot report, which caps the band.",
+    scores: {
+      "coa-batch": {
+        points: 0,
+        note: "The product page links a Light Labs testing page with results for samples tested 11 and 12 December 2025 (protein 22.4 g; arsenic, cadmium, lead and mercury below the stated detection levels; gluten not detected; microbes within limits). It gives no lot number, so a buyer cannot match it to a container, and limits are described only as “set by Bare Performance Nutrition”. A site search for “certificate of analysis” found no lot reports.",
+        sources: [BPN_LIGHT_LABS, P.bpn, BPN_SEARCH],
+      },
+      "coa-lab": NO_LOT(BPN_LIGHT_LABS),
+      "coa-numbers": NO_LOT(BPN_LIGHT_LABS),
+      "coa-contaminants": NO_LOT(BPN_LIGHT_LABS),
+      certification: {
+        points: 8,
+        note: "“Collagen Protein” by Bare Performance Nutrition is in NSF's Certified for Sport list (lot: all), with the same 22.2 g scoop, 20 g protein and 80 calories as the label.",
+        sources: [BPN_NSF, NSF_SPORT_LIST],
+      },
+      amount: { points: 8, note: "22 g of grass-fed hydrolysed bovine collagen per 22.2 g scoop (20 g protein).", sources: [BPN_FACTS, P.bpn] },
+      source: { points: 4, note: "Grass-fed bovine collagen peptides; the page's FAQ says the collagen comes from bovine hide.", sources: [P.bpn] },
+      allergen: NO_ALLERGEN(BPN_FACTS, "bovine collagen and pink Himalayan sea salt"),
+      blend: { points: 6, note: "One active ingredient with its amount; the only other ingredient is salt.", sources: [BPN_FACTS] },
+      "claims-match": {
+        points: 11,
+        note: "Claims joint and ligament health and joint comfort (joints mixed; ligaments rated with tendons, limited, −2), skin structure and appearance (consistent), and healthy hair (limited, −2) and nails (not rated). A general line that collagen supports connective tissue “including skin, joints, and bones” is not counted as a bone claim for the product.",
+        sources: [P.bpn, TOPIC.joints, TOPIC.skin, TOPIC.hair],
+      },
+      "dose-match": NONE_CITED(P.bpn),
+      "cites-real": NONE_CITED(P.bpn),
+      category: SUPPLEMENT(P.bpn),
+      identity: {
+        points: 5,
+        note: "Bare Performance Nutrition, LLC, with a Round Rock, Texas address, telephone number and support email, in the terms of service.",
+        sources: [{ label: "Bare Performance Nutrition terms of service", href: "https://www.bareperformancenutrition.com/policies/terms-of-service" }],
       },
     },
   },

@@ -19,7 +19,7 @@ const sections: { h: string; body: React.ReactNode }[] = [
         unapproved compounds sold for injury recovery or performance, plus the regulatory picture for the latter.
         Products are graded with the rubric at /grading-rubric (version 1.0 confirmed 13 November 2026, now version 1.1), which was
         published as a draft before any product was graded. Grades score public documentation and claims, not whether a
-        product works. Grades for 15 collagen products are at /peptides/best-collagen-peptides and for 10 other oral
+        product works. Grades for 16 collagen products are at /peptides/best-collagen-peptides and for 13 other oral
         peptide products, including Pürblack&rsquo;s eight, at /peptides/oral-peptides, and for 7 peptide creams and serums at
         /peptides/best-peptides-for-skin, each with a scoring sheet that links the source for every point.
       </p>

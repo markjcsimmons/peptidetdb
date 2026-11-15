@@ -17,11 +17,14 @@ import {
 } from "@/lib/product-checks";
 
 export const metadata: Metadata = {
-  title: "Best collagen peptides: 15 brands graded",
+  title: "Best collagen peptides: 16 brands graded",
   description:
-    "Looking for the best collagen peptides? We graded 15 brands out of 100 on batch lab reports, certification listings, labels and claims, with a scoring sheet for each. It does not rank effectiveness.",
+    "Looking for the best collagen peptides? We graded 16 brands out of 100 on batch lab reports, certification listings, labels and claims, with a scoring sheet for each. It does not rank effectiveness.",
   alternates: { canonical: "/peptides/best-collagen-peptides" },
 };
+
+/** Latest date any collagen product was checked (Bare Performance Nutrition was added after the first fifteen). */
+const LATEST_CHECK = ranked("collagen").map((g) => g.checkedOn).sort().at(-1)!;
 
 const NSF_SUPPLEMENT_PAGE = "https://www.nsf.org/consumer-resources/articles/supplement-vitamin-certification";
 const NSF_SPORT_PAGE = "https://www.nsfsport.com/our-mark.php";
@@ -29,7 +32,7 @@ const NSF_SPORT_PAGE = "https://www.nsfsport.com/our-mark.php";
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What is the best collagen peptide supplement?",
-    a: "No study has compared brands, so no one can say which works best. Human trials of collagen peptides test a collagen preparation, not a brand. What we can check is documentation. Of 15 brands graded on 13 November 2026, Momentous (86 of 100), Puori (81) and Transparent Labs (80) scored highest, and they were the only three that publish lab reports for the lot you buy.",
+    a: "No study has compared brands, so no one can say which works best. Human trials of collagen peptides test a collagen preparation, not a brand. What we can check is documentation. Of 16 brands graded on 13 and 15 November 2026, Momentous (86 of 100), Puori (81) and Transparent Labs (80) scored highest, and they were the only three that publish lab reports for the lot you buy.",
   },
   {
     q: "Do collagen peptide supplements contain heavy metals?",
@@ -88,7 +91,7 @@ export default function BestCollagenPeptidesPage() {
             {
               "@type": "ListItem",
               position: 3,
-              name: "Best collagen peptides: 15 brands graded",
+              name: "Best collagen peptides: 16 brands graded",
               item: absoluteUrl("/peptides/best-collagen-peptides"),
             },
           ],
@@ -98,22 +101,22 @@ export default function BestCollagenPeptidesPage() {
         <Link href="/peptides" className="link">
           What are peptides?
         </Link>{" "}
-        / Best collagen peptides: 15 brands graded
+        / Best collagen peptides: 16 brands graded
       </nav>
       <PageKindLabel path="/peptides/best-collagen-peptides" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">
-        Best collagen peptides: 15 brands graded
+        Best collagen peptides: 16 brands graded
       </h1>
       <p className="mt-2 text-sm text-muted">
-        Grades checked {formatDate(GRADES_CHECKED_ON)}; lab reports and registries first read {formatDate(COLLAGEN_CHECKED_ON)}.
-        Page last reviewed {formatDate(GRADES_CHECKED_ON)}.
+        Grades checked {formatDate(GRADES_CHECKED_ON)} (Bare Performance Nutrition added {formatDate(LATEST_CHECK)}); lab reports
+        and registries first read {formatDate(COLLAGEN_CHECKED_ON)}. Page last reviewed {formatDate(LATEST_CHECK)}.
       </p>
 
       <ShortAnswer className="mt-6">
         <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
-          We graded 15 collagen brands out of 100 with our published rubric. <strong>Momentous scored highest (86)</strong>,
+          We graded 16 collagen brands out of 100 with our published rubric. <strong>Momentous scored highest (86)</strong>,
           followed by Puori (81) and Transparent Labs (80): the only three that publish lab reports for the lot you buy.
-          Without such a report a product cannot rate above &ldquo;Partly documented&rdquo;, and the other twelve scored 32
+          Without such a report a product cannot rate above &ldquo;Partly documented&rdquo;, and the other thirteen scored 32
           to 64. The grades measure what can be checked, not results: they do not say any brand&rsquo;s collagen works better
           than another&rsquo;s.
         </p>
@@ -395,7 +398,7 @@ export default function BestCollagenPeptidesPage() {
       </section>
 
       <p className="mt-10 text-sm text-muted">
-        {SITE.disclaimer} Lab reports first read {formatDate(COLLAGEN_CHECKED_ON)}; grades checked {formatDate(GRADES_CHECKED_ON)}.
+        {SITE.disclaimer} Lab reports first read {formatDate(COLLAGEN_CHECKED_ON)}; grades checked {formatDate(GRADES_CHECKED_ON)} and {formatDate(LATEST_CHECK)}.
       </p>
     </article>
   );

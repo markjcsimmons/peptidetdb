@@ -45,11 +45,11 @@ export default function GradingRubricPage() {
       <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl">How we grade products</h1>
       <p className="mt-2 text-sm text-muted">
         Version {RUBRIC_VERSION}, updated {formatDate(RUBRIC_DATE)} (first published as a draft {formatDate(RUBRIC_FIRST_PUBLISHED)}; version 1.0 confirmed 13 November 2026; changes are listed below).
-        Graded so far: 15 collagen products, on{" "}
+        Graded so far: 16 collagen products, on{" "}
         <Link href="/peptides/best-collagen-peptides#grades" className="link">
           the collagen page
         </Link>
-        , and 10 other oral peptide products, including Pürblack&rsquo;s eight, on{" "}
+        , and 13 other oral peptide products, including Pürblack&rsquo;s eight, on{" "}
         <Link href="/peptides/oral-peptides#grades" className="link">
           the oral peptides page
         </Link>

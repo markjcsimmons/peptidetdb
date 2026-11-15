@@ -54,11 +54,11 @@ export default function AboutPage() {
             <Link href="/grading-rubric" className="link">
               /grading-rubric
             </Link>
-            , which was published before any product was graded. Grades for 15 collagen products are on{" "}
+            , which was published before any product was graded. Grades for 16 collagen products are on{" "}
             <Link href="/peptides/best-collagen-peptides" className="link">
               the collagen page
             </Link>{" "}
-            and for 10 other oral peptide products, including Pürblack&rsquo;s, on{" "}
+            and for 13 other oral peptide products, including Pürblack&rsquo;s, on{" "}
             <Link href="/peptides/oral-peptides" className="link">
               the oral peptides page
             </Link>
