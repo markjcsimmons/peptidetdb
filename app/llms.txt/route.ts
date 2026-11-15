@@ -88,6 +88,7 @@ export function GET() {
     `- [Editorial policy](${SITE.url}/editorial-policy)`,
     `- [Corrections log](${SITE.url}/corrections)`,
     `- [About and disclosure](${SITE.url}/about)`,
+    `- [Product finder](${SITE.url}/products): every graded over-the-counter peptide and collagen product in one list, with the evidence rating of its ingredient for each benefit claimed, its documentation grade out of 100, how it is taken, what it is made from, and whether it has lot reports or a sport-testing listing. Listing is not a recommendation.`,
     `- [Product-grading rubric](${SITE.url}/grading-rubric): the rules for grading product documentation (version 1.1; first published as a draft before any product was graded).`,
     `- [Study registry as CSV](${SITE.url}/data/studies.csv) and [JSON](${SITE.url}/data/studies.json)`,
     "",

@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/how-to-read-a-peptide-coa", "2026-11-10"),
     stat("/peptides/collagen-peptides", "2026-11-10"),
     stat("/peptides/best-collagen-peptides", GRADES_CHECKED_ON),
+    stat("/products", "2026-11-15"),
     stat("/peptides/best-peptides-for-skin", TOPICS.skin.reviewedOn),
     stat("/peptides/peptides-for-hair-growth", TOPICS.hair.reviewedOn),
     stat("/peptides/peptides-for-joint-pain", TOPICS.joints.reviewedOn),

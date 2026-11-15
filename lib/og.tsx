@@ -150,5 +150,27 @@ export function topicOgImage(slug: Topic) {
   return Card({ eyebrow: "Evidence page", title: t.title, children: <Spread ratings={t.ratings.filter((r) => r.level !== "unassessed")} /> });
 }
 
+/** Card for the product finder: counts only, no product or brand named. */
+export function productsOgImage(products: number, lotReports: number, sportTested: number) {
+  return Card({
+    eyebrow: "Product finder",
+    title: "Peptide products, graded and matched to the evidence",
+    children: (
+      <div style={{ display: "flex", gap: 56 }}>
+        {[
+          [products, "products graded out of 100"],
+          [lotReports, "publish lot reports"],
+          [sportTested, "sport-tested"],
+        ].map(([n, label]) => (
+          <div key={String(label)} style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 72, fontWeight: 700, color: C.accent }}>{String(n)}</div>
+            <div style={{ fontSize: 26, color: C.soft }}>{String(label)}</div>
+          </div>
+        ))}
+      </div>
+    ),
+  });
+}
+
 /** Alt text for a guide's card. */
 export const guideOgAlt = (path: string) => `${guideFor(path).title}: ${KIND_LABEL[guideFor(path).kind].toLowerCase()} on ${SITE.name}`;

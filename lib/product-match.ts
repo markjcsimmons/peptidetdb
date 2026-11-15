@@ -175,6 +175,8 @@ export const CLAIM_EVIDENCE: Record<Ingredient, Partial<Record<ClaimArea, ClaimE
     sleep: { unassessed: "We have read no study of these peptide complexes for sleep." },
     brain: { unassessed: "We have read no study of these peptide complexes for memory or focus." },
     stress: { unassessed: "We have read no study of these peptide complexes for stress." },
+    eye: { unassessed: "We have read no study of these peptide complexes for the eyes." },
+    immune: { unassessed: "We have read no study of these peptide complexes for immune function." },
   },
   "casein-hydrolysate": {
     sleep: { ratings: [["brain", "Casein hydrolysate (Lactium) for sleep"]] },

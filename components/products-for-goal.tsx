@@ -9,8 +9,9 @@ import { EvidenceMeter, levelTone } from "@/components/evidence-meter";
 import { BandPill } from "@/components/product-grades";
 import { DisclosureNote } from "@/components/disclosure-note";
 import { ProductFilter } from "@/components/product-filter";
+import { benefitFor } from "@/lib/product-finder";
 
-const AREA_LABEL: Record<ClaimArea, string> = {
+export const AREA_LABEL: Record<ClaimArea, string> = {
   skin: "Skin",
   joints: "Joints",
   tendons: "Tendons",
@@ -27,13 +28,13 @@ const AREA_LABEL: Record<ClaimArea, string> = {
 };
 
 /** Mixed and limited share a step on this site's scale (see the evidence meter); "not assessed" sorts last. */
-const STEP: Record<Level, number> = { consistent: 0, mixed: 1, limited: 1, preclinical: 2, none: 3, unassessed: 4 };
+export const STEP: Record<Level, number> = { consistent: 0, mixed: 1, limited: 1, preclinical: 2, none: 3, unassessed: 4 };
 
-type Claim =
+export type Claim =
   | { area: ClaimArea; level: Level; href: string; page: string; count: number }
   | { area: ClaimArea; level: "unassessed"; note: string };
 
-function claimsFor(g: ProductGrade, areas: ClaimArea[]): Claim[] {
+export function claimsFor(g: ProductGrade, areas: ClaimArea[]): Claim[] {
   const facts = PRODUCT_FACTS[g.id];
   return areas
     .filter((a) => g.claimAreas.includes(a))
@@ -55,7 +56,7 @@ function claimsFor(g: ProductGrade, areas: ClaimArea[]): Claim[] {
     });
 }
 
-function sportProgramme(g: ProductGrade) {
+export function sportProgramme(g: ProductGrade) {
   if (g.scores.certification.points !== 8) return undefined;
   return /Informed Choice/.test(g.scores.certification.note) ? "Informed Choice" : "NSF Certified for Sport";
 }
@@ -92,6 +93,11 @@ export function ProductsForGoal({
   const hasPurblack = rows.some((x) => isPurblack(x.g));
   const groups = [...new Set(rows.map((x) => x.g.group))];
   const dates = [...new Set(rows.map((x) => x.g.checkedOn))].sort();
+  // Link to the finder with this panel's benefit picked, unless the panel spans more than one benefit (athletes).
+  const panelBenefits = [...new Set(areas.map((a) => benefitFor(a)?.id))];
+  const finderBenefit = panelBenefits.length === 1 ? benefitFor(areas[0]) : undefined;
+  const finderQuery = [finderBenefit && `benefit=${finderBenefit.id}`, sportOnly && "sport=1"].filter(Boolean).join("&");
+  const finderHref = `/products${finderQuery ? `?${finderQuery}` : ""}`;
   const checkedRange =
     dates.length > 1 ? `${formatDate(dates[0])} to ${formatDate(dates[dates.length - 1])} (each sheet gives its date)` : formatDate(dates[0]);
 
@@ -204,6 +210,11 @@ export function ProductsForGoal({
           </span>
         ))}
         . We take no payment or affiliate commission from any brand.
+      </p>
+      <p className="mt-3">
+        <Link href={finderHref} className="link-solo">
+          Compare every graded product in the product finder
+        </Link>
       </p>
     </section>
   );

@@ -9,6 +9,8 @@ import { formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { BeadChainHero } from "@/components/beads";
+import { ALL_GRADES } from "@/lib/grades";
+import { BENEFITS } from "@/lib/product-finder";
 import { DigestionDiagramCompact, SignalDiagramCompact } from "@/components/diagrams";
 import { MeterLegend } from "@/components/evidence-meter";
 import { TopicCard } from "@/components/topic-card";
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
 
 const JUMP = [
   { href: "#goals", label: "By goal" },
+  { href: "#products", label: "Find a product" },
   { href: "#what", label: "What are they?" },
   { href: "#how", label: "How do they work?" },
   { href: "#types", label: "Types" },
@@ -292,6 +295,40 @@ export default function HomePage() {
           <Link href="/peptides/a-z" className="link-solo">
             Peptides A–Z
           </Link>
+        </p>
+      </section>
+
+      {/* Products: the same benefits, leading to the finder with the benefit picked */}
+      <section id="products" className="mt-14 scroll-mt-24 rounded-panel border border-line bg-card p-6 sm:p-8">
+        <SectionHead
+          eyebrow="Products"
+          title="Looking for a product?"
+          intro={`We have graded ${ALL_GRADES.length} over-the-counter peptide and collagen products on their lab reports, labels and claims, and matched each claim to the human evidence for its ingredient. Pick what you want help with.`}
+        />
+        <ul className="mt-6 flex flex-wrap gap-2.5">
+          {BENEFITS.map((b) => (
+            <li key={b.id}>
+              <Link
+                href={`/products?benefit=${b.id}`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-bg px-[18px] text-sm font-medium hover:border-accent"
+              >
+                {b.label}{" "}
+                <span className="tabular-nums text-muted">{ALL_GRADES.filter((g) => b.areas.some((a) => g.claimAreas.includes(a))).length}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <Link href="/products" className="inline-flex min-h-12 items-center rounded-tile bg-accent px-6 font-semibold text-on-accent hover:opacity-90">
+            Open the product finder
+          </Link>
+          <Link href="/grading-rubric" className="link-solo">
+            How we grade products
+          </Link>
+        </p>
+        <p className="mt-4 max-w-prose text-sm text-muted [text-wrap:pretty]">
+          A listing is not a recommendation, and no trial has compared these brands with each other. We take no payment or
+          affiliate commission from any brand. The products include Pürblack&rsquo;s, graded by the same rules.
         </p>
       </section>
 

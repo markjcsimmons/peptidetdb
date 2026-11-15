@@ -30,10 +30,10 @@ export const SITE = {
 
 export const NAV = [
   { href: "/peptides/by-goal", label: "By goal" },
+  { href: "/products", label: "Products" },
   { href: "/peptides/a-z", label: "Peptides A–Z" },
   { href: "/science", label: "Studies" },
   { href: "/peptides/legal-status", label: "Legal status" },
-  { href: "/science/methodology", label: "Methodology" },
 ];
 
 export const FOOTER_LINKS = [
