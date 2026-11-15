@@ -880,6 +880,19 @@ const TOPIC2 = {
   immune: { label: "Immune evidence", href: "/science/topics/immune" },
 };
 
+// batch 4 sources (checked 2026-11-14)
+const NF = { label: "Natural Factors product page", href: "https://naturalfactors.com/products/peptace-fish-peptides" };
+const NF_SEARCH = { label: "Natural Factors site search: “certificate of analysis”", href: "https://naturalfactors.com/search?q=certificate+of+analysis" };
+const NF_TERMS = { label: "Natural Factors terms of service", href: "https://naturalfactors.com/policies/terms-of-service" };
+const NF_CONTACT = { label: "Natural Factors contact page", href: "https://naturalfactors.com/pages/contact" };
+const BR = { label: "Biotics Research product page", href: "https://shop.bioticsresearch.com/collections/all-products-a-z/products/de-stress" };
+const BR_FACTS = { label: "Biotics Research Supplement Facts panel (product page image)", href: "https://shop.bioticsresearch.com/cdn/shop/files/7707-suppfacts.png" };
+const BR_ISO = { label: "Biotics Research ISO accreditation page", href: "https://www.bioticsresearch.com/iso-accreditation" };
+const BR_CONTACT = { label: "Biotics Research contact page", href: "https://www.bioticsresearch.com/contact-us" };
+const PE = { label: "Pure Encapsulations product page", href: "https://www.pureencapsulationspro.com/sereniten-plus-45.html" };
+const PE_TERMS = { label: "Pure Encapsulations terms of use", href: "https://www.pureencapsulationspro.com/terms-of-use" };
+const PE_CONTACT = { label: "Pure Encapsulations contact page", href: "https://www.pureencapsulationspro.com/contact" };
+
 /** The parts every Pürblack sheet shares; each product overrides what differs. */
 function purblack(o: {
   id: string;
@@ -1281,8 +1294,8 @@ export const ORAL_GRADES: ProductGrade[] = [
       allergen: { points: 5, note: "“Contains milk (casein decapeptide).”", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
       blend: { points: 6, note: "Single active ingredient.", sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }] },
       "claims-match": {
-        points: 13,
-        note: "Claims restful sleep (casein hydrolysate for sleep: limited, −2) and a healthy stress response and cortisol (not rated for casein).",
+        points: 11,
+        note: "Claims restful sleep (casein hydrolysate for sleep: limited, −2) and a healthy stress response and cortisol (food-derived peptides and stress: limited, −2). Corrected 14 November 2026: the stress claim was first left unscored, unlike the same claim on other products.",
         sources: [{ label: "Life Extension product page", href: "https://www.lifeextension.com/vitamins-supplements/item01512/bioactive-milk-peptides" }, TOPIC2.brain],
       },
       "dose-match": {
@@ -1342,6 +1355,145 @@ export const ORAL_GRADES: ProductGrade[] = [
         points: 5,
         note: "Metagenics, LLC, with a Jersey City address and a support route, on the product page.",
         sources: [{ label: "Metagenics product page", href: "https://www.metagenics.com/en-us/product/vasotensin" }],
+      },
+    },
+  },
+  // ---------- batch 4 (checked 2026-11-14): more oral peptide products for the thin goal pages ----------
+  {
+    id: "natural-factors-peptace",
+    brand: "Natural Factors",
+    product: "PeptACE Fish Peptides",
+    form: "Capsule: 500 mg bonito fish protein extract (85% peptides)",
+    group: "oral",
+    checkedOn: "2026-11-14",
+    documentsCheckedOn: "2026-11-14",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["blood-pressure"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Clear single-ingredient label with the fish declared, but no public lot report or certification listing, and “studies have shown” without naming a study.",
+    scores: {
+      "coa-batch": { points: 0, note: "No public lot report found; a search of the maker's site for “certificate of analysis” returns nothing.", sources: [NF, NF_SEARCH] },
+      "coa-lab": NO_LOT(NF),
+      "coa-numbers": NO_LOT(NF),
+      "coa-contaminants": NO_LOT(NF),
+      certification: { points: 0, note: "No sport or contents certification listing found (NSF/ANSI 173 search for “Natural Factors”: no matching products).", sources: [nsf173("Natural Factors")] },
+      amount: { points: 8, note: "500 mg of PeptACE fish (bonito) protein extract per capsule, stated as 85% peptides; 1 to 3 capsules a day.", sources: [NF] },
+      source: { points: 4, note: "Bonito fish.", sources: [NF] },
+      allergen: { points: 5, note: "“Contains bonito fish.”", sources: [NF] },
+      blend: { points: 6, note: "Single active ingredient.", sources: [NF] },
+      "claims-match": {
+        points: 13,
+        note: "Claims to help maintain healthy blood pressure already within the normal range (fish peptides and blood pressure: limited, −2).",
+        sources: [NF, TOPIC2.bp],
+      },
+      "dose-match": { points: 2, note: "“Studies have shown that PeptACE helps maintain healthy blood pressure” names no study, so the dose cannot be compared.", sources: [NF] },
+      "cites-real": { points: 2, note: "An appeal to studies without naming them, so a reader cannot find them.", sources: [NF] },
+      category: { points: 5, note: "Sold as a dietary supplement, with the FDA statement in the site footer.", sources: [NF] },
+      identity: {
+        points: 5,
+        note: "Natural Factors Nutritional Products Ltd., with a Monroe, Washington address and a customer-service email, in the terms of service; a contact form covers product complaints.",
+        sources: [NF_TERMS, NF_CONTACT],
+      },
+    },
+  },
+  {
+    id: "biotics-de-stress",
+    brand: "Biotics Research",
+    product: "De-Stress Peptides",
+    form: "Capsule: 150 mg casein hydrolysate (Lactium)",
+    group: "oral",
+    checkedOn: "2026-11-14",
+    documentsCheckedOn: "2026-11-14",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["sleep", "stress"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Clear label at the dose of the main human trial and milk declared, but no public lot report, and its research appeal names no study.",
+    scores: {
+      "coa-batch": {
+        points: 0,
+        note: "No public lot report. The page says every product is tested in the company's in-house lab, which holds ISO/IEC 17025 accreditation from ANAB for heavy metals, minerals, vitamins and coenzyme Q10, but no report for this product is published.",
+        sources: [BR, BR_ISO],
+      },
+      "coa-lab": NO_LOT(BR),
+      "coa-numbers": NO_LOT(BR),
+      "coa-contaminants": NO_LOT(BR),
+      certification: { points: 0, note: "No sport or contents certification listing found (NSF/ANSI 173 search for “Biotics”: no matching products); the gluten-free mark is not counted.", sources: [nsf173("Biotics")] },
+      amount: { points: 8, note: "150 mg of De-Stress hydrolysate (hydrolysed casein concentrate) per capsule, one a day.", sources: [BR_FACTS] },
+      source: { points: 4, note: "Casein from milk (Lactium, a milk protein hydrolysate).", sources: [BR] },
+      allergen: { points: 5, note: "“Contains ingredients derived from milk.”", sources: [BR_FACTS] },
+      blend: { points: 6, note: "Single active ingredient.", sources: [BR_FACTS] },
+      "claims-match": {
+        points: 11,
+        note: "Claims a healthy stress response and calmness (food-derived peptides and stress: limited, −2) and restorative sleep (casein hydrolysate for sleep: limited, −2). The label also says the decapeptide has “anxiolytic activity”, a drug-class word, with the FDA statement beside it.",
+        sources: [BR, BR_FACTS, TOPIC2.brain],
+      },
+      "dose-match": {
+        points: 2,
+        note: "The page says the decapeptide has “demonstrated affinity for GABA-A receptors” without naming a study, so nothing can be compared.",
+        sources: [BR],
+      },
+      "cites-real": { points: 2, note: "An appeal to research without naming it, so a reader cannot find it.", sources: [BR] },
+      category: { points: 5, note: "Sold as a dietary supplement, with the FDA statement on the label and in the site footer.", sources: [BR_FACTS] },
+      identity: {
+        points: 5,
+        note: "Biotics Research Corporation, with a Rosenberg, Texas address, phone numbers and an email address, on the contact page.",
+        sources: [BR_CONTACT],
+      },
+    },
+  },
+  {
+    id: "pure-sereniten-plus",
+    brand: "Pure Encapsulations",
+    product: "Sereniten Plus",
+    form: "Capsule: 175 mg casein hydrolysate (Lactium), 50 mg L-theanine, vitamin D",
+    group: "oral",
+    checkedOn: "2026-11-14",
+    documentsCheckedOn: "2026-11-14",
+    rubricVersion: RUBRIC_VERSION,
+    claimAreas: ["sleep", "stress", "brain"],
+    diseaseClaims: false,
+    deductions: [],
+    summary: "Every amount and the milk source are on the label, but there is no public lot report, and one cited sleep paper is not in PubMed.",
+    scores: {
+      "coa-batch": { points: 0, note: "No public lot report found on the product page.", sources: [PE] },
+      "coa-lab": NO_LOT(PE),
+      "coa-numbers": NO_LOT(PE),
+      "coa-contaminants": NO_LOT(PE),
+      certification: {
+        points: 0,
+        note: "No sport or contents certification listing found for this product (NSF/ANSI 173 search for “Pure Encapsulations”: no matching products).",
+        sources: [nsf173("Pure Encapsulations")],
+      },
+      amount: { points: 8, note: "Lactium 175 mg, L-theanine 50 mg and vitamin D 2.5 mcg per capsule.", sources: [PE] },
+      source: { points: 4, note: "Lactium from the hydrolysis of milk casein, from cows in France.", sources: [PE] },
+      allergen: {
+        points: 5,
+        note: "The label says “Contains milk”. (The page's general “free from … dairy” panel is the brand's standard wording and does not fit this product.)",
+        sources: [PE],
+      },
+      blend: { points: 6, note: "Every active ingredient listed with its amount.", sources: [PE] },
+      "claims-match": {
+        points: 9,
+        note: "Claims to moderate occasional stress (food-derived peptides and stress: limited, −2), support restful sleep (casein hydrolysate for sleep: limited, −2) and cognitive function (memory: limited, −2), plus mood and cardiovascular function (not rated). Immune and vitamin D claims are made for the other ingredients and not scored.",
+        sources: [PE, TOPIC2.brain],
+      },
+      "dose-match": {
+        points: 3,
+        note: "The 30-day stress trial it cites used 150 mg a day, close to the 175 mg capsule; another cited human study gave 1,200 mg over one day.",
+        sources: [pubmed("17136040", "Kim 2007 (150 mg/day)"), pubmed("15517308", "Messaoudi 2005")],
+      },
+      "cites-real": {
+        points: 0,
+        note: "Most references can be found, and the page says where results come from animals. But the sleep claim cites Saint-Hilaire et al., The Open Sleep Journal 2009, which we could not find in PubMed.",
+        sources: [PE, { label: "PubMed search: Saint-Hilaire Z, 2009", href: "https://pubmed.ncbi.nlm.nih.gov/?term=Saint-Hilaire+Z%5Bau%5D+AND+2009%5Bdp%5D" }],
+      },
+      category: { points: 5, note: "Sold as a dietary supplement, with the FDA statement on the label.", sources: [PE] },
+      identity: {
+        points: 5,
+        note: "Pure Encapsulations, LLC, with a Sudbury, Massachusetts address in the terms of use, and a contact form with a quality-complaint option.",
+        sources: [PE_TERMS, PE_CONTACT],
       },
     },
   },

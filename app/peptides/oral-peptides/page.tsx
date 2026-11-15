@@ -570,13 +570,13 @@ export default function OralPeptidesPage() {
       <section id="grades" className="mt-14 scroll-mt-6">
         <h2 className="text-3xl font-bold leading-[1.15]">Oral peptide products, graded</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          The ranking above rates ingredients. Here we grade products: Pürblack&rsquo;s eight peptide capsules and two other
-          oral peptide supplements, a milk-peptide capsule (Lactium) and a bonito-fish tablet, each scored out of 100 with
-          our{" "}
+          The ranking above rates ingredients. Here we grade products: Pürblack&rsquo;s eight peptide capsules and five other
+          oral peptide supplements (three milk-peptide capsules containing Lactium and two bonito-fish products), each scored
+          out of 100 with our{" "}
           <Link href="/grading-rubric" className="link">
             published rubric
           </Link>{" "}
-          on {formatDate(GRADES_CHECKED_ON)}. Pürblack is graded by exactly the same rules as everyone else; the
+          on {formatDate(GRADES_CHECKED_ON)} or, for the three added later, on {formatDate("2026-11-14")}. Pürblack is graded by exactly the same rules as everyone else; the
           disclosure above applies. A grade is about what can be checked, not whether a product works. Collagen products are
           graded on{" "}
           <Link href="/peptides/best-collagen-peptides#grades" className="link">

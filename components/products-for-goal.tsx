@@ -3,7 +3,7 @@ import Link from "next/link";
 import { formatDate } from "@/lib/format";
 import { LEVEL_LABEL, TOPICS, type Level } from "@/lib/topics";
 import { TOPIC_LABEL } from "@/lib/studies";
-import { ALL_GRADES, GRADES_CHECKED_ON, SHEETS_PAGE, isPurblack, result, type ClaimArea, type ProductGrade } from "@/lib/grades";
+import { ALL_GRADES, SHEETS_PAGE, isPurblack, result, type ClaimArea, type ProductGrade } from "@/lib/grades";
 import { CLAIM_EVIDENCE, INGREDIENT_LABEL, PRODUCT_FACTS, PRODUCT_URL } from "@/lib/product-match";
 import { EvidenceMeter, levelTone } from "@/components/evidence-meter";
 import { BandPill } from "@/components/product-grades";
@@ -91,6 +91,9 @@ export function ProductsForGoal({
   if (rows.every((x) => isPurblack(x.g))) throw new Error(`products-for-goal: "${title}" would list only Pürblack products`);
   const hasPurblack = rows.some((x) => isPurblack(x.g));
   const groups = [...new Set(rows.map((x) => x.g.group))];
+  const dates = [...new Set(rows.map((x) => x.g.checkedOn))].sort();
+  const checkedRange =
+    dates.length > 1 ? `${formatDate(dates[0])} to ${formatDate(dates[dates.length - 1])} (each sheet gives its date)` : formatDate(dates[0]);
 
   return (
     <section className="mt-14 rounded-panel border border-line bg-card p-6 sm:p-8" aria-labelledby="products-heading">
@@ -137,7 +140,8 @@ export function ProductsForGoal({
                     rel="nofollow noopener noreferrer"
                     className="link mt-1.5 inline-block text-sm"
                   >
-                    {g.brand}&rsquo;s product page<span aria-hidden> ↗</span>
+                    {g.brand}
+                    {g.brand.endsWith("s") ? "’" : "’s"} product page<span aria-hidden> ↗</span>
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>{" "}
                   {sport && (
@@ -188,7 +192,7 @@ export function ProductsForGoal({
       />
 
       <p className="mt-4 text-sm text-muted [text-wrap:pretty]">
-        Grades checked {formatDate(GRADES_CHECKED_ON)}. Select a product for its full scoring sheet, with the points, what we
+        Grades checked {checkedRange}. Select a product for its full scoring sheet, with the points, what we
         found and a source for every criterion; select a rating for the studies behind it. Product page links go to each
         maker&rsquo;s own site, with no affiliate codes. Full sheets:{" "}
         {groups.map((gr, i) => (

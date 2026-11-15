@@ -16,6 +16,12 @@ export type Correction = {
 export const CORRECTIONS: Correction[] = [
   {
     date: "2026-11-14",
+    page: "/peptides/oral-peptides",
+    was: "Life Extension Bioactive Milk Peptides scored 13 of 15 on the claims criterion (49/100): its sleep claim lost 2 points, but its stress claim was left unscored as 'not rated for casein'.",
+    now: "Our scoring rules rate food-derived peptides for stress as limited, and other products (Pürblack's Brain AM and Brain PM) had lost 2 points for the same claim. The stress claim now costs 2 points as well, so the product scores 11 (47/100, still 'Partly documented'). Found while grading three more oral peptide products.",
+  },
+  {
+    date: "2026-11-14",
     page: "/peptides/a-z",
     was: "The note at the foot of the A–Z list gave semax as an example of a peptide we had not yet summarised any study for.",
     now: "Semax studies were added on 2026-11-13 and semax has been in the list since then, so the example was out of date. The note now gives IGF-1 LR3, for which we have no study summaries.",
