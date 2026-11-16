@@ -28,7 +28,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Peptide products graded: filter by benefit",
-  description: `${ALL_GRADES.length} peptide and collagen products graded out of 100 on lab reports, certification, label and claims. Filter by the benefit claimed, how you take it, what it is made from and testing.`,
+  description: `Compare ${ALL_GRADES.length} peptide and collagen products, each graded out of 100 for lab reports, certification, labelling and claims. Filter by benefit, form, source and testing.`,
   alternates: { canonical: "/products" },
 };
 
@@ -41,15 +41,15 @@ const names = (list: typeof GRADED) => list.map((g) => `${g.brand} ${g.product}`
 const FAQ: { q: string; a: string }[] = [
   {
     q: "Which peptide supplements publish a lab report for the lot you buy?",
-    a: `Of the ${GRADED.length} products we graded, ${LOT.length} publish reports for individual lots: ${names(LOT)}. What the reports cover differs: some give the amount of the active ingredient with limits, others only microbes and heavy metals with no identity or content result. Each scoring sheet says what we found.`,
+    a: `Of the ${GRADED.length} products we graded, ${LOT.length} publish a lab report for each lot: ${names(LOT)}. The reports vary. Some state how much of the active ingredient is present and the range it should fall in; others cover only microbes and heavy metals, and do not confirm what the ingredient is or how much there is. Each scoring sheet says what we found.`,
   },
   {
     q: "Which peptide supplements are tested for substances banned in sport?",
-    a: `${SPORT.length} of the products we graded are listed in a sport-testing programme's own directory (NSF Certified for Sport or Informed Choice): ${names(SPORT)}. A listing reduces the risk of a banned substance; it does not show that the product works.`,
+    a: `Of the products we graded, ${SPORT.length} appear in a sport-testing programme's own directory (NSF Certified for Sport or Informed Choice): ${names(SPORT)}. A listing lowers the risk that a product contains a banned substance. It does not show that the product works.`,
   },
   {
     q: "Which peptide product works best?",
-    a: "No trial has compared these products with each other. Trials test an ingredient, such as collagen peptides, not a brand. Each product here shows how strong the human evidence is for its ingredient and the benefit claimed, and how well the maker documents the product.",
+    a: "No trial has compared these products with each other. Trials test an ingredient, such as collagen peptides, not a brand. For each product we show how strong the human evidence is for its ingredient and the benefit claimed, and how well the maker documents what it sells.",
   },
 ];
 
@@ -94,7 +94,7 @@ function Row({ id }: { id: string }) {
       <div>
         <span className="sr-only">Evidence for its claims: </span>
         {claims.length === 0 ? (
-          <span className="text-sm text-muted">No claim for its peptide or collagen ingredients in an area we rate.</span>
+          <span className="text-sm text-muted">Makes no claim for its peptide or collagen ingredients that we rate.</span>
         ) : (
           <ul className="flex flex-col gap-2">
             {claims.map((c) => (
@@ -187,36 +187,37 @@ export default function ProductsPage() {
         Peptide products, graded and matched to the evidence
       </h1>
       <p className="mt-2 text-sm text-muted">
-        {GRADED.length} products. Grades checked {formatDate(DATES[0])} to {formatDate(DATES[DATES.length - 1])}; each scoring sheet
-        gives its date.
+        Graded {formatDate(DATES[0])} to {formatDate(DATES[DATES.length - 1])}. Each scoring sheet shows its own date.
       </p>
       <p className="mt-6 max-w-prose text-lg text-soft [text-wrap:pretty]">
-        Every over-the-counter peptide or collagen product we have graded, in one place. Pick the benefit you care about,
-        then narrow by how you take it, what it is made from and how it is tested. Each product shows two separate things:
+        All {GRADED.length} peptide and collagen products we have graded, on one list. Start with what you want a product
+        for, then narrow the list by how you take it, what it is made from and how it is tested. Each product has two
+        separate ratings:
       </p>
       <ul className="mt-4 grid max-w-4xl gap-3 sm:grid-cols-2">
         <li className={`${CARD} !p-5`}>
-          <strong className="block">Evidence for the claim</strong>{" "}
+          <strong className="block">Evidence behind the claim</strong>{" "}
           <span className="mt-1 block text-sm text-soft [text-wrap:pretty]">
-            How strong the human studies are for the product&rsquo;s <em>ingredient</em> and each benefit its maker claims,
-            from our evidence pages. No trial has tested these brands against each other.
+            How strong the human research is for the product&rsquo;s <em>ingredient</em>, for each benefit the maker
+            claims. The ratings come from our evidence pages; no trial has compared these brands with each other.
           </span>
         </li>
         <li className={`${CARD} !p-5`}>
           <strong className="block">Documentation grade</strong>{" "}
           <span className="mt-1 block text-sm text-soft [text-wrap:pretty]">
-            How well the maker documents the product, out of 100, with our{" "}
+            A score out of 100 for how well the maker backs up what it sells: lab reports, certification, the label, its
+            claims and company details, scored with our{" "}
             <Link href="/grading-rubric" className="link">
               published rubric
             </Link>
-            : lab reports, certification, label, claims and company details. It is not a measure of whether it works.
+            . It does not tell you whether the product works.
           </span>
         </li>
       </ul>
-      <DisclosureNote>Pürblack products are listed and graded by the same published rules as every other product.</DisclosureNote>
+      <DisclosureNote>Pürblack products are graded by the same published rules as every other product.</DisclosureNote>
       <p className="mt-3 max-w-prose text-sm text-muted [text-wrap:pretty]">
-        All of these are sold over the counter as dietary supplements or cosmetics. We do not list prescription drugs or
-        unapproved injectable peptides; see{" "}
+        Everything here is sold over the counter as a dietary supplement or a cosmetic. Prescription drugs and unapproved
+        injectable peptides are not included; for those, see{" "}
         <Link href="/peptides/legal-status" className="link">
           legal status
         </Link>{" "}
@@ -224,7 +225,7 @@ export default function ProductsPage() {
         <Link href="/peptides/for-weight-loss" className="link">
           weight-loss peptides
         </Link>
-        . Listing is not a recommendation, and we take no payment or affiliate commission from any brand.
+        . Being listed is not a recommendation, and the site takes no payment or affiliate commission from any brand.
       </p>
 
       <ProductFinder
@@ -238,31 +239,36 @@ export default function ProductsPage() {
         <h2 className="text-3xl font-bold leading-[1.15]">How to read the list</h2>
         <ul className="mt-4 list-disc space-y-2 pl-6 text-soft [text-wrap:pretty]">
           <li>
-            <strong className="text-fg">Evidence comes first when you pick a benefit.</strong> Products are ordered by the
-            strongest rating among their claims for that benefit, then by grade. &ldquo;Mixed&rdquo; and
-            &ldquo;limited&rdquo; share a step on our scale. &ldquo;Not assessed&rdquo; means we have read no study of that
-            ingredient for that benefit; it sorts last.
+            <strong className="text-fg">Pick a benefit and the evidence comes first.</strong> Products are sorted by the
+            best rating among their claims for that benefit, then by grade. &ldquo;Mixed&rdquo; and &ldquo;limited&rdquo;
+            count as the same step on our scale. &ldquo;Not assessed&rdquo; means we have not read any study of that
+            ingredient for that benefit, so those products go to the bottom.
           </li>
           <li>
-            <strong className="text-fg">A grade without a lot report stops at &ldquo;Partly documented&rdquo;.</strong>{" "}
-            Only a report for the lot you buy shows what is in your container. Certification listings are checked in the
-            certifier&rsquo;s own directory.
+            <strong className="text-fg">
+              Without a lot report, the best a product can score is &ldquo;Partly documented&rdquo;.
+            </strong>{" "}
+            Only a lab report for the batch you buy shows what is actually in your container. We check every certification
+            in the certifier&rsquo;s own directory.
           </li>
           <li>
-            <strong className="text-fg">&ldquo;Made from&rdquo; matters for allergies.</strong> Fish, milk and some mixed
-            collagens can matter if you have a food allergy. &ldquo;Not stated&rdquo; means the label does not say.
+            <strong className="text-fg">Check &ldquo;Made from&rdquo; if you have a food allergy.</strong> Fish and milk
+            are common allergens, and multi-source collagens may include fish or egg. &ldquo;Not stated&rdquo; means the
+            label does not say.
           </li>
           {SINGLE_MAKER_BENEFITS.length > 0 && (
             <li>
-              <strong className="text-fg">Not in the benefit filter:</strong>{" "}
-              {SINGLE_MAKER_BENEFITS.map((b) => b.label.toLowerCase()).join(" and ")}. We have graded products from only
-              one maker (Pürblack) that claim these, so a filter would list one company&rsquo;s products alone. They are
-              still in the full list, and we will add the filter when other makers&rsquo; products are graded.
+              <strong className="text-fg">
+                Why there is no filter for {SINGLE_MAKER_BENEFITS.map((b) => b.label.toLowerCase()).join(" or ")}.
+              </strong>{" "}
+              The only graded products that claim these come from one maker, Pürblack, so the filter would show a single
+              company&rsquo;s products. They are still in the full list, and the filter will be added once we grade
+              products from other makers.
             </li>
           )}
         </ul>
         <p className="mt-4 text-soft [text-wrap:pretty]">
-          Full scoring sheets:{" "}
+          Full scoring sheets for every product:{" "}
           {groups.map((gr, i) => (
             <span key={gr}>
               {i > 0 && "; "}

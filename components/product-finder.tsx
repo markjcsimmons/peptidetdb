@@ -173,13 +173,13 @@ export function ProductFinder({
             </strong>{" "}
             {benefit ? (
               <>
-                Ordered by the evidence for {benefit.label.toLowerCase()} (strongest first), then by documentation grade.{" "}
+                Strongest evidence for {benefit.label.toLowerCase()} first, then highest grade.{" "}
                 <a href={benefit.guide} className="link">
                   {benefit.guideTitle}
                 </a>
               </>
             ) : (
-              "Ordered by documentation grade. Pick a benefit to order by the evidence for it."
+              "Highest grade first. Pick a benefit to put the best-supported products first."
             )}
           </p>
           {active && (
