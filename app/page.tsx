@@ -3,7 +3,7 @@ import Link from "next/link";
 import { GOALS, GoalBoard } from "@/components/guide-links";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
-import { TOPICS, TOPIC_SLUGS } from "@/lib/topics";
+import { TOPIC_SLUGS } from "@/lib/topics";
 import { COMMITTEE, LEGAL_REVIEWED } from "@/lib/legal-status";
 import { formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
@@ -13,6 +13,7 @@ import { BENEFITS } from "@/lib/product-finder";
 import { HorizontalTimeline } from "@/components/timeline";
 import { CARD, SectionHead } from "@/components/ui";
 import { SearchTrigger } from "@/components/site-search";
+import { LATEST_UPDATE, recent, summarise } from "@/lib/updates";
 
 // Title and description come from the layout defaults; this adds the canonical so ?utm= and other
 // variants of the homepage are not treated as separate pages.
@@ -66,7 +67,8 @@ const BASICS: { q: string; a: React.ReactNode; href: string; more: string }[] = 
 ];
 
 /** Latest date any study or evidence topic was checked: the "Updated" line in the hero. */
-const UPDATED = [...STUDIES.map((x) => x.verifiedOn), ...TOPIC_SLUGS.map((t) => TOPICS[t].reviewedOn)].sort().at(-1)!;
+/** The latest week of updates, for the "Latest" line under the evidence board. */
+const LATEST = recent(7);
 
 const FAQ: { q: string; text: string; a: React.ReactNode }[] = [
   {
@@ -194,7 +196,11 @@ export default function HomePage() {
               <strong className="tabular-nums text-fg">{GOALS.length}</strong> goals ranked
             </Link>
           </li>
-          <li>Updated {formatDate(UPDATED)}</li>
+          <li>
+            <Link href="/whats-new" className="link">
+              Updated {formatDate(LATEST_UPDATE)}
+            </Link>
+          </li>
         </ul>
         <p className="mt-5 max-w-[44rem] text-sm leading-relaxed text-muted">{SITE.disclosure}</p>
       </section>
@@ -219,6 +225,37 @@ export default function HomePage() {
           <Link href="/science/methodology" className="link-solo">
             How ratings are set
           </Link>
+        </p>
+      </section>
+
+      {/* Latest updates: a reason to come back */}
+      <section aria-labelledby="latest" className="mt-10 rounded-card border border-line bg-card p-5 sm:p-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h2 id="latest" className="text-xl font-bold">
+            Latest updates
+          </h2>
+          <p className="text-sm text-muted">Week to {formatDate(LATEST_UPDATE)}</p>
+        </div>
+        <p className="mt-1 text-sm text-soft">{summarise(LATEST)}.</p>
+        <ul className="mt-3 grid gap-x-6 gap-y-1 sm:grid-cols-2">
+          {LATEST.filter((u) => u.kind === "page" || u.kind === "grade" || u.kind === "study")
+            .slice(0, 6)
+            .map((u) => (
+              <li key={`${u.kind}-${u.href}-${u.title}`} className="min-w-0 truncate py-1 text-sm">
+                <span className="text-muted">{u.kind === "page" ? "New page" : u.kind === "grade" ? "Graded" : "Study"}:</span>{" "}
+                <Link href={u.href} className="link">
+                  {u.title}
+                </Link>
+              </li>
+            ))}
+        </ul>
+        <p className="mt-3 flex flex-wrap gap-x-6">
+          <Link href="/whats-new" className="link-solo">
+            Everything that&rsquo;s new
+          </Link>
+          <a href="/feed.xml" className="link-solo">
+            RSS feed
+          </a>
         </p>
       </section>
 

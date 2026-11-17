@@ -4,6 +4,7 @@ import { STUDIES } from "@/lib/studies";
 import { TOPICS, TOPIC_SLUGS } from "@/lib/topics";
 import { LEGAL_REVIEWED } from "@/lib/legal-status";
 import { GRADES_CHECKED_ON } from "@/lib/grades";
+import { LATEST_UPDATE } from "@/lib/updates";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const stat = (path: string, lastModified: string): MetadataRoute.Sitemap[number] => ({
@@ -25,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/collagen-peptides", "2026-11-10"),
     stat("/peptides/best-collagen-peptides", GRADES_CHECKED_ON),
     stat("/products", "2026-11-15"),
+    stat("/whats-new", LATEST_UPDATE),
     stat("/peptides/best-peptides-for-skin", TOPICS.skin.reviewedOn),
     stat("/peptides/peptides-for-hair-growth", TOPICS.hair.reviewedOn),
     stat("/peptides/peptides-for-joint-pain", TOPICS.joints.reviewedOn),

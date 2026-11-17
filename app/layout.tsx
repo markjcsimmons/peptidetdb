@@ -25,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${body.variable} ${heading.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <link rel="alternate" type="application/rss+xml" title={`${SITE.name}: what's new`} href="/feed.xml" />
       </head>
       <body>
         <a

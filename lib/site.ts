@@ -39,6 +39,7 @@ export const NAV = [
 ];
 
 export const FOOTER_LINKS = [
+  { href: "/whats-new", label: "What's new" },
   { href: "/about", label: "About" },
   { href: "/editorial-policy", label: "Editorial policy" },
   { href: "/corrections", label: "Corrections" },
