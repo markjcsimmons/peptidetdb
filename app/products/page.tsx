@@ -5,13 +5,14 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { JsonLd } from "@/components/json-ld";
 import { CARD } from "@/components/ui";
 import { DisclosureNote } from "@/components/disclosure-note";
-import { EvidenceMeter, levelTone } from "@/components/evidence-meter";
+import { EvidenceMeter } from "@/components/evidence-meter";
 import { BandPill } from "@/components/product-grades";
-import { AREA_LABEL, STEP, claimsFor, sportProgramme } from "@/components/products-for-goal";
+import { ProductRow, STEP, claimsFor } from "@/components/product-row";
 import { ProductFinder, type FinderRow } from "@/components/product-finder";
-import { ALL_GRADES, SHEETS_PAGE, isPurblack, result, type Group } from "@/lib/grades";
-import { INGREDIENT_LABEL, PRODUCT_FACTS, PRODUCT_URL } from "@/lib/product-match";
-import { LEVEL_LABEL, type Level } from "@/lib/topics";
+import { ALL_GRADES, SHEETS_PAGE, isPurblack, result, type BandLabel, type Group } from "@/lib/grades";
+import { PRODUCT_FACTS } from "@/lib/product-match";
+import { BANDS } from "@/lib/rubric";
+import type { Level } from "@/lib/topics";
 import { guideFor } from "@/lib/guides";
 import {
   BENEFITS,
@@ -53,89 +54,13 @@ const FAQ: { q: string; a: string }[] = [
   },
 ];
 
-/** Short level names for the narrow evidence column; the full name is in the link title and for screen readers. */
-const SHORT: Record<Level, string> = {
-  consistent: "Consistent",
-  mixed: "Mixed",
-  limited: "Limited",
-  preclinical: "Mostly animal",
-  none: "No human trials",
-  unassessed: "Not assessed",
-};
-
-function Row({ id }: { id: string }) {
-  const g = ALL_GRADES.find((x) => x.id === id)!;
-  const f = PRODUCT_FACTS[g.id];
-  const r = result(g);
-  const claims = claimsFor(g, g.claimAreas);
-  const sport = sportProgramme(g);
-  return (
-    <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_17rem_7rem] md:gap-6">
-      <div className="min-w-0">
-        <a href={`${SHEETS_PAGE[g.group].path}#grade-${g.id}`} className="link font-semibold">
-          {g.brand} {g.product}
-        </a>
-        <span className="sr-only">: </span>
-        <span className="mt-1 block text-sm text-muted">
-          {f.format} · {INGREDIENT_LABEL[f.ingredient]} · Source: {f.source}
-        </span>{" "}
-        <span className="mt-2 flex flex-wrap gap-2">
-          {hasLotReport(g) && (
-            <span className="rounded-full bg-accent-soft px-3 py-0.5 text-caption font-semibold text-accent">Lot reports published</span>
-          )}
-          {sport && <span className="rounded-full bg-accent-soft px-3 py-0.5 text-caption font-semibold text-accent">Sport-tested: {sport}</span>}
-        </span>{" "}
-        <a href={PRODUCT_URL[g.id]} target="_blank" rel="nofollow noopener noreferrer" className="link mt-2 inline-block text-sm">
-          {g.brand}
-          {g.brand.endsWith("s") ? "’" : "’s"} product page<span aria-hidden> ↗</span>
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>
-      </div>
-      <div>
-        <span className="sr-only">Evidence for its claims: </span>
-        {claims.length === 0 ? (
-          <span className="text-sm text-muted">Makes no claim for its peptide or collagen ingredients that we rate.</span>
-        ) : (
-          <ul className="flex flex-col gap-2">
-            {claims.map((c) => (
-              <li key={c.area} data-area={c.area} className="grid grid-cols-[6.5rem_minmax(0,1fr)] items-center gap-x-3 text-sm">
-                <span className="text-muted">
-                  {AREA_LABEL[c.area]}
-                  <span className="sr-only">:</span>
-                </span>{" "}
-                {"href" in c ? (
-                  <a href={c.href} className="flex items-center gap-2 hover:underline" title={`${LEVEL_LABEL[c.level]}: rating on our ${c.page} page`}>
-                    <EvidenceMeter level={c.level} size="sm" labelled={false} />
-                    <span className={`font-semibold ${levelTone(c.level) === "warn" ? "text-warn" : "text-accent"}`}>
-                      <span data-md-skip>{SHORT[c.level]}</span>
-                      <span className="sr-only">
-                        {LEVEL_LABEL[c.level]}
-                      </span>
-                    </span>
-                  </a>
-                ) : (
-                  <span className="text-muted" title={"note" in c ? c.note : undefined}>
-                    Not assessed
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div>
-        <span className="sr-only">Documentation grade: </span>
-        <span className="text-2xl font-bold tabular-nums">
-          {r.total}
-          <span className="text-sm font-medium text-muted">/100</span>
-        </span>{" "}
-        <span className="mt-1.5 block">
-          <BandPill band={r.band} />
-        </span>
-      </div>
-    </div>
-  );
-}
+/** Key for the evidence card: one example per step of the meter, in the words the rows use. */
+const EVIDENCE_KEY: { level: Level; label: string }[] = [
+  { level: "consistent", label: "Consistent" },
+  { level: "limited", label: "Mixed or limited" },
+  { level: "preclinical", label: "Mostly animal" },
+  { level: "none", label: "No human trials" },
+];
 
 export default function ProductsPage() {
   const rows: FinderRow[] = GRADED.map((g) => {
@@ -157,7 +82,7 @@ export default function ProductsPage() {
       documented: band === "Documented" || band === "Well documented",
       steps,
       purblack: isPurblack(g),
-      node: <Row id={g.id} />,
+      node: <ProductRow g={g} areas={g.claimAreas} wide />,
     };
   });
   const usedFrom = MADE_FROM_ORDER.filter((m) => rows.some((r) => r.madeFrom === m));
@@ -194,12 +119,20 @@ export default function ProductsPage() {
         for, then narrow the list by how you take it, what it is made from and how it is tested. Each product has two
         separate ratings:
       </p>
-      <ul className="mt-4 grid max-w-4xl gap-3 sm:grid-cols-2">
+      <ul className="mt-5 grid max-w-4xl gap-3 sm:grid-cols-2">
         <li className={`${CARD} !p-5`}>
           <strong className="block">Evidence behind the claim</strong>{" "}
           <span className="mt-1 block text-sm text-soft [text-wrap:pretty]">
             How strong the human research is for the product&rsquo;s <em>ingredient</em>, for each benefit the maker
             claims. The ratings come from our evidence pages; no trial has compared these brands with each other.
+          </span>{" "}
+          {/* A key to the meters; it means nothing without them, so the markdown skips it. */}
+          <span data-md-skip className="mt-4 grid gap-x-4 gap-y-2 border-t border-line pt-4 text-caption text-soft lg:grid-cols-2">
+            {EVIDENCE_KEY.map((k) => (
+              <span key={k.level} className="flex items-center gap-2">
+                <EvidenceMeter level={k.level} size="xs" labelled={false} /> <span className="whitespace-nowrap">{k.label}</span>
+              </span>
+            ))}
           </span>
         </li>
         <li className={`${CARD} !p-5`}>
@@ -211,10 +144,21 @@ export default function ProductsPage() {
               published rubric
             </Link>
             . It does not tell you whether the product works.
-          </span>
+          </span>{" "}
+          <ul aria-label="Grade bands" className="mt-4 grid gap-x-4 gap-y-2 border-t border-line pt-4 text-caption text-soft lg:grid-cols-2">
+            {BANDS.map((b) => (
+              <li key={b.label} className="flex items-center gap-2">
+                <span className="w-12 shrink-0 whitespace-nowrap tabular-nums text-muted">
+                  {b.range.replace(" to ", "–")}
+                  <span className="sr-only">:</span>
+                </span>{" "}
+                <BandPill band={b.label as BandLabel} />
+              </li>
+            ))}
+          </ul>
         </li>
       </ul>
-      <DisclosureNote>Pürblack products are graded by the same published rules as every other product.</DisclosureNote>
+      <DisclosureNote graded />
       <p className="mt-3 max-w-prose text-sm text-muted [text-wrap:pretty]">
         Everything here is sold over the counter as a dietary supplement or a cosmetic. Prescription drugs and unapproved
         injectable peptides are not included; for those, see{" "}

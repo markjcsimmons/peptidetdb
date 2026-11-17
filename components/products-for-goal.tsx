@@ -1,65 +1,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { formatDate } from "@/lib/format";
-import { LEVEL_LABEL, TOPICS, type Level } from "@/lib/topics";
-import { TOPIC_LABEL } from "@/lib/studies";
-import { ALL_GRADES, SHEETS_PAGE, isPurblack, result, type ClaimArea, type ProductGrade } from "@/lib/grades";
-import { CLAIM_EVIDENCE, INGREDIENT_LABEL, PRODUCT_FACTS, PRODUCT_URL } from "@/lib/product-match";
-import { EvidenceMeter, levelTone } from "@/components/evidence-meter";
-import { BandPill } from "@/components/product-grades";
+import { ALL_GRADES, SHEETS_PAGE, isPurblack, result, type ClaimArea } from "@/lib/grades";
+import { PRODUCT_FACTS } from "@/lib/product-match";
 import { DisclosureNote } from "@/components/disclosure-note";
 import { ProductFilter } from "@/components/product-filter";
+import { ProductRow, STEP, claimsFor, sportProgramme } from "@/components/product-row";
 import { benefitFor } from "@/lib/product-finder";
 
-export const AREA_LABEL: Record<ClaimArea, string> = {
-  skin: "Skin",
-  joints: "Joints",
-  tendons: "Tendons",
-  bone: "Bone",
-  hair: "Hair",
-  muscle: "Muscle",
-  gut: "Gut",
-  sleep: "Sleep",
-  brain: "Memory and focus",
-  stress: "Stress",
-  "blood-pressure": "Blood pressure",
-  eye: "Eyes",
-  immune: "Immune function",
-};
-
-/** Mixed and limited share a step on this site's scale (see the evidence meter); "not assessed" sorts last. */
-export const STEP: Record<Level, number> = { consistent: 0, mixed: 1, limited: 1, preclinical: 2, none: 3, unassessed: 4 };
-
-export type Claim =
-  | { area: ClaimArea; level: Level; href: string; page: string; count: number }
-  | { area: ClaimArea; level: "unassessed"; note: string };
-
-export function claimsFor(g: ProductGrade, areas: ClaimArea[]): Claim[] {
-  const facts = PRODUCT_FACTS[g.id];
-  return areas
-    .filter((a) => g.claimAreas.includes(a))
-    .map((area): Claim => {
-      const ev = CLAIM_EVIDENCE[facts.ingredient][area];
-      if (!ev) {
-        throw new Error(
-          `products-for-goal: ${g.id} (${facts.ingredient}) claims ${area} but lib/product-match.ts has no rating or "unassessed" entry for it`,
-        );
-      }
-      if ("unassessed" in ev) return { area, level: "unassessed", note: ev.unassessed };
-      const found = ev.ratings.map(([topic, subject]) => {
-        const i = TOPICS[topic].ratings.findIndex((r) => r.subject === subject);
-        if (i < 0) throw new Error(`products-for-goal: "${subject}" is not a rating on the ${topic} topic page`);
-        return { topic, level: TOPICS[topic].ratings[i].level, href: `/science/topics/${topic}#rating-${i + 1}` };
-      });
-      const best = [...found].sort((a, b) => STEP[a.level] - STEP[b.level])[0];
-      return { area, level: best.level, href: best.href, page: TOPIC_LABEL[best.topic], count: found.length };
-    });
-}
-
-export function sportProgramme(g: ProductGrade) {
-  if (g.scores.certification.points !== 8) return undefined;
-  return /Informed Choice/.test(g.scores.certification.note) ? "Informed Choice" : "NSF Certified for Sport";
-}
+export { AREA_LABEL, STEP, claimsFor, sportProgramme, type Claim } from "@/components/product-row";
 
 /**
  * Products section for a goal page, kept apart from the evidence ranking. Lists every graded product whose seller
@@ -99,108 +48,43 @@ export function ProductsForGoal({
   const finderQuery = [finderBenefit && `benefit=${finderBenefit.id}`, sportOnly && "sport=1"].filter(Boolean).join("&");
   const finderHref = `/products${finderQuery ? `?${finderQuery}` : ""}`;
   const checkedRange =
-    dates.length > 1 ? `${formatDate(dates[0])} to ${formatDate(dates[dates.length - 1])} (each sheet gives its date)` : formatDate(dates[0]);
+    dates.length > 1 ? `${formatDate(dates[0])} to ${formatDate(dates[dates.length - 1])} (each sheet shows its date)` : formatDate(dates[0]);
 
   return (
-    <section className="mt-14 rounded-panel border border-line bg-card p-6 sm:p-8" aria-labelledby="products-heading">
+    <section className="mt-14 rounded-panel border border-line bg-card px-4 py-6 sm:p-8" aria-labelledby="products-heading">
       <p className="text-caption font-semibold uppercase tracking-[0.08em] text-accent">Products · separate from the ranking</p>
       <h2 id="products-heading" className="mt-2 text-3xl font-bold leading-[1.15]">
         {title}
       </h2>
-      {hasPurblack && <DisclosureNote>Pürblack products are listed and graded by the same published rules as every other product.</DisclosureNote>}
+      {hasPurblack && <DisclosureNote graded />}
       <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
         Every product we have graded whose maker claims a benefit for {label}
-        {sportOnly ? " and that a sport-testing programme lists" : ""}. Listing is not a recommendation. Each shows
-        the evidence for its ingredient for that claim (from the ratings above and on our evidence pages), how well the
-        maker documents the product, scored out of 100 with our{" "}
+        {sportOnly ? " and that a sport-testing programme lists" : ""}. Each shows two separate things: the evidence for
+        its ingredient (from the ratings above) and how well the maker documents the product, scored out of 100 with our{" "}
         <Link href="/grading-rubric" className="link">
           published rubric
         </Link>
-        , and whether a sport-testing programme lists it. They are ordered by evidence first; &ldquo;mixed&rdquo; and
-        &ldquo;limited&rdquo; share a step on our scale, so within a step they are in order of grade. No trial has compared
-        these products with each other.
+        . Products are sorted by evidence, then by grade; &ldquo;mixed&rdquo; and &ldquo;limited&rdquo; count as the same
+        step. Being listed is not a recommendation, and no trial has compared these products with each other.
       </p>
       {note && <p className="mt-3 max-w-prose text-soft [text-wrap:pretty]">{note}</p>}
 
       <ProductFilter
         label={title.toLowerCase()}
-        rows={rows.map(({ g, r, claims, sport }) => {
+        rows={rows.map(({ g, sport }) => {
           const f = PRODUCT_FACTS[g.id];
           return {
             id: g.id,
             format: f.format,
             sport: Boolean(sport),
-            node: (
-              <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_12rem_9rem] sm:gap-5">
-                <div className="min-w-0">
-                  <a href={`${SHEETS_PAGE[g.group].path}#grade-${g.id}`} className="link font-semibold">
-                    {g.brand} {g.product}
-                  </a>
-                  <span className="sr-only">: </span>
-                  <span className="mt-1 block text-sm text-muted">
-                    {f.format} · {INGREDIENT_LABEL[f.ingredient]} · Source: {f.source}
-                  </span>{" "}
-                  <a
-                    href={PRODUCT_URL[g.id]}
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    className="link mt-1.5 inline-block text-sm"
-                  >
-                    {g.brand}
-                    {g.brand.endsWith("s") ? "’" : "’s"} product page<span aria-hidden> ↗</span>
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>{" "}
-                  {sport && (
-                    <span className="mt-2 flex w-fit items-center rounded-full bg-accent-soft px-3 py-0.5 text-caption font-semibold text-accent">
-                      Sport-tested: {sport}
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <span className="sr-only">Evidence for its claims: </span>
-                  <ul className="space-y-2.5">
-                    {claims.map((c) => (
-                      <li key={c.area}>
-                        <span className="block text-caption font-semibold uppercase tracking-[0.06em] text-muted">
-                          {AREA_LABEL[c.area]}
-                          <span className="sr-only">:</span>
-                        </span>{" "}
-                        {c.level === "unassessed" && "note" in c ? (
-                          <span className="text-sm text-muted">Not assessed. {c.note}</span>
-                        ) : (
-                          "href" in c && (
-                            <a href={c.href} className="mt-1 block hover:underline" title={`Rating on our ${c.page} page`}>
-                              <EvidenceMeter level={c.level} size="sm" labelled={false} />
-                              <span className={`mt-1 block text-sm font-semibold leading-snug ${levelTone(c.level) === "warn" ? "text-warn" : "text-accent"}`}>
-                                {LEVEL_LABEL[c.level]}
-                              </span>
-                            </a>
-                          )
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <span className="sr-only">Documentation grade: </span>
-                  <span className="text-2xl font-bold tabular-nums">
-                    {r.total}
-                    <span className="text-sm font-medium text-muted">/100</span>
-                  </span>{" "}
-                  <span className="mt-1.5 block">
-                    <BandPill band={r.band} />
-                  </span>
-                </div>
-              </div>
-            ),
+            node: <ProductRow g={g} areas={areas} />,
           };
         })}
       />
 
       <p className="mt-4 text-sm text-muted [text-wrap:pretty]">
-        Grades checked {checkedRange}. Select a product for its full scoring sheet, with the points, what we
-        found and a source for every criterion; select a rating for the studies behind it. Product page links go to each
-        maker&rsquo;s own site, with no affiliate codes. Full sheets:{" "}
+        Graded {checkedRange}. Select a product for its full scoring sheet, or a rating for the studies behind it. Maker
+        links carry no affiliate codes, and the site takes no payment or commission from any brand. All scoring sheets:{" "}
         {groups.map((gr, i) => (
           <span key={gr}>
             {i > 0 && "; "}
@@ -209,7 +93,7 @@ export function ProductsForGoal({
             </Link>
           </span>
         ))}
-        . We take no payment or affiliate commission from any brand.
+        .
       </p>
       <p className="mt-3">
         <Link href={finderHref} className="link-solo">

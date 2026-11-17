@@ -508,7 +508,7 @@ export default function OralPeptidesPage() {
       <PageKindLabel path="/peptides/oral-peptides" />
       <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Oral peptides: do they work? Ranked by the evidence</h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
-      <DisclosureNote />
+      <DisclosureNote graded />
 
       <ShortAnswer className="mt-6">
         <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">

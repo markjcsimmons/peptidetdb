@@ -61,10 +61,7 @@ export default function GradingRubricPage() {
         .
       </p>
 
-      <DisclosureNote>
-        Pürblack sells peptide supplements. The operator of this site works for Pürblack, so we are publishing the rules
-        first and apply them to every product the same way, including Pürblack&rsquo;s.
-      </DisclosureNote>
+      <DisclosureNote graded />
 
       <Callout label="What a grade means" className="mt-6">
         <p className="max-w-prose text-lg [text-wrap:pretty]">

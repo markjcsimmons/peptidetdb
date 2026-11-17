@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-16",
+    page: "/products, /grading-rubric, /peptides/oral-peptides and the product panels on goal pages",
+    was: "The one-line Pürblack note was followed by a second sentence that varied by page, and the product finder repeated the disclosure when a filter left only Pürblack products.",
+    now: "At the operator's request the note is now one shorter line, the same everywhere products are graded: run by a Pürblack employee, Pürblack does not fund or direct the site, and its products are graded like any other. The finder's repeat was removed; the note at the top of the page remains. The full disclosure in the footer and on the About page is unchanged, and nothing about the operator's relationship with Pürblack has changed.",
+  },
+  {
     date: "2026-11-15",
     page: "/about, /editorial-policy and /grading-rubric",
     was: "Said 10 oral peptide products other than collagen had been graded.",

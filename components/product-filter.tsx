@@ -44,7 +44,7 @@ export function ProductFilter({ rows, label }: { rows: FilterRow[]; label: strin
       )}
       <ul className="mt-4 divide-y divide-line overflow-hidden rounded-card border border-line bg-bg">
         {rows.map((r) => (
-          <li key={r.id} hidden={!shown.includes(r)} className="px-5 py-4 sm:px-6">
+          <li key={r.id} hidden={!shown.includes(r)} className="px-4 py-5 sm:px-6">
             {r.node}
           </li>
         ))}

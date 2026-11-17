@@ -22,14 +22,15 @@ export const LEVEL_FILL: Record<Level, number> = {
 export const levelTone = (level: Level): "accent" | "warn" =>
   level === "preclinical" || level === "none" || level === "unassessed" ? "warn" : "accent";
 
-export function EvidenceMeter({ level, size = "md", labelled = true }: { level: Level; size?: "sm" | "md"; labelled?: boolean }) {
+const METER_SIZE = { xs: { w: 16, h: 6, gap: "gap-0.5" }, sm: { w: 26, h: 8, gap: "gap-1" }, md: { w: 32, h: 10, gap: "gap-1" } };
+
+export function EvidenceMeter({ level, size = "md", labelled = true }: { level: Level; size?: "xs" | "sm" | "md"; labelled?: boolean }) {
   const fill = LEVEL_FILL[level];
   const color = levelTone(level) === "warn" ? "var(--warn)" : "var(--accent)";
-  const w = size === "sm" ? 26 : 32;
-  const h = size === "sm" ? 8 : 10;
+  const { w, h, gap } = METER_SIZE[size];
   return (
     <span
-      className="flex gap-1"
+      className={`flex shrink-0 ${gap}`}
       role={labelled ? "img" : undefined}
       aria-label={labelled ? `Evidence level ${fill} of 5: ${LEVEL_LABEL[level]}` : undefined}
       aria-hidden={labelled ? undefined : true}

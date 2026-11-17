@@ -23,6 +23,8 @@ export const SITE = {
     "Educational information only. It is not medical or legal advice, and nothing here is a recommendation to use any peptide. Talk to a clinician before starting a supplement or treatment.",
   /** One line for pages whose own text mentions Pürblack. Must say the same thing as `disclosure`. */
   disclosureShort: "Run by a Pürblack employee. Pürblack does not fund or direct this site.",
+  /** `disclosureShort` for a page or section that grades Pürblack products. Must say the same thing. */
+  disclosureGraded: "Run by a Pürblack employee. Pürblack does not fund or direct this site, and its products are graded like any other.",
   lastReviewed: "2026-11-09",
   /** Set when a monitored address exists. Pages that mention contact details show them only when set. */
   contactEmail: "info@peptidetdb.com" as string | null,

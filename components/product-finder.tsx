@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { WIDE_COLUMNS } from "@/components/product-columns";
 
 export type FinderRow = {
   id: string;
@@ -25,6 +26,7 @@ const CHIP = "inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4
 const ON = "border-accent bg-accent text-on-accent";
 const OFF = "border-line bg-bg hover:border-accent";
 const COUNT = "tabular-nums opacity-75";
+const HEAD = "text-caption font-semibold uppercase tracking-[0.06em] text-muted";
 
 type State = { benefit: string; route: string; from: string; lot: boolean; sport: boolean; documented: boolean };
 const EMPTY: State = { benefit: "", route: "", from: "", lot: false, sport: false, documented: false };
@@ -162,7 +164,7 @@ export function ProductFinder({
           ))}
         </Group>
         <Group label="Documentation">
-          {chip("lot", true, "Lab report for the lot you buy", count("lot", (r) => r.lot))}
+          {chip("lot", true, "Lot reports published", count("lot", (r) => r.lot))}
           {chip("sport", true, "Sport-tested", count("sport", (r) => r.sport))}
           {chip("documented", true, "Graded “Documented” or better", count("documented", (r) => r.documented))}
         </Group>
@@ -189,10 +191,7 @@ export function ProductFinder({
           )}
         </div>
         {onlyPurblack && (
-          <p className="mt-3 rounded-tile bg-warn-soft px-4 py-3 text-sm text-soft [text-wrap:pretty]">
-            Only Pürblack products match these filters. This site is run by a Pürblack employee; the products are graded by
-            the same published rules as every other product.
-          </p>
+          <p className="mt-3 rounded-tile bg-warn-soft px-4 py-3 text-sm text-soft">Only Pürblack products match these filters.</p>
         )}
         {shown.length === 0 && <p className="mt-3 text-sm text-soft">No product matches all of these filters.</p>}
       </div>
@@ -203,13 +202,21 @@ export function ProductFinder({
           .map((a) => `[data-area="${a}"]`)
           .join(",")}){opacity:.5}`}</style>
       )}
-      <ul className="finder-list mt-6 divide-y divide-line overflow-hidden rounded-card border border-line bg-bg">
-        {ordered.map((r) => (
-          <li key={r.id} hidden={!shown.includes(r)} className="px-5 py-5 sm:px-6">
-            {r.node}
-          </li>
-        ))}
-      </ul>
+      <div className="mt-6 overflow-hidden rounded-card border border-line bg-bg">
+        {/* Column names for the wide layout; each row also carries them for screen readers and the markdown. */}
+        <div aria-hidden data-md-skip className={`hidden gap-x-6 border-b border-line bg-card px-6 py-3 lg:grid ${WIDE_COLUMNS}`}>
+          <span className={HEAD}>Product</span>
+          <span className={HEAD}>Evidence for its claims</span>
+          <span className={`${HEAD} text-right`}>Grade</span>
+        </div>
+        <ul className="finder-list divide-y divide-line">
+          {ordered.map((r) => (
+            <li key={r.id} hidden={!shown.includes(r)} className="px-4 py-5 sm:px-6">
+              {r.node}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

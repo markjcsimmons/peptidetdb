@@ -23,7 +23,11 @@ import { DisclosureNote } from "@/components/disclosure-note";
 const bandTone = (b: BandLabel): Tone => (b === "Well documented" || b === "Documented" ? "accent" : b === "Not graded" ? "neutral" : "warn");
 
 export function BandPill({ band }: { band: BandLabel }) {
-  return <Pill tone={bandTone(band)}>{band}</Pill>;
+  return (
+    <span className="whitespace-nowrap">
+      <Pill tone={bandTone(band)}>{band}</Pill>
+    </span>
+  );
 }
 
 /** A 0–100 bar. Decorative: the number is always written next to it. */
@@ -261,7 +265,7 @@ export function GradedProducts({ area, ratingNote }: { area: ClaimArea; ratingNo
   return (
     <section className="mt-14">
       <h2 className="text-3xl font-bold leading-[1.15]">Products that claim {AREA_WORDS[area]}, graded</h2>
-      {hasPurblack && <DisclosureNote>Pürblack products below are graded by the same published rules as every other product.</DisclosureNote>}
+      {hasPurblack && <DisclosureNote graded />}
       <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
         {grades.length === 1 ? "One product" : `${grades.length} products`} we graded make a claim about {AREA_WORDS[area]}{" "}
         on their own pages. Each is scored out of 100 with our{" "}
@@ -303,7 +307,7 @@ export function SportListedProducts() {
     <section className="mt-14">
       <h2 className="text-3xl font-bold leading-[1.15]">Graded products listed by a sport-testing programme</h2>
       {grades.some(isPurblack) && (
-        <DisclosureNote>Pürblack products below are graded by the same published rules as every other product.</DisclosureNote>
+        <DisclosureNote graded />
       )}
       <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
         Of the products we have graded, these {grades.length} appear in the public directory of a programme that tests for
