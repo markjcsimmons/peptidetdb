@@ -3,6 +3,7 @@ import { FOOTER_LINKS, NAV, SITE } from "@/lib/site";
 import { formatDate } from "@/lib/format";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileMenu } from "@/components/mobile-menu";
+import { SearchTrigger, SiteSearch } from "@/components/site-search";
 
 export function LogoMark({ size = 30 }: { size?: number }) {
   return (
@@ -31,8 +32,10 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
+          <SearchTrigger variant="header" />
           <ThemeToggle />
           <MobileMenu links={NAV} />
+          <SiteSearch />
         </div>
       </div>
     </header>

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { OpenOnHash } from "@/components/open-on-hash";
 
 const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
 const heading = Space_Grotesk({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <SiteFooter />
         {/* Vercel Web Analytics: cookie-free page-view counts. Only reports on Vercel deployments. */}
+        <OpenOnHash />
         <Analytics />
       </body>
     </html>

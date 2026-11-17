@@ -17,6 +17,7 @@ import { TopicCard } from "@/components/topic-card";
 import { HorizontalTimeline } from "@/components/timeline";
 import { SizeScale } from "@/components/size-scale";
 import { CARD, Pill, SectionHead, type Tone } from "@/components/ui";
+import { SearchTrigger } from "@/components/site-search";
 
 // Title and description come from the layout defaults; this adds the canonical so ?utm= and other
 // variants of the homepage are not treated as separate pages.
@@ -227,7 +228,7 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="grid items-center gap-12 pt-6 lg:grid-cols-2 lg:gap-14">
-        <div>
+        <div className="min-w-0">
           <p className="mb-4 text-caption font-semibold uppercase tracking-[0.08em] text-accent">The {SITE.fullName}</p>
           <h1 className="text-4xl font-bold leading-[1.05] sm:text-6xl [text-wrap:balance]">
             Peptides, explained by the evidence
@@ -237,7 +238,10 @@ export default function HomePage() {
             unapproved injectables, and what the studies show is very different for each. Start here for the basics,
             then go as deep as you like.
           </p>
-          <p className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8">
+            <SearchTrigger variant="hero" />
+          </div>
+          <p className="mt-4 flex flex-wrap gap-3">
             <Link
               href="/peptides"
               className="inline-flex min-h-12 items-center rounded-tile bg-accent px-6 font-semibold text-on-accent hover:opacity-90"

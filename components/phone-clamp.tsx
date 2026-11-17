@@ -26,7 +26,10 @@ export function PhoneClamp({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div ref={ref} className={open ? "" : "relative max-sm:[[data-js]_&]:max-h-44 max-sm:[[data-js]_&]:overflow-hidden"}>
+      <div
+        ref={ref}
+        className={open ? "" : "relative max-sm:[[data-js]_&]:max-h-44 max-sm:[[data-js]_&]:overflow-hidden"}
+      >
         {children}
         {clamped && (
           <span
