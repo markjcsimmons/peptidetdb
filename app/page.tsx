@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GOALS, GoalLinkGrid } from "@/components/guide-links";
+import { GOALS, GoalBoard } from "@/components/guide-links";
 import { SITE } from "@/lib/site";
 import { STUDIES } from "@/lib/studies";
-import { TOPIC_SLUGS } from "@/lib/topics";
+import { TOPICS, TOPIC_SLUGS } from "@/lib/topics";
 import { COMMITTEE, LEGAL_REVIEWED } from "@/lib/legal-status";
 import { formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
-import { BeadChainHero } from "@/components/beads";
 import { ALL_GRADES } from "@/lib/grades";
 import { BENEFITS } from "@/lib/product-finder";
-import { DigestionDiagramCompact, SignalDiagramCompact } from "@/components/diagrams";
-import { MeterLegend } from "@/components/evidence-meter";
-import { TopicCard } from "@/components/topic-card";
 import { HorizontalTimeline } from "@/components/timeline";
-import { SizeScale } from "@/components/size-scale";
-import { CARD, Pill, SectionHead, type Tone } from "@/components/ui";
+import { CARD, SectionHead } from "@/components/ui";
 import { SearchTrigger } from "@/components/site-search";
 
 // Title and description come from the layout defaults; this adds the canonical so ?utm= and other
@@ -25,121 +20,53 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const JUMP = [
-  { href: "#goals", label: "By goal" },
-  { href: "#products", label: "Find a product" },
-  { href: "#what", label: "What are they?" },
-  { href: "#how", label: "How do they work?" },
-  { href: "#types", label: "Types" },
-  { href: "#safety", label: "Are they safe?" },
-  { href: "#evidence", label: "Do they work?" },
-  { href: "#legal", label: "Are they legal?" },
+/** Most-searched entry points (keyword workbook, US search volume); the evidence board below covers every goal. */
+const POPULAR = [
+  { href: "/peptides/bpc-157", label: "BPC-157" },
+  { href: "/peptides/for-weight-loss", label: "Weight loss & GLP-1" },
+  { href: "/peptides/ghk-cu", label: "GHK-Cu" },
+  { href: "/peptides/tb-500", label: "TB-500" },
+  { href: "/peptides/collagen-peptides", label: "Collagen" },
+  { href: "/peptides/legal-status", label: "Legal status" },
 ];
 
-const TYPES: { n: number; title: string; status: string; tone: Tone; body: React.ReactNode }[] = [
+const BASICS: { q: string; a: React.ReactNode; href: string; more: string }[] = [
   {
-    n: 1,
-    title: "Approved prescription drugs",
-    status: "Went through FDA approval",
-    tone: "accent",
-    body: (
-      <>
-        Insulin and the GLP-1 medicines are peptide drugs. A 2026 review contrasts them with a parallel &ldquo;gray
-        market&rdquo; of unapproved compounds (<PaperLink id="mendias-2026" via="doi">Mendias &amp; Awan</PaperLink>).
-        Prescribed by a clinician.
-      </>
-    ),
+    q: "What are peptides?",
+    a: "Short chains of amino acids. Long, folded chains are proteins; there is no sharp line between the two, and the word covers everything from insulin to collagen powder.",
+    href: "/peptides",
+    more: "The full explainer",
   },
   {
-    n: 2,
-    title: "Collagen and marine peptide supplements",
-    status: "Best-studied in people",
-    tone: "accent",
-    body: (
-      <>
-        Fragments of collagen or fish protein, swallowed as powders and capsules. Skin has the most trials; other uses
-        are small or mixed.{" "}
-        <Link href="/peptides/oral-marine-peptides" className="link">
-          Do oral marine peptides work?
-        </Link>
-      </>
-    ),
+    q: "How do they work?",
+    a: "Some act as signals on cells. Swallowed ones meet digestion, so whether a peptide does anything by mouth is a question for trials, not for the label.",
+    href: "/peptides/how-peptides-work",
+    more: "How peptides work",
   },
   {
-    n: 3,
-    title: "Skin-care peptides",
-    status: "No controlled trial summarised here yet",
-    tone: "warn",
-    body: (
+    q: "Are they safe?",
+    a: (
       <>
-        Peptides such as GHK-copper are applied to the skin. This hub holds a review of GHK but no controlled trial of
-        a product yet.
-      </>
-    ),
-  },
-  {
-    n: 4,
-    title: "Unapproved wellness and research peptides",
-    status: "Mostly animal evidence",
-    tone: "warn",
-    body: (
-      <>
-        BPC-157 and similar compounds are not FDA-approved for any use (
-        <PaperLink id="vasireddi-2025" via="pmc">systematic review</PaperLink>), and their compounding status changed
-        through 2026.{" "}
-        <Link href="/peptides/legal-status" className="link">
-          Legal status
-        </Link>
-      </>
-    ),
-  },
-];
-
-const SAFETY: { type: string; tag: string; tone: Tone; flag?: boolean; known: React.ReactNode }[] = [
-  {
-    type: "Approved prescription drugs",
-    tag: "Safety reviewed at approval",
-    tone: "accent",
-    known: (
-      <>
-        Approval includes a review of safety, and they are used under a clinician. They still have side effects; this
-        site has not summarised the trial evidence for any approved peptide drug.
-      </>
-    ),
-  },
-  {
-    type: "Collagen and marine supplements",
-    tag: "Not assessed here yet",
-    tone: "neutral",
-    known: (
-      <>
-        One small trial reported no adverse effects over four weeks in 29 people (
-        <PaperLink id="kawasaki-2000" via="doi">Kawasaki 2000</PaperLink>), which is too few to establish safety.
-      </>
-    ),
-  },
-  {
-    type: "Skin-care peptides",
-    tag: "Not assessed here yet",
-    tone: "neutral",
-    known: <>No safety evidence is summarised on this site for topical peptides.</>,
-  },
-  {
-    type: "Unapproved wellness and research peptides",
-    tag: "Human data scarce",
-    tone: "warn",
-    flag: true,
-    known: (
-      <>
-        Reviews say{" "}
+        It depends on the type. For unapproved injectable peptides, reviews say{" "}
         <PaperLink id="mendias-2026" via="doi">
-          rigorous human safety data are scarce and serious harm is possible
-        </PaperLink>
-        , and warn of risks from unregulated manufacturing and contamination.
+          rigorous human safety data are scarce
+        </PaperLink>{" "}
+        and warn about unregulated manufacturing.
       </>
     ),
+    href: "/science/topics/safety",
+    more: "Safety evidence",
+  },
+  {
+    q: "Are they steroids?",
+    a: "No. Anabolic steroids are relatives of testosterone, a different chemical class. Some peptides are still banned in sport, and \u2018not a steroid\u2019 does not mean safe.",
+    href: "/peptides/are-peptides-steroids",
+    more: "Peptides vs steroids",
   },
 ];
+
+/** Latest date any study or evidence topic was checked: the "Updated" line in the hero. */
+const UPDATED = [...STUDIES.map((x) => x.verifiedOn), ...TOPIC_SLUGS.map((t) => TOPICS[t].reviewedOn)].sort().at(-1)!;
 
 const FAQ: { q: string; text: string; a: React.ReactNode }[] = [
   {
@@ -149,7 +76,7 @@ const FAQ: { q: string; text: string; a: React.ReactNode }[] = [
       <>
         It depends on the peptide and the claim. Oral collagen peptides have consistent but caveated human evidence for
         skin hydration and elasticity. Most injectable wellness peptides, such as BPC-157, have mostly animal evidence (
-        <PaperLink id="tewari-2026" via="doi">Tewari 2026</PaperLink>). See the evidence grid above.
+        <PaperLink id="tewari-2026" via="doi">Tewari 2026</PaperLink>). See the evidence board above.
       </>
     ),
   },
@@ -226,84 +153,77 @@ export default function HomePage() {
         }}
       />
 
-      {/* Hero */}
-      <section className="grid items-center gap-12 pt-6 lg:grid-cols-2 lg:gap-14">
-        <div className="min-w-0">
-          <p className="mb-4 text-caption font-semibold uppercase tracking-[0.08em] text-accent">The {SITE.fullName}</p>
-          <h1 className="text-4xl font-bold leading-[1.05] sm:text-6xl [text-wrap:balance]">
-            Peptides, explained by the evidence
-          </h1>
-          <p className="mt-6 max-w-[34rem] text-lg text-soft [text-wrap:pretty]">
-            Peptides are short chains of amino acids. The word covers everything from insulin to collagen powder to
-            unapproved injectables, and what the studies show is very different for each. Start here for the basics,
-            then go as deep as you like.
-          </p>
-          <div className="mt-8">
-            <SearchTrigger variant="hero" />
-          </div>
-          <p className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href="/peptides"
-              className="inline-flex min-h-12 items-center rounded-tile bg-accent px-6 font-semibold text-on-accent hover:opacity-90"
-            >
-              What are peptides?
-            </Link>
-            <Link
-              href="/science"
-              className="inline-flex min-h-12 items-center rounded-tile border border-line bg-card px-6 font-semibold hover:border-accent"
-            >
-              Browse {STUDIES.length} study summaries
-            </Link>
-          </p>
-          <p className="mt-6 max-w-[34rem] text-sm leading-relaxed text-muted">{SITE.disclosure}</p>
+      {/* Hero: the answer to "what is this and where do I start", with search first */}
+      <section className="pt-6">
+        <p className="mb-4 text-caption font-semibold uppercase tracking-[0.08em] text-accent">The {SITE.fullName}</p>
+        <h1 className="max-w-4xl text-4xl font-bold leading-[1.05] sm:text-6xl [text-wrap:balance]">
+          Peptides, explained by the evidence
+        </h1>
+        <p className="mt-5 max-w-[40rem] text-lg text-soft [text-wrap:pretty]">
+          What the studies show for each peptide and each goal, in plain language, with what they do not show and who paid
+          for them.
+        </p>
+        <div className="mt-7 max-w-[40rem]">
+          <SearchTrigger variant="hero" />
         </div>
-        <figure className="m-0 rounded-panel bg-accent-soft p-7">
-          <BeadChainHero />
-          <figcaption className="mt-4 text-sm leading-snug text-soft">
-            One bead per amino acid. This chain has 15, the length reported for BPC-157. Colours are decoration only.
-          </figcaption>
-        </figure>
-      </section>
-
-      {/* Jump nav: sticky, scrolls sideways on small screens */}
-      <nav
-        aria-label="On this page"
-        data-noprint
-        className="sticky top-0 z-30 -mx-4 mt-10 overflow-x-auto bg-bg px-4 py-3 sm:-mx-8 sm:px-8"
-      >
-        <div className="flex w-max gap-2.5">
-          {JUMP.map((j) => (
-            <a
-              key={j.href}
-              href={j.href}
-              className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-line bg-card px-[18px] text-sm font-medium hover:border-accent"
+        <div className="mt-4 flex max-w-[48rem] flex-wrap items-center gap-2" data-md-skip>
+          <span className="mr-1 text-sm text-muted">Popular:</span>
+          {POPULAR.map((p) => (
+            <Link
+              key={p.href}
+              href={p.href}
+              className="inline-flex min-h-10 items-center rounded-full border border-line bg-card px-4 text-sm font-medium hover:border-accent"
             >
-              {j.label}
-            </a>
+              {p.label}
+            </Link>
           ))}
         </div>
-      </nav>
+        <ul className="mt-7 flex max-w-[44rem] flex-wrap gap-x-6 gap-y-1 text-sm text-soft" aria-label="At a glance">
+          <li>
+            <Link href="/science" className="link">
+              <strong className="tabular-nums text-fg">{STUDIES.length}</strong> studies summarised
+            </Link>
+          </li>
+          <li>
+            <Link href="/products" className="link">
+              <strong className="tabular-nums text-fg">{ALL_GRADES.length}</strong> products graded
+            </Link>
+          </li>
+          <li>
+            <Link href="/peptides/by-goal" className="link">
+              <strong className="tabular-nums text-fg">{GOALS.length}</strong> goals ranked
+            </Link>
+          </li>
+          <li>Updated {formatDate(UPDATED)}</li>
+        </ul>
+        <p className="mt-5 max-w-[44rem] text-sm leading-relaxed text-muted">{SITE.disclosure}</p>
+      </section>
 
-      {/* Goal strip: most visitors arrive with a goal in mind */}
-      <section id="goals" className="mt-14 scroll-mt-24">
+      {/* Evidence board: every goal, best and least-supported option side by side */}
+      <section id="evidence" className="mt-14 scroll-mt-24">
         <SectionHead
-          eyebrow="By goal"
-          title="What do you want to know about?"
-          intro="Each page ranks peptide types by the strength of the human evidence for one goal, and says what the studies do not show."
+          eyebrow="The evidence"
+          title="Do peptides work? It depends on the goal"
+          intro="Each goal links to a page ranking every option by the strength of the human evidence. Here are the best and the least-supported option for each, never only the best."
         />
-        <GoalLinkGrid goals={GOALS} className="mt-6" />
+        <div className="mt-7">
+          <GoalBoard />
+        </div>
         <p className="mt-4 flex flex-wrap gap-x-6">
           <Link href="/peptides/by-goal" className="link-solo">
-            Compare all goals
+            Compare goals in detail
           </Link>
           <Link href="/peptides/a-z" className="link-solo">
             Peptides A–Z
+          </Link>
+          <Link href="/science/methodology" className="link-solo">
+            How ratings are set
           </Link>
         </p>
       </section>
 
       {/* Products: the same benefits, leading to the finder with the benefit picked */}
-      <section id="products" className="mt-14 scroll-mt-24 rounded-panel border border-line bg-card p-6 sm:p-8">
+      <section id="products" className="mt-16 scroll-mt-24 rounded-panel border border-line bg-card p-6 sm:p-8">
         <SectionHead
           eyebrow="Products"
           title="Looking for a product?"
@@ -336,153 +256,22 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* What are peptides */}
-      <section id="what" className="mt-20 scroll-mt-24">
-        <SectionHead
-          eyebrow="The basics"
-          title="What are peptides?"
-          intro="Amino acids link into chains. Long, folded chains are proteins; short ones are peptides. There is no sharp line between the two, and the cut-off varies by source."
-        />
-        <div className="mt-9">
-          <SizeScale />
-        </div>
-        <p className="mt-5">
-          <Link href="/peptides" className="link">
-            Read the full explainer
-          </Link>{" "}
-          or see the{" "}
-          <Link href="/glossary" className="link">
-            glossary
-          </Link>
-          .
-        </p>
-      </section>
-
-      {/* How do they work */}
-      <section id="how" className="mt-24 scroll-mt-24">
-        <SectionHead eyebrow="The mechanism" title="How do they work?" intro="Three ideas cover most of it." />
-        <div className="mt-9 grid gap-6 md:grid-cols-3">
-          <div className={`${CARD} flex flex-col gap-4`}>
-            <SignalDiagramCompact />
-            <h3 className="text-xl font-bold leading-tight">Some are signals</h3>
-            <p className="text-soft">
-              They attach to a receptor on a cell and change what it does. That is how peptide drugs such as insulin are
-              designed to act.
-            </p>
-          </div>
-          <div className={`${CARD} flex flex-col gap-4`}>
-            <DigestionDiagramCompact />
-            <h3 className="text-xl font-bold leading-tight">Swallowed ones meet digestion</h3>
-            <p className="text-soft">
-              Whether anything active gets through, and does anything, is a question for trials, not for the label.
-            </p>
-          </div>
-          <div className={`${CARD} flex flex-col gap-4`}>
-            <div className="flex min-h-[130px] flex-col justify-center gap-2.5">
-              <div
-                className="flex h-9 overflow-hidden rounded-tile"
-                role="img"
-                aria-label="Bar chart: 67% of publications on six popular injectable peptides used animal models"
-              >
-                <div className="flex items-center bg-warn pl-3 text-sm font-semibold text-bg" style={{ width: "67%" }}>
-                  67% animal models
-                </div>
-                <div className="flex items-center bg-line pl-3 text-sm font-medium text-fg" style={{ width: "33%" }}>
-                  Other
-                </div>
-              </div>
-              <p className="text-caption leading-snug text-muted">
-                Publications found by a 2026 scoping review of six popular injectable peptides (
-                <PaperLink id="tewari-2026" via="doi">
-                  Tewari 2026
-                </PaperLink>
-                )
+      {/* The basics: short answers, each linking to the full page */}
+      <section id="basics" className="mt-20 scroll-mt-24">
+        <SectionHead eyebrow="New to peptides?" title="The basics, in four answers" />
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {BASICS.map((b) => (
+            <li key={b.href} className={`${CARD} flex flex-col`}>
+              <h3 className="text-xl font-bold leading-tight">{b.q}</h3>
+              <p className="mt-3 text-soft [text-wrap:pretty]">{b.a}</p>
+              <p className="mt-auto pt-4">
+                <Link href={b.href} className="link-solo">
+                  {b.more}
+                </Link>
               </p>
-            </div>
-            <h3 className="text-xl font-bold leading-tight">A mechanism is not proof</h3>
-            <p className="text-soft">&ldquo;It blocks an enzyme&rdquo; is a reason to run a trial, not a result.</p>
-          </div>
-        </div>
-        <p className="mt-6">
-          <Link href="/peptides/how-peptides-work" className="link-solo">
-            How peptides work, with the evidence
-          </Link>
-        </p>
-      </section>
-
-      {/* Types */}
-      <section id="types" className="mt-24 scroll-mt-24">
-        <SectionHead
-          eyebrow="The landscape"
-          title="What are the different types?"
-          intro="We sort them by what matters to a reader: whether they are approved, and how much human evidence exists."
-        />
-        <div className="mt-9 grid gap-6 md:grid-cols-2">
-          {TYPES.map((t) => (
-            <div key={t.title} className={CARD}>
-              <div className="flex flex-wrap items-center justify-between gap-2.5">
-                <span className="text-caption font-semibold uppercase tracking-[0.06em] text-muted">Type {t.n}</span>
-                <Pill tone={t.tone}>{t.status}</Pill>
-              </div>
-              <h3 className="mt-3 text-2xl font-bold leading-tight">{t.title}</h3>
-              <p className="mt-3 text-soft">{t.body}</p>
-            </div>
+            </li>
           ))}
-        </div>
-      </section>
-
-      {/* Safety */}
-      <section id="safety" className="mt-24 scroll-mt-24">
-        <SectionHead
-          eyebrow="What we know"
-          title="Are peptides safe?"
-          intro={<>There is no single answer, because &ldquo;peptides&rdquo; is not a single thing. Here is what we know, by type.</>}
-        />
-        <div className="mt-9 overflow-hidden rounded-card border border-line bg-card">
-          {SAFETY.map((r, i) => (
-            <div
-              key={r.type}
-              className={`flex flex-wrap gap-x-8 gap-y-3 px-6 py-6 sm:px-7 ${i > 0 ? "border-t border-line" : ""} ${r.flag ? "bg-warn-soft" : ""}`}
-            >
-              <div className="min-w-0 flex-[1_1_240px]">
-                <p className="font-semibold">{r.type}</p>
-                <p className="mt-2">
-                  <Pill tone={r.tone}>{r.tag}</Pill>
-                </p>
-              </div>
-              <p className="min-w-0 flex-[3_1_380px] text-soft">{r.known}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-3">
-          <Link href="/science/topics/safety" className="link-solo">
-            Safety evidence in detail
-          </Link>
-        </p>
-      </section>
-
-      {/* Evidence at a glance */}
-      <section id="evidence" className="mt-24 scroll-mt-24">
-        <SectionHead
-          eyebrow="The evidence"
-          title="Do they work? The evidence at a glance"
-          intro="For each topic, the best-supported and the least-supported claim we have summarised. Open a topic for every rating."
-        />
-        <div className="mt-8">
-          <MeterLegend />
-        </div>
-        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {TOPIC_SLUGS.map((slug) => (
-            <TopicCard key={slug} slug={slug} />
-          ))}
-        </div>
-        <p className="mt-4 text-sm text-muted">
-          Ratings reflect only the studies summarised here.{" "}
-          <Link href="/science/methodology" className="link">
-            How ratings are set
-          </Link>
-          .
-        </p>
+        </ul>
       </section>
 
       {/* Legal */}

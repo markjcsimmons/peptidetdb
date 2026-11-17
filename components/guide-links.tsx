@@ -13,7 +13,8 @@ import {
   type Goal,
 } from "@/lib/guides";
 import { CARD } from "@/components/ui";
-import { LEVEL_ORDER, RatingBadge, levelTone } from "@/components/evidence-meter";
+import { PhoneMore } from "@/components/phone-more";
+import { EvidenceMeter, LEVEL_ORDER, RatingBadge, levelTone } from "@/components/evidence-meter";
 
 const TILE_LINK =
   "flex h-full min-h-14 flex-col justify-center rounded-tile border border-line bg-bg px-[18px] py-3 hover:border-accent";
@@ -124,6 +125,104 @@ export function GoalTile({ goal, headingLevel = "h3" }: { goal: Goal; headingLev
         </Link>
       </p>
     </li>
+  );
+}
+
+/** Short level names for the board on phones, where two ratings sit side by side. */
+const SHORT_LEVEL: Record<Level, string> = {
+  consistent: "Consistent",
+  mixed: "Mixed",
+  limited: "Limited",
+  preclinical: "Mostly animal",
+  none: "No human trials found",
+  unassessed: "Not yet assessed",
+};
+
+function BoardRating({ rating, label }: { rating: TopicRating; label: string }) {
+  const tone = levelTone(rating.level) === "warn" ? "text-warn" : "text-accent";
+  return (
+    <>
+      <span className="mb-1 block text-caption font-semibold uppercase tracking-[0.06em] text-muted md:hidden" data-md-skip>
+        {label}
+      </span>
+      <span className="flex flex-col gap-1 md:flex-row md:items-center md:gap-2">
+        <EvidenceMeter level={rating.level} size="xs" labelled={false} />
+        <span className={`text-sm font-semibold leading-snug ${tone} md:hidden`} data-md-skip>
+          {SHORT_LEVEL[rating.level]}
+        </span>
+        <span className={`hidden text-sm font-semibold leading-snug ${tone} md:inline`}>{LEVEL_LABEL[rating.level]}</span>
+      </span>
+      <span className="sr-only">: </span>
+      <span className="mt-1 block text-sm leading-snug text-soft">{rating.subject}</span>
+    </>
+  );
+}
+
+/** Goals shown on phones before "Show all". */
+const PHONE_ROWS = 6;
+
+/**
+ * The home page's evidence board: one row per goal with its best AND least-supported option (never only the best),
+ * linking to the ranked list. A table on wide screens; on phones each row is a small two-column block, and only the
+ * first few show until "Show all" (all rows are in the HTML and markdown).
+ */
+export function GoalBoard({ goals = GOALS }: { goals?: Goal[] }) {
+  const cell = "md:table-cell md:px-5 md:py-4 md:align-top";
+  return (
+    <PhoneMore label={`Show all ${goals.length} goals`}>
+      <div className="overflow-hidden rounded-card border border-line bg-card">
+        <table className="block w-full text-left md:table">
+          <thead className="hidden text-sm text-muted md:table-header-group">
+            <tr>
+              <th scope="col" className="w-[30%] px-5 pb-2 pt-4 font-medium">
+                Goal
+              </th>
+              <th scope="col" className="px-5 pb-2 pt-4 font-medium">
+                Best supported
+              </th>
+              <th scope="col" className="px-5 pb-2 pt-4 font-medium">
+                Least supported
+              </th>
+            </tr>
+          </thead>
+          <tbody className="block md:table-row-group">
+            {goals.map((g, i) => {
+              const guide = guideFor(g.guide);
+              const { ratings, best, worst, unassessed } = bestAndWorst(g);
+              const same = best && worst && best.level === worst.level;
+              const later = i >= PHONE_ROWS ? "max-md:[[data-js]_&]:hidden max-md:[[data-open]_&]:!grid" : "";
+              return (
+                <tr
+                  key={g.id}
+                  className={`grid grid-cols-2 gap-x-4 gap-y-3 border-t border-line px-4 py-4 first:border-t-0 md:table-row md:p-0 md:first:border-t ${later}`}
+                >
+                  <th scope="row" className={`col-span-2 font-normal ${cell}`}>
+                    <span className="block text-caption font-semibold uppercase tracking-[0.08em] text-accent">{g.label}</span>
+                    <span className="sr-only">: </span>
+                    <Link href={guide.path} className="mt-0.5 inline-block font-semibold leading-snug hover:text-accent hover:underline">
+                      {guide.title}
+                    </Link>
+                    <span className="sr-only"> (</span>
+                    <span className="mt-0.5 hidden text-caption text-muted md:block">
+                      {ratings.length} options rated{unassessed > 0 ? `, ${unassessed} not yet assessed` : ""}
+                    </span>
+                    <span className="sr-only">)</span>
+                  </th>
+                  <td className={cell}>{best ? <BoardRating rating={best} label="Best" /> : null}</td>
+                  <td className={cell}>
+                    {worst && !same ? (
+                      <BoardRating rating={worst} label="Least" />
+                    ) : best ? (
+                      <span className="block text-sm text-soft">Every option is rated {LEVEL_LABEL[best.level].toLowerCase()}.</span>
+                    ) : null}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </PhoneMore>
   );
 }
 

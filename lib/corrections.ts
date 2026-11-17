@@ -15,6 +15,12 @@ export type Correction = {
 
 export const CORRECTIONS: Correction[] = [
   {
+    date: "2026-11-17",
+    page: "/ (home page)",
+    was: "The 'What are the different types?' and 'Are peptides safe?' sections said skin-care peptides had no controlled trial summarised here, that no safety evidence was summarised for oral collagen or topical peptides, and that the site had not summarised trial evidence for any approved peptide drug. All three had gone out of date as studies were added from 10 November (topical peptide trials, oral collagen safety ratings, semaglutide and tirzepatide trials).",
+    now: "Both sections were replaced in a redesign by short answers that link to the full pages, and the home page now shows every goal's best and least-supported rating from the same data as the goal pages, so it updates when a rating changes.",
+  },
+  {
     date: "2026-11-16",
     page: "/products, /grading-rubric, /peptides/oral-peptides and the product panels on goal pages",
     was: "The one-line Pürblack note was followed by a second sentence that varied by page, and the product finder repeated the disclosure when a filter left only Pürblack products.",
