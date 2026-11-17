@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PhoneClamp } from "@/components/phone-clamp";
 
 export type Tone = "accent" | "warn" | "neutral";
 
@@ -105,7 +106,9 @@ export function ShortAnswer({ children, className = "" }: { children: ReactNode;
         </svg>
         Short answer
       </h2>
-      <div className="mt-3 text-fg">{children}</div>
+      <div className="mt-3 text-fg">
+        <PhoneClamp>{children}</PhoneClamp>
+      </div>
     </section>
   );
 }

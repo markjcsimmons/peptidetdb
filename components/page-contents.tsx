@@ -22,6 +22,22 @@ export function PageContents() {
   const ref = useRef<HTMLDivElement>(null);
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [active, setActive] = useState("");
+  const boxRef = useRef<HTMLDetailsElement>(null);
+  // Below `xl`: once the in-flow box has scrolled away, a slim bar pinned to the top keeps the contents one tap away.
+  const [pinned, setPinned] = useState(false);
+  const [barOpen, setBarOpen] = useState(false);
+
+  useEffect(() => {
+    const box = boxRef.current;
+    if (!box) return;
+    const observer = new IntersectionObserver(([e]) => {
+      const past = !e.isIntersecting && e.boundingClientRect.bottom < 0;
+      setPinned(past);
+      if (!past) setBarOpen(false);
+    });
+    observer.observe(box);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const article = ref.current?.closest("article");
@@ -71,7 +87,7 @@ export function PageContents() {
   );
 
   return (
-    <div ref={ref} data-md-skip data-noprint>
+    <div ref={ref} data-md-skip data-noprint data-page-contents>
       {/* Wide screens: sticky in the right margin, beside the article. */}
       <div className="absolute left-full top-0 ml-8 hidden h-full w-48 xl:block">
         <nav aria-label="On this page" className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
@@ -79,13 +95,48 @@ export function PageContents() {
           {links()}
         </nav>
       </div>
-      {/* Elsewhere: a collapsible box in the flow. */}
-      <details className="mt-8 rounded-tile border border-line bg-card xl:hidden">
+      {/* Elsewhere: a collapsible box in the flow… */}
+      <details ref={boxRef} className="mt-8 rounded-tile border border-line bg-card xl:hidden">
         <summary className="flex min-h-11 cursor-pointer items-center px-4 text-sm font-medium">On this page</summary>
         <nav aria-label="On this page" className="px-4 pb-3">
           {links()}
         </nav>
       </details>
+      {/* …and, once that box is off screen, a bar pinned to the top. */}
+      {pinned && headings.length > 0 && (
+        <div className="fixed inset-x-0 top-0 z-40 border-b border-line bg-card shadow-sm xl:hidden">
+          <button
+            type="button"
+            aria-expanded={barOpen}
+            onClick={() => setBarOpen((o) => !o)}
+            className="mx-auto flex min-h-12 w-full max-w-3xl items-center gap-2 px-4 text-left text-sm"
+          >
+            <span className="shrink-0 text-muted">On this page:</span>
+            <span className="min-w-0 flex-1 truncate font-semibold">
+              {headings.find((h) => h.id === active)?.text ?? headings[0].text}
+            </span>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+              className={`shrink-0 transition-transform ${barOpen ? "rotate-180" : ""}`}
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          {barOpen && (
+            <nav aria-label="On this page" className="mx-auto max-h-[60vh] max-w-3xl overflow-y-auto px-4 pb-3">
+              {links(() => setBarOpen(false))}
+            </nav>
+          )}
+        </div>
+      )}
     </div>
   );
 }

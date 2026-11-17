@@ -8,7 +8,7 @@ import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
-import { RankedList, type Route } from "@/components/ranked-list";
+import { RankedCards, RankedTable, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
 import { ProductsForGoal } from "@/components/products-for-goal";
 
@@ -379,10 +379,12 @@ export default function PeptidesForWomenPage() {
         </p>
       </ShortAnswer>
 
+      <RankedTable options={OPTIONS} />
+
       <PageContents />
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How this ranking works</h2>
+        <h2 id="how-this-ranking-works" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">How this ranking works</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           Most peptide studies report men and women together, so this page covers only outcomes women search for where the
           studies enrolled women or the condition is specific to them. The list is ordered by how strong the human evidence is,
@@ -406,8 +408,8 @@ export default function PeptidesForWomenPage() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <RankedList options={OPTIONS} />
+        <h2 className="text-3xl font-bold leading-[1.15]">The ranking in detail</h2>
+        <RankedCards options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not rated: unapproved injectable peptides in pregnancy and breastfeeding (we have not summarised any study; see the{" "}
           <Link href="/science/topics/womens-health" className="link">

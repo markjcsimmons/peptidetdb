@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 /** Applies a saved light/dark choice before first paint so there is no flash. Own constant, no user input. */
-const THEME_SCRIPT = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+const THEME_SCRIPT = `document.documentElement.dataset.js="1";try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

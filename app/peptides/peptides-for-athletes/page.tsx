@@ -8,7 +8,7 @@ import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import type { Topic } from "@/lib/studies";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
-import { RankedList, type Route } from "@/components/ranked-list";
+import { RankedCards, RankedTable, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
 import { ProductsForGoal } from "@/components/products-for-goal";
 
@@ -425,10 +425,12 @@ export default function PeptidesForAthletesPage() {
         </p>
       </ShortAnswer>
 
+      <RankedTable options={OPTIONS} />
+
       <PageContents />
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How this ranking works</h2>
+        <h2 id="how-this-ranking-works" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">How this ranking works</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           The list is ordered by how strong the human evidence is, using the ratings on our{" "}
           <Link href="/science/topics/muscle" className="link">
@@ -448,8 +450,8 @@ export default function PeptidesForAthletesPage() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <RankedList options={OPTIONS.map((o) => ({ ...o, extra: { label: "Anti-doping status (WADA 2026).", body: WADA[o.name] } }))} />
+        <h2 className="text-3xl font-bold leading-[1.15]">The ranking in detail</h2>
+        <RankedCards options={OPTIONS.map((o) => ({ ...o, extra: { label: "Anti-doping status (WADA 2026).", body: WADA[o.name] } }))} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not ranked: tesamorelin and sermorelin (both named under S2.2.4 of the 2026 List; our evidence is in people with HIV for
           tesamorelin and we found no controlled trial of sermorelin), and other substances such as GHRP-2 and GHRP-6, which the

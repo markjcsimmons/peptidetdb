@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ShortAnswer } from "@/components/ui";
 import { TOPICS, type Level } from "@/lib/topics";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
-import { RankedList, type Route } from "@/components/ranked-list";
+import { RankedCards, RankedTable, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
 import { ProductsForGoal } from "@/components/products-for-goal";
 
@@ -253,10 +253,12 @@ export default function PeptidesForHairGrowthPage() {
         </p>
       </ShortAnswer>
 
+      <RankedTable options={OPTIONS} />
+
       <PageContents />
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How this ranking works</h2>
+        <h2 id="how-this-ranking-works" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">How this ranking works</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           The list is ordered by how strong the human evidence is, using the ratings on our{" "}
           <Link href="/science/topics/hair" className="link">
@@ -272,8 +274,8 @@ export default function PeptidesForHairGrowthPage() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">The ranking</h2>
-        <RankedList options={OPTIONS} />
+        <h2 className="text-3xl font-bold leading-[1.15]">The ranking in detail</h2>
+        <RankedCards options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
           Not ranked: copper peptide (GHK-Cu) on its own. We summarise no hair trial of it alone, although the 2026 review
           includes GHK-containing formulations. Biotin and other non-peptide supplements are outside this site&rsquo;s scope.

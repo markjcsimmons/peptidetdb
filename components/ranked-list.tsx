@@ -73,13 +73,8 @@ function RoutePills({ routes }: { routes?: Route[] }) {
   );
 }
 
-/**
- * The ranking on an evidence-ranked list page: a summary table first (most readers only need that),
- * then one card per option. Options must already be in ranked order; the page checks each level against
- * its topic page, so this component only draws them.
- */
-export function RankedList({ options }: { options: RankedOption[] }) {
-  // Ranks must never go up the scale as the list goes down (a mis-ordered list would contradict its ratings).
+/** Ranks must never go up the scale as the list goes down (a mis-ordered list would contradict its ratings). */
+function checkOrder(options: RankedOption[]) {
   const order: Level[] = ["consistent", "mixed", "limited", "preclinical", "none", "unassessed"];
   const step = (l: Level) => (l === "mixed" ? order.indexOf("limited") : order.indexOf(l));
   options.forEach((o, i) => {
@@ -87,12 +82,21 @@ export function RankedList({ options }: { options: RankedOption[] }) {
       throw new Error(`RankedList: "${o.name}" is rated higher than the option ranked above it`);
     }
   });
+}
+
+/**
+ * The "At a glance" table of an evidence-ranked list page. It goes straight after the short answer, so the ranking
+ * is on the first screen; each row links to its card in `<RankedCards>` further down. Options must already be in
+ * ranked order; the page checks each level against its topic page, so this component only draws them.
+ */
+export function RankedTable({ options, methodHref = "#how-this-ranking-works" }: { options: RankedOption[]; methodHref?: string }) {
+  checkOrder(options);
   const runs = groups(options);
   const hasTies = runs.some((g) => g.items.length > 1);
 
   return (
     <>
-      <div className="mt-6 overflow-hidden rounded-card border border-line bg-card">
+      <div id="at-a-glance" className="mt-6 scroll-mt-6 overflow-hidden rounded-card border border-line bg-card">
         <table className="w-full text-left text-sm">
           <caption className="px-5 pb-1 pt-5 text-left text-caption font-semibold uppercase tracking-[0.06em] text-muted sm:px-6">
             At a glance
@@ -154,13 +158,23 @@ export function RankedList({ options }: { options: RankedOption[] }) {
             );
           })}
         </table>
-        {hasTies && (
-          <p className="border-t border-line px-5 py-3 text-sm text-muted sm:px-6">
-            Options marked &ldquo;(tied)&rdquo; share the same rating; their order within the group is our judgement.
-          </p>
-        )}
+        <p className="border-t border-line px-5 py-3 text-sm text-muted sm:px-6 [text-wrap:pretty]">
+          Ordered by how strong the human evidence is, not by how big the benefit is.
+          {hasTies && <> Options marked &ldquo;(tied)&rdquo; share the same rating; their order within the group is our judgement.</>}{" "}
+          <a href={methodHref} className="link">
+            How this ranking works
+          </a>
+        </p>
       </div>
+    </>
+  );
+}
 
+/** One card per option, in ranked order, with what the studies show and do not show. Pair it with `<RankedTable>`. */
+export function RankedCards({ options }: { options: RankedOption[] }) {
+  checkOrder(options);
+  return (
+    <>
       <ol className="mt-8 grid gap-5">
         {options.map((o, i) => (
           <li key={o.name} id={`rank-${i + 1}`} className={`${CARD} scroll-mt-6`}>
