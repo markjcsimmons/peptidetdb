@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { WIDE_COLUMNS } from "@/components/product-columns";
 
 export type FinderRow = {
@@ -22,7 +22,8 @@ export type FinderRow = {
 type Option = { id: string; label: string };
 type BenefitOption = Option & { areas: string[]; guide: string; guideTitle: string };
 
-const CHIP = "inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 text-sm font-medium";
+const CHIP =
+  "inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-4 text-sm font-medium";
 const ON = "border-accent bg-accent text-on-accent";
 const OFF = "border-line bg-bg hover:border-accent";
 const COUNT = "tabular-nums opacity-75";
@@ -63,13 +64,18 @@ function writeUrl(s: State) {
   }
 }
 
-function Group({ label, children }: { label: string; children: ReactNode }) {
+/** `scroll`: one sideways-scrolling row on phones instead of several wrapped lines. */
+function Group({ label, children, scroll = false }: { label: string; children: ReactNode; scroll?: boolean }) {
   return (
     <div className="mt-5 first:mt-0">
       <p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted" aria-hidden>
         {label}
       </p>
-      <div role="group" aria-label={label} className="mt-2 flex flex-wrap gap-2">
+      <div
+        role="group"
+        aria-label={label}
+        className={`mt-2 flex gap-2 ${scroll ? "-mx-5 overflow-x-auto px-5 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0" : "flex-wrap"}`}
+      >
         {children}
       </div>
     </div>
@@ -93,11 +99,25 @@ export function ProductFinder({
   madeFrom: (Option & { note: string })[];
 }) {
   const [s, setS] = useState<State>(EMPTY);
+  const [more, setMore] = useState(false);
   useEffect(() => {
     const fromUrl = readUrl();
     if (fromUrl.benefit && !benefits.some((b) => b.id === fromUrl.benefit)) fromUrl.benefit = "";
     setS(fromUrl);
+    // A link that sets the secondary filters (e.g. ?sport=1 from the athletes page) shows them.
+    if (fromUrl.route || fromUrl.from || fromUrl.lot || fromUrl.sport || fromUrl.documented) setMore(true);
   }, [benefits]);
+
+  // Phones: once the filter panel has scrolled away, a bar pinned to the top shows the count and leads back to it.
+  const panel = useRef<HTMLDivElement>(null);
+  const [pinned, setPinned] = useState(false);
+  useEffect(() => {
+    const el = panel.current;
+    if (!el) return;
+    const o = new IntersectionObserver(([e]) => setPinned(!e.isIntersecting && e.boundingClientRect.bottom < 0));
+    o.observe(el);
+    return () => o.disconnect();
+  }, []);
   const set = (patch: Partial<State>) => {
     const next = { ...s, ...patch };
     setS(next);
@@ -112,15 +132,20 @@ export function ProductFinder({
     (skip === "sport" || !s.sport || r.sport) &&
     (skip === "documented" || !s.documented || r.documented);
   /** How many rows a choice would show, given the other filters. */
-  const count = (key: keyof State, test: (r: FinderRow) => boolean) => rows.filter((r) => match(r, key) && test(r)).length;
+  const count = (key: keyof State, test: (r: FinderRow) => boolean) =>
+    rows.filter((r) => match(r, key) && test(r)).length;
 
   const shown = rows.filter((r) => match(r));
   const ordered = s.benefit
-    ? [...rows].sort((a, b) => (a.steps[s.benefit] ?? 9) - (b.steps[s.benefit] ?? 9) || b.total - a.total || a.brand.localeCompare(b.brand))
+    ? [...rows].sort(
+        (a, b) =>
+          (a.steps[s.benefit] ?? 9) - (b.steps[s.benefit] ?? 9) || b.total - a.total || a.brand.localeCompare(b.brand),
+      )
     : rows;
   const benefit = benefits.find((b) => b.id === s.benefit);
   const onlyPurblack = shown.length > 0 && shown.every((r) => r.purblack);
   const active = JSON.stringify(s) !== JSON.stringify(EMPTY);
+  const secondary = [s.route, s.from, s.lot, s.sport, s.documented].filter(Boolean).length;
 
   const chip = (key: keyof State, value: string | boolean, label: string, n: number) => {
     const pressed = s[key] === value;
@@ -140,34 +165,116 @@ export function ProductFinder({
 
   return (
     <>
-      <div data-md-skip className="mt-8 rounded-card border border-line bg-card p-5 sm:p-6">
-        <Group label="Benefit claimed">
-          <button type="button" aria-pressed={!s.benefit} onClick={() => set({ benefit: "" })} className={`${CHIP} ${!s.benefit ? ON : OFF}`}>
+      <div
+        ref={panel}
+        id="filters"
+        data-md-skip
+        className="mt-6 scroll-mt-4 rounded-card border border-line bg-card p-5 sm:p-6"
+      >
+        <Group label="Benefit claimed" scroll>
+          <button
+            type="button"
+            aria-pressed={!s.benefit}
+            onClick={() => set({ benefit: "" })}
+            className={`${CHIP} ${!s.benefit ? ON : OFF}`}
+          >
             Any benefit <span className={COUNT}>{count("benefit", () => true)}</span>
           </button>
-          {benefits.map((b) => chip("benefit", b.id, b.label, count("benefit", (r) => b.id in r.steps)))}
+          {benefits.map((b) =>
+            chip(
+              "benefit",
+              b.id,
+              b.label,
+              count("benefit", (r) => b.id in r.steps),
+            ),
+          )}
         </Group>
-        <Group label="How you take it">
-          <button type="button" aria-pressed={!s.route} onClick={() => set({ route: "" })} className={`${CHIP} ${!s.route ? ON : OFF}`}>
-            Any <span className={COUNT}>{count("route", () => true)}</span>
-          </button>
-          {routes.map((o) => chip("route", o.id, o.label, count("route", (r) => r.route === o.id)))}
-        </Group>
-        <Group label="Made from">
-          <button type="button" aria-pressed={!s.from} onClick={() => set({ from: "" })} className={`${CHIP} ${!s.from ? ON : OFF}`}>
-            Any <span className={COUNT}>{count("from", () => true)}</span>
-          </button>
-          {madeFrom.map((o) => (
-            <span key={o.id} title={o.note} className="contents">
-              {chip("from", o.id, o.label, count("from", (r) => r.madeFrom === o.id))}
-            </span>
-          ))}
-        </Group>
-        <Group label="Documentation">
-          {chip("lot", true, "Lot reports published", count("lot", (r) => r.lot))}
-          {chip("sport", true, "Sport-tested", count("sport", (r) => r.sport))}
-          {chip("documented", true, "Graded “Documented” or better", count("documented", (r) => r.documented))}
-        </Group>
+        <button
+          type="button"
+          aria-expanded={more}
+          aria-controls="finder-more"
+          onClick={() => setMore((m) => !m)}
+          className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent"
+        >
+          {more ? "Fewer filters" : "More filters: form, source, testing"}
+          {secondary > 0 && !more && (
+            <span className="rounded-full bg-accent px-2 text-caption text-on-accent">{secondary} on</span>
+          )}
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+            className={more ? "rotate-180" : ""}
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <div id="finder-more" hidden={!more} className="mt-3">
+          <Group label="How you take it">
+            <button
+              type="button"
+              aria-pressed={!s.route}
+              onClick={() => set({ route: "" })}
+              className={`${CHIP} ${!s.route ? ON : OFF}`}
+            >
+              Any <span className={COUNT}>{count("route", () => true)}</span>
+            </button>
+            {routes.map((o) =>
+              chip(
+                "route",
+                o.id,
+                o.label,
+                count("route", (r) => r.route === o.id),
+              ),
+            )}
+          </Group>
+          <Group label="Made from">
+            <button
+              type="button"
+              aria-pressed={!s.from}
+              onClick={() => set({ from: "" })}
+              className={`${CHIP} ${!s.from ? ON : OFF}`}
+            >
+              Any <span className={COUNT}>{count("from", () => true)}</span>
+            </button>
+            {madeFrom.map((o) => (
+              <span key={o.id} title={o.note} className="contents">
+                {chip(
+                  "from",
+                  o.id,
+                  o.label,
+                  count("from", (r) => r.madeFrom === o.id),
+                )}
+              </span>
+            ))}
+          </Group>
+          <Group label="Documentation">
+            {chip(
+              "lot",
+              true,
+              "Lot reports published",
+              count("lot", (r) => r.lot),
+            )}
+            {chip(
+              "sport",
+              true,
+              "Sport-tested",
+              count("sport", (r) => r.sport),
+            )}
+            {chip(
+              "documented",
+              true,
+              "Graded “Documented” or better",
+              count("documented", (r) => r.documented),
+            )}
+          </Group>
+        </div>
         <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-line pt-4">
           <p className="text-sm text-soft [text-wrap:pretty]" aria-live="polite">
             <strong className="text-fg">
@@ -181,7 +288,7 @@ export function ProductFinder({
                 </a>
               </>
             ) : (
-              "Highest grade first. Pick a benefit to put the best-supported products first."
+              "Highest grade first."
             )}
           </p>
           {active && (
@@ -191,10 +298,37 @@ export function ProductFinder({
           )}
         </div>
         {onlyPurblack && (
-          <p className="mt-3 rounded-tile bg-warn-soft px-4 py-3 text-sm text-soft">Only Pürblack products match these filters.</p>
+          <p className="mt-3 rounded-tile bg-warn-soft px-4 py-3 text-sm text-soft">
+            Only Pürblack products match these filters.
+          </p>
         )}
         {shown.length === 0 && <p className="mt-3 text-sm text-soft">No product matches all of these filters.</p>}
       </div>
+
+      {pinned && (
+        <div
+          data-md-skip
+          data-noprint
+          className="fixed inset-x-0 top-0 z-40 border-b border-line bg-card shadow-sm lg:hidden"
+        >
+          <div className="mx-auto flex min-h-12 max-w-5xl items-center justify-between gap-3 px-4 text-sm">
+            <span className="min-w-0 truncate">
+              <strong>
+                {shown.length} of {rows.length}
+              </strong>{" "}
+              {benefit ? `· ${benefit.label}` : "products"}
+              {secondary > 0 ? ` · ${secondary} more ${secondary === 1 ? "filter" : "filters"}` : ""}
+            </span>
+            <button
+              type="button"
+              onClick={() => panel.current?.scrollIntoView({ behavior: "smooth" })}
+              className="inline-flex min-h-10 shrink-0 items-center rounded-full border border-accent px-4 font-semibold text-accent"
+            >
+              Filters
+            </button>
+          </div>
+        </div>
+      )}
 
       {benefit && (
         // Put the claims for the chosen benefit first in each row and fade the others.
@@ -204,7 +338,11 @@ export function ProductFinder({
       )}
       <div className="mt-6 overflow-hidden rounded-card border border-line bg-bg">
         {/* Column names for the wide layout; each row also carries them for screen readers and the markdown. */}
-        <div aria-hidden data-md-skip className={`hidden gap-x-6 border-b border-line bg-card px-6 py-3 lg:grid ${WIDE_COLUMNS}`}>
+        <div
+          aria-hidden
+          data-md-skip
+          className={`hidden gap-x-6 border-b border-line bg-card px-6 py-3 lg:grid ${WIDE_COLUMNS}`}
+        >
           <span className={HEAD}>Product</span>
           <span className={HEAD}>Evidence for its claims</span>
           <span className={`${HEAD} text-right`}>Grade</span>
