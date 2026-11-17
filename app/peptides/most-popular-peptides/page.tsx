@@ -527,29 +527,6 @@ export default function MostPopularPeptidesPage() {
         </p>
       </ShortAnswer>
 
-      <PageContents />
-
-      <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How we measured popularity</h2>
-        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          &ldquo;Popular&rdquo; here means searched for. The figures are Semrush estimates of average monthly Google searches in
-          the US for each peptide&rsquo;s name, from our keyword research of {formatDate(SEARCHES_DATED)}. They are modelled
-          estimates, not counts, and they measure interest, not how many people use a peptide or whether it works. Spellings and
-          combinations (such as &ldquo;CJC-1295 ipamorelin&rdquo;) are shown separately, not added in. Our research covered{" "}
-          144 search terms; a peptide missing from this page may not have been among them, so this is not a census.
-        </p>
-        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          Beside each peptide we show its best- and least-supported use, taken from the ratings on our evidence pages, so the
-          numbers here always match them. A rating measures how strong the human evidence is, not how large a benefit is or
-          whether something is safe. US status was checked {formatDate(STATUS_CHECKED)} against FDA&rsquo;s approval records and
-          its compounding safety-risk page; see the{" "}
-          <Link href="/peptides/legal-status" className="link">
-            legal status page
-          </Link>
-          . Nobody paid for a place on this page, and there are no affiliate links.
-        </p>
-      </section>
-
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">The list</h2>
         <div className="mt-6 overflow-hidden rounded-card border border-line bg-card">
@@ -597,6 +574,13 @@ export default function MostPopularPeptidesPage() {
             </tbody>
           </table>
         </div>
+        <p className="mt-3 max-w-prose text-sm text-muted">
+          Ordered by US searches, not by evidence.{" "}
+          <a href="#how-we-measured" className="link">
+            How we measured popularity
+          </a>
+        </p>
+        <PageContents />
 
         <ol className="mt-8 space-y-6">
           {rows.map((r) => {
@@ -706,6 +690,28 @@ export default function MostPopularPeptidesPage() {
         <p className="mt-6 max-w-prose text-sm text-muted">
           {STATUS_LABEL.supplement} and {STATUS_LABEL.cosmetic.toLowerCase()} describe how products are sold, not an FDA
           decision. Nothing here is legal advice.
+        </p>
+      </section>
+
+
+      <section className="mt-14">
+        <h2 id="how-we-measured" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">How we measured popularity</h2>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          &ldquo;Popular&rdquo; here means searched for. The figures are Semrush estimates of average monthly Google searches in
+          the US for each peptide&rsquo;s name, from our keyword research of {formatDate(SEARCHES_DATED)}. They are modelled
+          estimates, not counts, and they measure interest, not how many people use a peptide or whether it works. Spellings and
+          combinations (such as &ldquo;CJC-1295 ipamorelin&rdquo;) are shown separately, not added in. Our research covered{" "}
+          144 search terms; a peptide missing from this page may not have been among them, so this is not a census.
+        </p>
+        <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
+          Beside each peptide we show its best- and least-supported use, taken from the ratings on our evidence pages, so the
+          numbers here always match them. A rating measures how strong the human evidence is, not how large a benefit is or
+          whether something is safe. US status was checked {formatDate(STATUS_CHECKED)} against FDA&rsquo;s approval records and
+          its compounding safety-risk page; see the{" "}
+          <Link href="/peptides/legal-status" className="link">
+            legal status page
+          </Link>
+          . Nobody paid for a place on this page, and there are no affiliate links.
         </p>
       </section>
 

@@ -5,7 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { ShortAnswer } from "@/components/ui";
-import { TopicCard } from "@/components/topic-card";
+import { TopicGlance } from "@/components/ratings-table";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
 import { ProductsForGoal } from "@/components/products-for-goal";
@@ -83,6 +83,8 @@ export default function PeptidesForMuscleGrowthPage() {
           evidence that any peptide builds muscle without training.
         </p>
       </ShortAnswer>
+
+      <TopicGlance topic="muscle" />
 
       <PageContents />
 
@@ -268,16 +270,6 @@ export default function PeptidesForMuscleGrowthPage() {
         </p>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How each is rated here</h2>
-        <div className="mt-6 max-w-sm">
-          <TopicCard slug="muscle" compact />
-        </div>
-        <p className="mt-5 max-w-prose text-sm text-muted">
-          The card shows the best and the least-supported ratings in the muscle topic. Open it for every rating and the
-          studies behind it.
-        </p>
-      </section>
 
 
       <section className="mt-14">

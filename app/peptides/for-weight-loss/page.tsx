@@ -5,7 +5,7 @@ import { absoluteUrl, formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { ShortAnswer } from "@/components/ui";
-import { TopicCard } from "@/components/topic-card";
+import { TopicGlance } from "@/components/ratings-table";
 import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { PageContents } from "@/components/page-contents";
 
@@ -86,6 +86,11 @@ export default function ForWeightLossPage() {
           unapproved injectables, and FDA warns against unapproved and compounded versions of these drugs.
         </p>
       </ShortAnswer>
+
+      <TopicGlance topic="weight" />
+      <p className="mt-2 max-w-prose text-sm text-muted">
+        Talk to a clinician before starting or stopping any weight-loss medicine.
+      </p>
 
       <PageContents />
 
@@ -212,16 +217,6 @@ export default function ForWeightLossPage() {
         </p>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How this topic is rated here</h2>
-        <div className="mt-6 max-w-sm">
-          <TopicCard slug="weight" compact />
-        </div>
-        <p className="mt-5 max-w-prose text-sm text-muted">
-          Open the card for each rating and the studies behind it. Talk to a clinician before starting or stopping any
-          weight-loss medicine.
-        </p>
-      </section>
 
       <section className="mt-14">
         <h2 className="text-3xl font-bold leading-[1.15]">Common questions</h2>

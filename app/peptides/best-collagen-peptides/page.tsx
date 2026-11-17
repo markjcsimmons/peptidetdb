@@ -127,10 +127,24 @@ export default function BestCollagenPeptidesPage() {
         </p>
       </ShortAnswer>
 
+      <GradeTable grades={ranked("collagen")} />
+      <p className="mt-3 max-w-prose text-sm text-muted [text-wrap:pretty]">
+        Highest grade first. A grade is about how well a brand documents what it sells, not whether collagen works for you;
+        see{" "}
+        <a href="#how-we-checked" className="link">
+          how we checked
+        </a>{" "}
+        and the{" "}
+        <a href="#grades" className="link">
+          scoring sheets
+        </a>
+        .
+      </p>
+
       <PageContents />
 
       <section className="mt-14">
-        <h2 className="text-3xl font-bold leading-[1.15]">How we checked, and what this page is not</h2>
+        <h2 id="how-we-checked" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">How we checked, and what this page is not</h2>
         <ul className="mt-4 max-w-prose list-disc space-y-2 pl-6 text-soft [text-wrap:pretty]">
           <li>
             <strong className="text-fg">What counts as a batch report.</strong> A lab report for a particular lot, with the
@@ -211,13 +225,12 @@ export default function BestCollagenPeptidesPage() {
       </section>
 
       <section id="grades" className="mt-14 scroll-mt-6">
-        <h2 className="text-3xl font-bold leading-[1.15]">The grades</h2>
+        <h2 className="text-3xl font-bold leading-[1.15]">The grades in detail</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          Highest first. Select a product, or open its sheet below, for every criterion with its points, what we found and
-          a link to the document. &ldquo;Could not check&rdquo; counts as 0; if a brand sends us the missing document, we will
-          regrade it and date the change.
+          The table at the top of the page ranks the grades. Open a product&rsquo;s sheet below for every criterion with its
+          points, what we found and a link to the document. &ldquo;Could not check&rdquo; counts as 0; if a brand sends us the
+          missing document, we will regrade it and date the change.
         </p>
-        <GradeTable grades={ranked("collagen")} />
         <ScoringRules />
         <h3 className="mt-10 text-2xl font-bold leading-tight">Scoring sheets</h3>
         <div className="mt-4 grid gap-4">

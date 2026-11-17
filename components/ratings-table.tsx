@@ -1,5 +1,7 @@
-import { LEVEL_LABEL, type Level, type TopicPage } from "@/lib/topics";
-import { EvidenceMeter, RatingBadge, levelTone } from "@/components/evidence-meter";
+import Link from "next/link";
+import { LEVEL_LABEL, TOPICS, type Level, type TopicPage } from "@/lib/topics";
+import type { Topic } from "@/lib/studies";
+import { EvidenceMeter, LEVEL_ORDER, RatingBadge, levelTone } from "@/components/evidence-meter";
 
 /**
  * Compact "at a glance" table of a topic page's ratings, each linking to its full card. Benefit ratings get a small
@@ -50,5 +52,33 @@ export function RatingsTable({ rows, measures }: { rows: { subject: string; leve
         </tbody>
       </table>
     </div>
+  );
+}
+
+/**
+ * "At a glance" for a goal page that is written as sections rather than a ranked list (muscle growth, weight loss):
+ * every rating in the page's evidence topic, strongest first ("not yet assessed" last), each linking to the rating on
+ * the topic page. Placed straight after the short answer so the answer is on the first screen.
+ */
+export function TopicGlance({ topic }: { topic: Topic }) {
+  const t = TOPICS[topic];
+  const rows = t.ratings
+    .map((r, i) => ({ subject: r.subject, level: r.level, href: `/science/topics/${topic}#rating-${i + 1}` }))
+    .sort((a, b) => LEVEL_ORDER.indexOf(a.level) - LEVEL_ORDER.indexOf(b.level));
+  for (const r of rows) {
+    // A rating naming Pürblack would need the disclosure note on the page.
+    if (/p[uü]rblack/i.test(r.subject)) throw new Error(`TopicGlance(${topic}) would show a Pürblack rating`);
+  }
+  return (
+    <>
+      <RatingsTable rows={rows} measures={t.measures} />
+      <p className="mt-3 max-w-prose text-sm text-muted [text-wrap:pretty]">
+        Strongest human evidence first, from the evidence page{" "}
+        <Link href={`/science/topics/${topic}`} className="link">
+          {t.title}
+        </Link>
+        . A rating is about how strong the evidence is, not how big the effect is. Each row links to its rating and the studies behind it.
+      </p>
+    </>
   );
 }
