@@ -93,7 +93,7 @@ export const PRODUCT_URL: Record<string, string> = {
 
 const GRASS_FED = "Animal not named (“grass-fed”)";
 const INCI = "Named peptides (ingredient list)";
-const PB: ProductFacts = { ingredient: "purblack-iph", format: "Capsules", source: "Not stated on the label" };
+const PB: ProductFacts = { ingredient: "purblack-iph", format: "Capsules", source: "Marine protein, species not named (seller's FAQ; not on the label)" };
 
 /** One entry per graded product id (checked against lib/grades.ts at the bottom). */
 export const PRODUCT_FACTS: Record<string, ProductFacts> = {

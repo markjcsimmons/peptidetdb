@@ -7,7 +7,8 @@ export type FinderRow = {
   id: string;
   brand: string;
   total: number;
-  route: string;
+  /** Type of product (lib/product-finder.ts `Kind`). */
+  kind: string;
   madeFrom: string;
   lot: boolean;
   sport: boolean;
@@ -29,15 +30,16 @@ const OFF = "border-line bg-bg hover:border-accent";
 const COUNT = "tabular-nums opacity-75";
 const HEAD = "text-caption font-semibold uppercase tracking-[0.06em] text-muted";
 
-type State = { benefit: string; route: string; from: string; lot: boolean; sport: boolean; documented: boolean };
-const EMPTY: State = { benefit: "", route: "", from: "", lot: false, sport: false, documented: false };
+type State = { kind: string; benefit: string; from: string; lot: boolean; sport: boolean; documented: boolean };
+const EMPTY: State = { kind: "", benefit: "", from: "", lot: false, sport: false, documented: false };
 
 function readUrl(): State {
   try {
     const p = new URLSearchParams(window.location.search);
     return {
+      // `form=skin` is the address the old "how you take it" filter wrote.
+      kind: p.get("type") ?? (p.get("form") === "skin" ? "topical" : ""),
       benefit: p.get("benefit") ?? "",
-      route: p.get("form") ?? "",
       from: p.get("from") ?? "",
       lot: p.get("lot") === "1",
       sport: p.get("sport") === "1",
@@ -51,8 +53,8 @@ function readUrl(): State {
 function writeUrl(s: State) {
   try {
     const p = new URLSearchParams();
+    if (s.kind) p.set("type", s.kind);
     if (s.benefit) p.set("benefit", s.benefit);
-    if (s.route) p.set("form", s.route);
     if (s.from) p.set("from", s.from);
     if (s.lot) p.set("lot", "1");
     if (s.sport) p.set("sport", "1");
@@ -90,12 +92,12 @@ function Group({ label, children, scroll = false }: { label: string; children: R
 export function ProductFinder({
   rows,
   benefits,
-  routes,
+  kinds,
   madeFrom,
 }: {
   rows: FinderRow[];
   benefits: BenefitOption[];
-  routes: Option[];
+  kinds: (Option & { note: string })[];
   madeFrom: (Option & { note: string })[];
 }) {
   const [s, setS] = useState<State>(EMPTY);
@@ -103,10 +105,11 @@ export function ProductFinder({
   useEffect(() => {
     const fromUrl = readUrl();
     if (fromUrl.benefit && !benefits.some((b) => b.id === fromUrl.benefit)) fromUrl.benefit = "";
+    if (fromUrl.kind && !kinds.some((k) => k.id === fromUrl.kind)) fromUrl.kind = "";
     setS(fromUrl);
     // A link that sets the secondary filters (e.g. ?sport=1 from the athletes page) shows them.
-    if (fromUrl.route || fromUrl.from || fromUrl.lot || fromUrl.sport || fromUrl.documented) setMore(true);
-  }, [benefits]);
+    if (fromUrl.from || fromUrl.lot || fromUrl.sport || fromUrl.documented) setMore(true);
+  }, [benefits, kinds]);
 
   // Phones: once the filter panel has scrolled away, a bar pinned to the top shows the count and leads back to it.
   const panel = useRef<HTMLDivElement>(null);
@@ -125,8 +128,8 @@ export function ProductFinder({
   };
 
   const match = (r: FinderRow, skip?: keyof State) =>
+    (skip === "kind" || !s.kind || r.kind === s.kind) &&
     (skip === "benefit" || !s.benefit || s.benefit in r.steps) &&
-    (skip === "route" || !s.route || r.route === s.route) &&
     (skip === "from" || !s.from || r.madeFrom === s.from) &&
     (skip === "lot" || !s.lot || r.lot) &&
     (skip === "sport" || !s.sport || r.sport) &&
@@ -145,7 +148,8 @@ export function ProductFinder({
   const benefit = benefits.find((b) => b.id === s.benefit);
   const onlyPurblack = shown.length > 0 && shown.every((r) => r.purblack);
   const active = JSON.stringify(s) !== JSON.stringify(EMPTY);
-  const secondary = [s.route, s.from, s.lot, s.sport, s.documented].filter(Boolean).length;
+  const kind = kinds.find((k) => k.id === s.kind);
+  const secondary = [s.from, s.lot, s.sport, s.documented].filter(Boolean).length;
 
   const chip = (key: keyof State, value: string | boolean, label: string, n: number) => {
     const pressed = s[key] === value;
@@ -171,6 +175,27 @@ export function ProductFinder({
         data-md-skip
         className="mt-6 scroll-mt-4 rounded-card border border-line bg-card p-5 sm:p-6"
       >
+        <Group label="Type of product">
+          <button
+            type="button"
+            aria-pressed={!s.kind}
+            onClick={() => set({ kind: "" })}
+            className={`${CHIP} ${!s.kind ? ON : OFF}`}
+          >
+            All types <span className={COUNT}>{count("kind", () => true)}</span>
+          </button>
+          {kinds.map((o) => (
+            <span key={o.id} title={o.note} className="contents">
+              {chip(
+                "kind",
+                o.id,
+                o.label,
+                count("kind", (r) => r.kind === o.id),
+              )}
+            </span>
+          ))}
+        </Group>
+        {kind && <p className="mt-2 max-w-prose text-sm text-soft [text-wrap:pretty]">{kind.note}</p>}
         <Group label="Benefit claimed" scroll>
           <button
             type="button"
@@ -196,7 +221,7 @@ export function ProductFinder({
           onClick={() => setMore((m) => !m)}
           className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent"
         >
-          {more ? "Fewer filters" : "More filters: form, source, testing"}
+          {more ? "Fewer filters" : "More filters: source, testing"}
           {secondary > 0 && !more && (
             <span className="rounded-full bg-accent px-2 text-caption text-on-accent">{secondary} on</span>
           )}
@@ -216,24 +241,6 @@ export function ProductFinder({
           </svg>
         </button>
         <div id="finder-more" hidden={!more} className="mt-3">
-          <Group label="How you take it">
-            <button
-              type="button"
-              aria-pressed={!s.route}
-              onClick={() => set({ route: "" })}
-              className={`${CHIP} ${!s.route ? ON : OFF}`}
-            >
-              Any <span className={COUNT}>{count("route", () => true)}</span>
-            </button>
-            {routes.map((o) =>
-              chip(
-                "route",
-                o.id,
-                o.label,
-                count("route", (r) => r.route === o.id),
-              ),
-            )}
-          </Group>
           <Group label="Made from">
             <button
               type="button"
@@ -316,7 +323,8 @@ export function ProductFinder({
               <strong>
                 {shown.length} of {rows.length}
               </strong>{" "}
-              {benefit ? `· ${benefit.label}` : "products"}
+              {kind ? `· ${kind.label}` : ""}
+              {benefit ? ` · ${benefit.label}` : kind ? "" : "products"}
               {secondary > 0 ? ` · ${secondary} more ${secondary === 1 ? "filter" : "filters"}` : ""}
             </span>
             <button

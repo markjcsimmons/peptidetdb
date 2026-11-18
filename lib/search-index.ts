@@ -59,6 +59,14 @@ const SITE_PAGES: SearchEntry[] = [
   },
   {
     g: "page",
+    t: "Peptide capsules & tablets",
+    u: "/products?type=capsules",
+    k: "Products",
+    d: "Graded capsules and tablets of peptides other than collagen: milk, fish, fava bean and others.",
+    s: "pills oral peptide supplements bioactive lactium bonito non-collagen",
+  },
+  {
+    g: "page",
     t: "Study summaries",
     u: "/science",
     k: "Studies",

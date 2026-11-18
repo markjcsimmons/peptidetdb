@@ -9,7 +9,8 @@ import { formatDate } from "@/lib/format";
 import { PaperLink } from "@/components/paper-link";
 import { JsonLd } from "@/components/json-ld";
 import { ALL_GRADES } from "@/lib/grades";
-import { BENEFITS } from "@/lib/product-finder";
+import { BENEFITS, KIND_LABEL, KIND_ORDER, kindOf } from "@/lib/product-finder";
+import { PRODUCT_FACTS } from "@/lib/product-match";
 import { HorizontalTimeline } from "@/components/timeline";
 import { CARD, SectionHead } from "@/components/ui";
 import { SearchTrigger } from "@/components/site-search";
@@ -275,6 +276,22 @@ export default function HomePage() {
               >
                 {b.label}{" "}
                 <span className="tabular-nums text-muted">{ALL_GRADES.filter((g) => b.areas.some((a) => g.claimAreas.includes(a))).length}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-caption font-semibold uppercase tracking-[0.08em] text-muted">Or browse by type</p>
+        <ul className="mt-2 flex flex-wrap gap-2.5">
+          {KIND_ORDER.map((k) => (
+            <li key={k}>
+              <Link
+                href={`/products?type=${k}`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-bg px-[18px] text-sm font-medium hover:border-accent"
+              >
+                {KIND_LABEL[k]}{" "}
+                <span className="tabular-nums text-muted">
+                  {ALL_GRADES.filter((g) => kindOf(PRODUCT_FACTS[g.id]) === k).length}
+                </span>
               </Link>
             </li>
           ))}

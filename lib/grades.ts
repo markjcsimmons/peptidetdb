@@ -1028,6 +1028,8 @@ export const GRADES: ProductGrade[] = [
 // Pürblack is graded by exactly the same rules as everyone else; the operator of this site works for Pürblack.
 const PB = (handle: string, name: string) => ({ label: `Pürblack ${name} product page`, href: `https://purblack.com/products/${handle}` });
 const PB_COA = (slug: string, name: string) => ({ label: `Pürblack internal certificate, ${name}`, href: `https://purblack.com/pages/coa/${slug}` });
+/** Pürblack's peptide collection page; its FAQ states the protein source (read 2026-11-17). */
+const PB_FAQ = { label: "Pürblack peptides collection page, FAQ (read 17 Nov 2026)", href: "https://purblack.com/collections/peptides-1" };
 const PB_COA_PAGE = { label: "Pürblack certificate-of-analysis page (links the third-party reports)", href: "https://purblack.com/pages/certificate-of-analysis" };
 const CAMBIUM = { label: "NSF news release: NSF acquires Cambium Analytica", href: "https://www.nsf.org/news/nsf-acquires-cambium-analytica" };
 const ORAL_TESTING = { label: "Our oral peptides page (testing notes)", href: "/peptides/oral-peptides" };
@@ -1109,14 +1111,14 @@ function purblack(o: {
     },
     amount: { points: 8, note: "The label lists every ingredient with its amount per serving.", sources: [page] },
     source: {
-      points: 0,
-      note: "The label calls the peptides “from natural source” but does not say what protein they are made from. (Pürblack's own buying guide lists “clearly disclosed marine or protein origin” as a mark of quality.)",
-      sources: [page, { label: "Pürblack buying guide", href: "https://purblack.com/pages/peptides-quality-guide" }],
+      points: 2,
+      note: "The FAQ on Pürblack's peptides collection page says “Our peptides are made from marine sources of protein” and that vegetarians can take them if they eat algae or fish. No species is named, and the label and product page do not say. (Pürblack's own buying guide lists “clearly disclosed marine or protein origin” as a mark of quality.)",
+      sources: [page, PB_FAQ, { label: "Pürblack buying guide", href: "https://purblack.com/pages/peptides-quality-guide" }],
     },
     allergen: {
       points: null,
-      note: "Because the label does not say what the peptides are made from, we cannot tell whether an allergen such as fish should be declared. The label has no allergen statement.",
-      sources: [page],
+      note: "The label has no allergen statement and does not say what the peptides are made from. Pürblack's FAQ says marine protein, which may mean fish, a major allergen, but it names no species, so we cannot tell whether fish should be declared.",
+      sources: [page, PB_FAQ],
     },
     blend: { points: 6, note: "Every ingredient, including each peptide complex, is listed with its amount.", sources: [page] },
     "dose-match": NONE_CITED(page),
@@ -1162,7 +1164,7 @@ export const ORAL_GRADES: ProductGrade[] = [
     coaSlug: "muscle-plus",
     claimAreas: ["muscle"],
     summary:
-      "Lot reports, a full label and an NSF Certified for Sport listing under its earlier name, but the peptide source is not stated and one cited paper cannot be found.",
+      "Lot reports, a full label and an NSF Certified for Sport listing under its earlier name, but the label does not name the peptide source and one cited paper cannot be found.",
     scores: {
       "coa-numbers": {
         points: 7,
@@ -1199,7 +1201,7 @@ export const ORAL_GRADES: ProductGrade[] = [
     handle: "joint-peptide",
     coaSlug: "joint-plus",
     claimAreas: ["joints", "bone"],
-    summary: "Lot reports, a full label and an NSF Certified for Sport listing under its earlier name, but the peptide source is not stated.",
+    summary: "Lot reports, a full label and an NSF Certified for Sport listing under its earlier name, but the label does not name the peptide source.",
     scores: {
       "coa-numbers": {
         points: 7,

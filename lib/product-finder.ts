@@ -8,7 +8,9 @@
  *   the page instead.
  * - "Lab report for the lot" means the batch-report criterion scored above 0; "sport-tested" means the
  *   certification criterion scored 8 (a sport-testing programme's directory lists it).
- * - There is no "natural" or "safety" filter: neither is something the grades measure.
+ * - There is no "natural", "targeted" or "safety" filter: none is something the grades or the evidence measure
+ *   ("natural" and "targeted" are one seller's marketing words). The product types are plain descriptions of form
+ *   and ingredient.
  */
 import { ALL_GRADES, isPurblack, type ClaimArea, type ProductGrade } from "@/lib/grades";
 import { PRODUCT_FACTS, type ProductFacts } from "@/lib/product-match";
@@ -45,16 +47,62 @@ export const SINGLE_MAKER_BENEFITS = ALL_BENEFITS.filter((b) => ALL_GRADES.some(
 
 export const benefitFor = (area: ClaimArea) => BENEFITS.find((b) => b.areas.includes(area));
 
-export type Route = "mouth" | "skin";
-export const ROUTE_LABEL: Record<Route, string> = { mouth: "By mouth", skin: "On the skin" };
-export const routeOf = (f: ProductFacts): Route => (f.format === "Serum" || f.format === "Cream" ? "skin" : "mouth");
+/**
+ * Type of product, from the ingredient and format in lib/product-match.ts. It also says how you take it (collagen
+ * and capsules by mouth, creams and serums on the skin), so it replaces a separate "how you take it" filter.
+ */
+export type Kind = "collagen" | "capsules" | "topical";
+export const KIND_ORDER: Kind[] = ["collagen", "capsules", "topical"];
+export const KIND_LABEL: Record<Kind, string> = {
+  collagen: "Collagen powders",
+  capsules: "Peptide capsules & tablets",
+  topical: "Creams & serums",
+};
+export const KIND_NOTE: Record<Kind, string> = {
+  collagen: "Collagen peptide powders, mixed into food or drink.",
+  capsules:
+    "Capsules or tablets of protein fragments other than collagen, taken by mouth: milk peptides (Lactium), fish (bonito) peptides, fava bean peptides and Pürblack’s peptide complexes (from marine protein, the seller says).",
+  topical: "Peptides in a serum or cream, put on the skin or scalp.",
+};
+
+export function kindOf(f: ProductFacts): Kind {
+  if (f.format === "Serum" || f.format === "Cream") return "topical";
+  if (f.ingredient === "collagen" || f.ingredient === "multi-collagen") {
+    if (f.format !== "Powder") throw new Error(`product-finder: collagen product as ${f.format}; "Collagen powders" no longer fits`);
+    return "collagen";
+  }
+  if (f.format !== "Capsules" && f.format !== "Tablets")
+    throw new Error(`product-finder: ${f.ingredient} as ${f.format}; "Peptide capsules & tablets" no longer fits`);
+  return "capsules";
+}
 
 /** What the peptides are made from, grouped for a reader with an allergy or a diet. From the source criterion. */
-export type MadeFrom = "Beef (bovine)" | "Several animals" | "Animal not named" | "Fish" | "Milk" | "Plant" | "Cosmetic peptides" | "Not stated";
-export const MADE_FROM_ORDER: MadeFrom[] = ["Beef (bovine)", "Fish", "Milk", "Plant", "Several animals", "Animal not named", "Cosmetic peptides", "Not stated"];
+export type MadeFrom =
+  | "Beef (bovine)"
+  | "Several animals"
+  | "Animal not named"
+  | "Fish"
+  | "Marine, species not named"
+  | "Milk"
+  | "Plant"
+  | "Cosmetic peptides"
+  | "Not stated";
+export const MADE_FROM_ORDER: MadeFrom[] = [
+  "Beef (bovine)",
+  "Fish",
+  "Marine, species not named",
+  "Milk",
+  "Plant",
+  "Several animals",
+  "Animal not named",
+  "Cosmetic peptides",
+  "Not stated",
+];
 export const MADE_FROM_NOTE: Record<MadeFrom, string> = {
   "Beef (bovine)": "Collagen from cattle (hide or unspecified tissue).",
   Fish: "Peptides from fish protein.",
+  "Marine, species not named":
+    "The seller says marine protein but names no species, and the label does not say; it may be fish. Its FAQ says people who eat fish or algae can take them.",
   Milk: "Peptides from milk protein (casein).",
   Plant: "Peptides from plant protein (for example fava bean).",
   "Several animals": "Collagen from more than one animal; may include fish, chicken or egg.",
@@ -68,7 +116,7 @@ export function madeFromOf(f: ProductFacts): MadeFrom {
   if (f.ingredient === "fish-protein") return "Fish";
   if (f.ingredient === "casein-hydrolysate") return "Milk";
   if (f.ingredient === "fava-bean-peptides") return "Plant";
-  if (f.ingredient === "purblack-iph") return "Not stated";
+  if (f.ingredient === "purblack-iph") return "Marine, species not named";
   if (f.ingredient === "topical-peptides" || f.ingredient === "topical-ghk-cu") {
     return f.source.startsWith("Unclear") ? "Not stated" : "Cosmetic peptides";
   }
@@ -82,4 +130,9 @@ export const isSportTested = (g: ProductGrade) => g.scores.certification.points 
 
 // ---------- build checks ----------
 for (const g of ALL_GRADES) madeFromOf(PRODUCT_FACTS[g.id]);
+// Same rule as the benefits: a type is offered only when products from more than one maker have it.
+for (const k of KIND_ORDER) {
+  const of = ALL_GRADES.filter((g) => kindOf(PRODUCT_FACTS[g.id]) === k);
+  if (!of.some((g) => !isPurblack(g))) throw new Error(`product-finder: type "${k}" would list only Pürblack products`);
+}
 if (BENEFITS.length === 0) throw new Error("product-finder: no benefits to offer");

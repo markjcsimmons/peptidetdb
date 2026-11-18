@@ -16,20 +16,21 @@ import type { Level } from "@/lib/topics";
 import { guideFor } from "@/lib/guides";
 import {
   BENEFITS,
+  KIND_LABEL,
+  KIND_NOTE,
+  KIND_ORDER,
   MADE_FROM_NOTE,
   MADE_FROM_ORDER,
-  ROUTE_LABEL,
   SINGLE_MAKER_BENEFITS,
   hasLotReport,
   isSportTested,
+  kindOf,
   madeFromOf,
-  routeOf,
-  type Route,
 } from "@/lib/product-finder";
 
 export const metadata: Metadata = {
   title: "Peptide products graded: filter by benefit",
-  description: `Compare ${ALL_GRADES.length} peptide and collagen products, each graded out of 100 for lab reports, certification, labelling and claims. Filter by benefit, form, source and testing.`,
+  description: `Compare ${ALL_GRADES.length} peptide and collagen products, each graded out of 100 for lab reports, certification, labelling and claims. Filter by benefit, type, source and testing.`,
   alternates: { canonical: "/products" },
 };
 
@@ -75,7 +76,7 @@ export default function ProductsPage() {
       id: g.id,
       brand: g.brand,
       total: result(g).total,
-      route: routeOf(f),
+      kind: kindOf(f),
       madeFrom: madeFromOf(f),
       lot: hasLotReport(g),
       sport: isSportTested(g),
@@ -136,7 +137,7 @@ export default function ProductsPage() {
           guide: b.guide,
           guideTitle: `See ${guideFor(b.guide).title.toLowerCase()}`,
         }))}
-        routes={(["mouth", "skin"] as Route[]).map((id) => ({ id, label: ROUTE_LABEL[id] }))}
+        kinds={KIND_ORDER.map((id) => ({ id, label: KIND_LABEL[id], note: KIND_NOTE[id] }))}
         madeFrom={usedFrom.map((m) => ({ id: m, label: m, note: MADE_FROM_NOTE[m] }))}
       />
 
@@ -218,8 +219,18 @@ export default function ProductsPage() {
               certification in the certifier&rsquo;s own directory.
             </li>
             <li>
+              <strong className="text-fg">Three types of product.</strong>{" "}
+              {KIND_ORDER.map((k, i) => (
+                <span key={k}>
+                  {i > 0 && " "}
+                  <em>{KIND_LABEL[k]}</em>: {KIND_NOTE[k].charAt(0).toLowerCase() + KIND_NOTE[k].slice(1)}
+                </span>
+              ))}{" "}
+              The evidence differs by type, so a rating for collagen says nothing about a capsule, and the other way round.
+            </li>
+            <li>
               <strong className="text-fg">Check &ldquo;Made from&rdquo; if you have a food allergy.</strong> Fish and
-              milk are common allergens, and multi-source collagens may include fish or egg. &ldquo;Not stated&rdquo;
+              milk are common allergens, multi-source collagens may include fish or egg, and &ldquo;marine&rdquo; may mean fish. &ldquo;Not stated&rdquo;
               means the label does not say.
             </li>
             {SINGLE_MAKER_BENEFITS.length > 0 && (
