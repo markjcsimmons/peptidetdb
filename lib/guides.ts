@@ -241,6 +241,14 @@ export const GUIDES: Guide[] = [
     peptides: ["mots-c"],
   },
   {
+    path: "/peptides/semax",
+    title: "Semax",
+    kind: "profile",
+    blurb: "Russian nasal peptide: small Russian studies after stroke and in eye, ulcer and nerve disease; no memory trial in healthy people.",
+    topics: ["brain", "eye", "gut"],
+    peptides: ["semax"],
+  },
+  {
     path: "/peptides/selank",
     title: "Selank",
     kind: "profile",

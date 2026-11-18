@@ -109,7 +109,11 @@ const OPTIONS: Option[] = [
     notShown: (
       <>
         None of the three is described as randomised or placebo-controlled, one had no comparison group, and the abstracts give
-        few or no numbers. We found no trial of semax as a memory or focus aid in healthy people.
+        few or no numbers. We found no trial of semax as a memory or focus aid in healthy people. More:{" "}
+        <Link href="/peptides/semax" className="link">
+          semax: what the studies show
+        </Link>
+        .
       </>
     ),
   },
@@ -216,7 +220,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Does semax work?",
-    a: "The human evidence we found is three Russian-language studies from one research group, after stroke or in people with reduced blood flow to the brain. They report benefits but none is described as randomised or placebo-controlled, and the abstracts give few numbers. We found no trial of semax in healthy people.",
+    a: "For stroke and reduced blood flow to the brain, the human evidence we found is three Russian-language studies from one research group. They report benefits but none is described as randomised or placebo-controlled, and the abstracts give few numbers. In healthy people we found only a small placebo-controlled brain-scan study, which did not measure memory or attention. Other small Russian studies cover motor neuron disease, peptic ulcers and eye disease; see our semax profile.",
   },
   {
     q: "Is Cerebrolysin a nootropic?",

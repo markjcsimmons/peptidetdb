@@ -72,6 +72,18 @@ export const PROFILE_FACTS: Record<string, ProfileFacts> = {
       ["womens-health", "MOTS-c for bone loss after menopause (osteoporosis)"],
     ],
   },
+  "/peptides/semax": {
+    peptide: "semax",
+    what: "A Russian seven-amino-acid peptide from a fragment of the hormone ACTH, promoted for memory and focus.",
+    routes: ["nasal"],
+    status:
+      "Not an FDA-approved drug. FDA's compounding page lists it among withdrawn nominations; FDA's advisory committee recommended it for the 503A bulks list in July 2026 (not binding); no final FDA decision.",
+    ratings: [
+      ["brain", "Semax after stroke and for reduced blood flow to the brain"],
+      ["eye", "Semax nasal drops for optic nerve disease"],
+      ["gut", "Semax nasal drops for peptic ulcers"],
+    ],
+  },
   "/peptides/selank": {
     peptide: "selank",
     what: "A peptide promoted for anxiety.",

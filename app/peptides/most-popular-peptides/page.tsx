@@ -235,14 +235,15 @@ const ENTRIES: Entry[] = [
     ratings: [
       ["brain", "Semax after stroke and for reduced blood flow to the brain"],
       ["eye", "Semax nasal drops for optic nerve disease"],
+      ["gut", "Semax nasal drops for peptic ulcers"],
     ],
     note: (
       <>
-        Russian studies after stroke and in optic nerve disease, none described as randomised or placebo-controlled. We found no
-        trial of semax as a memory or focus aid in healthy people.
+        Small Russian studies, mostly after stroke and in eye disease; none with a clinical outcome is described as
+        placebo-controlled. We found no trial of semax as a memory or focus aid in healthy people.
       </>
     ),
-    more: { href: "/peptides/nootropic-peptides", label: "Nootropic peptides" },
+    more: { href: "/peptides/semax", label: "Semax: what the studies show" },
   },
   {
     id: "cjc-1295",

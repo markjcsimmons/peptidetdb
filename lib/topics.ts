@@ -349,12 +349,12 @@ export const TOPICS: Record<Topic, TopicPage> = {
     ],
     gaps: [
       "No independently funded randomised trial of a marine peptide supplement for sleep, memory or stress is summarised here.",
-      "We found no placebo-controlled human trial of selank or semax. The semax and Noopept studies are Russian-language articles; we read only their English abstracts.",
+      "We found no placebo-controlled human trial of selank, and none of semax with a clinical outcome (one small placebo-controlled semax study measured only brain scans). Most semax and Noopept studies are Russian-language articles; we read only their English abstracts.",
       "We found no trial of any of these peptides as a memory or focus aid in healthy people. Non-peptide nootropics (piracetam and similar drugs, caffeine, herbal products) are outside this site's scope.",
       "We did not search for trials comparing any of these with melatonin, sleep hygiene or cognitive behavioural therapy for insomnia.",
       "Glycine and other amino acids, melatonin and herbal sleep aids are outside this site's scope.",
     ],
-    reviewedOn: "2026-11-13",
+    reviewedOn: "2026-11-18",
   },
   immune: {
     slug: "immune",
@@ -586,6 +586,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "Two small trials disagree. In 28 people, 2.5 g of cod protein hydrolysate for six weeks did no better than placebo on IBS severity. In a 10-day crossover of about 41 people, a partly hydrolysed milk protein drink lowered symptom scores more than an ordinary one, but no blood or urine marker differed, and dairy-industry employees are among the authors.",
       },
       {
+        subject: "Semax nasal drops for peptic ulcers",
+        level: "limited",
+        why: "One short Russian report from 2002 found ulcers healed in 89.5% of patients given semax with standard drugs, against 30.8% of controls, after 14 days. Its abstract gives no patient numbers and does not say how patients were assigned or whether anyone was blinded.",
+      },
+      {
         subject: "BPC-157 for gut conditions (ulcers, colitis, fistulas)",
         level: "preclinical",
         why: "Rat experiments, summarised in two reviews that share authors, describe healing of gut joins and fistulas. A 2012 review mentions a phase II programme (PL 14736) but gives no results, and we found no controlled human trial of BPC-157 for a gut condition in PubMed.",
@@ -608,7 +613,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "Prescription trials are funded by the drug makers in several cases; we report funding for each study on its page.",
       "The collagen and BPC-157 'none' and 'preclinical' ratings rest on narrow PubMed searches.",
     ],
-    reviewedOn: "2026-11-12",
+    reviewedOn: "2026-11-18",
   },
   "oral-peptides": {
     slug: "oral-peptides",
@@ -672,7 +677,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       {
         subject: "Semax nasal drops for optic nerve disease",
         level: "limited",
-        why: "One Russian controlled study from 2000 reports better vision, visual fields and optic-nerve function when semax was added to standard treatment, but its abstract gives no patient numbers or results and does not say it was randomised.",
+        why: "Two Russian controlled studies report benefits when semax was added: better vision, visual fields and optic-nerve function in optic nerve disease (2000), and better electrical eye tests in glaucoma (2001). Neither abstract gives patient numbers or results, and neither says it was randomised.",
       },
       {
         subject: "Oral marine (fish-derived) peptides for eyesight",
@@ -685,7 +690,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "We did not compare any of these with other dry-eye or glaucoma treatments, and the glaucoma studies tested Retinalamin alongside eye-pressure treatment, not instead of it.",
       "No eye study of TB-500 was found; the eye trials used the full thymosin beta-4 protein.",
     ],
-    reviewedOn: "2026-11-13",
+    reviewedOn: "2026-11-18",
   },
   longevity: {
     slug: "longevity",
