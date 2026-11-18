@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/peptides/peptides-for-muscle-growth", "2026-11-10"),
     stat("/peptides/bpc-157", "2026-11-10"),
     stat("/peptides/kpv", "2026-11-10"),
+    stat("/peptides/mots-c", "2026-11-18"),
     stat("/peptides/ghk-cu", "2026-11-12"),
     stat("/peptides/tb-500", "2026-11-12"),
     stat("/peptides/selank", "2026-11-10"),

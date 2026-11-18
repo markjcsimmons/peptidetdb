@@ -216,7 +216,15 @@ const OPTIONS: Option[] = [
         , and in people exercise raises the body&rsquo;s own MOTS-c.
       </>
     ),
-    notShown: <>Our searches found no trial that gave MOTS-c to people, so its effect and safety in humans are unknown.</>,
+    notShown: (
+      <>
+        Our searches found no trial that gave MOTS-c to people, so its effect and safety in humans are unknown. More:{" "}
+        <Link href="/peptides/mots-c" className="link">
+          MOTS-c: what the studies show
+        </Link>
+        .
+      </>
+    ),
   },
   {
     name: "FOXO4-DRI (senolytic peptide)",

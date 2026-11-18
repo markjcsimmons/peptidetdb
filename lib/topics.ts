@@ -456,9 +456,14 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "A meta-analysis of seven trials found lean mass rose as a share of body weight but fell by 1.74 kg in absolute terms, with very high variation between studies, and a network meta-analysis found tirzepatide cut lean mass by 8.3% as well as fat. None of the studies summarised here tests whether exercise or diet prevents the loss.",
       },
       {
-        subject: "Non-prescription and unapproved peptides sold for weight loss (including MOTS-c and others)",
+        subject: "MOTS-c for obesity and insulin resistance",
+        level: "preclinical",
+        why: "In mice, MOTS-c treatment prevented obesity and insulin resistance caused by a high-fat diet. In people, studies have only measured the body's own MOTS-c, with conflicting results: a meta-analysis of 602 people found lower levels in type 2 diabetes but higher levels in obesity, and a study of 85 adults found no difference between people with and without obesity. Our PubMed searches on 18 November 2026 found no trial that gave MOTS-c to people. FDA's advisory committee considered it for obesity in July 2026.",
+      },
+      {
+        subject: "Other non-prescription and unapproved peptides sold for weight loss",
         level: "unassessed",
-        why: "We have not summarised any trial of these, so we do not rate them. FDA's advisory committee considered MOTS-c for obesity in July 2026. This is a gap in our coverage, not a finding that trials exist or do not.",
+        why: "We have not summarised any trial of these, so we do not rate them. This is a gap in our coverage, not a finding that trials exist or do not.",
       },
     ],
     gaps: [
@@ -467,7 +472,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "Most trials are funded by the drug makers and run for 1 to 3 years, and the long-term safety of staying on these drugs for life is not covered here.",
       "Compounded and unapproved GLP-1 products are a regulatory and safety topic, not a trial topic; see FDA's warning linked on the weight-loss page.",
     ],
-    reviewedOn: "2026-11-10",
+    reviewedOn: "2026-11-18",
   },
   "womens-health": {
     slug: "womens-health",
@@ -497,6 +502,11 @@ export const TOPICS: Record<Topic, TopicPage> = {
         why: "A 12-month trial in 131 postmenopausal women found small gains in spine and hip bone density over placebo, and an uncontrolled 4-year follow-up of 31 of them agreed. Two trials of about six months found no change in blood markers of bone turnover versus placebo. A 2026 scoping review of 15 studies called the evidence promising but inconsistent. No study here shows fewer fractures.",
       },
       {
+        subject: "MOTS-c for bone loss after menopause (osteoporosis)",
+        level: "preclinical",
+        why: "In mice with their ovaries removed, a model of bone loss after menopause, daily MOTS-c injections for 12 weeks lessened bone loss. Our PubMed search on 18 November 2026 found no human study of MOTS-c for bone. FDA's advisory committee considered it for osteoporosis in July 2026.",
+      },
+      {
         subject: "Peptides or collagen for menopausal symptoms (hot flushes, mood, sleep)",
         level: "none",
         why: "Our PubMed search on 12 November 2026 for peptide or collagen trials with hot-flush or menopause-symptom outcomes found none. That is not proof none exists.",
@@ -514,7 +524,7 @@ export const TOPICS: Record<Topic, TopicPage> = {
       "Collagen bone trials measure bone density or blood markers; none of the studies here counted fractures.",
       "Pregnancy and breastfeeding safety of research peptides was searched only narrowly and is not rated.",
     ],
-    reviewedOn: "2026-11-12",
+    reviewedOn: "2026-11-18",
   },
   "mens-health": {
     slug: "mens-health",

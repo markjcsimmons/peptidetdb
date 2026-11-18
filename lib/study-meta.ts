@@ -34,6 +34,7 @@ const FUNDING: Record<string, Exclude<FundingType, "not-stated">> = {
   "vasireddi-2025": "other", "mendias-2026": "other", "jain-2026": "other", "yeung-2026": "other", "cowart-2025": "other",
   "bassila-2026": "other", "khatri-2021": "other",
   // public or none, no industry link stated
+  "lee-2015": "public", "zhou-2024": "public", "von-walden-2021": "public", "ozkaya-2025": "public", "fang-2025": "public",
   "pu-2023": "public", "mcguire-2025": "public", "nukaly-2026": "public", "mortazavi-2025": "public",
   "zdrada-nowak-2025": "public", "chan-2024": "public", "lueangarun-2020": "public", "cheng-2026": "public",
   "dai-2021": "public", "yuenyongviwat-2025": "public", "hijlkema-2022": "public", "chang-2024": "public",
@@ -95,6 +96,7 @@ export const SIZE: Record<string, StudySize> = {
   "priyadarshini-2026": { people: 10225, trials: 58 }, "dasrilsyah-2023": { people: 38 }, "strakhov-2020": { people: 147 },
   "dorofeev-2025": { people: 56 }, "malakhova-2024": { people: 56 },
   "khavinson-2003": { people: 266 }, "karaa-2023": { people: 218 }, "thompson-2024": { people: 10 }, "cui-2019": { people: 597, trials: 6 }, "vester-2021": { people: 185, trials: 2 },
+  "zhou-2024": { people: 602 }, "von-walden-2021": { people: 30 }, "ozkaya-2025": { people: 85 },
 };
 
 // Every id must exist in the registry, so a renamed study cannot leave a stale value behind.

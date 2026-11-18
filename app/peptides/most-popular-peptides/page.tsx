@@ -215,14 +215,17 @@ const ENTRIES: Entry[] = [
     name: "MOTS-c",
     keyword: "MOTS-c",
     searches: 27100,
-    ratings: [["longevity", "MOTS-c for ageing and physical decline"]],
+    ratings: [
+      ["longevity", "MOTS-c for ageing and physical decline"],
+      ["weight", "MOTS-c for obesity and insulin resistance"],
+    ],
     note: (
       <>
         In mice it improved physical performance at all ages. Exercise raises the body&rsquo;s own MOTS-c, but our searches
         found no trial that gave MOTS-c to people.
       </>
     ),
-    more: { href: "/peptides/peptides-for-anti-aging", label: "Peptides for anti-aging" },
+    more: { href: "/peptides/mots-c", label: "MOTS-c: what the studies show" },
   },
   {
     id: "semax",

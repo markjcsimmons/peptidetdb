@@ -196,12 +196,13 @@ export default function ForWeightLossPage() {
           ).
         </p>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          For other peptides sold for weight loss, such as MOTS-c (considered for obesity by FDA&rsquo;s advisory
-          committee in July 2026, see{" "}
-          <Link href="/peptides/legal-status" className="link">
-            the legal status page
+          MOTS-c, which FDA&rsquo;s advisory committee considered for obesity in July 2026, has only mouse studies behind
+          it: our searches found no trial that gave it to people (see{" "}
+          <Link href="/peptides/mots-c" className="link">
+            MOTS-c: what the studies show
           </Link>
-          ), we have not summarised any human trial, so we do not rate them. That is a gap in our coverage.
+          ). For other peptides sold for weight loss we have not summarised any human trial, so we do not rate them. That
+          is a gap in our coverage.
         </p>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           The oral collagen and marine peptide studies on this site were not weight-loss trials. In the muscle trials,

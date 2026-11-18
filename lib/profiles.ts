@@ -61,6 +61,17 @@ export const PROFILE_FACTS: Record<string, ProfileFacts> = {
     ratings: [["joints", "TB-500 for tendon and ligament injury"]],
     safety: "Other unapproved research peptides (CJC-1295, ipamorelin, MK-677, TB-500 and others)",
   },
+  "/peptides/mots-c": {
+    peptide: "mots-c",
+    what: "A 16-amino-acid peptide made in mitochondria, promoted for weight loss, metabolism and ageing.",
+    status:
+      "Not an FDA-approved drug. FDA's compounding page lists its nomination as withdrawn; FDA's advisory committee reviewed it for obesity and osteoporosis in July 2026; no final FDA decision.",
+    ratings: [
+      ["weight", "MOTS-c for obesity and insulin resistance"],
+      ["longevity", "MOTS-c for ageing and physical decline"],
+      ["womens-health", "MOTS-c for bone loss after menopause (osteoporosis)"],
+    ],
+  },
   "/peptides/selank": {
     peptide: "selank",
     what: "A peptide promoted for anxiety.",

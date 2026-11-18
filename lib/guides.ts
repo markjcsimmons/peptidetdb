@@ -233,6 +233,14 @@ export const GUIDES: Guide[] = [
     peptides: ["tb-500"],
   },
   {
+    path: "/peptides/mots-c",
+    title: "MOTS-c",
+    kind: "profile",
+    blurb: "Mitochondrial peptide: mouse studies, and human studies of the body's own levels; no treatment trial found.",
+    topics: ["weight", "longevity", "womens-health"],
+    peptides: ["mots-c"],
+  },
+  {
     path: "/peptides/selank",
     title: "Selank",
     kind: "profile",

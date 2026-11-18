@@ -105,6 +105,7 @@ const ALIASES: Record<string, string> = {
   "/peptides/peptides-for-men": "testosterone erectile fertility",
   "/peptides/most-popular-peptides": "popular top trending mounjaro zepbound",
   "/peptides/are-peptides-steroids": "steroids anabolic",
+  "/peptides/mots-c": "motsc mitochondrial peptide mitochondria insulin resistance",
   "/peptides/how-to-read-a-peptide-coa": "coa certificate of analysis lab test purity",
 };
 
