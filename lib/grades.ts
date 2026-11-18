@@ -1840,6 +1840,18 @@ const VEGAMOUR = { label: "Vegamour product page", href: "https://vegamour.com/p
 const NIOD = { label: "NIOD product page", href: "https://niod.com/en-us/copper-amino-isolate-serum-3-11-cais3-serum-100368.html" };
 const DE = { label: "Drunk Elephant product page", href: "https://www.drunkelephant.com/collections/moisturizers/protini-polypeptide-firming-refillable-moisturizer-999DE00000103.html" };
 const OLAY = { label: "Olay product page", href: "https://www.olay.com/products/regenerist-micro-sculpting-cream-moisturizer" };
+// batch 6 sources (checked 2026-11-18)
+const RHODE = { label: "Rhode product page", href: "https://www.rhodeskin.com/products/peptide-glazing-fluid" };
+const RHODE_TERMS = { label: "Rhode terms of service", href: "https://www.rhodeskin.com/policies/terms-of-service" };
+const MEDIK8 = { label: "Medik8 US product page", href: "https://us.medik8.com/products/liquid-peptides" };
+const MEDIK8_TERMS = { label: "Medik8 US terms of service", href: "https://us.medik8.com/policies/terms-of-service" };
+const PTR = {
+  label: "Peter Thomas Roth product page",
+  href: "https://www.peterthomasroth.com/products/peptide-skinjection-amplified-wrinkle-fix-serum-1501069",
+};
+const PTR_TERMS = { label: "Peter Thomas Roth terms of service", href: "https://www.peterthomasroth.com/policies/terms-of-service" };
+const NATURIUM = { label: "Naturium product page", href: "https://naturium.com/products/multi-peptide-advanced-serum" };
+const NATURIUM_TERMS = { label: "Naturium terms of service", href: "https://naturium.com/policies/terms-of-service" };
 
 export const TOPICAL_GRADES: ProductGrade[] = [
   topical({
@@ -2031,6 +2043,129 @@ export const TOPICAL_GRADES: ProductGrade[] = [
         points: 5,
         note: "Vegamour, LLC, with a Los Angeles postal address and a support email, in the terms of service.",
         sources: [{ label: "Vegamour terms of service", href: "https://vegamour.com/policies/terms-of-service" }],
+      },
+    },
+  }),
+  topical({
+    id: "rhode-glazing-fluid",
+    brand: "Rhode",
+    product: "Peptide Glazing Fluid",
+    form: "Gel serum with acetyl hexapeptide-8 (argireline), niacinamide and marula oil",
+    page: RHODE,
+    claimAreas: ["skin"],
+    checkedOn: "2026-11-18",
+    summary: "Full ingredient list, appearance-only claims and full company details, but no peptide concentration, no lot report, and results from an unnamed consumer survey.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for the peptide or any other active.", sources: [RHODE] },
+      blend: { points: 6, note: "No branded complex; every ingredient is named in the full list.", sources: [RHODE] },
+      "claims-match": {
+        points: 13,
+        note: "Says the peptide “smooths and revitalizes skin” and that the serum visibly plumps skin over time (topical cosmetic peptides for skin: limited, −2). Hydration and glow are not rated.",
+        sources: [RHODE, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(RHODE, "Percentages are quoted from “a consumer perception study of 48+ people”."),
+      identity: {
+        points: 5,
+        note: "HRBeauty LLC dba Rhode, with a Beverly Hills PO box and an email address, in the terms of service.",
+        sources: [RHODE_TERMS],
+      },
+    },
+  }),
+  topical({
+    id: "medik8-liquid-peptides",
+    brand: "Medik8",
+    product: "Liquid Peptides",
+    form: "Serum with ten peptides, including a copper peptide, sold as a “30% complex”",
+    page: MEDIK8,
+    claimAreas: ["skin"],
+    checkedOn: "2026-11-18",
+    summary: "Full ingredient list and full company details, but the 30% is the share of a peptide blend, not a concentration, results come from an unnamed consumer study, and it claims to prevent line formation.",
+    scores: {
+      amount: {
+        points: 4,
+        note: "“10 powerful peptides in a 30% blend”: the 30% is the share of the blend, not the concentration of any peptide, which is not stated.",
+        sources: [MEDIK8],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Claims to visibly smooth fine lines and firm and plump skin (topical cosmetic peptides for skin: limited, −2). Hydration is not rated.",
+        sources: [MEDIK8, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(MEDIK8, "“Clinically proven” results are quoted from an “independent consumer study” on 60 participants over 8 weeks."),
+      category: {
+        points: 3,
+        note: "Sold as a cosmetic, but says it helps “slow & prevent fine line formation” and “supports the skin's natural age-defying functions”, claims about how the body works that US rules treat as drug claims.",
+        sources: [MEDIK8],
+      },
+      identity: {
+        points: 5,
+        note: "Medik8 Inc., with a Philadelphia street address and an email address, in the terms of service.",
+        sources: [MEDIK8_TERMS],
+      },
+    },
+  }),
+  topical({
+    id: "ptr-peptide-skinjection",
+    brand: "Peter Thomas Roth",
+    product: "Peptide Skinjection Amplified Wrinkle-Fix Serum",
+    form: "Serum with argireline, Matrixyl and Argirelox peptide solutions",
+    page: PTR,
+    claimAreas: ["skin"],
+    checkedOn: "2026-11-18",
+    summary: "Full ingredient list and full company details, but the percentages are of supplier solutions, the studies are unnamed, and it claims to prolong the effect of injected neurotoxin.",
+    scores: {
+      amount: {
+        points: 4,
+        note: "Gives 2% Matrixyl Morphomics, 5% Argireline Amplified, 2% Matrixyl Synthe'6 and 10% Argirelox: the shares of suppliers' branded peptide solutions, not the concentration of each peptide.",
+        sources: [PTR],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Claims to visibly reduce expression lines and prevent the look of future wrinkles, and better elasticity and firmness (topical cosmetic peptides for skin: limited, −2). Skin barrier strength is not rated.",
+        sources: [PTR, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(
+        PTR,
+        "Results are quoted from a 4-week study in 53 women, a 6-week consumer perception study in 28 women and an “in vivo study” in 22 women after neurotoxin injections.",
+      ),
+      category: {
+        points: 3,
+        note: "Sold as a cosmetic, but says its Argirelox solution helps “prolong the need for your next injectable treatment by up to six months”, a claim about how the body works that US rules treat as a drug claim.",
+        sources: [PTR],
+      },
+      identity: {
+        points: 5,
+        note: "Peter Thomas Roth Labs, LLC, with a New York street address and a support email, in the terms of service.",
+        sources: [PTR_TERMS],
+      },
+    },
+  }),
+  topical({
+    id: "naturium-multi-peptide",
+    brand: "Naturium",
+    product: "Multi-Peptide Advanced Serum",
+    form: "Serum with copper peptide, argireline and another peptide, plus hydrolyzed collagen",
+    page: NATURIUM,
+    claimAreas: ["skin"],
+    checkedOn: "2026-11-18",
+    summary: "Full ingredient list, appearance-only claims and full company details, but no concentrations, an unexplained collagen source in a product labelled vegan, and an unnamed appeal to clinical results.",
+    scores: {
+      amount: { points: 0, note: "No concentration is given for any peptide.", sources: [NATURIUM] },
+      source: {
+        points: 2,
+        note: "Each peptide is named by its cosmetic ingredient (INCI) name, but the product is labelled vegan while the list includes hydrolyzed collagen, which is normally made from animal tissue; the page does not say where it comes from.",
+        sources: [NATURIUM],
+      },
+      "claims-match": {
+        points: 13,
+        note: "Claims better texture, fewer visible fine lines and wrinkles and firmer-looking skin (topical cosmetic peptides and topical GHK-Cu for skin: limited, −2).",
+        sources: [NATURIUM, TOPIC3.skin],
+      },
+      ...UNNAMED_TEST(NATURIUM, "The site menu on the page describes the Multi-Peptide range as “clinically-effective peptide formulas”."),
+      identity: {
+        points: 5,
+        note: "e.l.f. Cosmetics, Inc. (Naturium's parent), with an Oakland street address in the terms of service; the page gives a Naturium email address.",
+        sources: [NATURIUM_TERMS, NATURIUM],
       },
     },
   }),

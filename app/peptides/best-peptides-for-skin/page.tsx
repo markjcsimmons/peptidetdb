@@ -11,7 +11,8 @@ import { RankedCards, RankedTable, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
 import { GradeTable, ScoringRules, ScoringSheet } from "@/components/product-grades";
 import { ProductsForGoal } from "@/components/products-for-goal";
-import { GRADES_CHECKED_ON, ranked } from "@/lib/grades";
+import { ranked } from "@/lib/grades";
+import { numberWord } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Best peptides for skin: ranked by the evidence",
@@ -93,7 +94,11 @@ const OPTIONS: Option[] = [
         <Link href="/peptides/collagen-peptides-side-effects" className="link">
           side-effects page
         </Link>
-        . More: <Link href="/peptides/marine-vs-bovine-collagen" className="link">marine vs bovine collagen</Link>.
+        . More:{" "}
+        <Link href="/peptides/marine-vs-bovine-collagen" className="link">
+          marine vs bovine collagen
+        </Link>
+        .
       </>
     ),
   },
@@ -155,13 +160,12 @@ const OPTIONS: Option[] = [
         <PaperLink id="mortazavi-2025" via="pmc">
           surprising
         </PaperLink>
-        , given how widely they are sold, and says the case rests mostly on cell studies. Cell results do not show that a
-        cream delivers enough peptide to skin cells. A{" "}
+        , given how widely they are sold, and says the case rests mostly on cell studies. Cell results do not show that
+        a cream delivers enough peptide to skin cells. A{" "}
         <PaperLink id="pickart-2015" via="pmc">
           2015 review
         </PaperLink>{" "}
-        is more positive; it is a review, not a trial. We found no study of GHK-Cu
-        injected or swallowed for skin.
+        is more positive; it is a review, not a trial. We found no study of GHK-Cu injected or swallowed for skin.
       </>
     ),
   },
@@ -189,7 +193,71 @@ const OPTIONS: Option[] = [
   },
 ];
 
+const TOPICAL = ranked("topical");
+const SCALP = TOPICAL.filter((g) => !g.claimAreas.includes("skin"));
+const TOPICAL_DATES = [...new Set(TOPICAL.map((g) => g.checkedOn))].sort();
+const gradedOn =
+  TOPICAL_DATES.length === 1
+    ? formatDate(TOPICAL_DATES[0])
+    : `between ${formatDate(TOPICAL_DATES[0])} and ${formatDate(TOPICAL_DATES[TOPICAL_DATES.length - 1])}`;
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/**
+ * Creams and serums whose page states a concentration for at least one peptide (the amount criterion scored above 0).
+ * The FAQ answer below names them; the build fails if the grades and the answer drift apart.
+ */
+const STATES_CONCENTRATION: Record<string, string> = {
+  "niod-cais3": "NIOD Copper Amino Isolate Serum 3 (1% GHK-Cu and 1% GHK)",
+  "the-ordinary-multi-peptide-copper": "The Ordinary Multi-Peptide + Copper Peptides 1% (1% copper peptides)",
+  "the-ordinary-argireline":
+    "The Ordinary Argireline Solution 10% (the 10% is the share of the supplier's argireline solution, not of the peptide itself)",
+  "ptr-peptide-skinjection":
+    "Peter Thomas Roth Peptide Skinjection (2% to 10% each of four suppliers' peptide solutions, again not the peptides themselves)",
+  "medik8-liquid-peptides":
+    "Medik8 Liquid Peptides (a “30% complex” of ten peptides, the share of the blend rather than of any one peptide)",
+};
+{
+  const withAmount = TOPICAL.filter((g) => (g.scores.amount.points ?? 0) > 0)
+    .map((g) => g.id)
+    .sort();
+  const named = Object.keys(STATES_CONCENTRATION).sort();
+  if (withAmount.join() !== named.join()) {
+    throw new Error(
+      `best-peptides-for-skin: products stating a concentration are ${withAmount.join(", ")}; the FAQ names ${named.join(", ")}`,
+    );
+  }
+}
+const SKIN_TOPICALS = TOPICAL.length - SCALP.length;
+// The FAQ says no graded skin product cites a published trial of its own formula: every sheet must say "none cited"
+// (5) or "unnamed study" (2) on that criterion.
+for (const g of TOPICAL) {
+  const c = g.scores["cites-real"];
+  if (!(c.points === 2 || c.note.startsWith("No study is cited"))) {
+    throw new Error(`best-peptides-for-skin: ${g.id} cites a study; reword the "worth buying" answer`);
+  }
+}
+
 const FAQ: { q: string; a: string }[] = [
+  {
+    q: "Which peptides have the best clinical evidence for fine lines and wrinkles?",
+    a: "Collagen peptides taken by mouth. A 2026 systematic review found fewer wrinkles in 9 of 10 trials that measured them, though it rated most trials at high risk of bias. On the skin, the best-known trial is of argireline: in 60 people, 4 weeks around the eyes was followed by less roughness than placebo. A 2026 meta-analysis of 19 oral and topical peptide trials found a modest wrinkle effect, largely driven by the oral products. The one small trial of copper peptide (GHK-Cu) found no objective difference in wrinkles.",
+  },
+  {
+    q: "Which peptides have the strongest evidence for firmer, more elastic skin?",
+    a: "Again collagen peptides by mouth: two meta-analyses of randomised trials found better elasticity than placebo, and the 2026 review counted improved elasticity in 10 of 13 trials. Two trials of fish-derived collagen also report better elasticity. For creams, one trial of a palmitoyl-RGD cream reported higher elasticity after 12 weeks, but its abstract gives no sample size. Firmness claims on serums are not backed by trials of those serums.",
+  },
+  {
+    q: "Copper peptides or other peptides: which is better for lines around the mouth?",
+    a: "No trial we found compares them, and none tested lines around the mouth specifically: the argireline trial treated the area around the eyes, and the GHK-Cu trial treated skin after laser resurfacing. We rate both topical cosmetic peptides and topical GHK-Cu as limited human evidence, so neither can be called better.",
+  },
+  {
+    q: "Which peptide serum is worth buying, based on published research?",
+    a: `Research cannot pick one. The trials tested peptides, not branded serums, and their abstracts do not give the concentration used, so no product can be matched to a trial. None of the ${numberWord(SKIN_TOPICALS)} skin creams and serums we graded cites a published trial of its own formula. What you can check is how well a product documents itself: a full ingredient list, a stated peptide concentration, and claims about appearance rather than biology. Our scoring sheets on this page grade exactly that.`,
+  },
+  {
+    q: "Which peptide serums state their peptide concentration?",
+    a: `Of the ${numberWord(TOPICAL.length)} peptide creams and serums we graded, ${numberWord(Object.keys(STATES_CONCENTRATION).length)} give any percentage for their peptides: ${Object.values(STATES_CONCENTRATION).join("; ")}. Only the first two state the concentration of a peptide itself, and even they give it for only some of their peptides. The rest name their peptides in the ingredient list without amounts. A higher concentration has not been shown to work better, because the trials do not report the concentrations they used.`,
+  },
   {
     q: "What is the best peptide for skin?",
     a: "Judged by the strength of human evidence, oral collagen peptides rank first: two meta-analyses of randomised trials found better skin hydration and elasticity than placebo. The trials have biases, so how large the benefit is remains uncertain. Topical cosmetic peptides and GHK-Cu have only small trials.",
@@ -243,7 +311,12 @@ export default function BestPeptidesForSkinPage() {
           itemListElement: [
             { "@type": "ListItem", position: 1, name: SITE.name, item: absoluteUrl("/") },
             { "@type": "ListItem", position: 2, name: "What are peptides?", item: absoluteUrl("/peptides") },
-            { "@type": "ListItem", position: 3, name: "Best peptides for skin", item: absoluteUrl("/peptides/best-peptides-for-skin") },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: "Best peptides for skin",
+              item: absoluteUrl("/peptides/best-peptides-for-skin"),
+            },
           ],
         }}
       />
@@ -254,15 +327,18 @@ export default function BestPeptidesForSkinPage() {
         / Best peptides for skin
       </nav>
       <PageKindLabel path="/peptides/best-peptides-for-skin" />
-      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">Best peptides for skin, ranked by the evidence</h1>
+      <h1 className="mt-2 text-4xl font-bold leading-[1.05] sm:text-5xl">
+        Best peptides for skin, ranked by the evidence
+      </h1>
       <p className="mt-2 text-sm text-muted">Last reviewed {formatDate(REVIEWED)}.</p>
 
       <ShortAnswer className="mt-6">
         <p className="max-w-prose text-lg leading-relaxed sm:text-xl sm:leading-relaxed [text-wrap:pretty]">
           Oral collagen peptides have the strongest human evidence of the peptides sold for skin: meta-analyses of
-          randomised trials found better hydration and elasticity than placebo, though the trials have biases and the size of
-          the benefit is uncertain. Fish-derived collagen, creams with cosmetic peptides such as argireline, and
-          copper-peptide (GHK-Cu) products each rest on a handful of trials, most of them small. KPV has only laboratory and animal data.
+          randomised trials found better hydration and elasticity than placebo, though the trials have biases and the
+          size of the benefit is uncertain. Fish-derived collagen, creams with cosmetic peptides such as argireline, and
+          copper-peptide (GHK-Cu) products each rest on a handful of trials, most of them small. KPV has only laboratory
+          and animal data.
         </p>
       </ShortAnswer>
 
@@ -271,16 +347,18 @@ export default function BestPeptidesForSkinPage() {
       <PageContents />
 
       <section className="mt-14">
-        <h2 id="how-this-ranking-works" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">How this ranking works</h2>
+        <h2 id="how-this-ranking-works" className="scroll-mt-6 text-3xl font-bold leading-[1.15]">
+          How this ranking works
+        </h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
           The list is ordered by how strong the human evidence is, using the same ratings as our{" "}
           <Link href="/science/topics/skin" className="link">
             skin evidence page
           </Link>
-          . It does not measure how big a benefit is, how safe something is, or whether one option beats another, because
-          the studies do not compare them. Options in the same rating are ordered by the number and size of controlled
-          trials, which is our judgement, so read the ties as ties. It ranks types of peptide, not products. For the
-          brand side, see{" "}
+          . It does not measure how big a benefit is, how safe something is, or whether one option beats another,
+          because the studies do not compare them. Options in the same rating are ordered by the number and size of
+          controlled trials, which is our judgement, so read the ties as ties. It ranks types of peptide, not products.
+          For the brand side, see{" "}
           <Link href="/peptides/best-collagen-peptides" className="link">
             which collagen brands publish batch test results
           </Link>
@@ -292,25 +370,30 @@ export default function BestPeptidesForSkinPage() {
         <h2 className="text-3xl font-bold leading-[1.15]">The ranking in detail</h2>
         <RankedCards options={OPTIONS} />
         <p className="mt-5 max-w-prose text-sm text-muted">
-          Not ranked: injectable peptides such as BPC-157 and TB-500. We have summarised no skin study of them, which is a
-          gap in our coverage, not a finding. Hair, nails and acne are not covered either.
+          Not ranked: injectable peptides such as BPC-157 and TB-500. We have summarised no skin study of them, which is
+          a gap in our coverage, not a finding. Hair, nails and acne are not covered either.
         </p>
       </section>
-
 
       <section id="grades" className="mt-14 scroll-mt-6">
         <h2 className="text-3xl font-bold leading-[1.15]">Topical peptide products: scoring sheets</h2>
         <p className="mt-4 max-w-prose text-soft [text-wrap:pretty]">
-          Seven peptide creams and serums, six for skin and one for the scalp, graded on {formatDate(GRADES_CHECKED_ON)} with the
-          same rubric as supplements. Some criteria were written for capsules and powders; the notes under &ldquo;How partial
-          points were given&rdquo; say how we applied them to creams and serums (for example, concentration in place of
-          amount per serving). None of these brands publishes a lot report, so none can rate above &ldquo;Partly
-          documented&rdquo;. A grade is about what can be checked, not whether a product works.
+          {cap(numberWord(TOPICAL.length))} peptide creams and serums
+          {SCALP.length > 0 && (
+            <>
+              , {numberWord(SKIN_TOPICALS)} for skin and {numberWord(SCALP.length)} for the scalp,
+            </>
+          )}{" "}
+          graded {gradedOn} with the same rubric as supplements. Some criteria were written for capsules and powders;
+          the notes under &ldquo;How partial points were given&rdquo; say how we applied them to creams and serums (for
+          example, concentration in place of amount per serving). None of these brands publishes a lot report, so none
+          can rate above &ldquo;Partly documented&rdquo;. A grade is about what can be checked, not whether a product
+          works.
         </p>
-        <GradeTable grades={ranked("topical")} />
+        <GradeTable grades={TOPICAL} />
         <ScoringRules />
         <div className="mt-6 grid gap-4">
-          {ranked("topical").map((g) => (
+          {TOPICAL.map((g) => (
             <ScoringSheet key={g.id} g={g} />
           ))}
         </div>
@@ -320,16 +403,16 @@ export default function BestPeptidesForSkinPage() {
         <h2 className="text-3xl font-bold leading-[1.15]">If you are choosing</h2>
         <ul className="mt-4 max-w-prose list-disc space-y-2 pl-6 text-soft">
           <li>
-            <strong className="text-fg">A collagen supplement:</strong> the trials tested peptides by mouth, and the abstracts
-            give no consistent dose. We do not recommend one. Look for a lot-specific lab report; our{" "}
+            <strong className="text-fg">A collagen supplement:</strong> the trials tested peptides by mouth, and the
+            abstracts give no consistent dose. We do not recommend one. Look for a lot-specific lab report; our{" "}
             <Link href="/peptides/how-to-read-a-peptide-coa" className="link">
               COA guide
             </Link>{" "}
             explains how to read one.
           </li>
           <li>
-            <strong className="text-fg">A cream or serum:</strong> the abstracts do not give the peptide concentration, so a
-            product cannot be matched to a trial, and the best evidence for peptides on skin is not for creams.
+            <strong className="text-fg">A cream or serum:</strong> the abstracts do not give the peptide concentration,
+            so a product cannot be matched to a trial, and the best evidence for peptides on skin is not for creams.
           </li>
           <li>
             <strong className="text-fg">Fish allergy:</strong> be careful with any fish-derived collagen; a case report
@@ -340,8 +423,8 @@ export default function BestPeptidesForSkinPage() {
             .
           </li>
           <li>
-            <strong className="text-fg">Injected or &ldquo;research&rdquo; peptides for skin:</strong> we found no
-            human skin evidence for them, and the{" "}
+            <strong className="text-fg">Injected or &ldquo;research&rdquo; peptides for skin:</strong> we found no human
+            skin evidence for them, and the{" "}
             <Link href="/peptides/legal-status" className="link">
               legal picture
             </Link>{" "}

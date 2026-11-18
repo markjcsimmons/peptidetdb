@@ -39,6 +39,12 @@ export const CORRECTIONS: Correction[] = [
     now: "Our scoring rules rate food-derived peptides for stress as limited, and other products (Pürblack's Brain AM and Brain PM) had lost 2 points for the same claim. The stress claim now costs 2 points as well, so the product scores 11 (47/100, still 'Partly documented'). Found while grading three more oral peptide products.",
   },
   {
+    date: "2026-11-18",
+    page: "/peptides/best-peptides-for-skin",
+    was: "The scoring-sheet section said “Seven peptide creams and serums, six for skin and one for the scalp, graded on November 13, 2026”, although an eighth product (Vegamour GRO Hair Serum, a second scalp serum) had been graded on 15 November and was in the table below it.",
+    now: "The count, the split between skin and scalp products and the dates are now worked out from the grades themselves, so they cannot fall behind again. The section now lists twelve products after four more serums were graded on 18 November.",
+  },
+  {
     date: "2026-11-17",
     page: "/peptides/oral-peptides",
     was: "All eight Pürblack scoring sheets scored the source criterion 0 of 4 and said the peptide source was not stated, because the labels and product pages do not say what protein the peptides come from. The product finder listed them under “Made from: not stated”.",

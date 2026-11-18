@@ -262,6 +262,10 @@ export const GRADE_ADDED: Record<string, string> = {
   "drunk-elephant-protini": "2026-11-13",
   "olay-micro-sculpting": "2026-11-13",
   "vegamour-gro": "2026-11-15",
+  "rhode-glazing-fluid": "2026-11-18",
+  "medik8-liquid-peptides": "2026-11-18",
+  "ptr-peptide-skinjection": "2026-11-18",
+  "naturium-multi-peptide": "2026-11-18",
 };
 
 /** Page path → date it was first published. Every GUIDES path, plus the pages in EXTRA_PAGES. */
