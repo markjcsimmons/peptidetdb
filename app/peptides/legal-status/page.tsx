@@ -202,7 +202,10 @@ export default function LegalStatusPage() {
             HHS may revisit the policy if a safety signal or product-quality problem arises with a compounded product
             in its scope.
           </li>
-          <li>Comments are due two weeks after publication, which is 13 November 2026 (docket HHS-OASH-2026-0496).</li>
+          <li>
+            Comments were due by 13 November 2026 (docket HHS-OASH-2026-0496). As of {formatDate(LEGAL_REVIEWED)} we found
+            no later Federal Register document about the policy, so it has not been withdrawn, changed or made final there.
+          </li>
         </ul>
         <p className="mt-4 max-w-prose">
           We could not open the HHS policy document (it blocks automated readers), so the details below come from a law
@@ -236,7 +239,7 @@ export default function LegalStatusPage() {
           source before relying on it.
         </p>
         <p className="mt-3 text-sm text-muted">
-          Sources: <SourceList sources={[SOURCES.hhsNotice, SOURCES.hollandKnight]} />
+          Sources: <SourceList sources={[SOURCES.hhsNotice, SOURCES.hollandKnight, SOURCES.federalRegisterSearch]} />
         </p>
       </section>
 

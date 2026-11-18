@@ -23,6 +23,9 @@ const REVIEWED = "2026-11-13";
 /** The date we read the Prohibited List on WADA's own website. */
 const WADA_CHECKED = "2026-11-13";
 const WADA_LIST = "https://www.wada-ama.org/en/prohibited-list";
+/** The date we last looked for the next year's List (WADA's 2027 document blocked automated readers). */
+const WADA_2027_SEEN = "2026-11-18";
+const USADA_2027 = "https://www.usada.org/spirit-of-sport/athlete-advisory-2027-prohibited-list/";
 
 type Option = {
   name: string;
@@ -443,7 +446,16 @@ export default function PeptidesForAthletesPage() {
           evidence pages. It does not measure how big a benefit is, and few of the studies were in competitive athletes. Under each
           entry we give its status on the{" "}
           <WadaLink>2026 WADA Prohibited List</WadaLink>, read on WADA&rsquo;s own website on {formatDate(WADA_CHECKED)}. The list
-          changes every year; your sport&rsquo;s anti-doping organisation has the final word. Entries that share a rating are in
+          changes every year; your sport&rsquo;s anti-doping organisation has the final word.{" "}
+          <strong className="text-fg">The 2027 List comes into force on 1 January 2027.</strong> We could not open
+          WADA&rsquo;s 2027 document (it blocks automated readers); as of {formatDate(WADA_2027_SEEN)}, the US Anti-Doping
+          Agency&rsquo;s{" "}
+          <a href={USADA_2027} target="_blank" rel="noopener noreferrer" className="link">
+            summary of the 2027 List
+          </a>{" "}
+          says that &ldquo;peptides&rdquo; in general are now named as prohibited in section S0, and lists BPC-157, TB-500,
+          ipamorelin and growth-hormone-releasing peptides as still prohibited. We will update each entry from WADA&rsquo;s
+          own text. Entries that share a rating are in
           an order that is our judgement: read them as ties. Nobody paid for a place on this page, and there are no affiliate
           links.
         </p>

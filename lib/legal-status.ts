@@ -8,7 +8,7 @@
  * says so.
  */
 
-export const LEGAL_REVIEWED = "2026-11-10";
+export const LEGAL_REVIEWED = "2026-11-18";
 
 export type SourceKind = "primary" | "news" | "commentary";
 export type Source = { label: string; url: string; kind: SourceKind };
@@ -54,6 +54,11 @@ export const SOURCES = {
     url: "https://www.hklaw.com/en/insights/publications/2026/11/hhs-issues-interim-enforcement-discretion-policy-for-compounding",
     kind: "commentary",
   },
+  federalRegisterSearch: {
+    label: "Federal Register search: documents mentioning peptides or bulk drug substances published since 25 October 2026 (searched 18 November 2026)",
+    url: "https://www.federalregister.gov/documents/search?conditions%5Bterm%5D=peptide&conditions%5Bpublication_date%5D%5Bgte%5D=10%2F25%2F2026&order=newest",
+    kind: "primary",
+  },
   time: {
     label: "TIME: An FDA Committee Just Voted in Favor of Peptides—Despite the Agency's Opposition (23 July 2026)",
     url: "https://time.com/article/2026/07/23/fda-committee-peptides/",
@@ -91,8 +96,14 @@ export const TIMELINE: TimelineEvent[] = [
   {
     date: "2026-10-30",
     label: "30 October 2026",
-    text: "HHS publishes in the Federal Register a draft, interim enforcement-discretion policy for compounding under Section 503A with certain peptide bulk drug substances. It says HHS does not intend to take enforcement action against a state-licensed pharmacy, a federal facility or a licensed physician that compounds with a substance listed in the policy's Appendix A, while rulemaking on the 503A bulks list is pending. The notice says it does not add any substance to the bulks list, creates no rights and is not binding. Comments are due two weeks after publication, which is 13 November 2026. Some law-firm alerts date the policy 28 October; the Federal Register publication date is 30 October.",
+    text: "HHS publishes in the Federal Register a draft, interim enforcement-discretion policy for compounding under Section 503A with certain peptide bulk drug substances. It says HHS does not intend to take enforcement action against a state-licensed pharmacy, a federal facility or a licensed physician that compounds with a substance listed in the policy's Appendix A, while rulemaking on the 503A bulks list is pending. The notice says it does not add any substance to the bulks list, creates no rights and is not binding. Comments were due two weeks after publication, by 13 November 2026. Some law-firm alerts date the policy 28 October; the Federal Register publication date is 30 October.",
     sources: [SOURCES.hhsNotice],
+  },
+  {
+    date: "2026-11-18",
+    label: "As of 18 November 2026",
+    text: "The comment period on the HHS policy has closed. A search of the Federal Register found no later document about it and no FDA proposed rule to add these peptides to the 503A bulks list. FDA's Category 2 page still reads 'current as of' 22 April 2026, and its advisory committee meeting page (current as of 6 August 2026) still shows no votes.",
+    sources: [SOURCES.federalRegisterSearch, SOURCES.fdaCategory2, SOURCES.fdaMeeting],
   },
 ];
 
