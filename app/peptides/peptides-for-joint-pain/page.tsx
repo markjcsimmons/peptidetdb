@@ -10,6 +10,8 @@ import { RelatedGoals, PageKindLabel } from "@/components/guide-links";
 import { RankedCards, RankedTable, type Route } from "@/components/ranked-list";
 import { PageContents } from "@/components/page-contents";
 import { ProductsForGoal } from "@/components/products-for-goal";
+import { ALL_GRADES } from "@/lib/grades";
+import { numberWord } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Peptides for joint pain: ranked by the evidence",
@@ -222,7 +224,22 @@ const OPTIONS: Option[] = [
   },
 ];
 
+/** Graded products claiming joint or tendon benefits, grouped by what their own pages cite (from the cites-real criterion). */
+const JOINT_PRODUCTS = ALL_GRADES.filter((g) => g.claimAreas.includes("joints") || g.claimAreas.includes("tendons"));
+const CITES_NONE = JOINT_PRODUCTS.filter((g) => g.scores["cites-real"].note.startsWith("No study is cited"));
+const CITES_UNNAMED = JOINT_PRODUCTS.filter((g) => g.scores["cites-real"].points === 2);
+const CITES_NAMED = JOINT_PRODUCTS.filter((g) => !CITES_NONE.includes(g) && !CITES_UNNAMED.includes(g));
+const nameList = (gs: typeof ALL_GRADES) => gs.map((g) => `${g.brand} ${g.product}`).join(" and ");
+
 const FAQ: { q: string; a: string }[] = [
+  {
+    q: "Which joint supplements are clinically studied?",
+    a: `Trials mostly test ingredients rather than the products sold in shops. The ingredients with controlled human trials for joints are collagen peptides and UC-II, and we rate both as mixed: some trials found less pain than placebo and others did not. Of the ${numberWord(JOINT_PRODUCTS.length)} graded products that claim joint or tendon benefits, ${numberWord(CITES_NAMED.length)} name published papers on their own pages (${nameList(CITES_NAMED)}), ${numberWord(CITES_UNNAMED.length)} appeal to studies or clinical results without naming any, and ${numberWord(CITES_NONE.length)} cite nothing. Each product's scoring sheet says what it cites and whether its dose matches the trials.`,
+  },
+  {
+    q: "Do peptides improve joint mobility or stiffness?",
+    a: "Some trials measured stiffness and physical function as well as pain, and the results are as mixed as for pain. In osteoarthritis, a 2019 meta-analysis found collagen improved the WOMAC stiffness subscore, a 2025 meta-analysis favoured collagen for function, and a 180-day trial of UC-II found better stiffness and function subscores than placebo. In a trial of 5 g of collagen a day, people reported fewer restrictions when squatting. But a trial of UC-II with hydrolysed collagen and a trial in 167 older adults found no difference from placebo in function scores. We found no controlled human trial of BPC-157 or TB-500 for joints.",
+  },
   {
     q: "Do collagen peptides help joint pain?",
     a: "Results are mixed. Two meta-analyses of osteoarthritis trials favoured collagen for some measures, though one found no difference on the WOMAC pain and function subscores and the other found large differences between trials. For exercise-related knee pain, two 12-week trials of about 180 people each found less pain than placebo, and a trial in 167 older adults found no difference.",
